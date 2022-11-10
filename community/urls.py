@@ -19,7 +19,7 @@ from . import views
 app_name = "community"
 
 urlpatterns = [
-    path('', views.index, name='index'),#qna목록
+    path('', views.qna_index, name='qna_index'),#qna목록
     path('qna_create/', views.qna_create, name='qna_create'),
     path('<int:qna_pk>/', views.qna_detail, name='qna_detail'),
     path('<int:qna_pk>/qna_update/', views.qna_update, name='qna_update'),

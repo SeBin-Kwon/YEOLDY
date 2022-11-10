@@ -8,19 +8,18 @@ from django.contrib import messages
 # Create your views here.
 
 
-def index(request):
+def qna_index(request):
     qna = QnA.objects.all()
     context = {"qna": qna}
     return render(request, "community/index.html", context)
 
 
-def qna_create(request, product_pk):
+def qna_create(request):
     if request.method == "POST":
         qna_form = QnaForm(request.POST, request.FILES)
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
-            qna.post = Products.objects.get(pk=product_pk)
             qna.save()
             return redirect("community:index")
     else:
@@ -73,11 +72,11 @@ def qna_delete(request, qna_pk):
 
 #리뷰 
 def review_index(request):
-    review = Review.objects.all()
+    reviews = Review.objects.all()
     context={
-        'review':review
+        'reviews':reviews
     }
-    return render(request, 'community/index.html', context)
+    return render(request, 'community/review_index.html', context)
 
 def review_create(request):
     if request.method == 'POST':
