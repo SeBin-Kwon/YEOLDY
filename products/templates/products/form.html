@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+<body class="container">
+  {% if request.resolver_match.url_name == 'create' %}
+  <h1 class="text-center post-color pb-4">
+    상품등록
+  </h1>
+  {% else %}
+  <h1 class="text-center post-color">
+    상품수정
+  </h1>
+  {% endif %}
+
+  {% if request.resolver_match.url_name == 'create' %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form products_form %}
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 등록하기
+      </button>
+    </div>
+  </form>
+  {% else %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form products_form %}
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">맛 등록하기
+      </button>
+    </div>
+  </form>
+  {% endif %}
+
+</body>
+{% endblock content %}
