@@ -6,9 +6,14 @@ from django.contrib.auth import get_user_model
 
 # Create your models here.
 class User(AbstractUser):
+    nickname = models.CharField(max_length=20)
     phone_number = PhoneNumberField(unique=True, null=False, blank=False, region="KR")
-    birth = models.IntegerField()
-    sex = models.BooleanField(default=False)
+    birth = models.IntegerField(blank=True, null=True)
+    genders = (
+        ('M', '남성'),
+        ('W', '여성'),
+    )
+    gender = models.CharField(verbose_name='성별', max_length=1, choices=genders, blank=True)
     followings = models.ManyToManyField(
         "self", symmetrical=False, related_name="followers"
     )
