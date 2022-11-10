@@ -41,3 +41,32 @@ nav {
 .sticky .nav-items li a {
   color: black
 }
+
+.drop {
+  display: none;
+  transition: all 0.3s ease 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+  /* transition: all 0.2s ease-in-out; */
+}
+
+.nav-items .drop-menu {
+  position: absolute;
+  display: flex;
+  top: 70px;
+  width: 100%;
+  left: 0;
+  z-index: 1;
+  line-height: 40px;
+  justify-content: center;
+  padding: 1.5rem 0;
+  box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.019);
+
+}
+
+.nav-items li a:hover {
+  background-color: red;
+}
+
+.nav-items li:hover .drop {
+  display: block;
+}
+

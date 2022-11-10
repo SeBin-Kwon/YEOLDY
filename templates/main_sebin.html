@@ -3,18 +3,31 @@
 
 {% block content %}
 <nav>
-  <ul class="nav-items" id="navItems">
+  <ul class="nav-items" style="padding-right: 0.5rem;">
     <li><a href="#">NEW</a></li>
-    <li><a href="#">APPAREL</a></li>
+    <li>
+      <a href="#">APPAREL</a>
+      <div class="drop">
+        <ul class="drop-menu">
+          <li><a href="#">모든 제품</a></li>
+          <li><a href="#">상의</a></li>
+          <li><a href="#">하의</a></li>
+          <li><a href="#">2SET/세트</a></li>
+          <li><a href="#">아우터</a></li>
+          <li><a href="#">애슬레져</a></li>
+        </ul>
+      </div>
+    </li>
     <li><a href="#">SHOES</a></li>
     <li><a href="#">ACC</a></li>
+    <li><a href="#">COMMUNITY</a></li>
   </ul>
   <div class="logo-div">
     <a href="#">
       <img id="logo" src="{% static 'images/logo_white.png' %}" style="width:8rem">
     </a>
   </div>
-  <ul class="nav-items" style="padding-left: 8rem;">
+  <ul class="nav-items" style="padding-left: 9rem;">
     <li><a href="#"><i class="bi bi-search"></i></a></li>
     <li><a href="#"><i class="bi bi-cart"></i></a></li>
     <li><a href="#">LOGIN</a></li>
