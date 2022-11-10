@@ -2,3 +2,42 @@
   font-family: 'Noto Sans KR', sans-serif;
   font-family: 'Poppins', sans-serif;
 }
+
+nav { 
+  background-color: rgba(255, 255, 255, 0);
+  width: 100vw;
+  height: 6rem;
+  display: flex;
+  position: fixed;
+  top: 0;
+  align-items: center;
+  justify-content: space-between;
+  transition: 0.7s;
+}
+
+.nav-items {
+  display: flex;
+  padding: 0 4rem;
+  margin: 0;
+}
+
+.nav-items li {
+  list-style: none;
+  padding: 0 10px;
+}
+
+.nav-items li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.logo-div {
+  padding-left: 1rem;
+  padding-right: 3rem;
+}
+
+.sticky .nav-items li a {
+  color: black
+}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<nav>
+  <ul class="nav-items" id="navItems">
+    <li><a href="#">NEW</a></li>
+    <li><a href="#">APPAREL</a></li>
+    <li><a href="#">SHOES</a></li>
+    <li><a href="#">ACC</a></li>
+  </ul>
+  <div class="logo-div">
+    <a href="#">
+      <img id="logo" src="{% static 'images/logo_white.png' %}" style="width:8rem">
+    </a>
+  </div>
+  <ul class="nav-items" style="padding-left: 8rem;">
+    <li><a href="#"><i class="bi bi-search"></i></a></li>
+    <li><a href="#"><i class="bi bi-cart"></i></a></li>
+    <li><a href="#">LOGIN</a></li>
+  </ul>
+</nav>
+{% endblock content %}
