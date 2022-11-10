@@ -20,6 +20,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 class CustomUserChangeForm(UserChangeForm):
 
+    password = None
     class Meta:
         model = User
         fields = ('profile_image', 'nickname', 'username', 'email', 'phone_number', 'birth', 'gender')

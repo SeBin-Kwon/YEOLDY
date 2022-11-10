@@ -6,6 +6,8 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from .models import User
 from django.contrib.auth import update_session_auth_hash
+from django.http import JsonResponse
+import json
 
 # Create your views here.
 def index(request):
@@ -37,6 +39,9 @@ def login(request):
     context = {"form": form}
     return render(request, "accounts/login.html", context)
 
+
+def callback(request):
+    return render(request, 'accounts/callback.html')
 
 def logout(request):
     auth_logout(request)
@@ -87,3 +92,44 @@ def change_password(request):
         "form": form,
     }
     return render(request, "accounts/change_password.html", context)
+
+
+def database(request):
+    jsonObject = json.loads(request.body)
+    username = jsonObject.get('username')
+    users = User.objects.filter(username=username)
+
+    if users:
+        user = User.objects.get(username=username)
+        auth_login(request, user)
+    else:
+        user = User()
+        user.username = jsonObject.get('username')
+        user.email = jsonObject.get('email')
+        user.gender = jsonObject.get('gender')
+        user.save()
+        user = User.objects.get(username=username)
+        auth_login(request, user)
+    return JsonResponse({'username': user.username, 'email': user.email, 'gender': user.gender})
+
+def database_naver(request):
+    jsonObject = json.loads(request.body)
+    username = jsonObject.get('id')
+
+    users = User.objects.filter(username=username)
+    if users:
+        user = User.objects.get(username=username)
+        auth_login(request, user)
+
+    else:
+        user = User()
+        user.username = jsonObject.get('id')
+
+        user.nickname = jsonObject.get('name')
+        user.email = jsonObject.get('email')
+        # user.phone = jsonObject.get('mobile')
+        user.save()
+        user = User.objects.get(username=username)
+        auth_login(request, user)
+    return JsonResponse({'username': user.username, 'email': user.email})
+

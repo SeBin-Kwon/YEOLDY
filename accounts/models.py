@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 class User(AbstractUser):
     profile_image = models.ImageField(upload_to="images/", blank=True)
     nickname = models.CharField(max_length=20)
-    phone_number = PhoneNumberField(unique=True, null=False, blank=False, region="KR")
+    phone_number = PhoneNumberField(unique=True, null=True, blank=True, region="KR")
     birth = models.IntegerField(blank=True, null=True)
     genders = (
         ("M", "남성"),

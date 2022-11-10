@@ -13,18 +13,22 @@ nav {
   align-items: center;
   justify-content: space-between;
   transition: 0.7s;
-  z-index:30000;
+  z-index:999;
 }
 
 .nav-items {
   display: flex;
   padding: 0 4rem;
   margin: 0;
+  height: 100%;
 }
 
 .nav-items li {
   list-style: none;
   padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .nav-items li a {
@@ -44,30 +48,72 @@ nav {
 }
 
 .drop {
-  display: none;
-  transition: all 0.3s ease 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
-  /* transition: all 0.2s ease-in-out; */
+  /* visibility: hidden; */
+  /* transition: all 0.3s ease 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+  transition: all 0.7s; */
 }
 
 .nav-items .drop-menu {
   position: absolute;
   display: flex;
-  top: 70px;
+  top: -100px;
   width: 100%;
   left: 0;
-  z-index: 1;
+  z-index: -1;
   line-height: 40px;
   justify-content: center;
   padding: 1.5rem 0;
   box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.019);
-
+  transition: all 0.7s;
 }
 
-.nav-items li a:hover {
-  background-color: red;
+.drop-menu li a {
+  opacity: 0;
+  transition: all 0.2s;
+  font-weight: 600;
 }
 
-.nav-items li:hover .drop {
-  display: block;
+.nav-items li:hover {
+  background-color: rgba(255, 0, 0, 0.164);
 }
 
+.nav-items li:hover .drop-menu {
+  top: 60px;
+  transition: all 0.7s;
+}
+
+.nav-items li:hover .drop-menu li a {
+  opacity: 1;
+  transition: all 0.2s;
+  transition-delay: 0.2s;
+}
+
+.sticky .nav-items .drop-menu {
+  background-color: white;
+}
+
+.sticky .drop-menu li a {
+  color: black;
+}
+
+/* .logo {
+  position: relative;
+}
+
+#logo2 {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+.logo:hover #logo2 {
+  opacity: 1;
+  transition: 0.7s;
+}
+
+.logo:hover #logo1 {
+  opacity: 0;
+  transition: 0.7s;
+} */
