@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+
+  {% if request.user == qna.user %}
+    <form action="{% url 'community:qna_delete' qna.pk %}" method="POST">
+      {% csrf_token %}
+      <input class="" type="submit" value="삭제">
+      <a href="{% url 'community:index' %}" class="btn btn-outline-secondary">뒤로</a>
+    </form>
+    <form action="{% url 'community:qna_update' qna.pk %}" method="POST">
+      {% csrf_token %}
+      <a href="{% url 'community:qna_update' qna.pk %}" method="POST">수정</a>
+      <a href="{% url 'community:index' %}" class="btn btn-outline-secondary">뒤로</a>
+    </form>
+  {% endif %}
+{% endblock content %}
