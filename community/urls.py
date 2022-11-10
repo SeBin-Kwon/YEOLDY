@@ -18,9 +18,9 @@ from . import views
 app_name = "community"
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('qua_create/', views.qua_create, name='qua_create'),
-    path('qua_detail/', views.qua_detail, name='qua_detail'),
-    path('qua_update/', views.qua_update, name='qua_update'),
-    path('qua_delete/', views.qua_delete, name='qua_delete'),
+    path('', views.index, name='index'),#목록
+    path('qna_create/', views.qna_create, name='qna_create'),
+    path('<int:qna_pk>/', views.qna_detail, name='qna_detail'),
+    path('<int:qna_pk>/qna_update/', views.qna_update, name='qna_update'),
+    path('<int:qna_pk>/qna_delete/', views.qna_delete, name='qna_delete'),
 ]

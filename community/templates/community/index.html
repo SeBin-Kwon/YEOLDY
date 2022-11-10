@@ -1,1 +1,11 @@
-<h1>인덱스</h1>
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+  {% for i in qna.all %}
+    <div class="card">
+      <div class="card-body">
+        <a href="{% url 'community:qna_detail' i.pk %}">{{ i.title }}</a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}
