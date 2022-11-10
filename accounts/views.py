@@ -4,7 +4,7 @@ from .forms import CustomUserCreationForm
 # Create your views here.
 def signup(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST, request.FILES)
         form.save()
         return redirect('accounts:login')
     else:
