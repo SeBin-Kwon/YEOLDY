@@ -13,7 +13,7 @@
 
 .product-list {
     margin-top: 36px;
-    margin-bottom: 36px;
+    margin-bottom: 100px;
     position: relative;
     display: flex;
     column-count: 12;
@@ -220,4 +220,110 @@
 .product-list .card1 .infoBox p .cost {
     font-size: 18px;
     font-weight: 600;
+}
+
+.admin {
+    display: flex;
+}
+
+.admin-title {
+    width: 400px;
+    margin-right: 20px;
+    padding-right: 20px;
+}
+
+.admin-title h2 {
+    letter-spacing: -3px;
+}
+
+.admin-title h2 span {
+    letter-spacing: -2px;
+}
+
+.admin-title p {
+    letter-spacing: -1px;
+}
+
+.admin-title .link {
+    color: rgb(156, 156, 156);
+    letter-spacing: -1px;
+    text-decoration: none;
+}
+
+.mySwiper2 {
+    width: 100%;
+    height: 400px;
+}
+
+.mySwiper2 .swiper-wrapper .swiper-slide {
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    background: #05bb7e2a;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.mySwiper2 .swiper-wrapper .swiper-slide::before {
+    content: "";
+    position: absolute;
+    height: 40%;
+    width: 100%;
+    /* border-bottom: 30%; */
+    border-radius: 10px 10px 30% 30%;
+    top: 0;
+    background: #05bb7e;
+}
+
+.mySwiper2 .swiper-wrapper .swiper-slide a {
+    z-index: 30;
+    padding-top: 40px;
+    color: #111;
+    text-decoration: none;
+}
+
+.mySwiper2 .swiper-wrapper .swiper-slide a img {
+    display: block;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #05bb7e;
+    background: #fff;
+    object-fit: contain;
+}
+
+.mySwiper2 .swiper-wrapper .swiper-slide .info {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-use-select: none;
+    user-select: none;
+}
+
+.mySwiper2 .swiper-wrapper .swiper-slide .info h2 {
+    letter-spacing: -2px;
+    font-weight: 600;
+}
+
+.mySwiper2 .swiper-wrapper .swiper-slide .info img {
+    width: 60px;
+    height: 60px;
+    border: 0;
 }
