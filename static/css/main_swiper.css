@@ -2,14 +2,15 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  min-height: 60vh;
+  /* min-height: 60vh; */
+  height: 10000px;
   /* display: grid;
   place-items: center; */
 }
 
 /* swiper */
-.container{
-  /* margin-bottom: 2rem; */
+.section1{
+  margin-bottom: 5rem;
   width: 100%;
   height: 700px;
   background: #222;
@@ -33,16 +34,19 @@ body {
   margin-bottom: 2rem !important;
   left:10% !important;
   width: 75% !important;
+  height: 1px !important;
   background: gray;
+  
 }
 .swiper-scrollbar-drag{
-  background: #fff;
+  background: #fff !important;
 }
 
 /* slider */
 .slider {
   height: 400px;
   margin: auto;
+  margin-bottom: 5rem;
   position: relative;
   width: 90%;
   display: grid;
