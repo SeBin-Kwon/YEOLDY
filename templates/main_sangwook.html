@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+
+    <link rel="stylesheet" href="{% static 'css/main_sangwook.css'%}">
+    <title>Document</title>
+  </head>
+
+  <body>
+
+    <!-- swiper -->
+    <div class="container">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="https://i.pinimg.com/564x/4d/a9/dc/4da9dcb8bbbdffbacedb93642a2f34d9.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="https://i.pinimg.com/736x/8f/56/76/8f5676d7ab7bc52747fca59d56bbb49c.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="https://i.pinimg.com/564x/55/bf/5f/55bf5f3d3aa6848b80d86b735359dc52.jpg" alt=""></div>
+        </div>
+
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+      </div>
+    </div>
+
+    <!-- slider -->
+    <div class="slider">
+
+      <dli class="slide-track">
+
+        <!-- 9 SLIDES -->
+
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/19/9b/a6/199ba600fb64fed1fcd3a88098a0e634.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/91/be/7e/91be7e01ec04758c849307cb08296dcd.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/f5/64/55/f56455e1e772e4b7374682e4768347d5.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/e6/0c/5a/e60c5a901b9e8612b1811e2a2362ce78.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/36/d9/b9/36d9b91050f9aff0344006a57c6d27c8.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/97/4b/9e/974b9eb563d2c8f68f4a48d730595d8d.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/ca/54/c0/ca54c0f793d7fb7f0ca8bf8bd8c935fa.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/32/f0/0b/32f00b840675dfb0f0ea0dc0840fa118.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/e2/4d/b9/e24db987b4953014af7d86590da6f916.jpg" alt="">
+        </div>
+
+        <!-- 9 SLIDES (DOUBLED) -->
+
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/19/9b/a6/199ba600fb64fed1fcd3a88098a0e634.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/91/be/7e/91be7e01ec04758c849307cb08296dcd.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/f5/64/55/f56455e1e772e4b7374682e4768347d5.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/e6/0c/5a/e60c5a901b9e8612b1811e2a2362ce78.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/36/d9/b9/36d9b91050f9aff0344006a57c6d27c8.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/97/4b/9e/974b9eb563d2c8f68f4a48d730595d8d.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/ca/54/c0/ca54c0f793d7fb7f0ca8bf8bd8c935fa.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/32/f0/0b/32f00b840675dfb0f0ea0dc0840fa118.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/e2/4d/b9/e24db987b4953014af7d86590da6f916.jpg" alt="">
+        </div>
+
+      </dli>
+
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    {% comment %} <script>
+      const swiper = new Swiper('.swiper', {
+        loop: true,
+
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      });
+    </script> {% endcomment %}
+  </body>
+
+</html>
