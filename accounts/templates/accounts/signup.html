@@ -1,13 +1,73 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% load django_bootstrap5 %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/accounts_signup.css' %}">
+{% endblock css %}
 
 {% block content %}
 
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    {% bootstrap_button button_type="submit" content="회원가입하기" %}
-</form>
+  <div class="signup-form">
+    <div class="title">회원가입</div>
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="user-details">
+        <div class="input-box">
+          <span class="details">이름</span>
+          <input type="text" placeholder="이름을 입력해 주세요" required="required" name="nickname">
+        </div>
+        <div class="input-box">
+          <span class="details">아이디</span>
+          <input type="text" placeholder="아이디를 입력해 주세요" required="required" name="username">
+        </div>
+        <div class="input-box">
+          <span class="details">이메일</span>
+          <input type="email" placeholder="이메일을 입력해 주세요" required="required" name="email">
+        </div>
+        <div class="input-box">
+          <span class="details">핸드폰</span>
+          <input type="tel" placeholder="번호를 입력해 주세요" required="required" name="phone_number">
+        </div>
+        <div class="input-box">
+          <span class="details">비밀번호</span>
+          <input type="password" placeholder="비밀번호를 입력해 주세요" required="required" name="password1">
+        </div>
+        <div class="input-box">
+          <span class="details">비밀번호 확인</span>
+          <input type="password" placeholder="비밀번호를 확인해 주세요" required="required" name="password2">
+        </div>
+        <div class="input-box">
+          <span class="details">생년월일</span>
+          <input type="number" name="birth">
+        </div>
+        <div class="input-box">
+          <span class="details">프로필사진</span>
+          <input type="file" class="btn" required="required" name="profile_image">
+        </div>
+      </div>
+
+      <div class="gender-details">
+        <div class="gender-title">
+          <input type="radio" name="gender" id="dot-1" value="M">
+          <input type="radio" name="gender" id="dot-2" value="W">
+          <span>성별</span>
+          <div class="category">
+            <label for="dot-1">
+              <span class="dot one"></span>
+              <span class="gender">남자</span>
+            </label>
+            <label for="dot-2">
+              <span class="dot two"></span>
+              <span class="gender">여자</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="button">
+        <input type="submit" value="제출">
+      </div>
+    </form>
+  </div>
 
 {% endblock %}
