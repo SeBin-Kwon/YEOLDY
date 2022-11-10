@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #b4b4b4;
+}
+
+.container1 {
+    position: relative;
+    display: flex;
+}
+
+.container1 .card1 {
+    position: relative;
+    width: 320px;
+    height: 450px;
+    background: #232323;
+    overflow: hidden;
+}
+
+.container1 .card1:after {
+    content: 'YEOLDY';
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    font-size: 5em;
+    font-weight: 800;
+    font-style: italic;
+    z-index: 10;
+    color: rgba(0, 192, 80, 0.425);
+}
+
+.container1 .card1 .imgBox {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.container1 .card1 .imgBox img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    object-fit: cover;
+    transform: translate(-50%, -50%) ;
+    width: 100%;
+    height: 100%;
+    z-index: -100000;
+}
+
+.container1 .card1 .contentBox {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    transition: 1s;
+    z-index: 12;
+}
+
+.container1 .card1:hover .contentBox {
+    height: 230px;
+    background: #23232377;
+}
+
+.container1 .card1 .contentBox h2 {
+    margin-top: 20px;
+    position: relative;
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: 1s;
+}
+
+.container1 .card1:hover .contentBox h2 {
+    opacity: 1;
+    color: #fff;
+    transition: 1s;
+}
+
+.container1 .card1 .contentBox .size,
+.container1 .card1 .contentBox .color {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 20px;
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.container1 .card1:hover .contentBox .size {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.5s;
+}
+
+.container1 .card1:hover .contentBox .color {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0.6s;
+}
+
+.container1 .card1 .contentBox .size h3,
+.container1 .card1 .contentBox .color h3 {
+    color: #fff;
+    font-weight: 300;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-right: 10px;
+}
+
+.container1 .card1 .contentBox .size span {
+    width: 26px;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    font-size: 14px;
+    display: inline-block;
+    color: #111;
+    background: #fff;
+    margin: 0 5px;
+    transition: 0.5s;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.container1 .card1 .contentBox .size span:hover {
+    background: #119b66;
+    color: #fff;
+}
+
+.container1 .card1 .contentBox .color span {
+    width: 20px;
+    height: 20px;
+    background: #ff0;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.container1 .card1 .contentBox .color span:nth-child(2) {
+    background: #9bdc28;
+}
+
+.container1 .card1 .contentBox .color span:nth-child(3) {
+    background: #03a9f4;
+}
+
+.container1 .card1 .contentBox .color span:nth-child(4) {
+    background: #e91e63;
+}
+
+.container1 .card1 .contentBox a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: rgb(255, 255, 255);
+    border-radius: 4px;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #111;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: 1s;
+}
+
+
+.container1 .card1:hover .contentBox a {
+    opacity: 1;
+    transform: translateY(0px);
+    transition: 1s;
+}
+
+.container1 .card1:hover .contentBox a:hover {
+    color: #fff;
+    background: #05bb7e;
+    transition-delay: 0s;
+}
