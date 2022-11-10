@@ -3,9 +3,9 @@ from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth import get_user_model
 
-
 # Create your models here.
 class User(AbstractUser):
+    profile_image = models.ImageField(upload_to='images/', blank=True)
     nickname = models.CharField(max_length=20)
     phone_number = PhoneNumberField(unique=True, null=False, blank=False, region="KR")
     birth = models.IntegerField(blank=True, null=True)
@@ -13,12 +13,11 @@ class User(AbstractUser):
         ('M', '남성'),
         ('W', '여성'),
     )
-    gender = models.CharField(verbose_name='성별', max_length=1, choices=genders, blank=True)
+    gender = models.CharField(verbose_name='성별', max_length=1, choices=genders, blank=True, default=0)
     followings = models.ManyToManyField(
         "self", symmetrical=False, related_name="followers"
     )
     # like = models.ManyToManyField()
-
 
 class Basket(models.Model):
     # product = models.ForeignKey()
