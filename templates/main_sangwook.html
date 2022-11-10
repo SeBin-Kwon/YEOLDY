@@ -19,15 +19,13 @@
     <div class="container">
       <div class="swiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="https://i.pinimg.com/564x/4d/a9/dc/4da9dcb8bbbdffbacedb93642a2f34d9.jpg" alt=""></div>
-          <div class="swiper-slide"><img src="https://i.pinimg.com/736x/8f/56/76/8f5676d7ab7bc52747fca59d56bbb49c.jpg" alt=""></div>
-          <div class="swiper-slide"><img src="https://i.pinimg.com/564x/55/bf/5f/55bf5f3d3aa6848b80d86b735359dc52.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/e5291548629d18379a95750b841c7474.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/14af5cd64ee9aac75ffd8007c12687ea.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/2a21354a4ac98f6a2754e41aae4a37e3.jpg" alt=""></div>
+
         </div>
 
-        <div class="swiper-pagination"></div>
-
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-scrollbar"></div>
 
       </div>
     </div>
@@ -106,14 +104,13 @@
     <!-- Initialize Swiper -->
     <script>
       const swiper = new Swiper('.swiper', {
-        loop: true,
-
-        pagination: {
-          el: '.swiper-pagination'
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
         },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+        scrollbar: {
+          el: ".swiper-scrollbar",
+          hide: true
         }
       });
     </script>

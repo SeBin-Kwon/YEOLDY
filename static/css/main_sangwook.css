@@ -11,7 +11,7 @@ body {
 .container{
   /* margin-bottom: 2rem; */
   width: 100%;
-  height: 47vh;
+  height: 700px;
   background: #222;
   /* display: flex;
   justify-content: center;
@@ -19,13 +19,24 @@ body {
 }
 
 .swiper{
-  width: 80%;
-  height: fit-content;
+  width: 100%;
+  height: 100%;
 }
 
 .swiper-slide img{
   width: 100%;
-  height: 600px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-scrollbar{
+  margin-bottom: 2rem !important;
+  left:10% !important;
+  width: 75% !important;
+  background: gray;
+}
+.swiper-scrollbar-drag{
+  background: #fff;
 }
 
 /* slider */
