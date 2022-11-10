@@ -5,9 +5,9 @@
 <body class="container">
   <h1> 상품등록</h1>
   {% load django_bootstrap5 %}
-  <form action="" method="POST">
+  <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {% bootstrap_form article_form %}
+    {% bootstrap_form products_form %}
     {% bootstrap_button button_type="submit" content="OK" %}
 
 

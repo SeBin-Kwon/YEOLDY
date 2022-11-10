@@ -1,0 +1,93 @@
+{% load django_bootstrap5 %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/main_wooyeol.css' %}">
+  </head>
+
+  <body>
+    <div class="container1 w-100 justify-content-evenly">
+      <div class="card1">
+        <div class="imgBox">
+          <img src="{% static 'images/1.png' %}" alt="">
+        </div>
+        <div class="contentBox">
+          <h2>Nike Shoes</h2>
+          <div class="size">
+            <h3>Size :
+            </h3>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+          </div>
+          <div class="color">
+            <h3>Color :
+            </h3>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <a href="#">Buy Now</a>
+        </div>
+      </div>
+      <div class="card1">
+        <div class="imgBox">
+          <img src="{% static 'images/2.png' %}" alt="">
+        </div>
+        <div class="contentBox">
+          <h2>Nike Shoes</h2>
+          <div class="size">
+            <h3>Size :
+            </h3>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+          </div>
+          <div class="color">
+            <h3>Color :
+            </h3>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <a href="#">Buy Now</a>
+        </div>
+      </div>
+      <div class="card1">
+        <div class="imgBox">
+          <img src="{% static 'images/3.png' %}" alt="">
+        </div>
+        <div class="contentBox">
+          <h2>Nike Shoes</h2>
+          <div class="size">
+            <h3>Size :
+            </h3>
+            <span>7</span>
+            <span>8</span>
+            <span>9</span>
+            <span>10</span>
+          </div>
+          <div class="color">
+            <h3>Color :
+            </h3>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <a href="#">Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -2,31 +2,42 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
+  min-height: 60vh;
+  /* display: grid;
+  place-items: center; */
 }
 
 /* swiper */
 .container{
-  margin-bottom: 2rem;
+  /* margin-bottom: 2rem; */
   width: 100%;
-  height: 60vh;
+  height: 700px;
   background: #222;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .swiper{
   width: 100%;
-  height: 700px;
-}
-.swiper-slide img{
-  width: 100%;
-  height: 600px;
+  height: 100%;
 }
 
+.swiper-slide img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-scrollbar{
+  margin-bottom: 2rem !important;
+  left:10% !important;
+  width: 75% !important;
+  background: gray;
+}
+.swiper-scrollbar-drag{
+  background: #fff;
+}
 
 /* slider */
 .slider {

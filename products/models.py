@@ -3,6 +3,7 @@ from django.conf import settings
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 from django.core.validators import FileExtensionValidator
+from django.contrib.auth import get_user_model
 from multiselectfield import MultiSelectField
 
 
@@ -45,7 +46,10 @@ class Products(models.Model):
     category = models.CharField(max_length=10, choices=MY_CATEGORY)
     color = MultiSelectField(choices=MY_COLOR)
     size = MultiSelectField(choices=MY_SIZE)
-    image = models.FileField(
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    image = ProcessedImageField(
         upload_to="images/",
-        validators=[FileExtensionValidator(allowed_extensions=["jpg", "png"])],
+        blank=True,
+        format="JPEG",
     )
+    save_users = models.ManyToManyField(get_user_model(), related_name="save_movies")
