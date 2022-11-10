@@ -7,11 +7,9 @@
   {% load django_bootstrap5 %}
   <form action="" method="POST">
     {% csrf_token %}
-    {% bootstrap_form article_form %}
+    {% bootstrap_form products_form %}
     {% bootstrap_button button_type="submit" content="OK" %}
 
-    <!-- {{ article_form.as_p }}
-    <input class="btn btn-primary my-3" type="submit" value="수정하기"> -->
   </form>
 
 </body>

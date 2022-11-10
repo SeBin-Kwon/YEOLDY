@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if product.image %}
+<img src="{{ product.image.url }}" alt="{{ post.image }}" style="width: 640px; height: 440px;">
+
+{% else %}
+
+<img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
+
+{% endif %}
+
+<a href="{% url 'products:update' product.pk %}"> 수정 </a>
+<a class="my-3 mx-2 btn btn-danger" href="{% url 'products:delete' product.pk %}">삭제</a>
+<p>수정</p>
+
+{% endblock content %}
