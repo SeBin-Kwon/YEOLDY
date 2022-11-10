@@ -31,7 +31,7 @@ def create(request):
         context = {
             "products_form": products_form,
         }
-        return render(request, "products/create.html", context)
+        return render(request, "products/form.html", context)
 
 
 # 상품 등록 수정 기능
@@ -51,7 +51,7 @@ def update(request, pk):
             "products_form": products_form,
         }
 
-        return render(request, "products/update.html", context)
+        return render(request, "products/form.html", context)
     else:
         return redirect("products:detail", product.pk)
 
