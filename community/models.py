@@ -3,7 +3,13 @@ from django.core.validators import FileExtensionValidator
 from django.contrib.auth import get_user_model
 
 
-
+MY_GRADES = (
+        ('5', '5'),
+        ('4', '4'),
+        ('3', '3'),
+        ('2', '2'),
+        ('1', '1'),
+    )
 # Create your models here.
 
 class QnA(models.Model):
@@ -26,11 +32,4 @@ class Review(models.Model):
     )
     # Product = models.ForeignKey()
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE) 
-    grades = (
-        ('5', '5'),
-        ('4', '4'),
-        ('3', '3'),
-        ('2', '2'),
-        ('1', '1'),
-    )
-    grade = models.IntegerField(verbose_name='평점', choices=grades, default=0)
+    grade = models.IntegerField(verbose_name='평점', choices=MY_GRADES, default=0)

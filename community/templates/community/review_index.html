@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+  {% for i in review.all %}
+    <div class="card">
+      <div class="card-body">
+        <a href="{% url 'community:review_detail' i.pk %}">{{ i.title }}</a>
+      </div>
+    </div>
+  {% endfor %}
+{% endblock content %}
