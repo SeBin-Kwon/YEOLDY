@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import QnaForm
-from .models import QnA
+
+from django.shortcuts import render,redirect,get_object_or_404
+from .forms import QnaForm,ReviewForm
+from .models import QnA,Review
 from products.models import Products
 from django.contrib import messages
 
@@ -66,5 +67,72 @@ def qna_delete(request, qna_pk):
             messages.success(request, "삭제 완료")
             return redirect("community:index", qna_pk)
     else:
-        messages.success(request, "작성자만 삭제가 가능함")
-        return redirect("community:index", qna_pk)
+
+        messages.success(request, '작성자만 삭제가 가능함')
+        return redirect('community:index',qna_pk)
+
+#리뷰 
+def review_index(request):
+    review = Review.objects.all()
+    context={
+        'review':review
+    }
+    return render(request, 'community/index.html', context)
+
+def review_create(request):
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST, request.FILES)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.save()
+            return redirect('community:review_index')
+    else:
+        review_form = ReviewForm()
+    context={
+        'review_form': review_form,
+    }
+    return render(request, 'community/review_create.html',context)
+
+def review_detail(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    context={
+        'review':review
+    }
+    return render(request,'community/review_detail.html', context)
+
+def review_update(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.user == review.user:
+        if request.method == "POST":
+            review_form= ReviewForm(request.POST, request.FILES, instance=review)
+            if review_form.is_valid():
+                review = review_form.save(commit=False)
+                review.user = request.user
+                review.save()
+                messages.success(request, '수정 완료')
+                return redirect('community:review_detail', review_pk)
+        else:
+            review_form= ReviewForm(instance=review)
+        context={
+            'review_form':review_form,
+        }
+        return render(request, 'community/review_create.html',context)
+    else:
+        messages.success(request, '작성자만 수정가 가능함')
+        return redirect('community:review_detail', review_pk)
+
+def review_delete(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.user == review.user:
+        if request.method == "POST":
+            review.delete()
+            messages.success(request, '삭제 완료')
+            return redirect('community:review_index',review_pk)
+    else:
+        messages.success(request, '작성자만 삭제가 가능함')
+        return redirect('community:review_index',review_pk)
+
+
+
+
