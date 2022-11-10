@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>마이페이지</h1>
+
+{% if user.profile_image %}
+    <div>
+        <img src="{{ user.profile_image.url }}" alt="" style="width:300px; height:400px;">
+    </div>
+{% else %}
+    <div>
+        <img src="https://dummyimage.com/300X400" alt="">
+    </div>
+{% endif %}
+<p>이름 : {{ user.nickname }}</p>
+<p>아이디 : {{ user.username }}</p>
+<p>휴대폰 번호 : {{ user.phone_number }}</p>
+<p>이메일 : {{ user.email }}</p>
+<p>생일 : {{ user.birth }}</p>
+<p>성별 : {{ user.gender }}</p>
+
+<a href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
+<a href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
+
+{% endblock %}
