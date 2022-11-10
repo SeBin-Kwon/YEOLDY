@@ -7,7 +7,7 @@ from .form import ProductsForm
 
 
 def index(request):
-    products = Products.order_by("-pk")
+    products = Products.objects.order_by("-pk")
     context = {
         "products": products,
     }
@@ -19,7 +19,7 @@ def create(request):
         products_form = ProductsForm(request.POST, request.FILES)
         if products_form.is_valid():
             products_form.save()
-            return redirect("main")
+            return redirect("products:index")
 
     else:
         products_form = ProductsForm()
@@ -45,3 +45,18 @@ def update(request, pk):
     }
 
     return render(request, "products/update.html", context)
+
+
+def detail(request, pk):
+    product = Products.objects.get(pk=pk)
+
+    context = {
+        "product": product,
+    }
+    return render(request, "products/detail.html", context)
+
+
+def delete(request, pk):
+    product = Products.objects.get(pk=pk)
+    product.delete()
+    return redirect("products:index")

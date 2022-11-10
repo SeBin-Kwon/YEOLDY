@@ -45,7 +45,8 @@ class Products(models.Model):
     category = models.CharField(max_length=10, choices=MY_CATEGORY)
     color = MultiSelectField(choices=MY_COLOR)
     size = MultiSelectField(choices=MY_SIZE)
-    image = models.FileField(
+    image = ProcessedImageField(
         upload_to="images/",
-        validators=[FileExtensionValidator(allowed_extensions=["jpg", "png"])],
+        blank=True,
+        format="JPEG",
     )
