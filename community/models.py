@@ -28,11 +28,11 @@ class Review(models.Model):
     )
     # Product = models.ForeignKey()
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    grades = (
-        ("5", "5"),
-        ("4", "4"),
-        ("3", "3"),
-        ("2", "2"),
-        ("1", "1"),
-    )
-    grade = models.IntegerField(verbose_name="평점", choices=grades, default=0)
+    RATING = [
+        (1, "★"),
+        (2, "★★"),
+        (3, "★★★"),
+        (4, "★★★★"),
+        (5, "★★★★★"),
+    ]
+    grade = models.IntegerField(choices=RATING, default=None)
