@@ -4,7 +4,6 @@ from products.models import Products
 from django.contrib.auth import get_user_model
 
 
-
 # Create your models here.
 
 
@@ -16,7 +15,7 @@ class QnA(models.Model):
         validators=[FileExtensionValidator(allowed_extensions=["jpg", "png"])],
     )
     solve = models.BooleanField(default=False)
-    Product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    Product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
 
