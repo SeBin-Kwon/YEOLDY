@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Products
 from .form import ProductsForm
-from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 

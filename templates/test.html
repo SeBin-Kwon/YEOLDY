@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/test.css' %}">
+{% endblock css %}
+
+{% block content %}
+  <div class="container">
+    <div class="banner">
+      <h1>상의</h1>
+      <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
+      <p>총 00개의 상품이 있습니다.</p>
+    </div>
+
+    <div class="row justify-content-start">
+      <div class="product-card col-2">
+        <div class="product-info">
+          <h5 class="product-title">자가드 로고 테잎<br/>트랙 탑 핑크</h5>
+          <p class="cost-list">
+            <span class="sale">50%</span>
+            <span class="cost">44,500</span>원
+          </p>
+          <a class="product_btn" href="#">Buy now</a>
+        </div>
+        <div class="cover">
+          <div class="coverFront">
+            <img src="{% static 'images/p1.png' %}" alt="" class="product_img">
+          </div>
+          <div class="coverBack"></div>
+        </div>
+      </div>
+
+      <div class="product-card col-2">
+        <div class="product-info">
+          <h5 class="product-title">자가드 로고 테잎<br/>트랙 탑 스카이블루</h5>
+          <p class="cost-list">
+            <span class="sale">30%</span>
+            <span class="cost">62,300</span>원
+          </p>
+          <a class="product_btn" href="#">Buy now</a>
+        </div>
+        <div class="cover">
+          <div class="coverFront">
+            <img src="{% static 'images/p2.png' %}" alt="" class="product_img">
+          </div>
+          <div class="coverBack"></div>
+        </div>
+      </div>
+
+      <div class="product-card col-2">
+        <div class="product-info">
+          <h5 class="product-title">자가드 로고 테잎<br/>스웻셔츠 핑크</h5>
+          <p class="cost-list">
+            <span class="sale">51%</span>
+            <span class="cost">39,000</span>원
+          </p>
+          <a class="product_btn" href="#">Buy now</a>
+        </div>
+        <div class="cover">
+          <div class="coverFront">
+            <img src="{% static 'images/p3.png' %}" alt="" class="product_img">
+          </div>
+          <div class="coverBack"></div>
+        </div>
+      </div>
+
+      <div class="product-card col-2">
+        <div class="product-info">
+          <h5 class="product-title">자가드 로고 테잎<br/>스웻셔츠 크림</h5>
+          <p class="cost-list">
+            <span class="sale">30%</span>
+            <span class="cost">55,300</span>원
+          </p>
+          <a class="product_btn" href="#">Buy now</a>
+        </div>
+        <div class="cover">
+          <div class="coverFront">
+            <img src="{% static 'images/p4.png' %}" alt="" class="product_img">
+          </div>
+          <div class="coverBack"></div>
+        </div>
+      </div>
+
+      <div class="product-card col-2">
+        <div class="product-info">
+          <h5 class="product-title">자가드 로고 테잎<br/>스웻셔츠 블랙</h5>
+          <p class="cost-list">
+            <span class="sale">30%</span>
+            <span class="cost">55,300</span>원
+          </p>
+          <a class="product_btn" href="#">Buy now</a>
+        </div>
+        <div class="cover">
+          <div class="coverFront">
+            <img src="{% static 'images/p5.png' %}" alt="" class="product_img">
+          </div>
+          <div class="coverBack"></div>
+        </div>
+      </div>
+
+      <div class="product-card col-2">
+        <div class="product-info">
+          <h5 class="product-title">자가드 로고 테잎<br/>스웻셔츠 블랙</h5>
+          <p class="cost-list">
+            <span class="sale">30%</span>
+            <span class="cost">55,300</span>원
+          </p>
+          <a class="product_btn" href="#">Buy now</a>
+        </div>
+        <div class="cover">
+          <div class="coverFront">
+            <img src="{% static 'images/p5.png' %}" alt="" class="product_img">
+          </div>
+          <div class="coverBack"></div>
+        </div>
+      </div>
+
+      <div class="product-card col-2">
+        <div class="product-info">
+          <h5 class="product-title">자가드 로고 테잎<br/>스웻셔츠 블랙</h5>
+          <p class="cost-list">
+            <span class="sale">30%</span>
+            <span class="cost">55,300</span>원
+          </p>
+          <a class="product_btn" href="#">Buy now</a>
+        </div>
+        <div class="cover">
+          <div class="coverFront">
+            <img src="{% static 'images/p5.png' %}" alt="" class="product_img">
+          </div>
+          <div class="coverBack"></div>
+        </div>
+      </div>
+
+      <div class="product-card col-2">
+        <div class="product-info">
+          <h5 class="product-title">자가드 로고 테잎<br/>스웻셔츠 블랙</h5>
+          <p class="cost-list">
+            <span class="sale">30%</span>
+            <span class="cost">55,300</span>원
+          </p>
+          <a class="product_btn" href="#">Buy now</a>
+        </div>
+        <div class="cover">
+          <div class="coverFront">
+            <img src="{% static 'images/p5.png' %}" alt="" class="product_img">
+          </div>
+          <div class="coverBack"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
