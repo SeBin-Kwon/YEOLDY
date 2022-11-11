@@ -1,22 +1,36 @@
 from django import forms
-from .models import QnA,Review
+from .models import QnA, Review
+
 
 class QnaForm(forms.ModelForm):
     class Meta:
         model = QnA
-        fields =[
-            'title',
-            'content',
-            'image',
-            'solve',
+        fields = [
+            "title",
+            "content",
+            "image",
+            "solve",
+            "password",
         ]
+        widgets = {"password": forms.PasswordInput()}
+
+
+class UpdateQnaForm(QnaForm):
+    class Meta:
+        model = QnA
+        fields = [
+            "title",
+            "content",
+            "image",
+        ]
+
 
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields =[
-            'title',
-            'content',
-            'image',
-            'grade',
+        fields = [
+            "title",
+            "content",
+            "image",
+            "grade",
         ]

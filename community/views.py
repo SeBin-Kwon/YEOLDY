@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import QnaForm, ReviewForm
+from .forms import QnaForm, ReviewForm, UpdateQnaForm
 from .models import QnA, Review
 from products.models import Products
 from django.contrib import messages
@@ -19,7 +19,7 @@ def qna_create(request, product_pk):
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
-            qna.post = Products.objects.get(pk=product_pk)
+            qna.Product = Products.objects.get(pk=product_pk)
             qna.save()
             return redirect("community:index")
     else:
@@ -27,7 +27,7 @@ def qna_create(request, product_pk):
     context = {
         "qna_form": qna_form,
     }
-    return render(request, "community/qna_create.html", context)
+    return render(request, "community/community_create.html", context)
 
 
 def qna_detail(request, qna_pk):
@@ -40,7 +40,7 @@ def qna_update(request, qna_pk):
     qna = get_object_or_404(QnA, pk=qna_pk)
     if request.user == qna.user:
         if request.method == "POST":
-            qna_form = QnaForm(request.POST, request.FILES, instance=qna)
+            qna_form = UpdateQnaForm(request.POST, request.FILES, instance=qna)
             if qna_form.is_valid():
                 qna = qna_form.save(commit=False)
                 qna.user = request.user
@@ -48,11 +48,11 @@ def qna_update(request, qna_pk):
                 messages.success(request, "수정 완료")
                 return redirect("community:qna_detail", qna_pk)
         else:
-            qna_form = QnaForm(instance=qna)
+            qna_form = UpdateQnaForm(instance=qna)
         context = {
             "qna_form": qna_form,
         }
-        return render(request, "community/qna_create.html", context)
+        return render(request, "community/community_create.html", context)
     else:
         messages.success(request, "작성자만 수정가 가능함")
         return redirect("community:qna_detail", qna_pk)
@@ -64,11 +64,10 @@ def qna_delete(request, qna_pk):
         if request.method == "POST":
             qna.delete()
             messages.success(request, "삭제 완료")
-            return redirect("community:index", qna_pk)
+            return redirect("community:index")
     else:
-
         messages.success(request, "작성자만 삭제가 가능함")
-        return redirect("community:index", qna_pk)
+        return redirect("community:index")
 
 
 # 리뷰
@@ -91,7 +90,7 @@ def review_create(request):
     context = {
         "review_form": review_form,
     }
-    return render(request, "community/review_create.html", context)
+    return render(request, "community/community_create.html", context)
 
 
 def review_detail(request, review_pk):
@@ -116,7 +115,7 @@ def review_update(request, review_pk):
         context = {
             "review_form": review_form,
         }
-        return render(request, "community/review_create.html", context)
+        return render(request, "community/community_create.html", context)
     else:
         messages.success(request, "작성자만 수정가 가능함")
         return redirect("community:review_detail", review_pk)
