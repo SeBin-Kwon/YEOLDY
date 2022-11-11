@@ -3,6 +3,7 @@ from .forms import QnaForm, ReviewForm, UpdateQnaForm
 from .models import QnA, Review
 from products.models import Products
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -36,6 +37,7 @@ def qna_detail(request, qna_pk):
     return render(request, "community/qna_detail.html", context)
 
 
+@login_required
 def qna_update(request, qna_pk):
     qna = get_object_or_404(QnA, pk=qna_pk)
     if request.user == qna.user:
@@ -58,6 +60,7 @@ def qna_update(request, qna_pk):
         return redirect("community:qna_detail", qna_pk)
 
 
+@login_required
 def qna_delete(request, qna_pk):
     qna = get_object_or_404(QnA, pk=qna_pk)
     if request.user == qna.user:
@@ -68,6 +71,19 @@ def qna_delete(request, qna_pk):
     else:
         messages.success(request, "작성자만 삭제가 가능함")
         return redirect("community:index")
+
+
+def qna_password(request, qna_pk):
+    qna = get_object_or_404(QnA, pk=qna_pk)
+    if request.user == qna.user:
+        if request.method == "POST":
+            if request.POST["password"] == qna.password:
+                return redirect("community:qna_detail", qna_pk)
+
+            else:
+                return redirect("community:index")
+        else:
+            return render(request, "community/qna_password.html")
 
 
 # 리뷰
@@ -99,6 +115,7 @@ def review_detail(request, review_pk):
     return render(request, "community/review_detail.html", context)
 
 
+@login_required
 def review_update(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.user == review.user:
@@ -121,6 +138,7 @@ def review_update(request, review_pk):
         return redirect("community:review_detail", review_pk)
 
 
+@login_required
 def review_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.user == review.user:
