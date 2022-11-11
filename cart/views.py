@@ -55,3 +55,8 @@ def delete_cart(request, product_id):
     cart_item = CartItem.objects.get(id=product_id)
     cart_item.delete()
     return redirect('cart:cart_detail')
+
+def clear_cart(request):
+    cart_items = CartItem.objects.all()
+    cart_items.delete()
+    return redirect('cart:cart_detail')
