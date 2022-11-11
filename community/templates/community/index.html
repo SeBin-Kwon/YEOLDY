@@ -3,128 +3,124 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/community_tab.css' %}">
+  <link rel="stylesheet" href="{% static 'css/community_tab.css' %}">
 {% endblock css %}
 
 {% block content %}
 
-<div class="container">
-  <div class="main-title">고객센터</div>
-  <div class="content">
-    <input type="radio" name="indicator" checked="checked" id="home">
-    <input type="radio" name="indicator" id="blog">
-    <input type="radio" name="indicator" id="help">
-    <input type="radio" name="indicator" id="code">
-    <input type="radio" name="indicator" id="about">
-    <div class="list">
-      <label for="home" class="home">
-        자주 묻는 질문
-      </label>
-      <label for="blog" class="blog">
-        문의하기
-      </label>
-      <label for="help" class="help">
-        실시간채팅
-      </label>
-      <label for="code" class="code">
-        리뷰
-      </label>
+  <div class="container">
+    <div class="main-title">고객센터</div>
+    <div class="content">
+      <input type="radio" name="indicator" checked="checked" id="home">
+      <input type="radio" name="indicator" id="blog">
+      <input type="radio" name="indicator" id="help">
+      <input type="radio" name="indicator" id="code">
+      <input type="radio" name="indicator" id="about">
+      <div class="list">
+        <label for="home" class="home">
+          자주 묻는 질문
+        </label>
+        <label for="blog" class="blog">
+          문의하기
+        </label>
+        <label for="help" class="help">
+          실시간채팅
+        </label>
+        <label for="code" class="code">
+          리뷰
+        </label>
 
-      <div class="indicator"></div>
-    </div>
-    <div class="text-content">
-      <div class="home text">
-        <div class="title">자주 묻는 질문</div>
-        <div class="qnacontainer">
-          <div class="tab">
-            <input type="radio" name="acc" id="acc1">
-            <label for="acc1">
-              <h2>01</h2>
-              <h3>How do I apply?</h3>
-            </label>
-            <div class="content">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto
-                reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias
-                voluptate, porro ea sequi nostrum!</p>
-            </div>
-          </div>
-          <div class="tab">
-            <input type="radio" name="acc" id="acc2">
-            <label for="acc2">
-              <h2>02</h2>
-              <h3>Lost or forgotten your password?</h3>
-            </label>
-            <div class="content">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto
-                reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias
-                voluptate, porro ea sequi nostrum!</p>
-            </div>
-          </div>
-          <div class="tab">
-            <input type="radio" name="acc" id="acc3">
-            <label for="acc3">
-              <h2>03</h2>
-              <h3>How can I make a change to my application?</h3>
-            </label>
-            <div class="content">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto
-                reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias
-                voluptate, porro ea sequi nostrum!</p>
-            </div>
-          </div>
-          <div class="tab">
-            <input type="radio" name="acc" id="acc4">
-            <label for="acc4">
-              <h2>04</h2>
-              <h3>How can I update my name?</h3>
-            </label>
-            <div class="content">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto
-                reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias
-                voluptate, porro ea sequi nostrum!</p>
-            </div>
-          </div>
-        </div>
+        <div class="indicator"></div>
       </div>
-      <div class="blog text">
-        <div class="title">문의하기</div>
-        <div class="accordion" id="accordionExample">
-          <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                aria-expanded="true" aria-controls="collapseOne">
-                Accordion Item #1
-              </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <strong>This is the first item's accordion body.</strong>
-                It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each
-                element. These classes control the overall appearance, as well as the showing and hiding via CSS
-                transitions. You can modify any of this with custom CSS or overriding our default variables. It's also
-                worth noting that just about any HTML can go within the
-                <code>.accordion-body</code>, though the transition does limit overflow.
+      <div class="text-content">
+
+        <!-- 주자 묻는 질문 -->
+        <div class="home text">
+          <div class="title">자주 묻는 질문</div>
+          <div class="qnacontainer">
+            <div class="tab">
+              <input type="radio" name="acc" id="acc1">
+              <label for="acc1">
+                <h2>01</h2>
+                <h3>How do I apply?</h3>
+              </label>
+              <div class="content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias voluptate, porro ea sequi nostrum!</p>
+              </div>
+            </div>
+            <div class="tab">
+              <input type="radio" name="acc" id="acc2">
+              <label for="acc2">
+                <h2>02</h2>
+                <h3>Lost or forgotten your password?</h3>
+              </label>
+              <div class="content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias voluptate, porro ea sequi nostrum!</p>
+              </div>
+            </div>
+            <div class="tab">
+              <input type="radio" name="acc" id="acc3">
+              <label for="acc3">
+                <h2>03</h2>
+                <h3>How can I make a change to my application?</h3>
+              </label>
+              <div class="content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias voluptate, porro ea sequi nostrum!</p>
+              </div>
+            </div>
+            <div class="tab">
+              <input type="radio" name="acc" id="acc4">
+              <label for="acc4">
+                <h2>04</h2>
+                <h3>How can I update my name?</h3>
+              </label>
+              <div class="content">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias voluptate, porro ea sequi nostrum!</p>
               </div>
             </div>
           </div>
         </div>
 
-      </div>
-      <div class="help text">
-        <div class="title">Help content</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid nemo non quaerat dolorem aut fuga amet
-          voluptas nostrum ut veniam debitis, nam accusamus officia earum, saepe sit ea odit itaque!</p>
-      </div>
-      <div class="code text">
-        <div class="title">code content</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid nemo non quaerat dolorem aut fuga amet
-          voluptas nostrum ut veniam debitis, nam accusamus officia earum, saepe sit ea odit itaque!</p>
-      </div>
+        <!-- 문의하기 -->
+        <div class="blog text">
+          <div class="title">문의하기</div>
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Accordion Item #1
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <strong>This is the first item's accordion body.</strong>
+                  It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the
+                  <code>.accordion-body</code>, though the transition does limit overflow.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <!-- 실시간 채팅 -->
+        <div class="help text">
+          <div class="title">Help content</div>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid nemo non quaerat dolorem aut fuga amet voluptas nostrum ut veniam debitis, nam accusamus officia earum, saepe sit ea odit itaque!</p>
+        </div>
+
+        <!-- 리뷰 -->
+        <div class="code text">
+          <div class="title">리뷰</div>
+          <div class="review-content">
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio, in quis doloremque tenetur repellat pariatur dolore harum, minima earum voluptatem possimus autem alias quibusdam deserunt quae similique eveniet dignissimos explicabo!
+            </p>
+            <img src="https://i.pinimg.com/564x/8f/fc/6c/8ffc6c28a6d4674e28434ef0f75d2342.jpg" alt="">
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
 
 {% for i in qna.all %}
 <div class="card">

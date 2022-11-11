@@ -230,6 +230,7 @@ body{
   position: relative;
   font-weight: 500;
   color: #333;
+  margin-top: 10px;
   z-index: 10;
 }
 
@@ -261,4 +262,25 @@ body{
 
 .qnacontainer .tab input:checked ~ .content p {
   color: #fff;
+}
+
+.container .content .text-content .review-content{
+  display: flex;
+  height: 250px;
+  width: 100%;
+  border-radius: 14px;
+  background: cornsilk;
+  justify-content: space-evenly;
+}
+.container .content .text-content .review-content img{
+  width: 150px;
+  height: auto;
+  align-self: center;
+  justify-items: center;
+}
+
+.container .content .text-content .review-content p{
+  width: 60%;
+  height: auto;
+  padding-top: 20px;
 }
