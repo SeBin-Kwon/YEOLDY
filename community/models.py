@@ -27,7 +27,7 @@ class Review(models.Model):
         upload_to="images/",
         validators=[FileExtensionValidator(allowed_extensions=["jpg", "png"])],
     )
-    # Product = models.ForeignKey()
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     RATING = [
         (1, "★"),
