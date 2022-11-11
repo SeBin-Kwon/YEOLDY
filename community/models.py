@@ -17,6 +17,7 @@ class QnA(models.Model):
     solve = models.BooleanField(default=False)
     Product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    password = models.CharField(max_length=20, default=None, null=True)
 
 
 class Review(models.Model):
