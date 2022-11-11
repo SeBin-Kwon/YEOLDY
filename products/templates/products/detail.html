@@ -11,6 +11,32 @@
 
 {% endif %}
 
+<!-- 장바구니 -->
+
+<div style="display:flex;">
+    <button id="minus">-</button>
+    <p>0</p>
+    <button id="plus">+</button>
+</div>
+
+<script>
+    let countNum = 0
+
+    const minus = document.querySelector('#minus')
+    minus.addEventListener('click', function() {
+        countNum -= 1
+        const p = document.querySelector('p')
+        p.innerText = countNum
+    })
+
+    const plus = document.querySelector('#plus')
+    plus.addEventListener('click', function() {
+        countNum += 1
+        const p = document.querySelector('p')
+        p.innerText = countNum
+    })
+</script>
+
 <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">장바구니 담기</a>
 
 {% if request.user.is_authenticated %}
