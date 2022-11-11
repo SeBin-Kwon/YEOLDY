@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
@@ -8,6 +8,7 @@ from .models import User
 from django.contrib.auth import update_session_auth_hash
 from django.http import JsonResponse
 import json
+from django.contrib.auth import get_user_model
 
 # Create your views here.
 def index(request):
@@ -133,3 +134,12 @@ def database_naver(request):
         auth_login(request, user)
     return JsonResponse({'username': user.username, 'email': user.email})
 
+def follow(request, pk):
+    user = get_object_or_404(get_user_model(), pk=pk)
+    if request.user == user :
+        return redirect('accounts:index')
+    if request.user in user.followers.all():
+        user.followers.remove(request.user)
+    else:
+        user.followers.add(request.user)
+    return render(request, "accounts/mypage.html")

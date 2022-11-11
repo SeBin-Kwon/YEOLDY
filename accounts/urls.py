@@ -30,4 +30,5 @@ urlpatterns = [
     path('change-password/', views.change_password, name='change-password'),
     path('database/', views.database, name='database'),
     path('database/naver/', views.database_naver, name='databse_naver'),
+    path('<int:pk>/follow', views.follow, name='follow'),
 ]
