@@ -3,7 +3,8 @@ from .forms import QnaForm, ReviewForm, UpdateQnaForm
 from .models import QnA, Review
 from products.models import Products
 from django.contrib import messages
-
+from django.core.paginator import Paginator
+from django.views.decorators.http import require_safe
 # Create your views here.
 
 
@@ -71,9 +72,16 @@ def qna_delete(request, qna_pk):
 
 
 # 리뷰
+
 def review_index(request):
+    page = request.GET.get('page', '1')
     review = Review.objects.all()
-    context = {"review": review}
+    paginator = Paginator(review, '10')
+    page_obj = paginator.get_page(page)
+    context = {
+        "reviews": review,
+        "question_list": page_obj,
+        }
     return render(request, "community/review_index.html", context)
 
 
