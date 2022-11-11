@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Products
+from django.core.paginator import Paginator
 from .form import ProductsForm
 
 
@@ -59,9 +60,14 @@ def update(request, pk):
 # 상품 디테일 연결 기능
 def detail(request, pk):
     product = Products.objects.get(pk=pk)
-
+    page = request.GET.get("page", "1")
+    reviews = product.review_set.all().order_by("-pk")
+    paginator = Paginator(reviews, "5")
+    page_obj = paginator.get_page(page)
     context = {
+        "reviews": reviews,
         "product": product,
+        "review_list": page_obj,
     }
     return render(request, "products/detail.html", context)
 

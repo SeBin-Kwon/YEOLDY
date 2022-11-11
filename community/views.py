@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_safe
+
 # Create your views here.
 
 
@@ -89,24 +90,26 @@ def qna_password(request, qna_pk):
 
 # 리뷰
 
+
 def review_index(request):
-    page = request.GET.get('page', '1')
+    page = request.GET.get("page", "1")
     review = Review.objects.all()
-    paginator = Paginator(review, '10')
+    paginator = Paginator(review, "10")
     page_obj = paginator.get_page(page)
     context = {
         "reviews": review,
         "question_list": page_obj,
-        }
+    }
     return render(request, "community/review_index.html", context)
 
 
-def review_create(request):
+def review_create(request, product_pk):
     if request.method == "POST":
         review_form = ReviewForm(request.POST, request.FILES)
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.user = request.user
+            review.product = Products.objects.get(pk=product_pk)
             review.save()
             return redirect("community:review_index")
     else:
@@ -153,7 +156,7 @@ def review_delete(request, review_pk):
         if request.method == "POST":
             review.delete()
             messages.success(request, "삭제 완료")
-            return redirect("community:review_index", review_pk)
+            return redirect("community:review_index")
     else:
         messages.success(request, "작성자만 삭제가 가능함")
-        return redirect("community:review_index", review_pk)
+        return redirect("community:review_index")

@@ -122,10 +122,14 @@
     </div>
   </div>
 
-  {% for i in qna.all %}
+{% for i in qna.all %}
 <div class="card">
   <div class="card-body">
+    {% if i.password %}
     <a href="{% url 'community:qna_password' i.pk %}">{{ i.title }}</a>
+    {% else %}
+    <a href="{% url 'community:qna_detail' i.pk %}">{{ i.title }}</a>
+    {% endif %}
   </div>
 </div>
 {% endfor %}
