@@ -65,6 +65,7 @@
     text-align: center;
     transition: 1s;
     z-index: 12;
+    overflow: hidden;
 }
 
 .product-list .card1:hover .contentBox {
@@ -297,8 +298,8 @@
 .mySwiper2 .swiper-wrapper .swiper-slide a img {
     display: block;
     margin: auto;
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     border: 3px solid #05bb7e;
     background: #fff;

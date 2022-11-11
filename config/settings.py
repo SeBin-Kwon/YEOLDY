@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "products",
     "community",
     "style",
+    "cart",
     "phonenumber_field",
     "django_bootstrap5",
     "imagekit",
