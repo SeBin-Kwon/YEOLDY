@@ -1,16 +1,39 @@
+// logo.onmouseover = function(){
+//   logo.src = "static/images/logo_green.png";
+// }
+// logo.onmouseout = function(){
+//   logo.src = "static/images/logo_white.png";
+// }
+
 window.addEventListener("scroll", function () {
   const nav = document.querySelector("nav");
   nav.classList.toggle("sticky", window.scrollY > 0)
+  const logo = document.querySelector("#logo1");
+
     if (window.scrollY > 0) {
       nav.style.backgroundColor = "white";
       nav.style.height = "4rem";
       logo.src = "static/images/logo_black.png";
+      // logo.onmouseover = function(){
+      //   logo.src = "static/images/logo_green.png";
+      // }
+      // logo.onmouseout = function(){
+      //   logo.src = "static/images/logo_black.png";
+      // }
   } else {
       nav.style.backgroundColor = "rgba(0,0,0,0)";
       nav.style.height = "6rem";
       logo.src = "static/images/logo_white.png";
+      // logo.onmouseover = function(){
+      //   logo.src = "static/images/logo_green.png";
+      // }
+      // logo.onmouseout = function(){
+      //   logo.src = "static/images/logo_white.png";
+      // }
   }
 })
+
+
 
 // window.addEventListener("scroll", function () {
 //   const nav = document.querySelector("nav");
