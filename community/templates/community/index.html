@@ -7,6 +7,7 @@
 {% endblock css %}
 
 {% block content %}
+
   <div class="container">
     <div class="main-title">고객센터</div>
     <div class="content">
@@ -111,10 +112,11 @@
   </div>
 
   {% for i in qna.all %}
-    <div class="card">
-      <div class="card-body">
-        <a href="{% url 'community:qna_detail' i.pk %}">{{ i.title }}</a>
-      </div>
-    </div>
-  {% endfor %}
+<div class="card">
+  <div class="card-body">
+    <a href="{% url 'community:qna_password' i.pk %}">{{ i.title }}</a>
+  </div>
+</div>
+{% endfor %}
+
 {% endblock content %}
