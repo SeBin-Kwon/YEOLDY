@@ -9,7 +9,12 @@
     {% else %}
         <h1>장바구니</h1>
         {% for cart_item in cart_items %}
-            {{ cart_item.product.name }}
+            <div style="display:flex; flex-direction:column; border:1px solid black;">
+                <p>제품명 : <a href="{% url 'products:detail' cart_item.product.id %}">{{ cart_item.product.name }}</a></p>
+                <p>개수 : {{ cart_item.quantity }}</p>
+                <p>총 가격 : {{ cart_item.product.cost }}원 X {{ cart_item.quantity }} = {{ cart_item.sub_total }}원</p>
+                <a class="btn btn-danger" href="{% url 'cart:delete_cart' cart_item.id %}">장바구니에서 삭제하기</a>
+            </div>
         {% endfor %}
     {% endif %}
 
