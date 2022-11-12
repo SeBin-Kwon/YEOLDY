@@ -24,6 +24,7 @@ class Review(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     # Product = models.ForeignKey()
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     RATING = [
         (1, "★"),

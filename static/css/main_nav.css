@@ -47,11 +47,11 @@ nav {
   color: black
 }
 
-.drop {
+/* .drop { */
   /* visibility: hidden; */
   /* transition: all 0.3s ease 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
   transition: all 0.7s; */
-}
+/* } */
 
 .nav-items .drop-menu {
   position: absolute;
@@ -73,9 +73,15 @@ nav {
   font-weight: 600;
 }
 
-.nav-items li:hover {
-  background-color: rgba(255, 0, 0, 0.164);
+/* .drop-menu li a::after {
+
 }
+
+.nav-items li a:hover {
+  padding: 3px;
+  background-color: rgba(164, 0, 0, 0.652);
+  border-bottom: 2px solid  #0DB295;
+} */
 
 .nav-items li:hover .drop-menu {
   top: 60px;
@@ -96,24 +102,26 @@ nav {
   color: black;
 }
 
-/* .logo {
+.logo-link {
   position: relative;
 }
 
 #logo2 {
   opacity: 0;
   position: absolute;
-  top: 0;
+  top: 1px;
   left: 0;
   z-index: 99;
 }
 
-.logo:hover #logo2 {
+.logo-link:hover #logo2 {
   opacity: 1;
-  transition: 0.7s;
+  transition: all 0.3s;
+  animation-name: out;
 }
 
-.logo:hover #logo1 {
+.logo-link:hover #logo1 {
   opacity: 0;
-  transition: 0.7s;
-} */
+  transition: all 0.3s;
+}
+
