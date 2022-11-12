@@ -23,10 +23,7 @@ class QnA(models.Model):
 class Review(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
-    image = models.FileField(
-        upload_to="images/",
-        validators=[FileExtensionValidator(allowed_extensions=["jpg", "png"])],
-    )
+    # Product = models.ForeignKey()
     product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     RATING = [
@@ -37,3 +34,12 @@ class Review(models.Model):
         (5, "★★★★★"),
     ]
     grade = models.IntegerField(choices=RATING, default=None)
+    
+    def __str__(self):
+        return self.title
+class Photo(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, null=True)
+    image = models.FileField(
+        upload_to="images/",
+        validators=[FileExtensionValidator(allowed_extensions=["jpg", "png"])],
+    )

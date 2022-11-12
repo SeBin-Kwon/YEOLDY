@@ -2,33 +2,35 @@
 {% load django_bootstrap5 %}
 {% block content %}
 
-{% if request.resolver_match.url_name == 'qna_create' %}
-<form action="" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {% bootstrap_form qna_form %}
-  {% bootstrap_button '확인' %}
-</form>
+  {% if request.resolver_match.url_name == 'qna_create' %}
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form qna_form %}
+      {% bootstrap_button '확인' %}
+    </form>
 
-{% elif request.resolver_match.url_name == 'qna_update' %}
-<form action="" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {% bootstrap_form qna_form %}
-  {% bootstrap_button '확인' %}
-</form>
+  {% elif request.resolver_match.url_name == 'qna_update' %}
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form qna_form %}
+      {% bootstrap_button '확인' %}
+    </form>
 
-{% elif request.resolver_match.url_name == 'review_update' %}
-<form action="" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {% bootstrap_form review_form %}
-  {% bootstrap_button '확인' %}
-</form>
+  {% elif request.resolver_match.url_name == 'review_update' %}
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form review_form %}
+      <input type="file" name="imgs" multiple="multiple">
+      {% bootstrap_button '확인' %}
+    </form>
 
-{% else %}
-<form action="" method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {% bootstrap_form review_form %}
-  {% bootstrap_button '확인' %}
-</form>
+  {% else %}
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form review_form %}
+      <input type="file" name="imgs" multiple="multiple">
+      {% bootstrap_button '확인' %}
+    </form>
 
-{% endif %}
+  {% endif %}
 {% endblock content %}

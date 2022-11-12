@@ -31,6 +31,5 @@ class ReviewForm(forms.ModelForm):
         fields = [
             "title",
             "content",
-            "image",
             "grade",
         ]
