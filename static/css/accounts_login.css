@@ -3,25 +3,41 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
+  margin-top: 3.5rem;
   padding: 0;
   box-sizing: border-box;
+  background-image: url('../images/yeoldy_main_design.png');
+  background-repeat : no-repeat;
+  background-size: 100%;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .login-form {
   position: relative;
+  background-color: rgba(255, 255, 255, 0.669);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  width: 35rem;
+  box-shadow: 2px 8px 14px 0px rgba(0, 0, 0, 0.086);
+  border-radius: 20px;
+  border: white solid 1px;
 }
 
 .login-form h1 {
-  font-size: 32px;
+  letter-spacing:3px;
+  font-size: 27px;
   text-align: center;
   margin-bottom: 60px;
+  color: rgb(49, 49, 49);
 }
 
 .int-area {
   width: 400px;
   position: relative;
   margin-top: 20px;
+  margin: auto;
+  margin-bottom: 1.5rem;
 }
 
 .int-area:first-child {
@@ -81,6 +97,11 @@
   border: none;
   border-radius: 7px;
   cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-area button:hover {
+  background-color: #07937a;
 }
 
 .caption {
