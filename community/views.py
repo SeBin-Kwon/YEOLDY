@@ -113,9 +113,9 @@ def review_create(request, product_pk):
             review.save()
             return redirect("community:review_index")
     else:
-        review_form = ReviewForm()
+        review_form = ReviewForm() 
     context = {
-        "review_form": review_form,
+        "review_form": review_form,     
     }
     return render(request, "community/community_create.html", context)
 
