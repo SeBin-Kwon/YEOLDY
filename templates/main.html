@@ -72,12 +72,12 @@
         </li>
       </ul>
       <div class="logo-div">
-        <a class="logo-link" href="#">
+        <a class="logo-link" href="{% url 'main' %}">
           <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
           <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
         </a>
       </div>
-      <ul class="nav-items" style="padding-left: 1rem;">
+      <ul class="nav-items" style="padding-left: 4rem;">
         <li>
           <a href="#">
             <i class="bi bi-search"></i>
@@ -89,7 +89,7 @@
           </a>
         </li>
         <li>
-          <a href="#">LOGIN</a>
+          <a href="{% url 'accounts:login' %}">LOGIN</a>
         </li>
       </ul>
     </nav>

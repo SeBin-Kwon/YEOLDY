@@ -14,6 +14,7 @@ nav {
   justify-content: space-between;
   transition: 0.7s;
   z-index:999;
+  backdrop-filter: blur(5px);
 }
 
 .nav-items {
@@ -38,13 +39,45 @@ nav {
   font-size: 14px;
 }
 
+.nav-items > li > a {
+  display: inline-block;
+	position: relative;
+  transition: 0.3s;
+}
+.nav-items > li > a:after {
+		content: "";
+		display: block;
+		position: absolute;
+		width: 0;
+		bottom: 0;
+		height: 2px;
+    border-radius: 2px;
+		margin: -3px 0;
+		left: 0;
+		background-color: #05bb7e;
+		transition: 0.3s;
+	}
+
+.nav-items > li > a:hover:after{
+  width: 100%;
+}
+
+.nav-items > li > a:hover{
+  color: #05bb7e;
+}
+
+
 .logo-div {
   padding-left: 1rem;
-  padding-right: 3rem;
+  padding-right: 6.5rem;
 }
 
 .sticky .nav-items li a {
-  color: black
+  color: black;
+}
+
+.sticky .nav-items li a:hover {
+  color: #0DB295;
 }
 
 /* .drop { */
@@ -65,6 +98,7 @@ nav {
   padding: 1.5rem 0;
   box-shadow: 0px 5px 4px 0px rgba(0, 0, 0, 0.019);
   transition: all 0.7s;
+  backdrop-filter: blur(5px);
 }
 
 .drop-menu li a {
@@ -91,15 +125,24 @@ nav {
 .nav-items li:hover .drop-menu li a {
   opacity: 1;
   transition: all 0.2s;
-  transition-delay: 0.2s;
+  /* transition-delay: 0.2s; */
 }
 
 .sticky .nav-items .drop-menu {
+  /* backdrop-filter: blur(5px); */
   background-color: white;
 }
 
 .sticky .drop-menu li a {
   color: black;
+}
+
+.sticky .drop-menu > li > a:hover {
+  color: #0DB295;
+}
+
+.drop-menu > li > a:hover {
+  color: #0DB295;
 }
 
 .logo-link {
@@ -112,6 +155,7 @@ nav {
   top: 1px;
   left: 0;
   z-index: 99;
+  transition: all 0.3s;
 }
 
 .logo-link:hover #logo2 {
@@ -124,4 +168,6 @@ nav {
   opacity: 0;
   transition: all 0.3s;
 }
+
+
 
