@@ -13,6 +13,7 @@ window.addEventListener("scroll", function () {
     if (window.scrollY > 0) {
       nav.style.backgroundColor = "white";
       nav.style.height = "4rem";
+      // nav.style.cssText = "backdrop-filter: blur(5px); height: 4rem; background-color: rgba(255,255,255,0.6)";
       logo.src = "static/images/logo_black.png";
       // logo.onmouseover = function(){
       //   logo.src = "static/images/logo_green.png";

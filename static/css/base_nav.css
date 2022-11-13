@@ -4,7 +4,7 @@
 }
 
 nav { 
-  background-color: rgba(255, 255, 255, 0);
+  background-color: white;
   width: 100vw;
   height: 6rem;
   display: flex;
@@ -15,6 +15,7 @@ nav {
   transition: 0.7s;
   z-index:999;
   backdrop-filter: blur(5px);
+  box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.044);
 }
 
 .nav-items {
@@ -34,7 +35,7 @@ nav {
 
 .nav-items li a {
   text-decoration: none;
-  color: white;
+  color: black;
   font-weight: 500;
   font-size: 14px;
 }
@@ -65,7 +66,6 @@ nav {
   border-radius: 2px;
   margin: -3px 0;
   left: 0;
-  /* background-color: #05bb7e; */
   transition: 0.3s;
 }
 
@@ -87,7 +87,7 @@ nav {
   padding-right: 6.5rem;
 }
 
-.sticky .nav-items li a {
+.nav-items li a {
   color: black;
 }
 
@@ -95,11 +95,6 @@ nav {
   color: #0DB295;
 }
 
-/* .drop { */
-  /* visibility: hidden; */
-  /* transition: all 0.3s ease 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
-  transition: all 0.7s; */
-/* } */
 
 .nav-items .drop-menu {
   position: absolute;
