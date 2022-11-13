@@ -49,16 +49,31 @@ nav {
 		display: block;
 		position: absolute;
 		width: 0;
-		bottom: 0;
-		height: 2px;
+		border-bottom: 2px solid #05bb7e;
     border-radius: 2px;
-		margin: -3px 0;
 		left: 0;
-		background-color: #05bb7e;
-		transition: 0.3s;
+		/* background-color: #05bb7e; */
+		transition: 0.1s;
 	}
 
+.nav-items > li > a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  border-top: 2px solid #05bb7e;
+  border-radius: 2px;
+  margin: -3px 0;
+  left: 0;
+  /* background-color: #05bb7e; */
+  transition: 0.3s;
+}
+
 .nav-items > li > a:hover:after{
+  width: 100%;
+}
+
+.nav-items > li > a:hover::before{
   width: 100%;
 }
 
