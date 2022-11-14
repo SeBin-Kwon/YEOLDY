@@ -2,124 +2,127 @@
 
 {% block content %}
 
-{% if product.image %}
-<img src="{{ product.image.url }}" alt="{{ post.image }}" style="width: 640px; height: 440px;">
+  {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ post.image }}" style="width: 640px; height: 440px;">
 
-{% else %}
+  {% else %}
 
-<img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
+    <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
 
-{% endif %}
+  {% endif %}
 
-<!-- 장바구니 -->
+  <!-- 장바구니 -->
 
-<div style="display:flex;">
-  <form action="{% url 'cart:add_cart' product.pk %}" method="POST">
-    {% csrf_token %}
-    <button id="minus">-</button>
-    <input id="cart_quantity" type="text" name="cart_quantity">
-    <button id="plus">+</button>
-    <button type="submit">장바구니 담기</button>
-  </form>
-</div>
-
-<script>
-  let countNum = 0
-
-  const minus = document.querySelector('#minus')
-  minus.addEventListener('click', function () {
-  countNum -= 1
-  const p = document.querySelector('p')
-  p.innerText = countNum
-  })
-
-  const plus = document.querySelector('#plus')
-  plus.addEventListener('click', function () {
-  countNum += 1
-  const p = document.querySelector('p')
-  p.innerText = countNum
-  })
-</script>
-
-{% if request.user.is_authenticated %}
-{% if request.user in product.save_users.all %}
-{{ product.save_users.count }}
-<a class="title_link" href="{% url 'products:save' product.pk %}"><svg xmlns="http://www.w3.org/2000/svg" width="25"
-    height="25" fill="black" class="bi bi-folder-check" viewBox="0 0 16 16">
-    <path
-      d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
-    <path
-      d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z" />
-  </svg> </a>
-{% else %}
-<a href="{% url 'products:save' product.pk %}"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-    fill="black" class="bi bi-folder-plus" viewBox="0 0 16 16">
-    <path
-      d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z" />
-    <path
-      d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z" />
-  </svg></a>
-{% endif %}
-{% endif %}
-
-<a href="{% url 'products:update' product.pk %}"> 수정 </a>
-
-
-<a href=""></a>
-<a class="my-3 mx-2 btn btn-danger" href="{% url 'products:delete' product.pk %}">삭제</a>
-
-<div>
-  <p> qna 작성</p>
-  <a href="{% url 'community:qna_create' product.pk %}"> 작성 </a>
-</div>
-
-<div>
-  <p> 리뷰 작성</p>
-  <a href="{% url 'community:review_create' product.pk %}"> 작성 </a>
-</div>
-
-<div>
-  {% for review in review_list %}
-  <div class="card">
-    <div class="card-body">
-      <a href="{% url 'community:review_detail' review.pk %}">{{ review.title }}</a>
-    </div>
+  <div style="display:flex;">
+    <form action="{% url 'cart:add_cart' product.pk %}" method="POST">
+      {% csrf_token %}
+      <button type="button" id="minus">-</button>
+      <input id="cart_quantity" type="text" name="cart_quantity" value="0">
+      <button type="button" id="plus">+</button>
+      <button type="submit">장바구니 담기</button>
+    </form>
   </div>
-  {% endfor %}
-  <!-- 페이징처리 시작 -->
-  <ul class="pagination justify-content-center">
-    <!-- 이전페이지 -->
-    {% if question_list.has_previous %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a>
-    </li>
+
+  <script>
+    const quantity = document.querySelector('#cart_quantity')
+
+    const minus = document.querySelector('#minus')
+    minus.addEventListener('click', function () {
+      quantity.value -= 1
+    })
+
+    const plus = document.querySelector('#plus')
+    plus.addEventListener('click', function () {
+      console.log(quantity)
+      num = parseInt(quantity.value)
+      quantity.value = num + 1
+    })
+  </script>
+
+  {% if request.user.is_authenticated %}
+    {% if request.user in product.save_users.all %}
+      {{ product.save_users.count }}
+      <a class="title_link" href="{% url 'products:save' product.pk %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-folder-check" viewbox="0 0 16 16">
+          <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
+          <path d="M15.854 10.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 .707-.708l1.146 1.147 2.646-2.647a.5.5 0 0 1 .708 0z"/>
+        </svg>
+      </a>
     {% else %}
-    <li class="page-item disabled">
-      <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-    </li>
+      <a href="{% url 'products:save' product.pk %}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-folder-plus" viewbox="0 0 16 16">
+          <path d="m.5 3 .04.87a1.99 1.99 0 0 0-.342 1.311l.637 7A2 2 0 0 0 2.826 14H9v-1H2.826a1 1 0 0 1-.995-.91l-.637-7A1 1 0 0 1 2.19 4h11.62a1 1 0 0 1 .996 1.09L14.54 8h1.005l.256-2.819A2 2 0 0 0 13.81 3H9.828a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 6.172 1H2.5a2 2 0 0 0-2 2zm5.672-1a1 1 0 0 1 .707.293L7.586 3H2.19c-.24 0-.47.042-.683.12L1.5 2.98a1 1 0 0 1 1-.98h3.672z"/>
+          <path d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 1 1 0 1H14v1.5a.5.5 0 1 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"/>
+        </svg>
+      </a>
     {% endif %}
-    <!-- 페이지리스트 -->
-    {% for page_number in question_list.paginator.page_range %}
-    {% if page_number == question_list.number %}
-    <li class="page-item active" aria-current="page">
-      <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-    </li>
-    {% else %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-    </li>
-    {% endif %}
+  {% endif %}
+
+  <a href="{% url 'products:update' product.pk %}">
+    수정
+  </a>
+
+  <a href=""></a>
+  <a class="my-3 mx-2 btn btn-danger" href="{% url 'products:delete' product.pk %}">삭제</a>
+
+  <div>
+    <p>
+      qna 작성</p>
+    <a href="{% url 'community:qna_create' product.pk %}">
+      작성
+    </a>
+  </div>
+
+  <div>
+    <p>
+      리뷰 작성</p>
+    <a href="{% url 'community:review_create' product.pk %}">
+      작성
+    </a>
+  </div>
+
+  <div>
+    {% for review in review_list %}
+      <div class="card">
+        <div class="card-body">
+          <a href="{% url 'community:review_detail' review.pk %}">{{ review.title }}</a>
+        </div>
+      </div>
     {% endfor %}
-    <!-- 다음페이지 -->
-    {% if question_list.has_next %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-      <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-    </li>
-    {% endif %}
-  </ul>
-</div>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+      <!-- 이전페이지 -->
+      {% if question_list.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+      {% endif %}
+      <!-- 페이지리스트 -->
+      {% for page_number in question_list.paginator.page_range %}
+        {% if page_number == question_list.number %}
+          <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+          </li>
+        {% else %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+      <!-- 다음페이지 -->
+      {% if question_list.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
 {% endblock content %}
