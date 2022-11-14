@@ -54,15 +54,11 @@ def update(request, pk):
 def detail(request, pk):
     style = Style.objects.get(pk=pk)
     review_form = ReviewForm()
-    page = request.GET.get("page", "1")
     reviews = style.style_review_set.all().order_by("-pk")
-    paginator = Paginator(reviews, "5")
-    page_obj = paginator.get_page(page)
-
     context = {
         "style": style,
         "review_form": review_form,
-        "review_list": page_obj,
+        "reviews": reviews,
     }
     return render(request, "style/detail.html", context)
 

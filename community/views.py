@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import QnaForm, ReviewForm, UpdateQnaForm
+from .forms import QnaForm, ReviewForm, UpdateQnaForm, QnaForm_2
 from .models import QnA, Review, Photo
 from products.models import Products
 from django.contrib import messages
@@ -31,6 +31,22 @@ def qna_create(request, product_pk):
         "qna_form": qna_form,
     }
     return render(request, "community/community_create.html", context)
+
+
+def qna(request):
+    if request.method == "POST":
+        qna_form = QnaForm_2(request.POST)
+        if qna_form.is_valid():
+            qna = qna_form.save(commit=False)
+            qna.user = request.user
+            qna.save()
+            return redirect("community:index")
+    else:
+        qna_form = QnaForm_2()
+    context = {
+        "qna_form": qna_form,
+    }
+    return render(request, "community/qna_create.html", context)
 
 
 def qna_detail(request, qna_pk):

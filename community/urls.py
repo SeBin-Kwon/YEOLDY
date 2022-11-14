@@ -21,6 +21,7 @@ app_name = "community"
 urlpatterns = [
     path("", views.index, name="index"),  # qna목록
     path("<int:product_pk>/qna_create/", views.qna_create, name="qna_create"),
+    path("qna_create/", views.qna, name="qna"),
     path("<int:qna_pk>/", views.qna_detail, name="qna_detail"),
     path("<int:qna_pk>/qna_update/", views.qna_update, name="qna_update"),
     path("<int:qna_pk>/qna_delete/", views.qna_delete, name="qna_delete"),
