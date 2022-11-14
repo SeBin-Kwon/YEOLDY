@@ -234,15 +234,15 @@
 }
 
 .admin-title h2 {
-    letter-spacing: -3px;
+    letter-spacing: -0.7px;
 }
 
 .admin-title h2 span {
-    letter-spacing: -2px;
+    letter-spacing: -0.9px;
 }
 
 .admin-title p {
-    letter-spacing: -1px;
+    letter-spacing: -0.9px;
 }
 
 .admin-title .link {

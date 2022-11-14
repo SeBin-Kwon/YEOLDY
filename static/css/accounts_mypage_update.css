@@ -76,6 +76,7 @@ form .user-details .input-box{
 .gender-details {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 5rem;
 }
 
@@ -120,9 +121,9 @@ form input[type="radio"]{
 }
 
 form .button {
-  height: 45px;
-  margin: 45px 0;
-  min-width: 300px;
+  height: 38px;
+  margin-left: 3px;
+  min-width: 100px;
 }
 
 form .button input:hover {

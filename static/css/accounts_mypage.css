@@ -3,10 +3,9 @@
 }
 
 .mypage{
-  display: flex;
-  margin: 2rem 6rem 0;
+  margin: auto;
   padding: 3rem;
-  flex-direction: column;
+  width: 900px;
   border-radius: 20px;
   box-shadow: 3px 6px 14px 2px rgba(0, 0, 0, 0.086);
 }
@@ -18,20 +17,21 @@
 }
 
 .section {
-  display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: auto;
 }
 
 
 .info {
   text-align: left;
-  margin: 0 5rem;
+  min-width: 300px;
 }
 
 .mypage-btn {
   margin-top: 2rem;
   text-align: end;
+  display: flex;
 }
 
 .info-name {
@@ -48,12 +48,38 @@
   height: 300px;
   border-radius: 50%;
   overflow: hidden;
+  margin: auto;
 }
 
 .profile-image {
   position: absolute;
   top: 50%;
   left: 50%;
-  height: 120%;
+  height: 100%;
+  width: 100%;
   transform: translate(-50%,-50%);
+}
+
+
+@media ( max-width: 1023px ) {
+  .mypage {
+    width: 700px;
+  }
+  /* .mypage-btn .btn {
+    --bs-btn-font-size: 12px !important;
+  } */
+}
+@media ( max-width: 767px ) {
+  .mypage {
+    width: 500px;
+  }
+
+  .mypage-btn {
+    justify-content: center;
+  }
+
+  .info-box {
+    padding-left: 4rem;
+  }
+  
 }
