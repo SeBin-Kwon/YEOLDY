@@ -12,6 +12,9 @@ def _cart_id(request):
     return cart
 
 def add_cart(request, product_id):
+    if request.method == 'POST':
+        cart_quantity = request.POST['cart_quantity']
+        print(cart_quantity)
     #장바구니에 들어가는 product
     product = Products.objects.get(id=product_id)
     try:
