@@ -1,13 +1,68 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/review_index.css'%}">
+{% endblock css %}
 {% block content %}
-  {% for i in question_list %}
-    <div class="card">
-      <div class="card-body">
-        <a href="{% url 'community:review_detail' i.pk %}">{{ i.title }}</a>
+  <!-- 리뷰 -->
+  <div class="code text">
+    <div class="review-content">
+
+      <!--testimonials-box-container-->
+      <div class="testimonial-box-container">
+        <!--box1-->
+        <div class="testimonial-box">
+          <!-- top -->
+          <div class="box-top">
+            <!--profile-->
+            <div class="profile">
+              <!--img-->
+              <div class="profile-img">
+                <img src="https://i.pinimg.com/564x/b7/21/57/b72157473ae510c74e7a96ccb8bd0e38.jpg" alt="">
+              </div>
+              <!--name-and-username-->
+              <div class="name-user">
+                <strong>SangWook</strong>
+                <span>@Wxxk</span>
+              </div>
+              <!--popup-->
+            </div>
+            <button type="submit" class="comment-btn" onclick="openPopup()">자세히</button>
+            <div class="popup" id="popup">
+              <img src="https://i.pinimg.com/736x/5c/6a/db/5c6adbec93947a0be97272a5b44cfaf8.jpg" alt="">
+              <h2>Thank You!</h2>
+              <p>Your detilas hasd been successfully submitted. Thanks!</p>
+              <button type="button" onclick="closePopup()">OK</button>
+            </div>
+
+            <!--review-->
+            <div class="reviews">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="far fa-star"></i>
+              <!--empty start-->
+            </div>
+
+          </div>
+
+          <!--Comments-->
+          <div class="client-comment">
+            <div class="comment">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, nobis ipsum magnam modi iste soluta eveniet eius expedita dolore atque itaque id, sunt cumque aperiam assumenda ipsam, qui laudantium quis?</p>
+              <img src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+            </div>
+
+          </div>
+
+        </div>
+
       </div>
+
     </div>
-  {% endfor %}
+  </div>
   <!-- 페이징처리 시작 -->
   <ul class="pagination justify-content-center">
     <!-- 이전페이지 -->
