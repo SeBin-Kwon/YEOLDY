@@ -112,9 +112,59 @@
         <div class="code text">
           <div class="title">리뷰</div>
           <div class="review-content">
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio, in quis doloremque tenetur repellat pariatur dolore harum, minima earum voluptatem possimus autem alias quibusdam deserunt quae similique eveniet dignissimos explicabo!
-            </p>
-            <img src="https://i.pinimg.com/564x/8f/fc/6c/8ffc6c28a6d4674e28434ef0f75d2342.jpg" alt="">
+
+            <!--testimonials-box-container-->
+            <div class="testimonial-box-container">
+              <!--box1-->
+              <div class="testimonial-box">
+                <!-- top -->
+                <div class="box-top">
+                  <!--profile-->
+                  <div class="profile">
+                    <!--img-->
+                    <div class="profile-img">
+                      <img src="https://i.pinimg.com/564x/b7/21/57/b72157473ae510c74e7a96ccb8bd0e38.jpg" alt="">
+                    </div>
+                    <!--name-and-username-->
+                    <div class="name-user">
+                      <strong>SangWook</strong>
+                      <span>@Wxxk</span>
+                    </div>
+                    <!--popup-->
+                  </div>
+                  <button type="submit" class="comment-btn" onclick="openPopup()">자세히</button>
+                  <div class="popup" id="popup">
+                    <img src="https://i.pinimg.com/736x/5c/6a/db/5c6adbec93947a0be97272a5b44cfaf8.jpg" alt="">
+                    <h2>Thank You!</h2>
+                    <p>Your detilas hasd been successfully submitted. Thanks!</p>
+                    <button type="button" onclick="closePopup()">OK</button>
+                  </div>
+
+                  <!--review-->
+                  <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <!--empty start-->
+                  </div>
+
+                </div>
+
+                <!--Comments-->
+                <div class="client-comment">
+                  <div class="comment">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, nobis ipsum magnam modi iste soluta eveniet eius expedita dolore atque itaque id, sunt cumque aperiam assumenda ipsam, qui laudantium quis?</p>
+                    <img src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
         </div>
 
@@ -122,16 +172,31 @@
     </div>
   </div>
 
-{% for i in qna.all %}
-<div class="card">
-  <div class="card-body">
-    {% if i.password %}
-    <a href="{% url 'community:qna_password' i.pk %}">{{ i.title }}</a>
-    {% else %}
-    <a href="{% url 'community:qna_detail' i.pk %}">{{ i.title }}</a>
-    {% endif %}
-  </div>
-</div>
-{% endfor %}
+  {% for i in qna.all %}
+    <div class="card">
+      <div class="card-body">
+        {% if i.password %}
+          <a href="{% url 'community:qna_password' i.pk %}">{{ i.title }}</a>
+        {% else %}
+          <a href="{% url 'community:qna_detail' i.pk %}">{{ i.title }}</a>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
 
+  <script>
+    let popup = document.getElementById("popup");
+
+    function openPopup() {
+      popup
+        .classList
+        .add("open-popup");
+    }
+
+    function closePopup() {
+      popup
+        .classList
+        .remove("open-popup");
+    }
+  </script>
 {% endblock content %}
