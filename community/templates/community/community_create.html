@@ -23,6 +23,7 @@
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form review_form %}
+    <input type="file" name="imgs" multiple>
     {% bootstrap_button '확인' %}
   </form>
 
