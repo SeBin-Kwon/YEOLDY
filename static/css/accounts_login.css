@@ -139,6 +139,12 @@
   height: 3.1rem !important;
 }
 
+#naver_id_login > a {
+  width: 100% !important;
+}
+
 #naver_id_login > a > img {
-  display: none;
+  opacity: 0;
+  width: 100% !important;
+  z-index: 999;
 }

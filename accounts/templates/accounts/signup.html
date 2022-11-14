@@ -38,11 +38,11 @@
         </div>
         <div class="input-box">
           <span class="details">생년월일</span>
-          <input type="number" name="birth">
+          <input type="number" required="required" placeholder="생년월일을 입력해 주세요" name="birth">
         </div>
         <div class="input-box">
           <span class="details">프로필사진</span>
-          <input type="file" class="btn" required="required" name="profile_image">
+          <input type="file" class="file-input" required="required" name="profile_image">
         </div>
       </div>
 
@@ -62,11 +62,12 @@
             </label>
           </div>
         </div>
+        <div class="button">
+          <input type="submit" value="제출">
+        </div>
       </div>
 
-      <div class="button">
-        <input type="submit" value="제출">
-      </div>
+
     </form>
   </div>
 
