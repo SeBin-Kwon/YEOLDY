@@ -13,19 +13,22 @@ body{
 }
 
 .signup-form{
-  max-width: 700px;
+  margin-top: 4rem;
+  max-width: 800px;
   width: 100%;
-  background: #fff;
-  padding: 25px 30px;
-  border-radius: 5px;
-  border: 1px solid gainsboro;
-  box-shadow: 0px 0px 10px rgba(13, 178, 148, 0.253)
+  /* background: #fff; */
+  padding: 50px;
+  /* border-radius: 5px; */
+  /* border: 1px solid gainsboro; */
+  /* box-shadow: 0px 0px 10px rgba(13, 178, 148, 0.253) */
 }
 
 .signup-form .title{
-  font-size: 25px;
+  font-size: 27px;
   font-weight: 500;
   position: relative;
+  color: rgb(50, 50, 50);
+  margin-bottom: 2.5rem;
 }
 
 /* .container .title::before{
@@ -47,7 +50,7 @@ body{
 
 form .user-details .input-box{
   margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
+  width: calc(100% / 2 - 30px);
 }
 
 .user-details .input-box .details{
@@ -56,15 +59,16 @@ form .user-details .input-box{
   margin-bottom: 5px;
 }
 
+
 .user-details .input-box input{
   height: 45px;
   width: 100%;
+  padding: 10px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px;
   outline: none;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  padding-left: 15px;
-  font-size: 16px;
-  border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
 
@@ -73,20 +77,28 @@ form .user-details .input-box{
   border-color: #0DB295;
 }
 
+.gender-details {
+  display: flex;
+  justify-content: space-between;
+}
+
 form .gender-details .gender-title{
   font-size: 20px;
   font-weight: 500;
+  width: 20rem;
 }
 
 form .gender-details .category{
   display: flex;
-  width: 80%;
+  width: 100%;
   margin: 14px 0;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .gender-details .category label{
   display: flex;
+  align-items: center;
+  margin-right: 2rem;
 }
 
 .gender-details .category .dot{
@@ -113,6 +125,11 @@ form input[type="radio"]{
 form .button {
   height: 45px;
   margin: 45px 0;
+  width: 300px;
+}
+
+form .button input:hover {
+  background-color: #07937a;
 }
 
 form .button input{
@@ -126,8 +143,8 @@ form .button input{
   border-radius: 5px;
   letter-spacing: 1px;
   background: #0DB295;
+  transition: 0.3s;
 }
-
 
 @media (max-width: 584px) {
   .signup-form{

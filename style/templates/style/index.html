@@ -5,10 +5,10 @@
 <body style="margin-top: 100px;">
 
 
-    {% for product in products %}
+    {% for style in styles %}
 
 
-    <a href="{% url 'products:detail' product.pk %}">{{ product.name }}</a>
+    <a href="">{{ style.title }}</a>
 
     {% endfor %}
 
