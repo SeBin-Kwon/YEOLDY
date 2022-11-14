@@ -18,25 +18,34 @@
 
 <a class="my-3 mx-2 btn btn-danger" href="{% url 'style:delete' style.pk %}">삭제</a>
 
-<div>
-  <p> 리뷰 작성</p>
-  <a href=""> 작성 </a>
+<div class="my-3">
+  {% if request.user.is_authenticated %}
+  {% load django_bootstrap5 %}
+  <form action="{% url 'style:review_create' style.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form review_form layout='inline' %}
+    <br>
+    {% bootstrap_button button_type="submit" content="댓글 작성" %}
+  </form>
+  {% endif %}
 </div>
+
 
 <div>
   {% for review in review_list %}
   <div class="card">
     <div class="card-body">
-      <a href="">{{ review.title }}</a>
+      {{ review.content }}
+      {{ review.grade }}
     </div>
   </div>
   {% endfor %}
   <!-- 페이징처리 시작 -->
   <ul class="pagination justify-content-center">
     <!-- 이전페이지 -->
-    {% if question_list.has_previous %}
+    {% if review_list.has_previous %}
     <li class="page-item">
-      <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a>
+      <a class="page-link" href="?page={{ review_list.previous_page_number }}">이전</a>
     </li>
     {% else %}
     <li class="page-item disabled">
@@ -44,8 +53,8 @@
     </li>
     {% endif %}
     <!-- 페이지리스트 -->
-    {% for page_number in question_list.paginator.page_range %}
-    {% if page_number == question_list.number %}
+    {% for page_number in review_list.paginator.page_range %}
+    {% if page_number == review_list.number %}
     <li class="page-item active" aria-current="page">
       <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
     </li>
@@ -56,9 +65,9 @@
     {% endif %}
     {% endfor %}
     <!-- 다음페이지 -->
-    {% if question_list.has_next %}
+    {% if review_list.has_next %}
     <li class="page-item">
-      <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a>
+      <a class="page-link" href="?page={{ review_list.next_page_number }}">다음</a>
     </li>
     {% else %}
     <li class="page-item disabled">

@@ -23,3 +23,17 @@ class Style(models.Model):
     )
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = MultiSelectField(choices=STYLE_CATEGORY)
+
+
+class Style_Review(models.Model):
+    content = models.TextField(max_length=50)
+    style = models.ForeignKey(Style, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    RATING = [
+        (1, "★"),
+        (2, "★★"),
+        (3, "★★★"),
+        (4, "★★★★"),
+        (5, "★★★★★"),
+    ]
+    grade = models.IntegerField(choices=RATING, default=None)
