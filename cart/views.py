@@ -32,7 +32,9 @@ def add_cart(request, product_id):
         cart_item.quantity += int(cart_quantity)
         cart_item.save()
     except CartItem.DoesNotExist:
-        cart_item = CartItem.objects.create(product=product, quantity=1, cart=cart)
+        cart_item = CartItem.objects.create(
+            product=product, quantity=int(cart_quantity), cart=cart
+        )
         cart_item.save()
     return redirect("cart:cart_detail")
 
