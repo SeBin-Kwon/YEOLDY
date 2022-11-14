@@ -26,9 +26,9 @@
         <label for="help" class="help">
           실시간채팅
         </label>
-        <label for="code" class="code">
+        {% comment %} <label for="code" class="code">
           리뷰
-        </label>
+        </label> {% endcomment %}
 
         <div class="indicator"></div>
       </div>
@@ -83,7 +83,10 @@
 
         <!-- 문의하기 -->
         <div class="blog text">
-          <div class="title">문의하기</div>
+          <div class="title">
+            <h5>문의하기</h5>
+            <a href="#">글 쓰기</a>
+          </div>
           <div class="accordion" id="accordionExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
@@ -109,7 +112,7 @@
         </div>
 
         <!-- 리뷰 -->
-        <div class="code text">
+        {% comment %} <div class="code text">
           <div class="title">리뷰</div>
           <div class="review-content">
 
@@ -166,7 +169,7 @@
             </div>
 
           </div>
-        </div>
+        </div> {% endcomment %}
 
       </div>
     </div>
