@@ -92,7 +92,7 @@
                     data: {'username': id, 'email': email, 'gender': gender}
                     }).then(response => {
                     location.reload();
-                    // window.location.href = 'http://localhost:8000/reviews/'; // 이동할 url
+                    window.location.href = 'http://127.0.0.1:8000/'; // 이동할 url
                     })
                     
                 },
@@ -126,7 +126,7 @@
             naver_id_login.setButton("white", 2,40);
             naver_id_login.setDomain("http://127.0.0.1:8000/accounts/login/");
             naver_id_login.setState(state);
-            naver_id_login.setPopup();
+            //naver_id_login.setPopup();
             naver_id_login.init_naver_id_login();
         </script>
         <div class="caption">
