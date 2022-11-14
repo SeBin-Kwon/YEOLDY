@@ -3,6 +3,7 @@
 {% load static %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/review_index.css'%}">
+  <script src="https://kit.fontawesome.com/44d20d6c0e.js" crossorigin="anonymous"></script>
 {% endblock css %}
 {% block content %}
   <!-- 리뷰 -->
@@ -26,14 +27,6 @@
                 <strong>SangWook</strong>
                 <span>@Wxxk</span>
               </div>
-              <!--popup-->
-            </div>
-            <button type="submit" class="comment-btn" onclick="openPopup()">자세히</button>
-            <div class="popup" id="popup">
-              <img src="https://i.pinimg.com/736x/5c/6a/db/5c6adbec93947a0be97272a5b44cfaf8.jpg" alt="">
-              <h2>Thank You!</h2>
-              <p>Your detilas hasd been successfully submitted. Thanks!</p>
-              <button type="button" onclick="closePopup()">OK</button>
             </div>
 
             <!--review-->
@@ -51,15 +44,27 @@
           <!--Comments-->
           <div class="client-comment">
             <div class="comment">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, nobis ipsum magnam modi iste soluta eveniet eius expedita dolore atque itaque id, sunt cumque aperiam assumenda ipsam, qui laudantium quis?</p>
-              <img src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime corporis, blanditiis tempora, explicabo vitae necessitatibus iure minus ipsam quam quis atque consequatur, cumque perspiciatis sit asperiores esse molestias aut inventore?</p>
+              <img class="comment-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+            </div>
+
+            <!--popup-->
+            <button type="submit" class="comment-btn" onclick="openPopup()">자세히</button>
+            <div class="modal-background">
+              <div class="popup" id="popup">
+                <img class="profile" src="https://i.pinimg.com/564x/b7/21/57/b72157473ae510c74e7a96ccb8bd0e38.jpg" alt="">
+                <h2>제목</h2>
+                <img class="product-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum voluptatibus aliquam maiores, corrupti necessitatibus expedita rerum odit quod corporis possimus nemo beatae delectus nihil nobis nisi quaerat, voluptate placeat. Veritatis!</p>
+                <button type="button" onclick="closePopup()">OK</button>
+              </div>
             </div>
 
           </div>
 
         </div>
 
-      </div>
+      </div>.
 
     </div>
   </div>
@@ -99,4 +104,20 @@
     {% endif %}
   </ul>
   <!-- 페이징처리 끝 -->
+
+  <script>
+    let popup = document.getElementById("popup");
+
+    function openPopup() {
+      popup
+        .classList
+        .add("open-popup");
+    }
+
+    function closePopup() {
+      popup
+        .classList
+        .remove("open-popup");
+    }
+  </script>
 {% endblock content %}
