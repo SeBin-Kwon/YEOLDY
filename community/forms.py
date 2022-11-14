@@ -15,6 +15,17 @@ class QnaForm(forms.ModelForm):
         widgets = {"password": forms.PasswordInput()}
 
 
+class QnaForm_2(forms.ModelForm):
+    class Meta:
+        model = QnA
+        fields = [
+            "title",
+            "content",
+            "password",
+        ]
+        widgets = {"password": forms.PasswordInput()}
+
+
 class UpdateQnaForm(QnaForm):
     class Meta:
         model = QnA

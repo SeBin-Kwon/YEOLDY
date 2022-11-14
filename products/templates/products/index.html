@@ -3,123 +3,125 @@
 {% load django_bootstrap5 %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/products_index.css' %}">
+<link rel="stylesheet" href="{% static 'css/products_index.css' %}">
 {% endblock css %}
 
 {% block content %}
 
-  <div class="position-absolute top-50 start-50">
+<div class="position-absolute top-50 start-50">
+
+  <form class="d-flex" role="search" action="{% url 'products:search' %}" method="POST">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{q}}" name="q">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+  {% for z in search_ranking %}
+  <a href="">{{ z.search_text }}</a>
+  {% endfor %}
+</div>
+
+<div class="container">
+  <div class="banner">
+    <h1>상의</h1>
+    <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
+    <p>총 00개의 상품이 있습니다.</p>
+    <a href="{% url 'products:create' %}">상품 등록</a>
+  </div>
+
+  <div class="row product-list w-100 justify-content-evenly">
     {% for product in products %}
-
-      <a class="" href="{% url 'products:detail' product.pk %}">{{ product.name }}</a>
-
+    <div class="product-card col-2">
+      <a href="{% url 'products:detail' product.id %}">
+        <div class="imgBox">
+          <img class="product-img img-fluid" src="{{ product.image.url }}" alt="">
+          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+        </div>
+        <div class="contentBox">
+          <h5 class="product-title">{{ product.name }}</h5>
+          <p>
+            <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+          </p>
+        </div>
+      </a>
+    </div>
     {% endfor %}
 
-    <form class="d-flex" role="search" action="{% url 'products:search' %}" method="POST">
-      {% csrf_token %}
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{q}}" name="q">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-    {% for z in search_ranking %}
-      <a href="">{{ z.search_text }}</a>
-    {% endfor %}
-  </div>
-
-  <div class="container">
-    <div class="banner">
-      <h1>상의</h1>
-      <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
-      <p>총 00개의 상품이 있습니다.</p>
-      <a href="{% url 'products:create' %}">상품 등록</a>
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/5.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+      </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
     </div>
 
-    <div class="row product-list w-100 justify-content-evenly">
-      {% for product in products %}
-        <div class="product-card col-2">
-          <a href="{% url 'products:detail' product.id %}">
-            <div class="imgBox">
-              <img class="product-img img-fluid" src="{{ product.image.url }}" alt="">
-              <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-            </div>
-            <div class="contentBox">
-              <h5 class="product-title">{{ product.name }}</h5>
-              <p>
-                <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원</p>
-            </div>
-          </a>
-        </div>
-      {% endfor %}
-
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/5.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원</p>
-        </div>
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/1.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
       </div>
-
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/1.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원</p>
-        </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
       </div>
+    </div>
 
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/2.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원</p>
-        </div>
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/2.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
       </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
+    </div>
 
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/3.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원</p>
-        </div>
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/3.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
       </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
+    </div>
 
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/4.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원</p>
-        </div>
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/4.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
       </div>
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/5.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원</p>
-        </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
+    </div>
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/5.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+      </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}

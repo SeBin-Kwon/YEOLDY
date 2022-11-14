@@ -10,6 +10,9 @@
 <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
 
 {% endif %}
+<div>
+  <p>{{ style.user }}</p>
+</div>
 
 
 <a href="{% url 'style:update' style.pk %}"> 수정 </a>
@@ -32,7 +35,7 @@
 
 
 <div>
-  {% for review in review_list %}
+  {% for review in reviews %}
   <div class="card">
     <div class="card-body">
       {{ review.content }}
@@ -40,40 +43,6 @@
     </div>
   </div>
   {% endfor %}
-  <!-- 페이징처리 시작 -->
-  <ul class="pagination justify-content-center">
-    <!-- 이전페이지 -->
-    {% if review_list.has_previous %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ review_list.previous_page_number }}">이전</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-      <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-    </li>
-    {% endif %}
-    <!-- 페이지리스트 -->
-    {% for page_number in review_list.paginator.page_range %}
-    {% if page_number == review_list.number %}
-    <li class="page-item active" aria-current="page">
-      <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-    </li>
-    {% else %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-    </li>
-    {% endif %}
-    {% endfor %}
-    <!-- 다음페이지 -->
-    {% if review_list.has_next %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ review_list.next_page_number }}">다음</a>
-    </li>
-    {% else %}
-    <li class="page-item disabled">
-      <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-    </li>
-    {% endif %}
-  </ul>
+
 </div>
 {% endblock content %}

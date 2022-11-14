@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Products, Search
-from django.core.paginator import Paginator
+from django.http import JsonResponse
 from .form import ProductsForm
 from django.db.models import F
 
@@ -10,10 +10,10 @@ from django.db.models import F
 # 상품 리스트 기능(메인페이지로 대체?)
 def index(request):
     products = Products.objects.order_by("-pk")
-    search_ranking = Search.objects.order_by('-search_count')
+    search_ranking = Search.objects.order_by("-search_count")
     context = {
         "products": products,
-        'search_ranking':search_ranking
+        "search_ranking": search_ranking,
     }
     return render(request, "products/index.html", context)
 
@@ -62,14 +62,11 @@ def update(request, pk):
 # 상품 디테일 연결 기능
 def detail(request, pk):
     product = Products.objects.get(pk=pk)
-    page = request.GET.get("page", "1")
     reviews = product.review_set.all().order_by("-pk")
-    paginator = Paginator(reviews, "5")
-    page_obj = paginator.get_page(page)
     context = {
         "reviews": reviews,
         "product": product,
-        "review_list": page_obj,
+        "review_list": reviews,
     }
     return render(request, "products/detail.html", context)
 
@@ -92,14 +89,18 @@ def save(request, product_pk):
 
     if request.user in product.save_users.all():
         product.save_users.remove(request.user)
+        is_saved = False
     else:
         product.save_users.add(request.user)
+        is_saved = True
+    context = {"issaved": is_saved}
+    return JsonResponse(context)
 
-    return redirect("products:detail", product_pk)
-#검색 기능
+
+# 검색 기능
 def search(request):
-    products = Products.objects.all().order_by('-pk')
-    q=request.POST.get('q')
+    products = Products.objects.all().order_by("-pk")
+    q = request.POST.get("q")
     search_create = Search.objects.filter(search_text=q)
     if q:
         products = Products.objects.filter(name__icontains=q)
@@ -109,8 +110,8 @@ def search(request):
         search_exist.save()
     else:
         Search.objects.create(search_text=q)
-    context={
-        'products':products, 
-        'q':q,
+    context = {
+        "products": products,
+        "q": q,
     }
-    return render(request, 'products/search.html' , context)
+    return render(request, "products/search.html", context)
