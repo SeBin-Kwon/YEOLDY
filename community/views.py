@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import QnaForm, ReviewForm, UpdateQnaForm
-from .models import QnA, Review
+from .models import QnA, Review, Photo
 from products.models import Products
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -111,11 +111,16 @@ def review_create(request, product_pk):
             review.user = request.user
             review.product = Products.objects.get(pk=product_pk)
             review.save()
+            for img in request.FILES.getlist("imgs"):
+                photo = Photo()
+                photo.review = review
+                photo.image = img
+                photo.save()
             return redirect("community:review_index")
     else:
-        review_form = ReviewForm() 
+        review_form = ReviewForm()
     context = {
-        "review_form": review_form,     
+        "review_form": review_form,
     }
     return render(request, "community/community_create.html", context)
 
