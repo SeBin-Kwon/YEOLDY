@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import QnaForm, ReviewForm, UpdateQnaForm
-from .models import QnA, Review
+from .models import QnA, Review, Photo
 from products.models import Products
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -111,11 +111,16 @@ def review_create(request, product_pk):
             review.user = request.user
             review.product = Products.objects.get(pk=product_pk)
             review.save()
+            for img in request.FILES.getlist("imgs"):
+                photo = Photo()
+                photo.review = review
+                photo.image = img
+                photo.save()
             return redirect("community:review_index")
     else:
-        review_form = ReviewForm() 
+        review_form = ReviewForm()
     context = {
-        "review_form": review_form,     
+        "review_form": review_form,
     }
     return render(request, "community/community_create.html", context)
 
@@ -129,13 +134,20 @@ def review_detail(request, review_pk):
 @login_required
 def review_update(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
+    photo = review.photo_set.all()
     if request.user == review.user:
         if request.method == "POST":
+            photo.delete()
             review_form = ReviewForm(request.POST, request.FILES, instance=review)
             if review_form.is_valid():
                 review = review_form.save(commit=False)
                 review.user = request.user
                 review.save()
+                for img in request.FILES.getlist("imgs"):
+                    photo = Photo()
+                    photo.review = review
+                    photo.image = img
+                    photo.save()
                 messages.success(request, "수정 완료")
                 return redirect("community:review_detail", review_pk)
         else:

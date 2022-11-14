@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body style="margin-top: 100px;">
+
+
+    {% for style in styles %}
+
+
+    <a href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
+
+    {% endfor %}
+
+</body>
+
+
+{% endblock content %}

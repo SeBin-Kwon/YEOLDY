@@ -1,5 +1,5 @@
 from django import forms
-from .models import QnA, Review
+from .models import QnA, Review, Photo
 
 
 class QnaForm(forms.ModelForm):

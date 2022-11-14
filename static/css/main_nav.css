@@ -1,3 +1,12 @@
+::-moz-selection {
+  background: rgb(17, 238, 164);
+  color: rgb(0, 0, 0);
+}
+::selection {
+  background: rgb(17, 238, 164);
+  color: rgb(0, 0, 0);
+}
+
 * {
   font-family: 'Noto Sans KR', sans-serif;
   font-family: 'Poppins', sans-serif;
@@ -84,7 +93,6 @@ nav {
 
 .logo-div {
   padding-left: 1rem;
-  padding-right: 6.5rem;
 }
 
 .sticky .nav-items li a {
@@ -183,6 +191,5 @@ nav {
   opacity: 0;
   transition: all 0.3s;
 }
-
 
 

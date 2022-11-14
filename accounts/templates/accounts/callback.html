@@ -24,8 +24,8 @@
     const birthday = naver_id_login.getProfileData('birthday');
     const mobile = naver_id_login.getProfileData('mobile');
     
-	let body = $('body');
-	body.append('로그인 성공!');
+	//let body = $('body');
+	//body.append('로그인 성공!');
   // body.append('<h4>아이디:'+id+'</h4>')
 	// body.append('<h4>이메일:'+email+'</h4>');
 	// body.append('<h4>닉네임:'+nickname+'</h4>');
@@ -43,7 +43,8 @@
     data: {'id': id, 'name': name, 'email': email, 'nickname': nickname, 'mobile': mobile}
     }).then(response => {
     // location.reload();
-    window.close()
+    //window.close()
+    window.location.replace("http://127.0.0.1:8000/");
     })
   }
 </script>
