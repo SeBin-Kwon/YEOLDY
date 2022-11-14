@@ -12,12 +12,14 @@ body{
   padding: 10px;
 }
 
+.base-div{
+  margin-top: 5rem !important;
+}
+
 .signup-form{
-  margin-top: 4rem;
   max-width: 800px;
   width: 100%;
   /* background: #fff; */
-  padding: 50px;
   /* border-radius: 5px; */
   /* border: 1px solid gainsboro; */
   /* box-shadow: 0px 0px 10px rgba(13, 178, 148, 0.253) */
@@ -80,6 +82,7 @@ form .user-details .input-box{
 .gender-details {
   display: flex;
   justify-content: space-between;
+  height: 5rem;
 }
 
 form .gender-details .gender-title{

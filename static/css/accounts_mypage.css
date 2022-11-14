@@ -1,0 +1,59 @@
+.base-div{
+  margin-top: 10rem !important;
+}
+
+.mypage{
+  display: flex;
+  margin: 2rem 6rem 0;
+  padding: 3rem;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: 3px 6px 14px 2px rgba(0, 0, 0, 0.086);
+}
+
+.mypage h1 {
+  color: rgb(53, 53, 53);
+  font-size: 27px;
+  margin-bottom: 2rem;
+}
+
+.section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+
+.info {
+  text-align: left;
+  margin: 0 5rem;
+}
+
+.mypage-btn {
+  margin-top: 2rem;
+  text-align: end;
+}
+
+.info-name {
+  font-weight: 300;
+}
+
+.info-content {
+  font-weight: 200;
+}
+
+.profile-crop {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 120%;
+  transform: translate(-50%,-50%);
+}

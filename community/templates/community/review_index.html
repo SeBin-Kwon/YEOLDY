@@ -3,6 +3,7 @@
 {% load static %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/review_index.css'%}">
+  <script src="https://kit.fontawesome.com/44d20d6c0e.js" crossorigin="anonymous"></script>
 {% endblock css %}
 {% block content %}
   <!-- 리뷰 -->
@@ -26,14 +27,6 @@
                 <strong>SangWook</strong>
                 <span>@Wxxk</span>
               </div>
-              <!--popup-->
-            </div>
-            <button type="submit" class="comment-btn" onclick="openPopup()">자세히</button>
-            <div class="popup" id="popup">
-              <img src="https://i.pinimg.com/736x/5c/6a/db/5c6adbec93947a0be97272a5b44cfaf8.jpg" alt="">
-              <h2>Thank You!</h2>
-              <p>Your detilas hasd been successfully submitted. Thanks!</p>
-              <button type="button" onclick="closePopup()">OK</button>
             </div>
 
             <!--review-->
@@ -51,15 +44,27 @@
           <!--Comments-->
           <div class="client-comment">
             <div class="comment">
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, nobis ipsum magnam modi iste soluta eveniet eius expedita dolore atque itaque id, sunt cumque aperiam assumenda ipsam, qui laudantium quis?</p>
-              <img src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maxime corporis, blanditiis tempora, explicabo vitae necessitatibus iure minus ipsam quam quis atque consequatur, cumque perspiciatis sit asperiores esse molestias aut inventore?</p>
+              <img class="comment-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+            </div>
+
+            <!--popup-->
+            <button type="submit" class="comment-btn" onclick="openPopup()">자세히</button>
+            <div id="background-popup">
+              <div class="popup" id="popup">
+                <img class="profile" src="https://i.pinimg.com/564x/b7/21/57/b72157473ae510c74e7a96ccb8bd0e38.jpg" alt="">
+                <h2>제목</h2>
+                <img class="product-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum voluptatibus aliquam maiores, corrupti necessitatibus expedita rerum odit quod corporis possimus nemo beatae delectus nihil nobis nisi quaerat, voluptate placeat. Veritatis! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi quibusdam sint earum dolores quos repellat architecto eius quo repudiandae necessitatibus reprehenderit delectus, distinctio porro, aut, cumque provident voluptas? Porro, dignissimos? Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati eligendi recusandae quisquam nihil sit incidunt doloremque ducimus natus mollitia ad, non voluptatem enim, amet possimus. Corrupti incidunt aperiam quas repellendus? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam ratione dolores voluptates voluptatibus vero veritatis iusto, at maiores recusandae error consequuntur alias quod, quo qui corporis sequi numquam quis! Tenetur? Lorem ipsum dolor sit amet consectetur adipisicing elit. At eum, nam modi sunt quidem minima facilis error doloribus ullam, veniam saepe repellat inventore recusandae consectetur illo hic earum, tempora illum? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum aspernatur cupiditate autem at iusto, ab dignissimos hic repellendus sint aliquid odit, quia nemo error sed? Hic ipsam maiores eligendi dolorum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat at ullam, illo officiis veritatis voluptatibus tempora, commodi sequi aliquam saepe rerum deleniti delectus labore veniam ab! Sed dignissimos odio numquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quae optio aliquid nostrum incidunt eligendi earum, unde quia dignissimos, molestias nesciunt sed cum praesentium sapiente distinctio, placeat sequi ex. Voluptates! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima, cupiditate ducimus libero, mollitia molestiae, incidunt ratione a illo accusamus ea vel commodi qui provident adipisci facere fuga eius sapiente quidem?</p>
+                <button type="button" onclick="closePopup()">OK</button>
+              </div>
             </div>
 
           </div>
 
         </div>
 
-      </div>
+      </div>.
 
     </div>
   </div>
@@ -99,4 +104,27 @@
     {% endif %}
   </ul>
   <!-- 페이징처리 끝 -->
+
+  <script>
+    let popup = document.getElementById("popup");
+    const backgroundpopup = document.getElementById("background-popup")
+
+    function openPopup() {
+      popup
+        .classList
+        .add("open-popup");
+      backgroundpopup
+        .classList
+        .add('newDiv')
+    }
+
+    function closePopup() {
+      popup
+        .classList
+        .remove("open-popup");
+      backgroundpopup
+        .classList
+        .remove('newDiv')
+    }
+  </script>
 {% endblock content %}
