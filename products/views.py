@@ -1,17 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Products
+from .models import Products, Search
 from django.core.paginator import Paginator
 from .form import ProductsForm
-
+from django.db.models import F
 
 # Create your views here.
 
 # 상품 리스트 기능(메인페이지로 대체?)
 def index(request):
     products = Products.objects.order_by("-pk")
+    search_ranking = Search.objects.order_by('-search_count')
     context = {
         "products": products,
+        'search_ranking':search_ranking
     }
     return render(request, "products/index.html", context)
 
@@ -94,3 +96,21 @@ def save(request, product_pk):
         product.save_users.add(request.user)
 
     return redirect("products:detail", product_pk)
+#검색 기능
+def search(request):
+    products = Products.objects.all().order_by('-pk')
+    q=request.POST.get('q')
+    search_create = Search.objects.filter(search_text=q)
+    if q:
+        products = Products.objects.filter(name__icontains=q)
+    if search_create:
+        search_exist = Search.objects.get(search_text=q)
+        search_exist.search_count += 1
+        search_exist.save()
+    else:
+        Search.objects.create(search_text=q)
+    context={
+        'products':products, 
+        'q':q,
+    }
+    return render(request, 'products/search.html' , context)

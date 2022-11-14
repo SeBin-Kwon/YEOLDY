@@ -53,3 +53,7 @@ class Products(models.Model):
         format="JPEG",
     )
     save_users = models.ManyToManyField(get_user_model(), related_name="save_movies")
+
+class Search(models.Model):
+    search_count = models.IntegerField(default=1)
+    search_text = models.CharField(max_length=20)

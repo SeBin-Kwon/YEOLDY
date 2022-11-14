@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="position-absolute top-50 start-50">
+    {% if not products %}
+      <h1>검색없음</h1>
+    {% else %}
+      {% for i in products.all %}
+        <p>{{ i.name }}</p>
+      {% endfor %}
+    {% endif %}
+  </div>
+{% endblock content %}
