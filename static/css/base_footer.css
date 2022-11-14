@@ -1,0 +1,21 @@
+footer {
+  margin-top: 3rem;
+  padding: 3rem 5rem;
+  font-size: 13px;
+  background-color: #0DB295;
+  line-height: 24px;
+}
+
+footer span {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+footer p {
+  color: rgba(255, 255, 255, 0.832);
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+}
