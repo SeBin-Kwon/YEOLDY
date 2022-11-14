@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "community",
     "style",
     "cart",
+    "kakaopay",
     "phonenumber_field",
     "django_bootstrap5",
     "imagekit",
