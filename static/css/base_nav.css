@@ -1,10 +1,10 @@
 ::-moz-selection {
   background: rgb(17, 238, 164);
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 ::selection {
   background: rgb(17, 238, 164);
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 * {
