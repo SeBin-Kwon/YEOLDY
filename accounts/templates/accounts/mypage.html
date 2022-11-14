@@ -2,46 +2,56 @@
 {% load django_bootstrap5 %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/accounts_mypage.css' %}">
+{% endblock css %}
+
 {% block content %}
 
-  <h1>마이페이지</h1>
-
-  {% if user.profile_image %}
-    <div>
-      <img src="{{ user.profile_image.url }}" alt="" style="width:300px; height:400px;">
-    </div>
-  {% else %}
-    <div>
-      <img src="https://dummyimage.com/300X400" alt="">
-    </div>
-  {% endif %}
-  <p>이름 :
-    {{ user.nickname }}</p>
-  <p>아이디 :
-    {{ user.username }}</p>
-  <p>휴대폰 번호 :
-    {{ user.phone_number }}</p>
-  <p>이메일 :
-    {{ user.email }}</p>
-  <p>생일 :
-    {{ user.birth }}</p>
-  <p>성별 :
-    {{ user.gender }}</p>
-  {% if request.user != user %}
-    <form action="{% url 'accounts:follow' user.pk %}" method="POST">
-      {% if request.user.is_authenticated %}
-        {% csrf_token %}
-        {% if request.user in user.followers.all %}
-          {% bootstrap_button button_type="submit" content="팔로우취소"%}
-        {% else %}
-          {% bootstrap_button button_type="submit" content="팔로우"%}
-        {% endif %}
-      </form>
+<div class="mypage">
+  <h1>My Page</h1>
+  <div class="section">
+    {% if user.profile_image %}
+      <div class="profile-crop">
+        <img class="profile-image"  src="{{ user.profile_image.url }}">
+      </div>
     {% else %}
-      {% bootstrap_button button_type="submit" content="로그인 필요"%}
+      <div>
+        <img src="https://dummyimage.com/300X400" alt="">
+      </div>
     {% endif %}
-  {% endif %}
-  <a href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
-  <a href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
-
+    <div class="info">
+      <p>이름 :
+        <span class="info-name">{{ user.nickname }}</p>
+      <p>아이디 :
+        <span class="info-content">{{ user.username }}</span></p>
+      <p>휴대폰 번호 :
+        <span class="info-content">{{ user.phone_number }}</span></p>
+      <p>이메일 :
+        <span class="info-content">{{ user.email }}</span></p>
+      <p>생일 :
+        <span class="info-content">{{ user.birth }}</span></p>
+      <p>성별 :
+        <span class="info-content">{{ user.gender }}</span></p>
+        <div class="mypage-btn">
+          <a class="btn btn-outline-primary" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
+          <a class="btn btn-outline-danger" href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
+        </div>
+    </div>
+    {% if request.user != user %}
+      <form action="{% url 'accounts:follow' user.pk %}" method="POST">
+        {% if request.user.is_authenticated %}
+          {% csrf_token %}
+          {% if request.user in user.followers.all %}
+            {% bootstrap_button button_type="submit" content="팔로우취소"%}
+          {% else %}
+            {% bootstrap_button button_type="submit" content="팔로우"%}
+          {% endif %}
+        </form>
+      {% else %}
+        {% bootstrap_button button_type="submit" content="로그인 필요"%}
+      {% endif %}
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
