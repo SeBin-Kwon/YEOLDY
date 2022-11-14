@@ -2,12 +2,17 @@
 
 {% block content %}
 
-{% for product in products %}
+<body style="margin-top: 500px;">
 
 
-<a href="{% url 'products:detail' product.pk %}">{{ product.name }}</a>
+    {% for product in products %}
 
-{% endfor %}
+
+    <a href="{% url 'products:detail' product.pk %}">{{ product.name }}</a>
+
+    {% endfor %}
+
+</body>
 
 
 {% endblock content %}
