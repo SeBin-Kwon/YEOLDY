@@ -94,7 +94,7 @@ def qna_password(request, qna_pk):
 def review_index(request):
     page = request.GET.get("page", "1")
     review = Review.objects.all()
-    paginator = Paginator(review, "10")
+    paginator = Paginator(review, "5")
     page_obj = paginator.get_page(page)
     context = {
         "reviews": review,
