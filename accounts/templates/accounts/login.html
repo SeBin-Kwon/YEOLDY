@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="{% static 'css/accounts_login.css' %}">
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 {% endblock %}
 
@@ -18,11 +16,11 @@
         <form action="" method="POST">
             {% csrf_token %}
             <div class="int-area">
-                <input type="text" name="id" id="id" autocomplete="off" required>
+                <input type="text" name="username" id="id" autocomplete="off" required>
                 <label for="id">USER NAME</label>
             </div>
             <div class="int-area">
-                <input type="password" name="pw" id="pw" autocomplete="off" required>
+                <input type="password" name="password" id="pw" autocomplete="off" required>
                 <label for="pw">PASSWORD</label>
             </div>
             <div class="btn-area mb-2">
@@ -112,6 +110,9 @@
             })
         </script>
 
+
+        <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
         <!-- 네이버 로그인 -->
         <!-- 네이버아이디로로그인 버튼 노출 영역 -->
         <div class="relative">
@@ -133,11 +134,5 @@
         </div>
     </div>
 </div>
-{% if user.is_authenticated %}
-    <h1>로그인 됨</h1>
-{% else %}
-    <h1>로그인 안됨</h1>
-{% endif %}
-
 
 {% endblock %}

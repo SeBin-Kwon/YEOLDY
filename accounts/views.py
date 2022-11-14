@@ -34,7 +34,7 @@ def login(request):
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             auth_login(request, form.get_user())
-            return redirect("accounts:index")
+            return redirect("main")
     else:
         form = AuthenticationForm()
     context = {"form": form}
@@ -47,7 +47,7 @@ def callback(request):
 def logout(request):
     auth_logout(request)
     print("로그아웃 완료")
-    return redirect("accounts:index")
+    return redirect("main")
 
 
 def mypage(request, pk):
