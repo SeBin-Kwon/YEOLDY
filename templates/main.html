@@ -65,18 +65,27 @@
                 <a href="#">Style</a>
               </li>
               <li>
-                <a href="#">Q&N</a>
+                <a href="#">Q&A</a>
               </li>
             </ul>
           </div>
         </li>
       </ul>
-      <div class="logo-div">
+      {% if user.is_authenticated %}
+      <div class="logo-div" style="padding-right: 3rem;">
         <a class="logo-link" href="{% url 'main' %}">
           <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
           <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
         </a>
       </div>
+      {% else %}
+      <div class="logo-div" style="padding-right: 6.5rem;">
+        <a class="logo-link" href="{% url 'main' %}">
+          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+          <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
+        </a>
+      </div>
+      {% endif %}
       <ul class="nav-items" style="padding-left: 4rem;">
         <li>
           <a href="#">
@@ -88,9 +97,18 @@
             <i class="bi bi-cart"></i>
           </a>
         </li>
+        {% if user.is_authenticated %}
         <li>
-          <a href="{% url 'accounts:login' %}">LOGIN</a>
+          <a href="{% url 'accounts:mypage' user.pk %}"><i class="bi bi-person-fill"></i></a>
         </li>
+        <li>
+          <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+        </li>
+        {% else %}
+          <li>
+            <a href="{% url 'accounts:login' %}">LOGIN</a>
+          </li>
+        {% endif %}
       </ul>
     </nav>
 

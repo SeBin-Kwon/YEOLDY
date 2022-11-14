@@ -84,7 +84,6 @@ nav {
 
 .logo-div {
   padding-left: 1rem;
-  padding-right: 6.5rem;
 }
 
 .sticky .nav-items li a {
@@ -183,6 +182,5 @@ nav {
   opacity: 0;
   transition: all 0.3s;
 }
-
 
 
