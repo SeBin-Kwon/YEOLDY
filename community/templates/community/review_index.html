@@ -49,26 +49,39 @@
             </div>
 
             <!--popup-->
-            <button type="submit" class="comment-btn" onclick="openPopup()">자세히</button>
-            <div id="background-popup">
-              <div class="popup" id="popup">
-                <img class="profile" src="https://i.pinimg.com/564x/b7/21/57/b72157473ae510c74e7a96ccb8bd0e38.jpg" alt="">
-                <h2>제목</h2>
-                <img class="product-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum voluptatibus aliquam maiores, corrupti necessitatibus expedita rerum odit quod corporis possimus nemo beatae delectus nihil nobis nisi quaerat, voluptate placeat. Veritatis! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi quibusdam sint earum dolores quos repellat architecto eius quo repudiandae necessitatibus reprehenderit delectus, distinctio porro, aut, cumque provident voluptas? Porro, dignissimos? Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati eligendi recusandae quisquam nihil sit incidunt doloremque ducimus natus mollitia ad, non voluptatem enim, amet possimus. Corrupti incidunt aperiam quas repellendus? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam ratione dolores voluptates voluptatibus vero veritatis iusto, at maiores recusandae error consequuntur alias quod, quo qui corporis sequi numquam quis! Tenetur? Lorem ipsum dolor sit amet consectetur adipisicing elit. At eum, nam modi sunt quidem minima facilis error doloribus ullam, veniam saepe repellat inventore recusandae consectetur illo hic earum, tempora illum? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum aspernatur cupiditate autem at iusto, ab dignissimos hic repellendus sint aliquid odit, quia nemo error sed? Hic ipsam maiores eligendi dolorum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat at ullam, illo officiis veritatis voluptatibus tempora, commodi sequi aliquam saepe rerum deleniti delectus labore veniam ab! Sed dignissimos odio numquam? Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero quae optio aliquid nostrum incidunt eligendi earum, unde quia dignissimos, molestias nesciunt sed cum praesentium sapiente distinctio, placeat sequi ex. Voluptates! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima, cupiditate ducimus libero, mollitia molestiae, incidunt ratione a illo accusamus ea vel commodi qui provident adipisci facere fuga eius sapiente quidem?</p>
-                <button type="button" onclick="closePopup()">OK</button>
+            <button type="submit" class="comment-btn" onclick="openPopup()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">자세히</button>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header border-0 align-items-start">
+                    <div class="d-flex flex-column">
+                      <h1 class="modal-title fs-5" id="staticBackdropLabel"><strong>username</strong></h1>
+                      <p class="m-0">옷 이름</p>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <img class="modal-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                  </div>
+                </div>
               </div>
             </div>
+            <a class="review-btnd" href="#"><i class="bi bi-trash"></i></a>
+            <a class="review-btnu" href="#"><i class="bi bi-pencil-square"></i></a>
 
           </div>
 
         </div>
 
-      </div>.
+      </div>
 
     </div>
   </div>
-  <!-- 페이징처리 시작 -->
+  {% comment %} <!-- 페이징처리 시작 -->
   <ul class="pagination justify-content-center">
     <!-- 이전페이지 -->
     {% if question_list.has_previous %}
@@ -103,28 +116,5 @@
       </li>
     {% endif %}
   </ul>
-  <!-- 페이징처리 끝 -->
-
-  <script>
-    let popup = document.getElementById("popup");
-    const backgroundpopup = document.getElementById("background-popup")
-
-    function openPopup() {
-      popup
-        .classList
-        .add("open-popup");
-      backgroundpopup
-        .classList
-        .add('newDiv')
-    }
-
-    function closePopup() {
-      popup
-        .classList
-        .remove("open-popup");
-      backgroundpopup
-        .classList
-        .remove('newDiv')
-    }
-  </script>
+  <!-- 페이징처리 끝 --> {% endcomment %}
 {% endblock content %}
