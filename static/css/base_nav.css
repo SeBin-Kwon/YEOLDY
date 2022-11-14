@@ -1,3 +1,12 @@
+::-moz-selection {
+  background: rgb(17, 238, 164);
+  color: #fff;
+}
+::selection {
+  background: rgb(17, 238, 164);
+  color: #fff;
+}
+
 * {
   font-family: 'Noto Sans KR', sans-serif;
   font-family: 'Poppins', sans-serif;
