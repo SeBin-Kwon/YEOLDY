@@ -3,6 +3,10 @@
   font-family: 'Poppins', sans-serif;
 }
 
+.base-div {
+  margin-top: 8rem;
+}
+
 nav { 
   background-color: white;
   width: 100vw;
@@ -179,5 +183,7 @@ nav {
   transition: all 0.3s;
 }
 
-
+footer {
+  margin-top: 3rem;
+}
 

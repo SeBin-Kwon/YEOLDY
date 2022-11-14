@@ -2,8 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin-top: 3.5rem;
+  /* height: 100vh; */
   padding: 0;
   box-sizing: border-box;
   background-image: url('../images/yeoldy_main_design.png');
@@ -17,7 +16,7 @@
   position: relative;
   background-color: rgba(255, 255, 255, 0.669);
   backdrop-filter: blur(10px);
-  padding: 3rem;
+  padding: 3rem 4.5rem;
   width: 35rem;
   box-shadow: 2px 8px 14px 0px rgba(0, 0, 0, 0.086);
   border-radius: 20px;
@@ -28,7 +27,7 @@
   letter-spacing:3px;
   font-size: 27px;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
   color: rgb(49, 49, 49);
 }
 
