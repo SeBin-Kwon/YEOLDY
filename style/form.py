@@ -1,5 +1,5 @@
 from django import forms
-from .models import Style
+from .models import Style, Style_Review
 
 
 class StyleForm(forms.ModelForm):
@@ -10,4 +10,13 @@ class StyleForm(forms.ModelForm):
             "content",
             "image",
             "tag",
+        ]
+
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Style_Review
+        fields = [
+            "content",
+            "grade",
         ]
