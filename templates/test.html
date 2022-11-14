@@ -4,6 +4,7 @@
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/test.css' %}">
+  <link rel="stylesheet" href="{% static 'css/products_index.css' %}">
 {% endblock css %}
 
 {% block content %}
@@ -12,6 +13,38 @@
       <h1>상의</h1>
       <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
       <p>총 00개의 상품이 있습니다.</p>
+    </div>
+
+    <div class="product-list w-100 justify-content-evenly">
+      <div class="card1 col-2">
+        <div class="imgBox">
+          <img class="img-fluid" src="{% static 'images/5.png' %}" alt="">
+        </div>
+        <div class="contentBox">
+          <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
+          <div class="size">
+            <h3>Size :
+            </h3>
+            <span>S</span>
+            <span>M</span>
+            <span>L</span>
+            <span>XL</span>
+          </div>
+          <div class="color">
+            <h3>Color :
+            </h3>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <a href="#">Buy Now</a>
+        </div>
+        <div class="infoBox">
+          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+          <p>
+            <span class="sale">10%</span><span class="cost">89,100</span>원</p>
+        </div>
+      </div>
     </div>
 
     <div class="row justify-content-start">
