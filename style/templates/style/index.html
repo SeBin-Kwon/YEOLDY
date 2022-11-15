@@ -1,19 +1,34 @@
-{% extends 'base.html' %}
-{% load django_bootstrap5 %}
-{% load static %}
-{% block content %}
+{% extends 'base.html' %} 
+{% load django_bootstrap5 %} 
+{% load static %} 
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style_index.css' %}" />
+{% endblock css %}
 
-<div style="margin-top: 100px;">
-
-
+{%block content %} 
+<!-- <div class="style-box row"> -->
+  <div class="style-box row">
     {% for style in styles %}
-
-
-    <a href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
-
+    <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
+      <a href="{% url 'style:detail' style.pk %}">
+        <div class="style-card">
+          <img src="{{ style.image.url }}" class="card-img-top" alt="...">
+          <div class="style-content card-body">
+            <h5 class="style-title card-title">{{ style.title }}</h5>
+            <p class="card-text">{{ style.content }}</p>
+          </div>
+        </div>
+      </a>
+          
+    </div>
     {% endfor %}
-
+    </div>
+  </div>
+  <a href="{% url 'style:create' %}"><h5 class="">style 작성</h5></a>
+{% endblock content %}
 </div>
 
-
-{% endblock content %}
+<!-- <div class="col-3">
+  <img src="{{ style.image.url }}" />
+  <a href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
+</div> -->

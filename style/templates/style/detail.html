@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
-{% block content %}
+{% comment %} {% block content %}
 
 {% if style.image %}
 <img src="{{ style.image.url }}" alt="{{ style.image }}" style="width: 640px; height: 440px;">
@@ -46,4 +46,4 @@
   {% endfor %}
 
 </div>
-{% endblock content %}
+{% endblock content %} {% endcomment %}

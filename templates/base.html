@@ -32,7 +32,7 @@
           <a href="#">BEST</a>
         </li>
         <li>
-          <a href="#">APPAREL</a>
+          <a href="{% url 'products:index' %}">APPAREL</a>
           <div class="drop">
             <ul class="drop-menu">
               <li>
@@ -57,14 +57,14 @@
           </div>
         </li>
         <li>
-          <a href="#">COMMUNITY</a>
+          <a href="{% url 'style:index' %}">COMMUNITY</a>
           <div class="drop">
             <ul class="drop-menu">
               <li>
                 <a href="{% url 'community:review_index' %}">Review</a>
               </li>
               <li>
-                <a href="#">Style</a>
+                <a href="{% url 'style:index' %}">Style</a>
               </li>
               <li>
                 <a href="{% url 'community:index' %}">Q&A</a>

@@ -1,0 +1,44 @@
+.style-box {
+  padding: 3rem 3rem;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.style-card {
+  width: 20rem;
+  padding: 3rem;
+  margin: 0 0;
+  height: 100%;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 5px 16px 32px 0px #0d224216;
+}
+
+.style-content {
+  position: absolute;
+}
+
+
+@media ( max-width: 1023px ) {
+  .style-card {
+    /* width: 20rem; */
+  }
+  /* .mypage-btn .btn {
+    --bs-btn-font-size: 12px !important;
+  } */
+}
+@media ( max-width: 767px ) {
+  .mypage {
+    width: 500px;
+  }
+
+  .mypage-btn {
+    justify-content: center;
+    
+  }
+
+  .info-box {
+    padding-left: 4rem;
+  }
+  
+}
