@@ -1,13 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="position-absolute top-50 start-50">
-    {% if not products %}
-      <h1>검색없음</h1>
-    {% else %}
-      {% for i in products.all %}
-        <p>{{ i.name }}</p>
-      {% endfor %}
-    {% endif %}
-  </div>
+
+<div>
+  <form class="d-flex" role="search" action="{% url 'products:search' %}" method="POST">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{q}}" name="q">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+  {% for z in search_ranking %}
+  <a href="">{{ z.search_text }}</a>
+  {% endfor %}
+
+</div>
+
+<div class="position-absolute top-50 start-50">
+  {% if not products %}
+  <h1>검색없음</h1>
+  {% else %}
+  {% for i in products.all %}
+  <p>{{ i.name }}</p>
+  {% endfor %}
+  {% endif %}
+</div>
 {% endblock content %}

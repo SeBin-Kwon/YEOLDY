@@ -143,10 +143,21 @@ def database_naver(request):
 
 def follow(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
+
+    # 스스로를 팔로우하려는 경우
     if request.user == user:
         return redirect("accounts:index")
+    # 팔로우하고 있는 상태인 경우
     if request.user in user.followers.all():
         user.followers.remove(request.user)
+        is_followed = False
+    # 팔로우하고 있지 않았을때
     else:
         user.followers.add(request.user)
-    return render(request, "accounts/mypage.html")
+        is_followed = True
+    context = {
+        "is_followed": is_followed,
+        "followers_count": user.followers.count(),
+        "followings_count": user.followings.count(),
+    }
+    return JsonResponse(context)
