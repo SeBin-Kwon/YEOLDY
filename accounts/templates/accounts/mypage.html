@@ -13,9 +13,9 @@
   <div class="section row container">
       <div class="col-12 col-md-7 mb-4">
         {% if user.profile_image %}
-          <div class="profile-crop">
-            <img class="profile-image"  src="{{ user.profile_image.url }}">
+          <div class="profile-crop" style="background-image: url('{{ user.profile_image.url }}');">
           </div>
+            {% comment %} <img class="profile-image"  src="{{ user.profile_image.url }}"> {% endcomment %}
         {% else %}
           <div class="profile-crop">
             <img class="profile-image" src="https://dummyimage.com/300X400" alt="">
@@ -36,7 +36,11 @@
           <p>생일 :
             <span class="info-content">{{ user.birth }}</span></p>
           <p>성별 :
-            <span class="info-content">{{ user.gender }}</span></p>
+            {% if request.user.gender == 'M'%}
+              <span class="info-content">남자</span></p>
+            {% else %}
+              <span class="info-content">여자</span></p>
+            {% endif %}
         </div>
           <div class="mypage-btn">
             <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
