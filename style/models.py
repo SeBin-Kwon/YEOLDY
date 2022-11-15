@@ -23,6 +23,7 @@ class Style(models.Model):
     )
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = MultiSelectField(choices=STYLE_CATEGORY)
+    like_users = models.ManyToManyField(get_user_model(), related_name="like_style")
 
 
 class Style_Review(models.Model):
