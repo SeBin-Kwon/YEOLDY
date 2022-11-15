@@ -118,6 +118,7 @@ def search(request):
     else:
         Search.objects.create(search_text=search)
     context = {
+        'products':products,
         "search_ranking": search_ranking,
         "search": search,
         "products": products,
