@@ -18,7 +18,6 @@ def index(request):
 def signup(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST, request.FILES)
-        print(request.POST)
         if form.is_valid():
             form.save()
             return redirect("accounts:login")
@@ -86,10 +85,12 @@ def change_password(request):
         form = PasswordChangeForm(request.user, request.POST)
         print(request.POST)
         if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)
+            print(1)
+            user = form.save()
+            update_session_auth_hash(request, user)
             return redirect("accounts:mypage", request.user.pk)
     else:
+        print(2)
         form = PasswordChangeForm(request.user)
     context = {
         "form": form,

@@ -2,9 +2,7 @@
 {% load django_bootstrap5 %}
 {% block content %}
 
-<body style="margin-top: 100px;">
-
-
+  <p>{{ review.title }}</p>
   {% comment %} {% if request.user == review.user %} {% endcomment %}
   <form action="{% url 'community:review_delete' review.pk %}" method="POST">
     {% csrf_token %}
