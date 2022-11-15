@@ -36,7 +36,11 @@
           <p>생일 :
             <span class="info-content">{{ user.birth }}</span></p>
           <p>성별 :
-            <span class="info-content">{{ user.gender }}</span></p>
+            {% if request.user.gender == 'M'%}
+              <span class="info-content">남자</span></p>
+            {% else %}
+              <span class="info-content">여자</span></p>
+            {% endif %}
         </div>
           <div class="mypage-btn">
             <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
