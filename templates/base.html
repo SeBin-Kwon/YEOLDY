@@ -102,19 +102,20 @@
           <i class="bi bi-cart"></i>
         </a>
       </li>
+      
       {% if user.is_authenticated %}
-      <li>
-        <a href="{% url 'accounts:mypage' user.pk %}">
-          <i class="bi bi-person-fill"></i>
-        </a>
-      </li>
-      <li>
-        <a href="{% url 'accounts:logout' %}">LOGOUT</a>
-      </li>
+        <li>
+          <a href="{% url 'accounts:mypage' user.pk %}">
+            <i class="bi bi-person-fill"></i>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+        </li>
       {% else %}
-      <li>
-        <a href="{% url 'accounts:login' %}">LOGIN</a>
-      </li>
+        <li>
+          <a href="{% url 'accounts:login' %}">LOGIN</a>
+        </li>
       {% endif %}
     </ul>
   </nav>
@@ -151,6 +152,8 @@
       }
     })
   </script>
+
 </body>
+
 
 </html>

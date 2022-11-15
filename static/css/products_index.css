@@ -18,7 +18,13 @@
     height: auto;
 }
 
+a {
+    color: #000;
+    text-decoration: none;
+}
+
 .imgBox {
+    height: 60%;
     position: relative;
     overflow: hidden;
 }
@@ -42,9 +48,8 @@
     /* filter: blur(2px); */
 }
 
-a {
-    color: #000;
-    text-decoration: none;
+.product-img {
+    width: 100%;
 }
 
 .contentBox {

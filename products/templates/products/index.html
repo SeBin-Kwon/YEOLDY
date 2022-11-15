@@ -8,15 +8,6 @@
 
 {% block content %}
 
-<div class="container">
-  <div class="banner">
-    <h1>상의</h1>
-    <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
-    <p>총 00개의 상품이 있습니다.</p>
-    <a href="{% url 'products:create' %}">상품 등록</a>
-
-  </div>
-
   <div class="container">
     <div class="banner">
       <h1>상의</h1>
@@ -30,7 +21,12 @@
         <div class="product-card col-2">
           <a href="{% url 'products:detail' product.id %}">
             <div class="imgBox">
-              <img class="product-img img-fluid" src="{{ product.image.url }}" alt="">
+              {% if product.image %}
+                <img class="product-img" src="{{ product.image.url }}" alt="">
+              {% else %}
+                <img class="product-img" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif">
+              {% endif %}
+              
               <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
             </div>
             <div class="contentBox">
@@ -122,11 +118,4 @@
     </div>
   </div>
 
-
-
-
-
 {% endblock content %}
-
-
-

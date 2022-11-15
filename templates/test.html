@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/test.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="{% static 'js/html2canvas.min.js' %}" defer="defer"></script>
+    <script src="{% static 'js/button.js' %}" defer="defer"></script>
+    <script src="{% static 'js/sub.js' %}" defer="defer"></script>
+  </head>
+
+  <body>
+    <div class="page-container sub-wrap">
+      <main class="sub-contents">
+
+        <ul class="dressup-btns">
+          <li class="hat_btn" data-parts="hat">
+            <span class="material-icons">
+              face_retouching_natural
+            </span>
+
+          </li>
+          <li class="top_btn" data-parts="top">
+            <span class="material-icons">
+              checkroom
+            </span>
+          </li>
+          <li class="bottom_btn" data-parts="bottom">
+            <span class="material-icons">
+              emoji_emotions
+            </span>
+          </li>
+          <li class="shoes_btn" data-parts="shoes">
+            <span class="material-icons">
+              visibility
+            </span>
+          </li>
+          <li class="outer_btn" data-parts="outer">
+            <span class="material-icons">
+              auto_awesome
+            </span>
+          </li>
+
+        </ul>
+        <div class="chara__custom__wrap">
+          <div class="chara__custom">
+            <div class="chara__custom__info">
+              <span class="chara__custom__title">
+                Hat
+              </span>
+              <span class="material-icons close-btn">
+                close
+              </span>
+            </div>
+            <div class="chara__custom__img">
+              <img src="../static/images/top_01.png" alt="헤어 작은 이미지">
+            </div>
+            <button class="chara__custom__btn custom--prev">
+              <span class="material-icons">
+                arrow_left
+              </span>
+            </button>
+            <button class="chara__custom__btn custom--next">
+              <span class="material-icons">
+                arrow_right
+              </span>
+            </button>
+          </div>
+        </div>
+        <!-- chara__custom__wrap -->
+
+        <section class="card-container">
+          <div id="capture" class="card-img">
+            <div class="character__area">
+              <img data-value="outer" class="chara_outer chara-parts" src="../static/images/outer_01.png" alt="액세서리">
+              <img data-value="top" class="chara_top chara-parts" src="../static/images/top_01.png" alt="머리">
+              <img data-value="hat" class="chara_hat chara-parts" src="../static/images/hat_01.png" alt="머리">
+              <img data-value="bottom" class="chara_bottom chara-parts" src="../static/images/bottom_01.png" alt="입">
+              <img data-value="shoes" class="chara_shoes chara-parts" src="../static/images/shoes_01.png" alt="눈">
+              <img class="chara_base" src="../static/images/github.png" alt="베이스" style="width:50%; top:50%; left:25%">
+            </div>
+            <input type="text" id="name" name="name" placeholder="이름을 입력해주세요" reqiured="reqiured" maxlength="10">
+            <ul class="check-vaccine">
+              <li class="first-check">
+                <div class="checkbox">
+                  <span class="check-label">1차</span>
+                  <input type="checkbox" name="vaccine" id="first" value="first" checked="checked">
+                  <label for="first"></label>
+                </div>
+              </li>
+              <li class="second-check">
+                <div class="checkbox">
+                  <span class="check-label">2차</span>
+                  <input type="checkbox" name="vaccine" id="second" value="second">
+                  <label for="second"></label>
+                </div>
+              </li>
+              <li class="third-check">
+                <div class="checkbox">
+                  <span class="check-label">3차</span>
+                  <input type="checkbox" name="vaccine" id="third" value="third">
+                  <label for="third"></label>
+                </div>
+              </li>
+            </ul>
+            <span class="card-text">
+              코로나19 1차 백신 접종 완료했음을 인증합니다.
+            </span>
+            <img src="../static/images/products_banner.jpg" alt="카드틀">
+          </div>
+          <button class="btn-go-to-sub btn download-btn">
+            <span>저장하기</span>
+            <span class="material-icons">
+              file_download
+            </span>
+          </button>
+        </section>
+      </main>
+    </div>
+  </body>
+
+</html>
