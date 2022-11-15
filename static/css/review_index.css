@@ -145,11 +145,6 @@
   }
 }
 
-::selection{
-  color: #ffffff;
-  background-color: #252525;
-}
-
 .comment-btn{
   padding: 10px 20px;
   background: #0DB295;
