@@ -10,6 +10,7 @@ from django.http import JsonResponse
 import json
 from django.contrib.auth import get_user_model
 
+
 # Create your views here.
 def index(request):
     return render(request, "accounts/index.html")
@@ -83,14 +84,11 @@ def mypage_delete(request, pk):
 def change_password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
-        print(request.POST)
         if form.is_valid():
-            print(1)
             user = form.save()
             update_session_auth_hash(request, user)
             return redirect("accounts:mypage", request.user.pk)
     else:
-        print(2)
         form = PasswordChangeForm(request.user)
     context = {
         "form": form,
