@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Style
-from django.core.paginator import Paginator
+from .models import Style, Style_Review
 from .form import StyleForm, ReviewForm
 from django.http import JsonResponse
+from django.http import HttpResponse
+import json
+from django.core import serializers
+from django.core.serializers.json import DjangoJSONEncoder
 
 
 def index(request):
@@ -74,17 +77,65 @@ def delete(request, pk):
         return redirect("style:detail", pk)
 
 
+# @login_required
+# def review_create(request, pk):
+#     if request.method == "POST":
+#         style = Style.objects.get(pk=pk)
+#         review_form = ReviewForm(request.POST)
+#         if review_form.is_valid():
+#             review = review_form.save(commit=False)
+#             review.user = request.user
+#             review.style = style
+#             review.save()
+#             return redirect("style:detail", style.pk)
+
+
 @login_required
 def review_create(request, pk):
-    if request.method == "POST":
-        style = Style.objects.get(pk=pk)
-        review_form = ReviewForm(request.POST)
-        if review_form.is_valid():
-            review = review_form.save(commit=False)
-            review.user = request.user
-            review.style = style
-            review.save()
-            return redirect("style:detail", style.pk)
+    style = get_object_or_404(Style, id=pk)
+    user = request.POST.get("user")
+    content = request.POST.get("content")
+    if content:
+        review = Style_Review.objects.create(
+            style=style,
+            content=content,
+            user=request.user,
+        )
+        style.save()
+        data = {
+            "user": user,
+            "content": content,
+            "created": "방금 전",
+            "review_id": review.id,
+        }
+        if request.user == style.user:
+            data["self_comment"] = "(작성자)"
+
+        return HttpResponse(
+            json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json"
+        )
+
+
+@login_required
+def review_delete(request, pk):
+    style = get_object_or_404(Style, id=pk)
+    review_id = request.POST.get("review_id")
+    target_review = Style_Review.objects.get(pk=review_id)
+
+    if (
+        request.user == target_review.user
+        or request.user.level == "1"
+        or request.user.level == "0"
+    ):
+        target_review.deleted = True
+        target_review.save()
+        style.save()
+        data = {
+            "review_id": review_id,
+        }
+        return HttpResponse(
+            json.dumps(data, cls=DjangoJSONEncoder), content_type="application/json"
+        )
 
 
 @login_required
