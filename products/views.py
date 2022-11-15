@@ -112,7 +112,7 @@ def search(request):
     else:
         Search.objects.create(search_text=search)
     context = {
-        "q": q,
+        'products':products,
         "search_ranking": search_ranking,
         "search": search,
     }
@@ -120,7 +120,7 @@ def search(request):
 
 
 def search_main(request):
-    search_ranking = Search.objects.order_by("-search_count")
+    search_ranking = Search.objects.order_by("-search_count")[:5]
     context = {
         "search_ranking": search_ranking,
     }
