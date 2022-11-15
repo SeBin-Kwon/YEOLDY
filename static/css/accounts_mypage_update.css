@@ -55,6 +55,33 @@ form .user-details .input-box{
   margin-bottom: 5px;
 }
 
+.profile-box .details{
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.profile-box .img-input{
+  height: 45px;
+  width: 300px;
+  padding: 10px 10px 10px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #999;
+  font-size: 18px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.img-check {
+  padding-top: 1rem;
+  padding-right: 12rem;
+}
+
+.profile-box .img-input:focus,
+.profile-box .img-input:valid{
+  border-color: #0DB295;
+}
+
 
 .user-details .input-box input{
   height: 45px;
@@ -148,6 +175,9 @@ form .button input{
   .signup-form{
     max-width: 100%;
     padding: 2rem;
+  }
+  .pw-btn{
+    width: 115px;
   }
   form .user-details .input-box{
     margin-bottom: 15px;

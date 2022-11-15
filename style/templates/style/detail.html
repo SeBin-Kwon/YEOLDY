@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{% comment %} {% block content %}
+
 
 {% block content %}
 <!-- 스타일 게시글 -->
@@ -112,4 +116,4 @@
   {% endfor %}
 
 </div>
-{% endblock content %}
+{% endblock content %} {% endcomment %}
