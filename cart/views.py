@@ -49,6 +49,6 @@ def delete_cart(request, product_id):
 
 @login_required
 def clear_cart(request):
-    cart_items = CartItem.objects.get(user=request.user)
+    cart_items = CartItem.objects.filter(user=request.user)
     cart_items.delete()
     return redirect("cart:cart_detail")
