@@ -84,6 +84,7 @@ def mypage_delete(request, pk):
 def change_password(request):
     if request.method == "POST":
         form = PasswordChangeForm(request.user, request.POST)
+        print(request.POST)
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
@@ -141,6 +142,7 @@ def database_naver(request):
 
 def follow(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
+
     # 스스로를 팔로우하려는 경우
     if request.user == user:
         return redirect("accounts:index")
