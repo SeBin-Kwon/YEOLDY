@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-
+{% load django_bootstrap5 %}
+{% load static %}
 {% block content %}
 
-<body style="margin-top: 100px;">
+<div style="margin-top: 100px;">
 
 
     {% for style in styles %}
@@ -12,7 +13,7 @@
 
     {% endfor %}
 
-</body>
+</div>
 
 
 {% endblock content %}

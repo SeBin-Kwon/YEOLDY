@@ -42,23 +42,31 @@
   font-weight: 200;
 }
 
-.profile-crop {
+/* .profile-crop {
   position: relative;
   width: 300px;
   height: 300px;
   border-radius: 50%;
   overflow: hidden;
   margin: auto;
+} */
+
+.profile-crop {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
 }
 
-.profile-image {
+/* .profile-image {
   position: absolute;
   top: 50%;
   left: 50%;
   height: 100%;
   width: 100%;
   transform: translate(-50%,-50%);
-}
+} */
 
 
 @media ( max-width: 1023px ) {

@@ -13,9 +13,9 @@
   <div class="section row container">
       <div class="col-12 col-md-7 mb-4">
         {% if user.profile_image %}
-          <div class="profile-crop">
-            <img class="profile-image"  src="{{ user.profile_image.url }}">
+          <div class="profile-crop" style="background-image: url('{{ user.profile_image.url }}');">
           </div>
+            {% comment %} <img class="profile-image"  src="{{ user.profile_image.url }}"> {% endcomment %}
         {% else %}
           <div class="profile-crop">
             <img class="profile-image" src="https://dummyimage.com/300X400" alt="">
