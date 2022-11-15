@@ -1,0 +1,108 @@
+.product {
+    margin: 100px auto;
+    justify-content: center;
+}
+
+.imgBox {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    margin-right: 50px;
+    border: 1px solid rgb(201, 201, 201);
+}
+
+/* 992px부터 반응형 */
+
+.infoBox {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.costBox {
+    display: flex;
+    align-items: center;
+}
+
+.cost-label {
+    margin-right: 40px;
+}
+
+.cost {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.service {
+    color: gray;
+}
+
+.form-option {
+    margin: 10px 0;
+    min-width: 100%;
+}
+
+.select-option {
+    display: flex;
+    flex-direction: column;
+}
+
+.count-btn {
+    padding: 5px 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(51, 226, 182);
+}
+
+.cart-btn {
+    padding: 5px 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background: rgb(51, 226, 182);
+}
+
+ul{
+    display: flex;
+    list-style:none;
+    justify-content: space-evenly;
+}
+
+.tab_menu{
+    position:relative;
+}
+
+.tab_menu .list{
+    overflow:hidden;
+}
+
+.tab_menu .list li{
+    float:left; 
+    margin-right:14px;
+}
+
+.tab_menu .list li.is_on .btn{
+    font-weight:bold; 
+    color:rgb(45, 185, 108);
+    border: none;
+}
+
+.tab_menu .list .btn{
+    font-size:16px;
+    border: none;
+}
+
+.tab_menu .cont_area .cont{
+    display:none; 
+    background:#555; 
+    color:#fff; 
+    text-align:center; 
+    width: 100%;
+    line-height:100px;
+}

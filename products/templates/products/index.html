@@ -21,7 +21,12 @@
         <div class="product-card col-2">
           <a href="{% url 'products:detail' product.id %}">
             <div class="imgBox">
-              <img class="product-img img-fluid" src="{{ product.image.url }}" alt="">
+              {% if product.image %}
+                <img class="product-img" src="{{ product.image.url }}" alt="">
+              {% else %}
+                <img class="product-img" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif">
+              {% endif %}
+              
               <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
             </div>
             <div class="contentBox">

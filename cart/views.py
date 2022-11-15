@@ -38,7 +38,7 @@ def cart_detail(request, total=0, counter=0, cart_items=None):
     return render(
         request,
         "cart/cart.html",
-        {"cart_items": cart_items, "total": total, "counter": counter},
+        {"cart_items": cart_items, "total": total, "counter": counter, "cart_length": len(cart_items)},
     )
 
 @login_required
@@ -51,4 +51,18 @@ def delete_cart(request, product_id):
 def clear_cart(request):
     cart_items = CartItem.objects.filter(user=request.user)
     cart_items.delete()
+    return redirect("cart:cart_detail")
+
+@login_required
+def revise_cart(request, product_id):
+    if request.method == "POST":
+        cart_quantity = request.POST["cart_quantity"]
+        print(cart_quantity)
+    # 장바구니에 들어가는 product
+    product = Products.objects.get(id=product_id)
+
+    cart_item = CartItem.objects.get(product=product, user=request.user)
+    cart_item.quantity = int(cart_quantity)
+    cart_item.save()
+
     return redirect("cart:cart_detail")
