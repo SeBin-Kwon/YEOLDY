@@ -114,18 +114,8 @@
   </div>
 </div>
 
-<div>
 
-  <form class="d-flex" role="search" action="{% url 'products:search' %}" method="POST">
-    {% csrf_token %}
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value="{{q}}" name="q">
-    <button class="btn btn-outline-success" type="submit">Search</button>
-  </form>
-  {% for z in search_ranking %}
-  <a href="">{{ z.search_text }}</a>
-  {% endfor %}
 
-</div>
 
 
 {% endblock content %}

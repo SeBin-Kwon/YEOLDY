@@ -99,6 +99,7 @@ def save(request, product_pk):
 
 # 검색 기능
 def search(request):
+    search_ranking = Search.objects.order_by("-search_count")
     products = Products.objects.all().order_by("-pk")
     q = request.POST.get("q")
     search_create = Search.objects.filter(search_text=q)
@@ -113,5 +114,15 @@ def search(request):
     context = {
         "products": products,
         "q": q,
+        "search_ranking": search_ranking,
     }
     return render(request, "products/search.html", context)
+
+
+def search_main(request):
+    search_ranking = Search.objects.order_by("-search_count")
+    context = {
+        "search_ranking": search_ranking,
+    }
+
+    return render(request, "products/search_main.html", context)
