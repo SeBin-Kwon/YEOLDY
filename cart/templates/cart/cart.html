@@ -17,6 +17,8 @@
             </div>
         {% endfor %}
     {% endif %}
+    <h1>총 물건 개수 : {{ counter }}개</h1>
+    <h1>총 가격 : {{ total }}원</h1>
     <a class="btn btn-primary" href="{% url 'cart:clear_cart' %}">장바구니 비우기</a>
 
 {% endblock %}
