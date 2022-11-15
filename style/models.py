@@ -27,14 +27,25 @@ class Style(models.Model):
 
 
 class Style_Review(models.Model):
-    content = models.TextField(max_length=50)
-    style = models.ForeignKey(Style, on_delete=models.CASCADE, null=True)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    RATING = [
-        (1, "★"),
-        (2, "★★"),
-        (3, "★★★"),
-        (4, "★★★★"),
-        (5, "★★★★★"),
-    ]
-    grade = models.IntegerField(choices=RATING, default=None)
+    content = models.TextField(max_length=50, verbose_name="댓글내용")
+    style = models.ForeignKey(
+        Style,
+        on_delete=models.CASCADE,
+        null=True,
+        verbose_name="style",
+    )
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        verbose_name="댓글 작성자",
+    )
+    created = models.DateTimeField(auto_now_add=True, verbose_name="삭제여부")
+    deleted = models.BooleanField(default=False, verbose_name="삭제 여부")
+
+    def __str__(self):
+        return self.content
+
+    class Meta:
+        db_table = "스타일 댓글"
+        verbose_name = "스타일 댓글"
+        verbose_name_plural = "스타일 댓글"
