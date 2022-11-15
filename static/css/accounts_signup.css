@@ -9,7 +9,7 @@
   margin-top: 9rem !important;
 }
 
-.signupForm{
+.signup-form{
   max-width: 800px;
   width: 100%;
   margin: auto;
@@ -19,7 +19,7 @@
   /* box-shadow: 0px 0px 10px rgba(13, 178, 148, 0.253) */
 }
 
-.signupForm .title{
+.signup-form .title{
   font-size: 27px;
   font-weight: 500;
   position: relative;
@@ -37,7 +37,7 @@
   widtsignup-form
 } */
 
-.signupForm form .user-details{
+.signup-form form .user-details{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
