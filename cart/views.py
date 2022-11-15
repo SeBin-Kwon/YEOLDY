@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from products.models import Products
 from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def _cart_id(request):
@@ -11,7 +12,7 @@ def _cart_id(request):
         cart = request.session.create()
     return cart
 
-
+@login_required
 def add_cart(request, product_id):
     if request.method == "POST":
         cart_quantity = request.POST["cart_quantity"]
@@ -28,22 +29,23 @@ def add_cart(request, product_id):
 
     # cart_item이 있는지 없는지 여부 확인
     try:
-        cart_item = CartItem.objects.get(product=product, cart=cart)
+        cart_item = CartItem.objects.get(product=product, cart=cart, user=request.user)
         cart_item.quantity += int(cart_quantity)
         cart_item.save()
     except CartItem.DoesNotExist:
         cart_item = CartItem.objects.create(
-            product=product, quantity=int(cart_quantity), cart=cart
+            product=product, quantity=int(cart_quantity), cart=cart, user=request.user
         )
         cart_item.save()
     return redirect("cart:cart_detail")
 
 
 # counter=0 : 루프가 입력된 횟수(인덱스)
+@login_required
 def cart_detail(request, total=0, counter=0, cart_items=None):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
-        cart_items = CartItem.objects.filter(cart=cart, active=True)
+        cart_items = CartItem.objects.filter(cart=cart, active=True, user=request.user)
         for cart_item in cart_items:
             total += cart_item.product.cost * cart_item.quantity
             counter += cart_item.quantity
