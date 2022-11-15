@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login as auth_login
@@ -42,7 +42,8 @@ def login(request):
 
 
 def callback(request):
-    return render(request, 'accounts/callback.html')
+    return render(request, "accounts/callback.html")
+
 
 def logout(request):
     auth_logout(request)
@@ -97,7 +98,7 @@ def change_password(request):
 
 def database(request):
     jsonObject = json.loads(request.body)
-    username = jsonObject.get('username')
+    username = jsonObject.get("username")
     users = User.objects.filter(username=username)
 
     if users:
@@ -105,17 +106,20 @@ def database(request):
         auth_login(request, user)
     else:
         user = User()
-        user.username = jsonObject.get('username')
-        user.email = jsonObject.get('email')
-        user.gender = jsonObject.get('gender')
+        user.username = jsonObject.get("username")
+        user.email = jsonObject.get("email")
+        user.gender = jsonObject.get("gender")
         user.save()
         user = User.objects.get(username=username)
         auth_login(request, user)
-    return JsonResponse({'username': user.username, 'email': user.email, 'gender': user.gender})
+    return JsonResponse(
+        {"username": user.username, "email": user.email, "gender": user.gender}
+    )
+
 
 def database_naver(request):
     jsonObject = json.loads(request.body)
-    username = jsonObject.get('id')
+    username = jsonObject.get("id")
 
     users = User.objects.filter(username=username)
     if users:
@@ -124,22 +128,33 @@ def database_naver(request):
 
     else:
         user = User()
-        user.username = jsonObject.get('id')
+        user.username = jsonObject.get("id")
 
-        user.nickname = jsonObject.get('name')
-        user.email = jsonObject.get('email')
+        user.nickname = jsonObject.get("name")
+        user.email = jsonObject.get("email")
         # user.phone = jsonObject.get('mobile')
         user.save()
         user = User.objects.get(username=username)
         auth_login(request, user)
-    return JsonResponse({'username': user.username, 'email': user.email})
+    return JsonResponse({"username": user.username, "email": user.email})
+
 
 def follow(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
-    if request.user == user :
-        return redirect('accounts:index')
+    # 스스로를 팔로우하려는 경우
+    if request.user == user:
+        return redirect("accounts:index")
+    # 팔로우하고 있는 상태인 경우
     if request.user in user.followers.all():
         user.followers.remove(request.user)
+        is_followed = False
+    # 팔로우하고 있지 않았을때
     else:
         user.followers.add(request.user)
-    return render(request, "accounts/mypage.html")
+        is_followed = True
+    context = {
+        "is_followed": is_followed,
+        "followers_count": user.followers.count(),
+        "followings_count": user.followings.count(),
+    }
+    return JsonResponse(context)

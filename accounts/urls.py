@@ -19,16 +19,16 @@ from . import views
 app_name = "accounts"
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('signup/', views.signup, name='signup'),
-    path('login/', views.login, name='login'),
-    path('callback/', views.callback, name='callback'),
-    path('logout/', views.logout, name='logout'),
-    path('mypage/<int:pk>/', views.mypage, name='mypage'),
-    path('mypage-update/<int:pk>/', views.mypage_update, name='mypage-update'),
-    path('mypage-delete/<int:pk>/', views.mypage_delete, name='mypage-delete'),
-    path('change-password/', views.change_password, name='change-password'),
-    path('database/', views.database, name='database'),
-    path('database/naver/', views.database_naver, name='databse_naver'),
-    path('<int:pk>/follow', views.follow, name='follow'),
+    path("", views.index, name="index"),
+    path("signup/", views.signup, name="signup"),
+    path("login/", views.login, name="login"),
+    path("callback/", views.callback, name="callback"),
+    path("logout/", views.logout, name="logout"),
+    path("mypage/<int:pk>/", views.mypage, name="mypage"),
+    path("mypage-update/<int:pk>/", views.mypage_update, name="mypage-update"),
+    path("mypage-delete/<int:pk>/", views.mypage_delete, name="mypage-delete"),
+    path("change-password/", views.change_password, name="change-password"),
+    path("database/", views.database, name="database"),
+    path("database/naver/", views.database_naver, name="databse_naver"),
+    path("<int:pk>/follow/", views.follow, name="follow"),
 ]

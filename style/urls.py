@@ -25,4 +25,5 @@ urlpatterns = [
     path("<int:pk>/detail/", views.detail, name="detail"),
     path("<int:pk>/delete/", views.delete, name="delete"),
     path("<int:pk>/reviews/", views.review_create, name="review_create"),
+    path("<int:style_pk>/like/", views.like, name="like"),
 ]
