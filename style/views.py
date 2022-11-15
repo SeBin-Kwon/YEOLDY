@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Style
 from django.core.paginator import Paginator
 from .form import StyleForm, ReviewForm
+from django.http import JsonResponse
 
 
 def index(request):
@@ -84,3 +85,17 @@ def review_create(request, pk):
             review.style = style
             review.save()
             return redirect("style:detail", style.pk)
+
+
+@login_required
+def like(request, style_pk):
+    style = Style.objects.get(pk=style_pk)
+
+    if request.user in style.like_users.all():
+        style.like_users.remove(request.user)
+        is_liked = False
+    else:
+        style.like_users.add(request.user)
+        is_liked = True
+    context = {"isliked": is_liked}
+    return JsonResponse(context)

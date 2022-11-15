@@ -33,12 +33,12 @@
         <div class="product-card col-2">
           <a href="{% url 'products:detail' product.id %}">
             <div class="imgBox">
-              {% comment %} <img src="{{ product.image.url }}" alt="{{ post.image }}" style="width: 640px; height: 440px;"> {% endcomment %}
               {% if product.image %}
                 <img class="product-img" src="{{ product.image.url }}" alt="">
               {% else %}
                 <img class="product-img" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif">
               {% endif %}
+              
               <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
             </div>
             <div class="contentBox">
@@ -129,4 +129,5 @@
       </div>
     </div>
   </div>
+  
 {% endblock content %}

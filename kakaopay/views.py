@@ -2,37 +2,6 @@ from django.shortcuts import render, redirect
 import requests
 
 # Create your views here.
-# def index(request):
-#     if request.method == 'POST':
-#         URL = 'https://kapi.kakao.com/v1/payment/ready'
-#         #변경할 수 없는 값들을 담아줌
-#         headers = {
-#             "Authorization": "KakaoAK " + "	b2fcbb98f1cd8dbadcae7f2981acb9e3",
-#             "Content-type": "application/x-www-form-urlencoded;charset=utf-8"
-#         }
-#         params = {
-#             "cid": "TCOONETIME", #code id
-#             "partner_order_id": "1001", #주문번호
-#             "partner_user_id": "yoda",  #주문자
-#             "item_name": "YEOLDY 바람막이", #구매 물품 이름
-#             "quantity": "3",    #구매 물품 수량
-#             "total_amount": "12000",    #구매 물품 가격
-#             "approval_url": "#", #결제 성공 시 이동할 url
-#             "cancel_url": "#",  #결제 취소 시 이동할 url
-#             "fail_url": "#", #결제 실패 시 이동할 url
-#         }
-
-#         res = requests.post(URL, headers=headers, params=params)
-#         request.session['cid'] = res.json()['cid']      # 결제 승인시 사용할 cid를 세션에 저장
-#         next_url = res.json()['next_redirect_pc_url']   # 결제 페이지로 넘어갈 url을 저장
-#         return redirect(next_url)
-
-#     return render(request, 'kakaopay/index.html')
-
-from django.shortcuts import render, redirect
-import requests
-
-# Create your views here.
 def index(request):
     if request.method == "POST":
         URL = 'https://kapi.kakao.com/v1/payment/ready'
@@ -48,7 +17,7 @@ def index(request):
             "quantity": "1",                # 구매 물품 수량
             "total_amount": "12000",        # 구매 물품 가격
             "tax_free_amount": "0",         # 구매 물품 비과세
-            "approval_url": "http://127.0.0.1:8000",
+            "approval_url": "http://127.0.0.1:8000/kakaopay/approval/",
             "cancel_url": "http://127.0.0.1:8000",
             "fail_url": "http://127.0.0.1:8000",
         }
@@ -57,7 +26,6 @@ def index(request):
         request.session['tid'] = res.json()['tid']      # 결제 승인시 사용할 tid를 세션에 저장
         next_url = res.json()['next_redirect_pc_url']   # 결제 페이지로 넘어갈 url을 저장
         return redirect(next_url)
-
 
     return render(request, 'kakaopay/index.html')
 

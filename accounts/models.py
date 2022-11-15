@@ -20,8 +20,3 @@ class User(AbstractUser):
         "self", symmetrical=False, related_name="followers"
     )
     # like = models.ManyToManyField()
-
-
-class Basket(models.Model):
-    # product = models.ForeignKey()
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)

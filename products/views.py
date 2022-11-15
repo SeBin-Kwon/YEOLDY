@@ -3,17 +3,16 @@ from django.contrib.auth.decorators import login_required
 from .models import Products, Search
 from django.http import JsonResponse
 from .form import ProductsForm
-from django.db.models import F
+from django.db.models import F  # 검색 순위 조회수 증가
+from django.db.models import Q  # 검색 기능
 
 # Create your views here.
 
 # 상품 리스트 기능(메인페이지로 대체?)
 def index(request):
     products = Products.objects.order_by("-pk")
-    search_ranking = Search.objects.order_by("-search_count")
     context = {
         "products": products,
-        "search_ranking": search_ranking,
     }
     return render(request, "products/index.html", context)
 
@@ -103,19 +102,33 @@ def save(request, product_pk):
 
 # 검색 기능
 def search(request):
+    search_ranking = Search.objects.order_by("-search_count")
     products = Products.objects.all().order_by("-pk")
-    q = request.POST.get("q")
-    search_create = Search.objects.filter(search_text=q)
-    if q:
-        products = Products.objects.filter(name__icontains=q)
+    search = request.GET.get("search")
+    search_create = Search.objects.filter(search_text=search)
+    search_ranking = Search.objects.order_by("-search_count")[:5]  # 순위 5
+    if search:
+        products = Products.objects.filter(
+            Q(name__icontains=search) | Q(category__icontains=search)
+        )
     if search_create:
-        search_exist = Search.objects.get(search_text=q)
+        search_exist = Search.objects.get(search_text=search)
         search_exist.search_count += 1
         search_exist.save()
     else:
-        Search.objects.create(search_text=q)
+        Search.objects.create(search_text=search)
     context = {
+        "search_ranking": search_ranking,
+        "search": search,
         "products": products,
-        "q": q,
     }
     return render(request, "products/search.html", context)
+
+
+def search_main(request):
+    search_ranking = Search.objects.order_by("-search_count")[:5]
+    context = {
+        "search_ranking": search_ranking,
+    }
+
+    return render(request, "products/search_main.html", context)

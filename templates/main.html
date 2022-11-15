@@ -60,36 +60,36 @@
           <div class="drop">
             <ul class="drop-menu">
               <li>
-                <a href="#">Review</a>
+                <a href="{% url 'community:review_index' %}">Review</a>
               </li>
               <li>
                 <a href="#">Style</a>
               </li>
               <li>
-                <a href="#">Q&A</a>
+                <a href="{% url 'community:index' %}">Q&A</a>
               </li>
             </ul>
           </div>
         </li>
       </ul>
       {% if user.is_authenticated %}
-      <div class="logo-div" style="padding-right: 3rem;">
-        <a class="logo-link" href="{% url 'main' %}">
-          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-          <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
-        </a>
-      </div>
+        <div class="logo-div" style="padding-right: 3rem;">
+          <a class="logo-link" href="{% url 'main' %}">
+            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+            <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
+          </a>
+        </div>
       {% else %}
-      <div class="logo-div" style="padding-right: 6.5rem;">
-        <a class="logo-link" href="{% url 'main' %}">
-          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-          <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
-        </a>
-      </div>
+        <div class="logo-div" style="padding-right: 6.5rem;">
+          <a class="logo-link" href="{% url 'main' %}">
+            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+            <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
+          </a>
+        </div>
       {% endif %}
       <ul class="nav-items" style="padding-left: 4rem;">
         <li>
-          <a href="#">
+          <a href="{% url 'products:search' %}">
             <i class="bi bi-search"></i>
           </a>
         </li>
@@ -99,12 +99,14 @@
           </a>
         </li>
         {% if user.is_authenticated %}
-        <li>
-          <a href="{% url 'accounts:mypage' user.pk %}"><i class="bi bi-person-fill"></i></a>
-        </li>
-        <li>
-          <a href="{% url 'accounts:logout' %}">LOGOUT</a>
-        </li>
+          <li>
+            <a href="{% url 'accounts:mypage' user.pk %}">
+              <i class="bi bi-person-fill"></i>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+          </li>
         {% else %}
           <li>
             <a href="{% url 'accounts:login' %}">LOGIN</a>
@@ -468,10 +470,10 @@
       <span>(주) 열디</span><br>
       <div class="footer-content">
         <p>대표이사 : 이우열<br>
-        소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
+          소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
         <p>
-        문의 : contact@yeoldy.com / 02-123-4567<br>
-        평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
+          문의 : contact@yeoldy.com / 02-123-4567<br>
+          평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
       </div>
     </footer>
   </body>

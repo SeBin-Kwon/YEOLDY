@@ -4,151 +4,156 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YEOLDY</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/base_nav.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="shortcut icon" href="{% static 'images/yeoldy_favicon.ico' %}">
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {% block css %}{% endblock css %}
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YEOLDY</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/base_nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="shortcut icon" href="{% static 'images/yeoldy_favicon.ico' %}">
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% block css %}{% endblock css %}
+</head>
 
-  <body>
-    <nav>
-      <ul class="nav-items" style="padding-right: 0.5rem;">
-        <li>
-          <a href="#">NEW</a>
-        </li>
-        <li>
-          <a href="#">BEST</a>
-        </li>
-        <li>
-          <a href="#">APPAREL</a>
-          <div class="drop">
-            <ul class="drop-menu">
-              <li>
-                <a href="#">모든 제품</a>
-              </li>
-              <li>
-                <a href="#">상의</a>
-              </li>
-              <li>
-                <a href="#">하의</a>
-              </li>
-              <li>
-                <a href="#">아우터</a>
-              </li>
-              <li>
-                <a href="#">신발</a>
-              </li>
-              <li>
-                <a href="#">악세서리</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a href="#">COMMUNITY</a>
-          <div class="drop">
-            <ul class="drop-menu">
-              <li>
-                <a href="#">Review</a>
-              </li>
-              <li>
-                <a href="#">Style</a>
-              </li>
-              <li>
-                <a href="#">Q&A</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
-      {% if user.is_authenticated %}
-        <div class="logo-div" style="padding-right: 3rem;">
-          <a class="logo-link" href="{% url 'main' %}">
-            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-            <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
-          </a>
+<body>
+  <nav>
+    <ul class="nav-items" style="padding-right: 0.5rem;">
+      <li>
+        <a href="#">NEW</a>
+      </li>
+      <li>
+        <a href="#">BEST</a>
+      </li>
+      <li>
+        <a href="#">APPAREL</a>
+        <div class="drop">
+          <ul class="drop-menu">
+            <li>
+              <a href="#">모든 제품</a>
+            </li>
+            <li>
+              <a href="#">상의</a>
+            </li>
+            <li>
+              <a href="#">하의</a>
+            </li>
+            <li>
+              <a href="#">아우터</a>
+            </li>
+            <li>
+              <a href="#">신발</a>
+            </li>
+            <li>
+              <a href="#">악세서리</a>
+            </li>
+          </ul>
         </div>
-      {% else %}
-        <div class="logo-div" style="padding-right: 6.5rem;">
-          <a class="logo-link" href="{% url 'main' %}">
-            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-            <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
-          </a>
+      </li>
+      <li>
+        <a href="#">COMMUNITY</a>
+        <div class="drop">
+          <ul class="drop-menu">
+            <li>
+              <a href="{% url 'community:review_index' %}">Review</a>
+            </li>
+            <li>
+              <a href="#">Style</a>
+            </li>
+            <li>
+              <a href="{% url 'community:index' %}">Q&A</a>
+            </li>
+          </ul>
         </div>
-      {% endif %}
-      <ul class="nav-items" style="padding-left: 4rem;">
-        <li>
-          <a href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="bi bi-cart"></i>
-          </a>
-        </li>
-        {% if user.is_authenticated %}
-          <li>
-            <a href="{% url 'accounts:mypage' user.pk %}">
-              <i class="bi bi-person-fill"></i>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'accounts:logout' %}">LOGOUT</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{% url 'accounts:login' %}">LOGIN</a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
-
-    <div class="base-div">
-      {% block content %}{% endblock content %}
+      </li>
+    </ul>
+    {% if user.is_authenticated %}
+    <div class="logo-div" style="padding-right: 3rem;">
+      <a class="logo-link" href="{% url 'main' %}">
+        <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+        <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+      </a>
     </div>
+    {% else %}
+    <div class="logo-div" style="padding-right: 6.5rem;">
+      <a class="logo-link" href="{% url 'main' %}">
+        <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+        <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+      </a>
+    </div>
+    {% endif %}
+    <ul class="nav-items" style="padding-left: 4rem;">
+      <li>
+        <a href="{% url 'products:search_main' %}">
+          <i class="bi bi-search"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bi bi-cart"></i>
+        </a>
+      </li>
+      
+      {% if user.is_authenticated %}
+        <li>
+          <a href="{% url 'accounts:mypage' user.pk %}">
+            <i class="bi bi-person-fill"></i>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url 'accounts:login' %}">LOGIN</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 
-    <!-- footer -->
-    <footer>
-      <img src="{% static 'images/logo_white.png' %}" style="width:4rem;">
-      <span>(주) 열디</span><br>
-      <div class="footer-content">
-        <p>대표이사 : 이우열<br>
-          소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
-        <p>
-          문의 : contact@yeoldy.com / 02-123-4567<br>
-          평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
-      </div>
-    </footer>
+  <div class="base-div">
+    {% block content %}{% endblock content %}
+  </div>
 
-    <script>
-      window.addEventListener("scroll", function () {
-        const nav = document.querySelector("nav");
-        nav
-          .classList
-          .toggle("sticky", window.scrollY > 0)
-        const logo = document.querySelector("#logo1");
+  <!-- footer -->
+  <footer>
+    <img src="{% static 'images/logo_white.png' %}" style="width:4rem;">
+    <span>(주) 열디</span><br>
+    <div class="footer-content">
+      <p>대표이사 : 이우열<br>
+        소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
+      <p>
+        문의 : contact@yeoldy.com / 02-123-4567<br>
+        평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
+    </div>
+  </footer>
 
-        if (window.scrollY > 0) {
-          nav.style.height = "4rem";
-        } else {
-          nav.style.height = "6rem";
-        }
-      })
-    </script>
+  <script>
+    window.addEventListener("scroll", function () {
+      const nav = document.querySelector("nav");
+      nav
+        .classList
+        .toggle("sticky", window.scrollY > 0)
+      const logo = document.querySelector("#logo1");
 
-  </body>
+      if (window.scrollY > 0) {
+        nav.style.height = "4rem";
+      } else {
+        nav.style.height = "6rem";
+      }
+    })
+  </script>
+
+</body>
+
 
 </html>
