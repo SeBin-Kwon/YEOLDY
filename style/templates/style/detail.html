@@ -3,25 +3,95 @@
 {% load static %}
 {% comment %} {% block content %}
 
-{% if style.image %}
-<img src="{{ style.image.url }}" alt="{{ style.image }}" style="width: 640px; height: 440px;">
 
-{% else %}
-
-<img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
-
-{% endif %}
+{% block content %}
+<!-- 스타일 게시글 -->
 <div>
-  <p>{{ style.user }}</p>
+  {% if style.image %}
+  <img src="{{ style.image.url }}" alt="{{ style.image }}" style="width: 640px; height: 440px;">
+
+  {% else %}
+
+  <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
+
+  {% endif %}
+
+  <!-- 좋아요 -->
+
+  {% if request.user.is_authenticated %}
+  {% if request.user in product.save_users.all %}
+  <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
+  {% else %}
+  <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
+
+  {% endif %}
+  {% else %}
+  <i class=" bi bi-heart"></i>
+  {% endif %}
+
 </div>
 
 
+<div>
+  <p>{{ style.user }}</p>
+  <!-- 팔로우 -->
+  {% if request.user != style.user %}
+  {% if request.user in style.user.followers.all %}
+  <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow</div>
+  {% else %}
+  <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-primary" type="submit"> Follow </div>
+  {% endif %}
+  {% endif %}
+
+</div>
+<!-- 팔로우 비동기 -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const followBtn = document.querySelector('#follow-btn')
+  followBtn.addEventListener('click', function (event) {
+    console.log(event.target.dataset)
+    axios({ method: 'get', url: `/accounts/${event.target.dataset.postId}/follow/` }).then(response => {
+      console.log(event.target.dataset)
+      console.log(response.data)
+      if (response.data.is_followed === true) {
+        event.target.classList.add('btn-outline-danger')
+        event.target.classList.remove('btn-outline-primary')
+        followBtn.innerText = "Unfollow"
+      } else {
+        event.target.classList.add('btn-outline-primary')
+        event.target.classList.remove('btn-outline-danger')
+        followBtn.innerText = "Follow"
+      }
+    })
+  })
+</script>
+<!-- 좋아요 비동기 -->
+<script>
+  const likeBtn = document.querySelector('#like-btn')
+  likeBtn.addEventListener('click', function (event) {
+    console.log(event.target.dataset)
+    axios({ method: 'get', url: `/style/${event.target.dataset.postId}/like/` }).then(response => {
+      console.log(response)
+      console.log(response.data)
+      if (response.data.isliked === true) {
+        event.target.classList.add('bi-heart-fill')
+        event.target.classList.remove('bi-heart')
+      } else {
+        event.target.classList.add('bi-heart')
+        event.target.classList.remove('bi-heart-fill')
+      }
+    })
+  })
+</script>
+
+{% if request.user == style.user %}
 <a href="{% url 'style:update' style.pk %}"> 수정 </a>
 
-
-
 <a class="my-3 mx-2 btn btn-danger" href="{% url 'style:delete' style.pk %}">삭제</a>
+{% endif %}
 
+
+<!-- 댓글 작성 -->
 <div class="my-3">
   {% if request.user.is_authenticated %}
   {% load django_bootstrap5 %}

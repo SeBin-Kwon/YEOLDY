@@ -431,11 +431,6 @@ a{
   }
 }
 
-::selection{
-  color: #ffffff;
-  background-color: #252525;
-}
-
 .comment-btn{
   padding: 10px 40px;
   background: #0DB295;
@@ -516,7 +511,7 @@ thead th{
 
 th, td{
   border-bottom: 1px solid #dddddd;
-  padding: 10px 20px;
+  padding: 10px 10px;
   word-break: break-all;
   text-align: center;
 }

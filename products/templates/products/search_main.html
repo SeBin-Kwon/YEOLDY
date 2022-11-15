@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div>
+    <form class="d-flex" role="search" action="{% url 'products:search' %}" method="GET">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+            value="{{search}} 0개의 검색결과" name="search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    {% for z in search_ranking %}
+    <a href="/products/search/?search={{z.search_text}}">{{ z.search_text }}</a>
+
+    {% endfor %}
+
+  </div>
+
+{% endblock content %}

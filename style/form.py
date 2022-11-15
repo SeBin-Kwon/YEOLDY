@@ -18,5 +18,4 @@ class ReviewForm(forms.ModelForm):
         model = Style_Review
         fields = [
             "content",
-            "grade",
         ]

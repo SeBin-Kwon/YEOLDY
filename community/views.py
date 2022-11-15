@@ -82,10 +82,9 @@ def qna_update(request, qna_pk):
 def qna_delete(request, qna_pk):
     qna = get_object_or_404(QnA, pk=qna_pk)
     if request.user == qna.user:
-        if request.method == "POST":
-            qna.delete()
-            messages.success(request, "삭제 완료")
-            return redirect("community:index")
+        qna.delete()
+        messages.success(request, "삭제 완료")
+        return redirect("community:index")
     else:
         messages.success(request, "작성자만 삭제가 가능함")
         return redirect("community:index")
@@ -143,7 +142,10 @@ def review_create(request, product_pk):
 
 def review_detail(request, review_pk):
     review = Review.objects.get(pk=review_pk)
-    context = {"review": review}
+    print(review)
+    context = {
+        "review": review,
+    }
     return render(request, "community/review_detail.html", context)
 
 

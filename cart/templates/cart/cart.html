@@ -8,15 +8,48 @@
         <h1>장바구니가 비었습니다.</h1>
     {% else %}
         <h1>장바구니</h1>
-        {% for cart_item in cart_items %}
-            <div style="display:flex; flex-direction:column; border:1px solid black;">
-                <p>제품명 : <a href="{% url 'products:detail' cart_item.product.id %}">{{ cart_item.product.name }}</a></p>
-                <p>개수 : {{ cart_item.quantity }}</p>
-                <p>총 가격 : {{ cart_item.product.cost }}원 X {{ cart_item.quantity }} = {{ cart_item.sub_total }}원</p>
-                <a class="btn btn-danger" href="{% url 'cart:delete_cart' cart_item.id %}">장바구니에서 삭제하기</a>
-            </div>
-        {% endfor %}
+            {% for cart_item in cart_items %}
+            <form action="{% url 'cart:revise_cart' cart_item.product_id %}" method="POST">
+                {% csrf_token %}
+                <p>{{forloop.counter}}</p>
+                <div style="display:flex; flex-direction:column; border:1px solid black;">
+                    <p>제품명 : <a href="{% url 'products:detail' cart_item.product.id %}">{{ cart_item.product.name }}</a></p>
+                    <p>개수 : </p>
+                        <button type="button" id="minus{{forloop.counter}}">-</button>
+                        <input id="cart_quantity{{forloop.counter}}" type="text" name="cart_quantity" value="{{ cart_item.quantity }}">
+                        <button type="button" id="plus{{forloop.counter}}">+</button>
+                        <button type="submit">수량 변경하기</button>
+                    <p>총 가격 : {{ cart_item.product.cost }}원 X {{ cart_item.quantity }} = {{ cart_item.sub_total }}원</p>
+                    <a class="btn btn-danger" href="{% url 'cart:delete_cart' cart_item.id %}">장바구니에서 삭제하기</a>
+                </div>
+            </form>
+
+            {% endfor %}
     {% endif %}
+    <h1>총 물건 개수 : {{ counter }}개</h1>
+    <h1>총 가격 : {{ total }}원</h1>
     <a class="btn btn-primary" href="{% url 'cart:clear_cart' %}">장바구니 비우기</a>
+
+    <script>
+        const cart_items = "{{cart_length}}"
+
+        for (let i=1; i<=cart_items; i++) {
+            eval("var quantity" + i + "=" + "document.querySelector('#cart_quantity" + i + "')");
+            eval("var minus" + i + "=" + "document.querySelector('#minus" + i + "')");
+            eval("var plus" + i + "=" + "document.querySelector('#plus" + i + "')");
+
+            eval("minus" + i).addEventListener('click', function () {
+            eval("quantity" + i).value -= 1
+            })
+
+            eval("plus" + i).addEventListener('click', function () {
+            num = parseInt(eval("quantity" + i).value)
+            eval("quantity" + i).value = num + 1
+            })
+        }
+
+    </script>
+
+
 
 {% endblock %}
