@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Style, Style_Review, Photo
 from .form import StyleForm, ReviewForm
+from products.models import Products
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.db.models import Q  # 검색 기능
 import json
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder

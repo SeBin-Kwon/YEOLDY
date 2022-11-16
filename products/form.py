@@ -13,3 +13,6 @@ class ProductsForm(forms.ModelForm):
             "size",
             "image",
         ]
+        labels = {
+            "image": ("Thumbnail"),
+        }
