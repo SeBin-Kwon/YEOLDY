@@ -5,6 +5,8 @@ from accounts.models import User
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    color = models.CharField(max_length=20)
+    size = models.CharField(max_length=20)
     quantity = models.IntegerField()
 
     class Meta:

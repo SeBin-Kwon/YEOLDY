@@ -67,6 +67,7 @@
 
       <hr>
 
+      <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
       {% csrf_token %}
       <!-- 색상 -->
       <div class="form-option select-option">
@@ -94,16 +95,14 @@
 
       <!-- 장바구니 -->
       <div id="cart">
-        <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
-          {% csrf_token %}
-          <div class="form-option">
-            <button class="count-btn" type="button" id="minus">-</button>
-            <input id="cart_quantity" type="text" name="cart_quantity" value="0">
-            <button class="count-btn" type="button" id="plus">+</button>
-          </div>
-          <button class="cart-btn" type="submit">장바구니 담기</button>
-        </form>
+        <div class="form-option">
+          <button class="count-btn" type="button" id="minus">-</button>
+          <input id="cart_quantity" type="text" name="cart_quantity" value="0">
+          <button class="count-btn" type="button" id="plus">+</button>
+        </div>
+        <button class="cart-btn" type="submit">장바구니 담기</button>
       </div>
+      </form>
     </div>
 
     <div class="product container col-9">
