@@ -36,7 +36,7 @@
           <div class="drop">
             <ul class="drop-menu">
               <li>
-                <a href="#">모든 제품</a>
+                <a href="{% url 'products:index' %}">모든 제품</a>
               </li>
               <li>
                 <a href="#">상의</a>
@@ -90,12 +90,12 @@
       {% endif %}
       <ul class="nav-items" style="padding-left: 4rem;">
         <li>
-          <a href="#">
+          <a href="{% url 'products:search_main' %}">
             <i class="bi bi-search"></i>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="{% url 'cart:cart_detail' %}">
             <i class="bi bi-cart"></i>
           </a>
         </li>

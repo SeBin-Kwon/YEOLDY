@@ -4,218 +4,226 @@
 
 {% block content %}
 
+  <!-- 스타일 게시글 -->
+  <div>
+    {% if style.image %}
+      <img src="{{ style.image.url }}" alt="{{ style.image }}" style="width: 640px; height: 440px;">
 
+    {% else %}
 
-<!-- 스타일 게시글 -->
-<div>
-  {% if style.image %}
-  <img src="{{ style.image.url }}" alt="{{ style.image }}" style="width: 640px; height: 440px;">
+      <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
 
-  {% else %}
+    {% endif %}
 
-  <img src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif" style="width: 720px; height: 480px;">
+    <!-- 좋아요 -->
+    {% if request.user.is_authenticated %}
+      {% if request.user in product.save_users.all %}
+        <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
+      {% else %}
+        <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
 
-  {% endif %}
-
-  <!-- 좋아요 -->
-  {% if request.user.is_authenticated %}
-  {% if request.user in product.save_users.all %}
-  <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
-  {% else %}
-  <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
-
-  {% endif %}
-  {% else %}
-  <i class=" bi bi-heart"></i>
-  {% endif %}
-</div>
-
-
-<div>
-  <p>{{ style.user }}</p>
-  <!-- 팔로우 -->
-  {% if request.user != style.user %}
-  {% if request.user in style.user.followers.all %}
-  <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow</div>
-  {% else %}
-  <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-primary" type="submit"> Follow </div>
-  {% endif %}
-  {% endif %}
-
-</div>
-
-{% if request.user == style.user %}
-<a href="{% url 'style:update' style.pk %}"> 수정 </a>
-
-<a class="my-3 mx-2 btn btn-danger" href="{% url 'style:delete' style.pk %}">삭제</a>
-{% endif %}
-
-
-
-<div class="card">
-  <div class="card-header">
-    <div class="col-md-12">
-      {% csrf_token %}
-      <div class="form-group row">
-        <textarea class="form-control" id="content_id" rows="3" placeholder="댓글을 입력해주세요."></textarea>
-      </div>
-      <div class="text-right" style="float:right">
-        <button id="review_write" class="btn btn-sm">댓글달기</button>
-      </div>
-    </div>
-    <hr>
-    <div id="more_review">
-      {% if reviews %}
-      {% for review in reviews %}
-      <div id='{{ review.id }}'>
-        {% if review.deleted %}
-        <span>삭제된 댓글입니다.</span>
-        <hr>
-        {% else %}
-        {% if review.user == style.user %}
-        <strong>{{ review.user }}&nbsp;<span>(글쓴이)</span></strong>
-        {% else %}
-        <strong>{{ review.user }}</strong>
-        {% endif %}
-        <span style="float:right">{{ review.created }}</span>
-        {% if review.user == request.user or request.user.level == '0' or request.user.level == '1' %}
-        <div>
-          <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
-          <div style="text-align: right;">
-            <a onclick="reviewDelete('{{review.id}}');">댓글삭제</a>
-          </div>
-        </div>
-        <hr>
-        {% else %}
-        <div>
-          <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
-        </div>
-        <hr>
-        {% endif %}
-        {% endif %}
-      </div>
-      <div class='{{ review.id }}'></div>
-      {% endfor %}
       {% endif %}
-      <input type="hidden" id="review_user" value={{request.user}}>
-      <div id="review_list"></div>
+    {% else %}
+      <i class=" bi bi-heart"></i>
+    {% endif %}
+  </div>
+
+  <div>
+    <p>{{ style.user }}</p>
+    <!-- 팔로우 -->
+    {% if request.user != style.user %}
+      {% if request.user in style.user.followers.all %}
+        <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow</div>
+      {% else %}
+        <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-primary" type="submit">
+          Follow
+        </div>
+      {% endif %}
+    {% endif %}
+
+  </div>
+
+  {% if request.user == style.user %}
+    <a href="{% url 'style:update' style.pk %}">
+      수정
+    </a>
+
+    <a class="my-3 mx-2 btn btn-danger" href="{% url 'style:delete' style.pk %}">삭제</a>
+  {% endif %}
+
+  <div class="card">
+    <div class="card-header">
+      <div class="col-md-12">
+        {% csrf_token %}
+        <div class="form-group row">
+          <textarea class="form-control" id="content_id" rows="3" placeholder="댓글을 입력해주세요."></textarea>
+        </div>
+        <div class="text-right" style="float:right">
+          <button id="review_write" class="btn btn-sm">댓글달기</button>
+        </div>
+      </div>
+      <hr>
+      <div id="more_review">
+        {% if reviews %}
+          {% for review in reviews %}
+            <div id='{{ review.id }}'>
+              {% if review.deleted %}
+                <span>삭제된 댓글입니다.</span>
+                <hr>
+              {% else %}
+                {% if review.user == style.user %}
+                  <strong>{{ review.user }}&nbsp;<span>(글쓴이)</span></strong>
+                {% else %}
+                  <strong>{{ review.user }}</strong>
+                {% endif %}
+                <span style="float:right">{{ review.created }}</span>
+                {% if review.user == request.user or request.user.level == '0' or request.user.level == '1' %}
+                  <div>
+                    <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
+                    <div style="text-align: right;">
+                      <a onclick="reviewDelete('{{review.id}}');">댓글삭제</a>
+                    </div>
+                  </div>
+                  <hr>
+                {% else %}
+                  <div>
+                    <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
+                  </div>
+                  <hr>
+                {% endif %}
+              {% endif %}
+            </div>
+            <div class='{{ review.id }}'></div>
+          {% endfor %}
+        {% endif %}
+        <input type="hidden" id="review_user" value="{{request.user}}">
+        <div id="review_list"></div>
+      </div>
     </div>
   </div>
-</div>
 
-
-<!-- 댓글 비동기 처리 -->
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function () {
-    $('#review_write').click(function () {
-      var content = $("#content_id").val();
-      var user = $("#review_user").val();
-      $.ajax({
-        type: "POST",
-        url: "{% url 'style:review_create' style.id %}",
-        dataType: "json",
-        data: {
-          'user': user,
-          'content': content,
-          'csrfmiddlewaretoken': '{{csrf_token}}',
-        },
-        success: function (response) {
-          if (response.self_comment) {
-            $('#review_list').append(
-              '<div><div id=' + response.review_id + '><strong>' + response.user + '&nbsp;<span>' + response.self_comment + '</span></strong>' +
-              '<span style="float:right;">' + response.created + '</span>' +
-              '<div><div style="white-space:pre-wrap; text-align:left;">' + response.content +
-              '</div><div style="text-align:right;"><a onclick="reviewDelete(' + response.review_id + ');">댓글삭제</a></div></div><hr></div><div class=' + response.review_id + '></div>'
-            );
+  <!-- 댓글 비동기 처리 -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('#review_write').click(function () {
+        var content = $("#content_id").val();
+        var user = $("#review_user").val();
+        $.ajax({
+          type: "POST",
+          url: "{% url 'style:review_create' style.id %}",
+          dataType: "json",
+          data: {
+            'user': user,
+            'content': content,
+            'csrfmiddlewaretoken': '{{csrf_token}}'
+          },
+          success: function (response) {
+            if (response.self_comment) {
+              $('#review_list').append('<div><div id=' + response.review_id + '><strong>' + response.user + '&nbsp;<span>' + response.self_comment + '</span></strong>' + '<span style="float:right;">' + response.created + '</span>' + '<div><div style="white-space:pre-wrap; text-align:left;">' + response.content + '</div><div style="text-align:right;"><a onclick="reviewDelete(' + response.review_id + ');">댓글삭제</a></div></div><hr></div><div class=' + response.review_id + '></div>');
+            } else {
+              $('#review_list').append('<div><div id=' + response.review_id + '><strong>' + response.user + '</strong>' + '<span style="float:right;">' + response.created + '</span>' + '<div><div style="white-space:pre-wrap; text-align:left;">' + response.content + '</div><div style="text-align:right;"><a onclick="reviewDelete(' + response.review_id + ');">댓글삭제</a></div></div><hr></div><div class=' + response.review_id + '></div>');
+            }
+            $('#content_id').val("");
+          },
+          error: function () {
+            if ($('#content_id').val() == "") {
+              alert('댓글을 입력해주세요.');
+            }
           }
-          else {
-            $('#review_list').append(
-              '<div><div id=' + response.review_id + '><strong>' + response.user + '</strong>' +
-              '<span style="float:right;">' + response.created + '</span>' +
-              '<div><div style="white-space:pre-wrap; text-align:left;">' + response.content +
-              '</div><div style="text-align:right;"><a onclick="reviewDelete(' + response.review_id + ');">댓글삭제</a></div></div><hr></div><div class=' + response.review_id + '></div>'
-            );
-          }
-          $('#content_id').val("");
-        },
-        error: function () {
-          if ($('#content_id').val() == "") {
-            alert('댓글을 입력해주세요.');
-          }
-        },
-      })
-    });
-  });
-</script>
-
-<!-- 댓글 삭제 -->
-<script type="text/javascript">
-  function reviewDelete(value) {
-    var review_id = value;
-    var delete_warning = confirm('댓글을 삭제하시겠습니까?');
-    if (delete_warning == true) {
-      $.ajax({
-        type: "POST",
-        url: "{% url 'style:review_delete' style.id %}",
-        dataType: "json",
-        data: {
-          'review_id': review_id,
-          'csrfmiddlewaretoken': '{{csrf_token}}',
-        },
-        success: function (response) {
-          $('#' + response.review_id).replaceWith('<span style="color:gray;">삭제된 댓글입니다.</span><hr>');
-        },
-        error: function () {
-          alert('본인 댓글이 아닙니다.');
-        },
+        })
       });
+    });
+  </script>
+
+  <!-- 댓글 삭제 -->
+  <script type="text/javascript">
+    function reviewDelete(value) {
+      var review_id = value;
+      var delete_warning = confirm('댓글을 삭제하시겠습니까?');
+      if (delete_warning == true) {
+        $.ajax({
+          type: "POST",
+          url: "{% url 'style:review_delete' style.id %}",
+          dataType: "json",
+          data: {
+            'review_id': review_id,
+            'csrfmiddlewaretoken': '{{csrf_token}}'
+          },
+          success: function (response) {
+            $('#' + response.review_id).replaceWith('<span style="color:gray;">삭제된 댓글입니다.</span><hr>');
+          },
+          error: function () {
+            alert('본인 댓글이 아닙니다.');
+          }
+        });
+      }
     }
-  }
-</script>
+  </script>
 
-
-
-<!-- 팔로우 비동기 -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script>
-  const followBtn = document.querySelector('#follow-btn')
-  followBtn.addEventListener('click', function (event) {
-    console.log(event.target.dataset)
-    axios({ method: 'get', url: `/accounts/${event.target.dataset.postId}/follow/` }).then(response => {
+  <!-- 팔로우 비동기 -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const followBtn = document.querySelector('#follow-btn')
+    followBtn.addEventListener('click', function (event) {
       console.log(event.target.dataset)
-      console.log(response.data)
-      if (response.data.is_followed === true) {
-        event.target.classList.add('btn-outline-danger')
-        event.target.classList.remove('btn-outline-primary')
-        followBtn.innerText = "Unfollow"
-      } else {
-        event.target.classList.add('btn-outline-primary')
-        event.target.classList.remove('btn-outline-danger')
-        followBtn.innerText = "Follow"
-      }
+      axios({method: 'get', url: `/accounts/${event.target.dataset.postId}/follow/`}).then(response => {
+        console.log(event.target.dataset)
+        console.log(response.data)
+        if (response.data.is_followed === true) {
+          event
+            .target
+            .classList
+            .add('btn-outline-danger')
+          event
+            .target
+            .classList
+            .remove('btn-outline-primary')
+          followBtn.innerText = "Unfollow"
+        } else {
+          event
+            .target
+            .classList
+            .add('btn-outline-primary')
+          event
+            .target
+            .classList
+            .remove('btn-outline-danger')
+          followBtn.innerText = "Follow"
+        }
+      })
     })
-  })
-</script>
+  </script>
 
-
-<!-- 좋아요 비동기 -->
-<script>
-  const likeBtn = document.querySelector('#like-btn')
-  likeBtn.addEventListener('click', function (event) {
-    console.log(event.target.dataset)
-    axios({ method: 'get', url: `/style/${event.target.dataset.postId}/like/` }).then(response => {
-      console.log(response)
-      console.log(response.data)
-      if (response.data.isliked === true) {
-        event.target.classList.add('bi-heart-fill')
-        event.target.classList.remove('bi-heart')
-      } else {
-        event.target.classList.add('bi-heart')
-        event.target.classList.remove('bi-heart-fill')
-      }
+  <!-- 좋아요 비동기 -->
+  <script>
+    const likeBtn = document.querySelector('#like-btn')
+    likeBtn.addEventListener('click', function (event) {
+      console.log(event.target.dataset)
+      axios({method: 'get', url: `/style/${event.target.dataset.postId}/like/`}).then(response => {
+        console.log(response)
+        console.log(response.data)
+        if (response.data.isliked === true) {
+          event
+            .target
+            .classList
+            .add('bi-heart-fill')
+          event
+            .target
+            .classList
+            .remove('bi-heart')
+        } else {
+          event
+            .target
+            .classList
+            .add('bi-heart')
+          event
+            .target
+            .classList
+            .remove('bi-heart-fill')
+        }
+      })
     })
-  })
-</script>
+  </script>
 
 {% endblock content %}
