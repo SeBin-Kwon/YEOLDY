@@ -16,4 +16,4 @@ class CartItem(models.Model):
         return self.product.cost * self.quantity
 
     def __str__(self):
-        return self.product
+        return self.product.name

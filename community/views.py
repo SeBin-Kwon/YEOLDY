@@ -16,6 +16,7 @@ def index(request):
     return render(request, "community/index.html", context)
 
 
+#상품에 대한 문의
 def qna_create(request, product_pk):
     if request.method == "POST":
         qna_form = QnaForm(request.POST, request.FILES)
@@ -32,7 +33,7 @@ def qna_create(request, product_pk):
     }
     return render(request, "community/community_create.html", context)
 
-
+#상품이 아닌 일반적인 문의
 def qna(request):
     if request.method == "POST":
         qna_form = QnaForm_2(request.POST)
