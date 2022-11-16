@@ -4,6 +4,7 @@
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/review_index.css'%}">
   <script src="https://kit.fontawesome.com/44d20d6c0e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 {% endblock css %}
 {% block content %}
   <!-- 리뷰 -->
@@ -12,6 +13,7 @@
 
       <!--testimonials-box-container-->
       {% for review in reviews %}
+
         <div class="testimonial-box-container">
           <!--box1-->
           <div class="testimonial-box">
@@ -29,15 +31,12 @@
                 </div>
                 <!--name-and-username-->
                 <div class="name-user">
-                  <strong>{{ review.user.username }}</strong>
-                  <span>@{{ review.user.nickname }}</span>
-                </div>
-              </div>
-
-              <!--review-->
-              <div class="reviews">
-                <div class="wrap-star">
-                  <p class="fs-5">평점: {{ review.grade }}점</p>
+                  {% if review.user.nickname %}
+                    <strong>{{ review.user.nickname }}</strong>
+                  {% else %}
+                    <strong>Anonymous</strong>
+                  {% endif %}
+                  <span>{{ review.get_grade_display }}</span>
                 </div>
               </div>
 
@@ -47,79 +46,94 @@
             <div class="client-comment">
               <div class="comment">
                 <p>{{ review.content }}</p>
-                <img class="comment-img" src="{{ photo.image.url }}" alt="">
-              </div>
-
-
-              <!-- Modal -->
-              <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">자세히</button>
-              
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header border-0 align-items-start">
-                      <div class="d-flex flex-column">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>username</strong></h1>
-                        <p class="m-0">옷 이름</p>
-                      </div>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <img class="modal-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
-                    </div>
+                <div class="swiper mySwiper1">
+                  <div class="swiper-wrapper">
+                    {% for photo1 in review.photo_set.all%}
+                      <div class="swiper-slide"><img class="comment-img" src="{{ photo1.image.url }}" alt=""></div>
+                    {% endfor %}
                   </div>
+
+                  <div class="swiper-pagination"></div>
+
                 </div>
+
               </div>
-              {% if request.user == review.user %}
-              <a class="review-btnd" href="{% url 'community:review_delete' review.pk %}"><i class="bi bi-trash"></i></a>
-              <a class="review-btnu" href="{% url 'community:review_update' review.pk %}"><i class="bi bi-pencil-square"></i></a>
-              {% endif %}
+
+              <!-- button -->
+              <div class="d-flex">
+                {% if review.photo_set.all %}
+                  <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">자세히</button>
+                {% endif %}
+
+                {% if request.user == review.user %}
+                  <a class="review-btnd" href="{% url 'community:review_delete' review.pk %}">
+                    <i class="bi bi-trash"></i>
+                  </a>
+                  <a class="review-btnu" href="{% url 'community:review_update' review.pk %}">
+                    <i class="bi bi-pencil-square"></i>
+                  </a>
+                {% endif %}
+              </div>
 
             </div>
 
           </div>
 
         </div>
+
+      {% endfor %}
+      {% for review_2 in reviews_2 %}
+        <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header border-0 align-items-start">
+                <div class="d-flex flex-column">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <strong>{{review_2.user.nickname}}</strong>
+                  </h1>
+                  <p class="m-0">{{review_2.product.name}}</p>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+
+                <div class="swiper mySwiper2">
+                  <div class="swiper-wrapper">
+                    {% for photo2 in review_2.photo_set.all %}
+                      <div class="swiper-slide"><img class="modal-img" src="{{ photo2.image.url }}" alt="">
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="swiper-pagination"></div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
       {% endfor %}
 
     </div>
   </div>
-  
 
-  {% comment %} <!-- 페이징처리 시작 -->
-  <ul class="pagination justify-content-center">
-    <!-- 이전페이지 -->
-    {% if question_list.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ question_list.previous_page_number }}">이전</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-      </li>
-    {% endif %}
-    <!-- 페이지리스트 -->
-    {% for page_number in question_list.paginator.page_range %}
-      {% if page_number == question_list.number %}
-        <li class="page-item active" aria-current="page">
-          <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-        </li>
-      {% else %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-        </li>
-      {% endif %}
-    {% endfor %}
-    <!-- 다음페이지 -->
-    {% if question_list.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ question_list.next_page_number }}">다음</a>
-      </li>
-    {% else %}
-      <li class="page-item disabled">
-        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-      </li>
-    {% endif %}
-  </ul>
-  <!-- 페이징처리 끝 --> {% endcomment %}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.mySwiper1', {
+      pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true
+      }
+    });
+
+    const swiper2 = new Swiper(".mySwiper2", {
+      slidesPerView: 1,
+      pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true
+      }
+    });
+  </script>
+
 {% endblock content %}

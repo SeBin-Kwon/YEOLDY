@@ -108,9 +108,11 @@ def qna_password(request, qna_pk):
 
 def review_index(request):
     reviews = Review.objects.all()
-
+    reviews_2 = Review.objects.all()
+    print(reviews_2)
     context = {
         "reviews": reviews,
+        "reviews_2": reviews_2,
     }
     return render(request, "community/review_index.html", context)
 

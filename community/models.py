@@ -27,7 +27,14 @@ class Review(models.Model):
     content = models.TextField()
     product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    grade = models.FloatField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    RATING = [
+        (1, "⭐"),
+        (2, "⭐⭐"),
+        (3, "⭐⭐⭐"),
+        (4, "⭐⭐⭐⭐"),
+        (5, "⭐⭐⭐⭐⭐"),
+    ]
+    grade = models.IntegerField(choices=RATING, default=None)
 
     def __str__(self):
         return self.title
