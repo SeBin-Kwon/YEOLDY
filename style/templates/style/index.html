@@ -6,29 +6,36 @@
 {% endblock css %}
 
 {%block content %} 
-<!-- <div class="style-box row"> -->
+
+
   <div class="style-box row">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="style-title">Style</h1>
+      <a class="style-create-link" href="{% url 'style:create' %}"><h5 class="m-0 style-create">My style 공유</h5></a>
+    </div>
     {% for style in styles %}
     <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
       <a href="{% url 'style:detail' style.pk %}">
         <div class="style-card">
+          <!-- 카드 사진 -->
           <img src="{{ style.image.url }}" class="style-img card-img-top" alt="...">
-          <div class="style-content">
-            <a href="{% url 'accounts:mypage' style.user.pk %}">
-              <div class="style-userimage" style="background-image: url('{{ style.user.profile_image.url }}')"></div>
-              <h5 class="style-title">{{ style.user.username }}</h5>
+          <!-- 유저 -->
+          <div class="style-user">
+            <!-- 프사 -->
+            <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
+            </div>
+            <!-- 유저 이름 -->
+            <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+              <h5 class="style-username">{{ style.user.username }}</h5>
             </a>
           </div>
         </div>
       </a>
-          
     </div>
     {% endfor %}
     </div>
-  </div>
-  <a href="{% url 'style:create' %}"><h5 class="">style 작성</h5></a>
+
 {% endblock content %}
-</div>
 
 <!-- <div class="col-3">
   <img src="{{ style.image.url }}" />

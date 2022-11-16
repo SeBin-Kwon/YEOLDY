@@ -1,14 +1,35 @@
+
 .style-box {
-  padding: 3rem 3rem;
-  /* gap: 2rem; */
+  padding: 3rem 8rem;
+  /* gap: 5px; */
   justify-content: center;
 }
 
+.style-title {
+  font-weight: 200;
+  font-size: 40px;
+}
+
+.style-create-link {
+  text-decoration: none;
+  color: black;
+  transition: 0.3s;
+}
+
+.style-create-link:hover {
+  text-decoration: none;
+  color: #05bb7e;
+}
+
+.style-create {
+  font-weight: 200;
+}
+
 .style-card {
-  width: 25rem;
-  padding: 3rem;
-  margin: 0 !important;
-  height: 100%;
+  padding: 2rem;
+  padding-bottom: 10rem;
+  margin: 14px;
+  height: 90%;
   position: relative;
   border-radius: 8px;
   box-shadow: 5px 16px 32px 0px #0d224216;
@@ -16,11 +37,26 @@
 
 .style-img {
   margin: 0 !important;
+  width: 100%;
 }
 
-.style-title {
+.style-user {
   position: absolute;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.style-link {
+  color: rgb(31, 31, 31);
+  text-decoration: none;
+}
+
+.style-username {
+  font-size: 22px;
+  font-weight: 400;
   z-index: 999;
+  margin: 0;
 }
 
 .style-userimage {
@@ -29,30 +65,43 @@
   border-radius: 50%;
   background-position: center;
   background-size: cover;
-  border: solid 1px rgba(228, 228, 228, 0.588);
+  border: solid 1px rgba(193, 193, 193, 0.704);
 }
 
-
-@media ( max-width: 1023px ) {
+@media ( max-width: 1400px ) {
   .style-card {
-    /* width: 20rem; */
+    padding: 2rem;
+    padding-bottom: 7rem;
   }
-  /* .mypage-btn .btn {
-    --bs-btn-font-size: 12px !important;
-  } */
+  .style-username {
+    font-size: 18px;
+  }
 }
+
+@media ( max-width: 1024px ) {
+  .style-card {
+    padding: 2rem;
+    padding-bottom: 5rem;
+  }
+  .style-username {
+    font-size: 16px;
+  }
+}
+
 @media ( max-width: 767px ) {
-  .mypage {
-    width: 500px;
+  .style-card {
+    padding-bottom: 8rem;
   }
-
-  .mypage-btn {
+  .style-box {
+    padding: 3rem 5rem;
+    /* gap: 5px; */
     justify-content: center;
-    
   }
-
-  .info-box {
-    padding-left: 4rem;
-  }
-  
 }
+
+@media ( max-width: 560px ) {
+  .style-card {
+    padding-bottom: 6rem;
+  }
+}
+
