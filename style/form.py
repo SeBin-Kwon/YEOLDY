@@ -8,7 +8,6 @@ class StyleForm(forms.ModelForm):
         fields = [
             "title",
             "content",
-            "image",
             "tag",
         ]
 
