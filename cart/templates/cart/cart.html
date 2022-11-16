@@ -9,7 +9,7 @@
     {% else %}
         <h1>장바구니</h1>
             {% for cart_item in cart_items %}
-            <form action="{% url 'cart:revise_cart' cart_item.product_id %}" method="POST">
+            <form action="{% url 'cart:revise_cart' cart_item.product_id cart_item.color cart_item.size %}" method="POST">
                 {% csrf_token %}
                 <p>{{forloop.counter}}</p>
                 <div style="display:flex; flex-direction:column; border:1px solid black;">
@@ -19,8 +19,10 @@
                         <input id="cart_quantity{{forloop.counter}}" type="text" name="cart_quantity" value="{{ cart_item.quantity }}">
                         <button type="button" id="plus{{forloop.counter}}">+</button>
                         <button type="submit">수량 변경하기</button>
+                    <p>색상 : {{ cart_item.color }}</p>
+                    <p>사이즈 : {{ cart_item.size }}</p>
                     <p>총 가격 : {{ cart_item.product.cost }}원 X {{ cart_item.quantity }} = {{ cart_item.sub_total }}원</p>
-                    <a class="btn btn-danger" href="{% url 'cart:delete_cart' cart_item.id %}">장바구니에서 삭제하기</a>
+                    <a class="btn btn-danger" href="{% url 'cart:delete_cart' cart_item.id cart_item.color cart_item.size %}">장바구니에서 삭제하기</a>
                 </div>
             </form>
 

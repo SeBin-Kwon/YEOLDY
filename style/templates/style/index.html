@@ -1,12 +1,14 @@
-{% extends 'base.html' %} 
-{% load django_bootstrap5 %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/style_index.css' %}" />
 {% endblock css %}
 
-{%block content %} 
+{%block content %}
+
 <!-- <div class="style-box row"> -->
+
   <div class="style-box row">
     {% for style in styles %}
     <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
@@ -18,13 +20,14 @@
             <p class="card-text">{{ style.content }}</p>
           </div>
         </div>
-      </a>
-          
-    </div>
-    {% endfor %}
-    </div>
+    </a>
   </div>
-  <a href="{% url 'style:create' %}"><h5 class="">style 작성</h5></a>
+  {% endfor %}
+</div>
+</div>
+<a href="{% url 'style:create' %}">
+  <h5 class="">style 작성</h5>
+</a>
 {% endblock content %}
 </div>
 
