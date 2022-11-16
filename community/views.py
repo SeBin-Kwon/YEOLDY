@@ -107,13 +107,10 @@ def qna_password(request, qna_pk):
 
 
 def review_index(request):
-    page = request.GET.get("page", "1")
-    review = Review.objects.all()
-    paginator = Paginator(review, "5")
-    page_obj = paginator.get_page(page)
+    reviews = Review.objects.all()
+
     context = {
-        "reviews": review,
-        "question_list": page_obj,
+        "reviews": reviews,
     }
     return render(request, "community/review_index.html", context)
 
