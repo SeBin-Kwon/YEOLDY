@@ -136,7 +136,7 @@ def search(request):
         "search": search,
         "products": products,
     }
-    return render(request, "products/search.html", context)
+    return render(request, "products/search_main.html", context)
 
 
 def search_main(request):
