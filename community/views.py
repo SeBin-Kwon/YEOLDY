@@ -183,10 +183,9 @@ def review_update(request, review_pk):
 def review_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.user == review.user:
-        if request.method == "POST":
-            review.delete()
-            messages.success(request, "삭제 완료")
-            return redirect("community:review_index")
+        review.delete()
+        messages.success(request, "삭제 완료")
+        return redirect("community:review_index")
     else:
         messages.success(request, "작성자만 삭제가 가능함")
         return redirect("community:review_index")
