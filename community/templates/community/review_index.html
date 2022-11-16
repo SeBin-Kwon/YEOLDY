@@ -12,76 +12,78 @@
 
       <!--testimonials-box-container-->
       {% for review in reviews %}
-      <div class="testimonial-box-container">
-        <!--box1-->
-        <div class="testimonial-box">
-          <!-- top -->
-          <div class="box-top">
-            <!--profile-->
-            <div class="profile">
-              <!--img-->
-              <div class="profile-img">
-                {% if review.user.profile_image %}
-                  <img src="{{ review.user.profile_image.url }}" alt="">
-                {% else %}
-                  <img src="{% static 'images/yeoldy_favicon.ico' %}" alt="">
-                {% endif %}
+        <div class="testimonial-box-container">
+          <!--box1-->
+          <div class="testimonial-box">
+            <!-- top -->
+            <div class="box-top">
+              <!--profile-->
+              <div class="profile">
+                <!--img-->
+                <div class="profile-img">
+                  {% if review.user.profile_image %}
+                    <img src="{{ review.user.profile_image.url }}" alt="">
+                  {% else %}
+                    <img src="{% static 'images/yeoldy_favicon.ico' %}" alt="">
+                  {% endif %}
+                </div>
+                <!--name-and-username-->
+                <div class="name-user">
+                  <strong>{{ review.user.username }}</strong>
+                  <span>@{{ review.user.nickname }}</span>
+                </div>
               </div>
-              <!--name-and-username-->
-              <div class="name-user">
-                <strong>{{ review.user.username }}</strong>
-                <span>@{{ review.user.nickname }}</span>
+
+              <!--review-->
+              <div class="reviews">
+                <div class="wrap-star">
+                  <p class="fs-5">평점: {{ review.grade }}점</p>
+                </div>
               </div>
+
             </div>
 
-            <!--review-->
-            <div class="reviews">
-              {{ review.get_grade_display }}
-            </div>
-
-          </div>
-
-          <!--Comments-->
-          <div class="client-comment">
-            <div class="comment">
-              <p>{{ review.content }}</p>
-              <img class="comment-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
-            </div>
+            <!--Comments-->
+            <div class="client-comment">
+              <div class="comment">
+                <p>{{ review.content }}</p>
+                <img class="comment-img" src="{{ photo.image.url }}" alt="">
+              </div>
 
 
-            <!-- Modal -->
-            <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">자세히</button>
-            
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header border-0 align-items-start">
-                    <div class="d-flex flex-column">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>username</strong></h1>
-                      <p class="m-0">옷 이름</p>
+              <!-- Modal -->
+              <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">자세히</button>
+              
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header border-0 align-items-start">
+                      <div class="d-flex flex-column">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"><strong>username</strong></h1>
+                        <p class="m-0">옷 이름</p>
+                      </div>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <img class="modal-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+                    <div class="modal-body">
+                      <img class="modal-img" src="https://i.pinimg.com/564x/59/88/db/5988db35d63851e890384c9ff6ed2743.jpg" alt="">
+                    </div>
                   </div>
                 </div>
               </div>
+              {% if request.user == review.user %}
+              <a class="review-btnd" href="{% url 'community:review_delete' review.pk %}"><i class="bi bi-trash"></i></a>
+              <a class="review-btnu" href="{% url 'community:review_update' review.pk %}"><i class="bi bi-pencil-square"></i></a>
+              {% endif %}
+
             </div>
-            <a class="review-btnd" href="{% url 'community:review_delete' review.pk %}"><i class="bi bi-trash"></i></a>
-            <a class="review-btnu" href="{% url 'community:review_update' review.pk %}"><i class="bi bi-pencil-square"></i></a>
 
           </div>
 
         </div>
-
-      </div>
       {% endfor %}
 
     </div>
   </div>
-
-
   
 
   {% comment %} <!-- 페이징처리 시작 -->
