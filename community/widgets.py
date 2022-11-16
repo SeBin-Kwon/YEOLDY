@@ -24,7 +24,7 @@ class starWidget(forms.TextInput):
             {
                 "min": 0,
                 "max": 5,
-                "step": 0.5,
+                "step": 1,
             }
         )
         return attrs
