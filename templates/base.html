@@ -74,21 +74,21 @@
         </li>
       </ul>
       {% if user.is_authenticated %}
-        <div class="logo-div" style="padding-right: 3rem;">
+        <div class="logo-div" style="padding-right: 2.5rem;">
           <a class="logo-link" href="{% url 'main' %}">
             <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
             <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
           </a>
         </div>
       {% else %}
-        <div class="logo-div" style="padding-right: 6.5rem;">
+        <div class="logo-div" style="padding-right: 6rem;">
           <a class="logo-link" href="{% url 'main' %}">
             <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
             <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
           </a>
         </div>
       {% endif %}
-      <ul class="nav-items" style="padding-left: 4rem;">
+      <ul class="nav-right" style="padding-left: 4rem;">
         <li>
           <a href="{% url 'products:search_main' %}">
             <i class="bi bi-search"></i>

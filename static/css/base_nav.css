@@ -94,6 +94,79 @@ nav {
   color: #05bb7e;
 }
 
+.nav-right {
+  display: flex;
+  padding: 0 4rem;
+  margin: 0;
+  height: 100%;
+}
+
+.nav-right li {
+  list-style: none;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.nav-right li a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.nav-right > li > a {
+  display: inline-block;
+	position: relative;
+  transition: 0.3s;
+}
+/* .nav-right > li > a:after {
+		content: "";
+		display: block;
+		position: absolute;
+		width: 0;
+		border-bottom: 2px solid #05bb7e;
+    border-radius: 2px;
+		left: 0;
+		transition: 0.1s;
+} */
+
+/* .nav-right > li > a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  border-top: 2px solid #05bb7e;
+  border-radius: 2px;
+  margin: -3px 0;
+  left: 0;
+  transition: 0.3s;
+} */
+
+/* .nav-right > li > a:hover:after{
+  width: 100%;
+}
+
+.nav-right > li > a:hover::before{
+  width: 100%;
+} */
+
+.nav-right > li > a:hover{
+  color: #05bb7e;
+}
+
+.nav-right li a {
+  color: black;
+}
+
+.sticky .nav-right li a:hover {
+  color: #0DB295;
+}
+
+.nav-right li a i {
+  font-size: 18px;
+}
 
 .logo-div {
   padding-left: 1rem;
