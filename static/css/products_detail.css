@@ -69,6 +69,8 @@
 }
 
 ul{
+    margin-bottom: 4rem;
+    padding-left: 0;
     display: flex;
     list-style:none;
     justify-content: space-evenly;
@@ -84,25 +86,59 @@ ul{
 
 .tab_menu .list li{
     float:left; 
-    margin-right:14px;
+    min-width: 50%;
+    text-align: center;
 }
 
 .tab_menu .list li.is_on .btn{
     font-weight:bold; 
     color:rgb(45, 185, 108);
-    border: none;
+    /* border: none; */
+    border-radius: 0;
+    border-bottom: 3px solid rgb(45, 185, 108);
 }
 
 .tab_menu .list .btn{
-    font-size:16px;
+    font-size:20px;
     border: none;
+    width: 100%;
 }
 
 .tab_menu .cont_area .cont{
     display:none; 
-    background:#555; 
-    color:#fff; 
+    /* background:#555;  */
+    color:#000; 
     text-align:center; 
     width: 100%;
-    line-height:100px;
+}
+
+.review-link {
+    color: #000;
+    text-decoration: none
+}
+
+.review-link:hover {
+    color:rgb(34, 207, 112);
+}
+
+.review {
+    text-align: start;
+}
+
+.grade {
+    color: rgb(34, 207, 112);
+}
+
+.review-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+}
+
+.review-user {
+    font-weight: 600;
+}
+
+.review-content {
+    padding: 20px 0;
 }

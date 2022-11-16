@@ -1,5 +1,6 @@
 from django import forms
 from .models import QnA, Review
+from .widgets import starWidget
 
 
 class QnaForm(forms.ModelForm):
@@ -9,7 +10,6 @@ class QnaForm(forms.ModelForm):
             "title",
             "content",
             "image",
-            "solve",
             "password",
         ]
         widgets = {"password": forms.PasswordInput()}
@@ -21,6 +21,7 @@ class QnaForm_2(forms.ModelForm):
         fields = [
             "title",
             "content",
+            "image",
             "password",
         ]
         widgets = {"password": forms.PasswordInput()}
@@ -44,3 +45,5 @@ class ReviewForm(forms.ModelForm):
             "content",
             "grade",
         ]
+        widgets = {"grade": starWidget}
+        labels = {"title": "제목", "content": "본문", "grade": "평점"}

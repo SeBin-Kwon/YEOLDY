@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Style, Style_Review
+from .models import Style, Style_Review, Photo
 from .form import StyleForm, ReviewForm
+from products.models import Products
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.db.models import Q  # 검색 기능
 import json
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
@@ -25,23 +27,35 @@ def create(request):
             style = style_form.save(commit=False)
             style.user = request.user
             style.save()
+            for img in request.FILES.getlist("imgs"):
+                photo = Photo()
+                photo.style = style
+                photo.image = img
+                photo.save()
             return redirect("style:index")
     else:
         style_form = StyleForm()
-        context = {
-            "style_form": style_form,
-        }
-        return render(request, "style/form.html", context)
+    context = {
+        "style_form": style_form,
+    }
+    return render(request, "style/form.html", context)
 
 
 @login_required
 def update(request, pk):
     style = Style.objects.get(id=pk)
+    photo = style.photo_set.all()
     if request.user == style.user:
         if request.method == "POST":
+            photo.delete()
             style_form = StyleForm(request.POST, request.FILES, instance=style)
             if style_form.is_valid():
                 style_form.save()
+                for img in request.FILES.getlist("imgs"):
+                    photo = Photo()
+                    photo.style = style
+                    photo.image = img
+                    photo.save()
                 return redirect("style:detail", style.pk)
 
         else:
@@ -57,12 +71,14 @@ def update(request, pk):
 
 def detail(request, pk):
     style = Style.objects.get(pk=pk)
+    style_image = style.photo_set.all()
     review_form = ReviewForm()
     reviews = style.style_review_set.all().order_by("-pk")
     context = {
         "style": style,
         "review_form": review_form,
         "reviews": reviews,
+        "style_image": style_image,
     }
     return render(request, "style/detail.html", context)
 

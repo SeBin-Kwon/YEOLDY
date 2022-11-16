@@ -51,11 +51,12 @@
 }
 
 .profile-img{
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   overflow: hidden;
   margin-right: 10px;
+  border: 3px solid #0DB295;
 }
 
 .profile-img img{
@@ -77,17 +78,19 @@
 
 .name-user strong{
   color: #3d3d3d;
-  font-size: 1.1rem;
+  font-size: 24px;
   letter-spacing: 0.5px;
 }
 
+
 .name-user span{
-  color: #979797;
-  font-size: 0.8rem;
+  color: #f9d71c;
+  font-size: 18px;
 }
 
 .reviews{
   color: #f9d71c;
+  font-size: 24px;
 }
 
 .box-top{
@@ -103,13 +106,15 @@
 }
 
 .client-comment p{
-  font-size: 0.9rem;
+  width: 70%;
+  font-size: 1rem;
   color: #4b4b4b;
   margin-right: 20px;
+  padding: 10px;
 }
 
 .client-comment .comment-img{
-  width: 100px;
+  width: 180px;
   height: auto;
   border-radius: 5px;
 }
@@ -159,6 +164,10 @@
   width: 100%;
 }
 
+.modal-body{
+  height: auto;
+}
+
 .client-comment .review-btnd{
   text-decoration: none;
   padding: 10px 13.5px;
@@ -167,7 +176,6 @@
   border: 0;
   outline: none;
   cursor: pointer;
-  border-radius: 30px;
   border-radius: 50%;
 }
 
@@ -180,4 +188,21 @@
   outline: none;
   cursor: pointer;
   border-radius: 50%;
+}
+
+.mySwiper1 {
+  width: 180px;
+  height: auto;
+}
+
+.swiper .swiper-pagination-bullet{
+  background: rgba(0, 0, 0);
+}
+
+.swiper .swiper-pagination-bullet-active{
+  background: #0DB295;
+}
+
+.mySwiper2{
+  width: 100%;
 }

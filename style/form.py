@@ -8,9 +8,12 @@ class StyleForm(forms.ModelForm):
         fields = [
             "title",
             "content",
-            "image",
             "tag",
+            "image",
         ]
+        labels = {
+            "image": ("Thumbnail"),
+        }
 
 
 class ReviewForm(forms.ModelForm):

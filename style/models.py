@@ -26,6 +26,15 @@ class Style(models.Model):
     like_users = models.ManyToManyField(get_user_model(), related_name="like_style")
 
 
+class Photo(models.Model):
+    style = models.ForeignKey(Style, on_delete=models.CASCADE, null=True)
+    image = ProcessedImageField(
+        upload_to="images/",
+        blank=True,
+        format="JPEG",
+    )
+
+
 class Style_Review(models.Model):
     content = models.TextField(max_length=50, verbose_name="댓글내용")
     style = models.ForeignKey(
