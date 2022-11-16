@@ -46,7 +46,7 @@ body{
 
 .content .list label{
   height: 60px;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 500;
   border-radius: 12px;
   line-height: 60px;
@@ -410,6 +410,9 @@ a{
     width: 45%;
     padding: 10px;
   }
+  .content .list label{
+    font-size: 12px;
+  }
 }
 
 @media(max-width:790px){
@@ -418,6 +421,12 @@ a{
   }
   .testimonial-heading h1{
     font-size: 1.4rem;
+  }
+  .content .list label{
+    visibility:hidden
+  }
+  .container .main-title{
+    font-size: 20px;
   }
 }
 

@@ -4,7 +4,7 @@
 
 <body style="margin-top: 100px;">
 
-
+  <!-- 상품 QnA 작성 -->
   {% if request.resolver_match.url_name == 'qna_create' %}
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -12,13 +12,14 @@
     {% bootstrap_button '확인' %}
   </form>
 
+  <!-- 상품 QnA 수정 -->
   {% elif request.resolver_match.url_name == 'qna_update' %}
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form qna_form %}
     {% bootstrap_button '확인' %}
   </form>
-
+  <!-- 상품 리뷰 수정 -->
   {% elif request.resolver_match.url_name == 'review_update' %}
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -26,6 +27,8 @@
     <input type="file" name="imgs" multiple>
     {% bootstrap_button '확인' %}
   </form>
+
+  <!-- 상품 리뷰 작성 -->
 
   {% else %}
   <form action="" method="POST" enctype="multipart/form-data">

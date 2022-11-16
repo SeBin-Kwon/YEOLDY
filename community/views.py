@@ -16,6 +16,7 @@ def index(request):
     return render(request, "community/index.html", context)
 
 
+#상품에 대한 문의
 def qna_create(request, product_pk):
     if request.method == "POST":
         qna_form = QnaForm(request.POST, request.FILES)
@@ -32,7 +33,7 @@ def qna_create(request, product_pk):
     }
     return render(request, "community/community_create.html", context)
 
-
+#상품이 아닌 일반적인 문의
 def qna(request):
     if request.method == "POST":
         qna_form = QnaForm_2(request.POST)
@@ -107,13 +108,12 @@ def qna_password(request, qna_pk):
 
 
 def review_index(request):
-    page = request.GET.get("page", "1")
-    review = Review.objects.all()
-    paginator = Paginator(review, "5")
-    page_obj = paginator.get_page(page)
+    reviews = Review.objects.all()
+    reviews_2 = Review.objects.all()
+    print(reviews_2)
     context = {
-        "reviews": review,
-        "question_list": page_obj,
+        "reviews": reviews,
+        "reviews_2": reviews_2,
     }
     return render(request, "community/review_index.html", context)
 
