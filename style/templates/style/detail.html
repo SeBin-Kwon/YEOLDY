@@ -1,13 +1,16 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style_detail.css' %}">
+{% endblock css %}
+
 
 {% block content %}
-
   <!-- 스타일 게시글 -->
   <div>
     {% if style.image %}
-      <img src="{{ style.image.url }}" alt="{{ style.image }}" style="width: 640px; height: 440px;">
+      <img class="st-img" src="{{ style.image.url }}" alt="{{ style.image }}">
 
     {% else %}
 
