@@ -67,6 +67,7 @@
 
       <hr>
 
+      <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
       {% csrf_token %}
       <!-- 색상 -->
       <div class="form-option select-option">
@@ -94,16 +95,14 @@
 
       <!-- 장바구니 -->
       <div id="cart">
-        <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
-          {% csrf_token %}
-          <div class="form-option">
-            <button class="count-btn" type="button" id="minus">-</button>
-            <input id="cart_quantity" type="text" name="cart_quantity" value="0">
-            <button class="count-btn" type="button" id="plus">+</button>
-          </div>
-          <button class="cart-btn" type="submit">장바구니 담기</button>
-        </form>
+        <div class="form-option">
+          <button class="count-btn" type="button" id="minus">-</button>
+          <input id="cart_quantity" type="text" name="cart_quantity" value="0">
+          <button class="count-btn" type="button" id="plus">+</button>
+        </div>
+        <button class="cart-btn" type="submit">장바구니 담기</button>
       </div>
+      </form>
     </div>
 
     <div class="product container col-9">
@@ -119,7 +118,25 @@
 
         <div class="cont_area">
           <div id="tab1" class="cont" style="display:block;">
-            Tab Content1
+            {% for review in reviews %}
+              <a class="review-link" href="{% url 'community:review_detail' review.pk %}">
+                <div class="review">
+                  <h3 class="grade">{{ review.get_grade_display }}
+                    <span class="review-title">{{ review.title }}</span>
+                  </h3>
+                  <div class="d-flex align-items-center">
+                    <div class="review-userimg me-3" style="width:40px; height:40px; background-image:url({{ review.user.profile_image.url }}); background-repeat:no-repeat; background-position-center; background-size:cover;"></div>
+                    <div>
+                      <span class="review-user">
+                        {{ review.user.username }}
+                      </span>님의 리뷰입니다.
+                    </div>
+                  </div>
+                  <p class="review-content">{{ review.content }}</p>
+                </div>
+              </a>
+              <hr>
+            {% endfor %}
           </div>
           <div id="tab2" class="cont">
             Tab Content2
