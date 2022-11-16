@@ -62,10 +62,12 @@ def update(request, pk):
 def detail(request, pk):
     product = Products.objects.get(pk=pk)
     reviews = product.review_set.all().order_by("-pk")
+    qna = product.qna_set.all().order_by("-pk")
     colors = list(str(product.color).split(", "))
     sizes = list(str(product.size).split(", "))
     context = {
         "reviews": reviews,
+        "qna": qna,
         "product": product,
         "review_list": reviews,
         "colors": colors,

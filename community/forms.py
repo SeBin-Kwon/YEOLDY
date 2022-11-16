@@ -9,7 +9,6 @@ class QnaForm(forms.ModelForm):
             "title",
             "content",
             "image",
-            "solve",
             "password",
         ]
         widgets = {"password": forms.PasswordInput()}
