@@ -12,9 +12,9 @@
     <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
       <a href="{% url 'style:detail' style.pk %}">
         <div class="style-card">
-          <img src="{{ style.image.url }}" class="card-img-top" alt="...">
-          <div class="style-content card-body">
-            <h5 class="style-title card-title">{{ style.title }}</h5>
+          <img src="{{ style.image.url }}" class="style-img card-img-top" alt="...">
+          <div class="style-content">
+            <h5 class="style-title">{{ style.title }}</h5>
             <p class="card-text">{{ style.content }}</p>
           </div>
         </div>

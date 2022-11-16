@@ -125,12 +125,54 @@
   display: none;
 }
 
-.logintext {
-  left: 50%;
-  transform: translate(-45%,50%);
+.ka-box{
+  height: 3.1rem !important;
+  transition: 0.3s;
+  border-radius: 7px;
+}
+
+.na-box{
+  transition: 0.3s;
+  border-radius: 7px;
+}
+
+.ka-box:hover {
+  background-color: #bb89002e;
+}
+
+.na-box:hover {
+  background-color: #d7ffaa34;
+}
+
+.ka-logintext {
+  /* left: 50%;
+  transform: translate(-45%,50%); */
+  width: 100%;
+  height: 100%;
   cursor: pointer;
   font-size: 16px;
-  z-index: 999;
+  z-index: -999;
+  background-color: #fbe300;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+}
+
+.logintext {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  z-index: -999;
+  background-color: #1EC800;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  color: white;
 }
 
 #naver_id_login {

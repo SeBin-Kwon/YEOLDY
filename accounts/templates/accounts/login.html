@@ -27,19 +27,31 @@
                 <button style="letter-spacing:2px;" id="btn" type="submit">LOGIN</button>
             </div>
         </form>
-        
-        <script type="text/javascript" defer="defer" src="{% static 'javascript/login.js' %}"></script>
 
         <!-- 카카오 로그인 -->
-        <div class="relative">
-            <a class="mb-2 btn btn-warning" id="kakao-login-btn"></a>
-            <span class="logintext position-absolute">
+        <div class="ka-box mb-2 position-relative">
+            <span class="ka-logintext position-absolute">
                 <i class="bi bi-chat-fill"></i> &nbsp;카카오톡 로그인
-            <span></div>
-
+            </span>
+            <a class="btn" id="kakao-login-btn" style="background-color: rgba(0,0,0,0);">
+            </a></div>
 
             <!-- <button class="api-btn" onclick="unlinkApp()">앱 탈퇴하기</button> -->
             <div id="result"></div>
+        
+        <!-- 네이버 로그인 -->
+        <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+        <div class="na-box position-relative">
+            <span class="logintext position-absolute"><span class="fw-bold" style="font-size: 18px;">N</span> &nbsp;네이버 로그인</span>
+            <div class="mb-2" id="naver_id_login" style="background-color: rgba(0,0,0,0);"></div>
+        </div>
+
+        <div class="caption">
+            <a href="{% url 'accounts:signup' %}">SIGN UP</a>
+        </div>
+    </div>
+</div>
+
         <script type="text/javascript">
             function unlinkApp() {
             Kakao.API.request({
@@ -113,12 +125,6 @@
 
         <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-        <!-- 네이버 로그인 -->
-        <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-        <div class="relative">
-            <div class="mb-2 btn btn-success" id="naver_id_login"></div>
-            <span class="logintext position-absolute text-white"><span class="fw-bold">N</span> &nbsp;네이버 로그인</span>
-        </div>
         <!-- //네이버아이디로로그인 버튼 노출 영역 -->
         <script type="text/javascript">
             var naver_id_login = new naver_id_login("zjLdxtDw_nRiWWquH1wK", "http://127.0.0.1:8000/accounts/callback/");
@@ -129,10 +135,8 @@
             //naver_id_login.setPopup();
             naver_id_login.init_naver_id_login();
         </script>
-        <div class="caption">
-            <a href="{% url 'accounts:signup' %}">SIGN UP</a>
-        </div>
-    </div>
-</div>
+
+<script type="text/javascript" defer="defer" src="{% static 'javascript/login.js' %}"></script>
+
 
 {% endblock %}
