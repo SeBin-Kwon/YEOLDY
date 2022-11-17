@@ -1,3 +1,7 @@
+.base-div {
+  margin-top: 13rem !important;
+}
+
 .section {
   display: flex;
   justify-content: center;
@@ -198,4 +202,11 @@ input:-webkit-autofill:active {
   -webkit-transition: background-color 9999s ease-out;
   -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0) inset !important;
   -webkit-text-fill-color: rgb(0, 0, 0) !important;
+}
+
+@media ( max-width: 1024px ) {
+  .base-div {
+    margin-top: 11rem !important;
+    min-height: 850px !important;
+  }
 }

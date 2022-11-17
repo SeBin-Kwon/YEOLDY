@@ -55,6 +55,16 @@ def index(request):
     return render(request, 'kakaopay/index.html')
 
 def approval(request):
+    #user
+    user = User.objects.get(pk=request.user.pk)
+
+    #cart_total
+    cart_items = list(CartItem.objects.filter(user_id=request.user.pk))
+
+    cart_total = 0
+    for cart_item in cart_items:
+        cart_total += cart_item.product.cost * cart_item.quantity
+
     URL = 'https://kapi.kakao.com/v1/payment/approve'
     headers = {
         "Authorization": "KakaoAK " + "b2fcbb98f1cd8dbadcae7f2981acb9e3",
@@ -63,17 +73,16 @@ def approval(request):
     params = {
         "cid": "TC0ONETIME",    # 테스트용 코드
         "tid": request.session['tid'],  # 결제 요청시 세션에 저장한 tid
-        "partner_order_id": "request.session['order_id']",     # 주문번호
-        "partner_user_id": "german",    # 유저 아이디
+        "partner_order_id": "1001",     # 주문번호
+        "partner_user_id": "{}".format(user),    # 유저 아이디
         "pg_token": request.GET.get("pg_token"),     # 쿼리 스트링으로 받은 pg토큰
     }
 
     res = requests.post(URL, headers=headers, params=params)
-    # amount = res.json()['amount']['total']
     res = res.json()
     context = {
         'res': res,
-        # 'amount': amount,
+        "total_amount": "{}".format(cart_total),  
     }
     return render(request, 'kakaopay/approval.html', context)
 
