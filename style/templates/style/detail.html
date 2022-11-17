@@ -9,54 +9,79 @@
 
 {% block content %}
   <!-- 스타일 게시글 -->
-  <div>
+  <div class="section">
+    <div class="back">
+      <a href="{% url 'style:index' %}">
+        <i class="bi bi-chevron-left"></i><span>&nbsp;BACK</span>
+      </a>
+    </div>
     {% if style.image %}
+    <div class="img-div">
       <img class="st-img" src="{{ style.image.url }}" alt="{{ style.image }}">
+    {% endif %}
+  <div class="info">
+      <div class="style-user mt-4 mb-3">
+        <div class="d-flex align-items-center">
+            <!-- 프사 -->
+            <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
+            </div>
+            <!-- 유저 이름 -->
+            <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+              <p class="style-username">{{ style.user.username }}</p>
+            </a>
+          </div>
+          
+      </div>
+      <div class="st-top mb-3">
+        <h1 class="st-title">{{ style.title }}</h1>
+        <div class="left-btn">
+          {% if request.user == style.user %}
+          <a class="btn btn-sm btn-outline-primary me-1" href="{% url 'style:update' style.pk %}">
+            <i class="bi bi-pencil-square"></i>
+          </a>
+          <a class="btn btn-sm btn-outline-danger" href="{% url 'style:delete' style.pk %}"><i class="bi bi-trash"></i></a>
+          {% endif %}
+        </div>
+      </div>
+
+      <p class="st-content d-flex">{{ style.content }}</p>
+    </div>
+</div>
+
+  <div class="center-btn">
+    
+  <div class="follow me-3">  
+    <!-- 팔로우 -->
+    {% if request.user != style.user %}
+      {% if request.user in style.user.followers.all %}
+      <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow</div>
+      {% else %}
+      <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-primary" type="submit">
+        Follow
+      </div>
+      {% endif %}
     {% endif %}
   </div>
 
-  <p>{{ style.content }}</p>
-  <p>{{ style.created }}</p>
-
-
   <!-- 좋아요 -->
-  {% if request.user.is_authenticated %}
-  {% if request.user in style.like_users.all %}
-  <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
-  {% else %}
-  <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
+  <div class="d-flex flex-column justify-content-center text-center">
+    {% if request.user.is_authenticated %}
+    {% if request.user in style.like_users.all %}
+      <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
+      {% else %}
+      <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
 
-  {% endif %}
-  {% else %}
-  <i class=" bi bi-heart"></i>
-  {% endif %}
-</div>
-
-<div>
-  <p>{{ style.user }}</p>
-  <!-- 팔로우 -->
-  {% if request.user != style.user %}
-  {% if request.user in style.user.followers.all %}
-  <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow</div>
-  {% else %}
-  <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-primary" type="submit">
-    Follow
+      {% endif %}
+    {% else %}
+      <i class=" bi bi-heart"></i>
+    {% endif %}
+    <div>{{ style.like_users.count }}</div>
   </div>
-  {% endif %}
-  {% endif %}
+  </div>
 
-</div>
-
-{% if request.user == style.user %}
-<a href="{% url 'style:update' style.pk %}">
-  수정
-</a>
-
-<a class="my-3 mx-2 btn btn-danger" href="{% url 'style:delete' style.pk %}">삭제</a>
-{% endif %}
 
 <div class="card">
-  <div class="card-header">
+  <div class="card-header bg-white">
     <div class="col-md-12">
       {% csrf_token %}
       <div class="form-group row">
@@ -76,16 +101,16 @@
         <hr>
         {% else %}
         {% if review.user == style.user %}
-        <strong>{{ review.user }}&nbsp;<span>(글쓴이)</span></strong>
+        <span style="font-weight: 500;">{{ review.user }}&nbsp;<span>(글쓴이)</span></span>
         {% else %}
         <strong>{{ review.user }}</strong>
         {% endif %}
-        <span style="float:right">{{ review.created }}</span>
+        <span style="float:right; font-size: 13px; color: gray;">{{ review.created }}</span>
         {% if review.user == request.user or request.user.level == '0' or request.user.level == '1' %}
         <div>
           <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
           <div style="text-align: right;">
-            <a onclick="reviewDelete('{{review.id}}');">댓글삭제</a>
+            <a class="comment-delete" onclick="reviewDelete('{{review.id}}');">삭제</a>
           </div>
         </div>
         <hr>
@@ -105,7 +130,7 @@
     </div>
   </div>
 </div>
-
+</div>
 <!-- 댓글 비동기 처리 -->
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
@@ -226,6 +251,7 @@
           .classList
           .remove('bi-heart-fill')
       }
+      location.reload();
     })
   })
 </script>

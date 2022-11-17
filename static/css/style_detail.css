@@ -1,3 +1,121 @@
+.base-div {
+  position: relative;
+}
+
+.section {
+  padding: 0 12rem;
+}
+
+.back {
+  font-size: 20px;
+  position: absolute;
+  top: 0;
+  left: 70px;
+  font-weight: 200;
+}
+
+.back a {
+  color: rgba(140, 140, 140, 0.705);
+  text-decoration: none;
+}
+
 .st-img {
   width: 600px;
+}
+
+.img-div {
+  width: 600px;
+  margin: auto;
+  text-align: center;
+}
+
+
+.st-title {
+  font-weight: 500;
+  font-size: 30px;
+  color: rgb(40,40,40);
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.st-content {
+  letter-spacing: -1px;
+  margin: 0 2px;
+  margin-bottom: 3rem;
+}
+
+.st-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.center-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+/* flex-direction: column; */
+
+.style-link {
+  color: rgb(31, 31, 31);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.style-link:hover {
+  text-decoration: none;
+  color: #05bb7e;
+}
+
+.comment-delete {
+  color: rgb(31, 31, 31);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.comment-delete:hover {
+  color: rgb(208, 68, 68);
+}
+
+.style-username {
+  font-size: 18px;
+  font-weight: 400;
+  z-index: 999;
+  margin: 0;
+}
+
+.style-userimage {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-position: center;
+  background-size: cover;
+  border: solid 1px rgba(193, 193, 193, 0.704);
+}
+
+#like-btn {
+  font-size: 25px;
+  transition: 0.3s;
+  color: rgb(238, 97, 97);
+}
+
+@media ( max-width: 1024px ) {
+  .section {
+    padding: 0 8rem;
+  }
+  .back span {
+    display: none;
+  } 
+}
+
+@media ( max-width: 767px ) {
+  .st-img {
+    width: 400px;
+  }
+  .img-div {
+    width: 400px;
+  }
 }
