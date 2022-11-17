@@ -3,6 +3,8 @@ import requests
 from accounts.models import User
 from cart.models import CartItem
 from .forms import OrderlistForm
+from .models import OrderList
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -75,8 +77,18 @@ def approval(request):
     }
     return render(request, 'kakaopay/approval.html', context)
 
+#주문서
+@login_required
 def order_list(request):
-    form = OrderlistForm()
+    if request.method == "POST":
+        form = OrderlistForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.user = request.user
+            order.save()
+            return redirect('main')
+    else:
+        form = OrderlistForm()
     context = {
         'form': form
     }

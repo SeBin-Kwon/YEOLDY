@@ -1,5 +1,7 @@
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
+from django.contrib.auth import get_user_model
+from products.models import Products
 
 order_requests = (
     ("부재 시 경비실에 맡겨주세요", "부재 시 경비실에 맡겨주세요"),
@@ -10,8 +12,14 @@ order_requests = (
 )
 
 class OrderList(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     location_name = models.CharField(max_length=20)
     order_name = models.CharField(max_length=20)
     location = models.TextField()
     phone_number = PhoneNumberField(unique=True, null=True, blank=True, region="KR")
     order_request = models.CharField(max_length=50, choices=order_requests)
+    order_condition = models.BooleanField(default=0)
+    product = models.TextField(blank=True)
+    color = models.CharField(max_length=20, blank=True)
+    size = models.CharField(max_length=20, blank=True)
+    quantity = models.IntegerField(null=True, blank=True)
