@@ -68,8 +68,7 @@ form .user-details .input-box{
   transition: all 0.3s ease;
 }
 
-.user-details .input-box input:focus,
-.user-details .input-box input:valid{
+.user-details .input-box input:focus{
   border-color: #0DB295;
 }
 
