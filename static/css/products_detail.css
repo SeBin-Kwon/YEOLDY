@@ -9,8 +9,9 @@
 }
 
 .imgBox {
+    display: none;
     height: 500px;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     margin-right: 50px;
     border: 1px solid rgb(201, 201, 201);

@@ -11,20 +11,32 @@
   <div class="product container row">
     <!-- 상품 이미지 리스트 -->
     <div class="col-1">
-      <div class="d-flex flex-column">
+      <div class="img-list d-flex flex-column">
         {% for product_image in product_images %}
-          <a href="#imagetab{{ forloop.counter }}">
-            <div class="product-image-list w-100">
-              <img class="img-fluid" src="{{ product_image.image.url }}" alt="">
+          {% if forloop.first %}
+            <div class="on-image product-image-list w-100">
+              <a class="image-btn" href="#imagetab{{ forloop.counter }}">
+                <img class="img-fluid" src="{{ product_image.image.url }}" alt="">
+              </a>
             </div>
-          </a>
+          {% else %}
+            <div class="product-image-list w-100">
+              <a class="image-btn" href="#imagetab{{ forloop.counter }}">
+                <img class="img-fluid" src="{{ product_image.image.url }}" alt="">
+              </a>
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>
 
     <!-- 상품 대표 이미지 -->
     {% for product_image in product_images %}
-      <div id="imagetab{{ forloop.counter }}" class="col-4 imgBox" style="background-image:url('{{ product_image.image.url }}'); background-repeat:no-repeat; background-position:center; background-size:contain;"></div>
+      {% if forloop.first %}
+        <div id="imagetab{{ forloop.counter }}" class="col-4 imgBox" style="display:block; background-image:url('{{ product_image.image.url }}'); background-repeat:no-repeat; background-position:center; background-size:contain;"></div>
+      {% else %}
+        <div id="imagetab{{ forloop.counter }}" class="col-4 imgBox" style="background-image:url('{{ product_image.image.url }}'); background-repeat:no-repeat; background-position:center; background-size:contain;"></div>
+      {% endif %}
     {% endfor %}
 
     <!-- 상품 상세 박스 -->
@@ -246,18 +258,18 @@
       })
     </script>
 
-    <!-- 상품 후기 & 문의 탭 분리 -->
     <script>
+      // 상품 후기 & 문의 탭 분리
       const tabList = document.querySelectorAll('.tab_menu .list li');
-      const contents = document.querySelectorAll('.tab_menu .cont_area .cont')
+      const contents = document.querySelectorAll('.tab_menu .cont_area .cont');
       let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
 
-      for (var i = 0; i < tabList.length; i++) {
+      for (let i = 0; i < tabList.length; i++) {
         tabList[i]
           .querySelector('.btn')
           .addEventListener('click', function (e) {
             e.preventDefault();
-            for (var j = 0; j < tabList.length; j++) {
+            for (let j = 0; j < tabList.length; j++) {
               // 나머지 버튼 클래스 제거
               tabList[j]
                 .classList
@@ -275,10 +287,43 @@
 
             // 버튼 클릭시 컨텐츠 전환
             activeCont = this.getAttribute('href');
+
             document
               .querySelector(activeCont)
               .style
               .display = 'block';
+          });
+      }
+
+      // 이미지 바꾸기
+      const imgList = document.querySelectorAll('.img-list .product-image-list');
+      const productImage = document.querySelectorAll('.imgBox');
+      let activeImage = '';
+
+      for (let i = 0; i < imgList.length; i++) {
+        imgList[i]
+          .querySelector('.image-btn')
+          .addEventListener('click', function (e) {
+            e.preventDefault();
+            for (let j = 0; j < imgList.length; j++) {
+              imgList[j]
+                .classList
+                .remove('on-image');
+
+              productImage[j].style.display = 'none';
+            }
+
+            this
+              .parentNode
+              .classList
+              .add('on-image');
+
+            activeImage = this.getAttribute('href');
+
+            document
+              .querySelector(activeImage)
+              .style
+              .display = 'flex';
           });
       }
     </script>
