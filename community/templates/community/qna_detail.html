@@ -8,7 +8,7 @@
 
   <div class="qna-post">
     <div class="qna-post_img">
-      <img src="{{ qna.image.url }}" alt="">
+      <img class="qna-img" src="{{ qna.image.url }}" alt="">
     </div>
     <div class="qna-post_info">
       <div class="post-head">
@@ -28,7 +28,7 @@
       <div class="qna-btn">
       {% if request.user == qna.user %}
         <a class="delete-btn" href="{% url 'community:qna_delete' qna.pk %}"><i class="bi bi-trash"></i></a>
-        <a class="update-btn" href="{% url 'community:qna_update' qna.pk %}"><i class="bi bi-pencil-square"></i></a>
+        <a class="update-btn mx-1" href="{% url 'community:qna_update' qna.pk %}"><i class="bi bi-pencil-square"></i></a>
       {% endif %} 
         <a class="back-btn" href="{% url 'community:index' %}" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
       </div>
