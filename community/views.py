@@ -20,6 +20,7 @@ def index(request):
 def qna_create(request, product_pk):
     if request.method == "POST":
         qna_form = QnaForm(request.POST, request.FILES)
+
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
@@ -75,6 +76,7 @@ def qna_update(request, qna_pk):
             qna_form = UpdateQnaForm(instance=qna)
         context = {
             "qna_form": qna_form,
+            "qna": qna,
         }
         return render(request, "community/community_create.html", context)
     else:
@@ -175,7 +177,10 @@ def review_update(request, review_pk):
             review_form = ReviewForm(instance=review)
         context = {
             "review_form": review_form,
+            "review": review,
+            "photo": photo,
         }
+        print(photo)
         return render(request, "community/community_create.html", context)
     else:
         messages.success(request, "작성자만 수정가 가능함")
