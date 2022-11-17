@@ -3,6 +3,11 @@
     justify-content: center;
 }
 
+.product-image-list {
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+}
+
 .imgBox {
     height: 500px;
     display: flex;
