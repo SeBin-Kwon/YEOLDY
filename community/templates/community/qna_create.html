@@ -1,37 +1,46 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/community_qna_create.css' %}">
+{% endblock css %}
+
 {% block content %}
 
   <body>
-    <div class="qna-form">
-      <div class="title">QnA</div>
+    <div class="create-form">
+      <div class="title">Q&A</div>
+
       <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {% bootstrap_form qna_form %}
-        {% comment %} <div class="user-details">
+        <div class="user-details">
           <div class="input-box">
-            <span class="details">제목</span>
-            <input type="text" placeholder="제목을 입력해 주세요" required id="title" name="title">
+            <label class="details" for="id_title" name="label_title">제목</label>
+            <input type="text" name="title" placeholder="제목" required="required" id="id_title">
           </div>
-          <div class="input-box">
-            <span class="details">내용</span>
-            <input type="text" placeholder="내용을 입력해 주세요" required id="content" name="content">
-          </div>
-          <div class="input-box">
-            <span class="details">사진</span>
-            <input type="file" placeholder="사진을 넣어주세요" required id="id_image" name="image">
-          </div>
-          <div class="input-box">
-            <span class="details">비밀번호</span>
-            <input type="text" placeholder="비밀번호 넣어주세요" required id="password" name="password">
-          </div>
-        </div> {% endcomment %}
 
-        {% bootstrap_button '확인' %}
+          <div class="input-box">
+            <label class="details" for="id_content">내용</label>
+            <textarea name="content" cols="40" rows="10" placeholder="내용" required="required" id="id_contnet"></textarea>
+          </div>
 
-      </form>
-    </div>
+          <div class="input-box">
+            <label class="details" for="id_image">이미지</label>
+            <input type="file" name="image" required="required" id="id_image">
+          </div>
+          <div class="input-box">
+            <label class="details" for="id_password">비밀번호</label>
+            <input type="password" name="password" maxlength="20" placeholder="비밀번호" required="required" id="id_password">
+          </div>
+        </div>
 
-  </body>
+        <div class="button">
+          <input type="submit" value="제출">
+        </div>
+      </div>
+    </form>
+  </div>
+
+</body>
 
 {% endblock content %}
