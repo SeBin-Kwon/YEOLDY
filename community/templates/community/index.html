@@ -86,16 +86,17 @@
         <div class="blog text">
           <div class="title">
             <h5>QnA</h5>
+
           </div>
           <div class="table_section">
             <table>
               <thead>
                 <tr>
-                  <th>S NO.</th>
+
                   <th>Product</th>
                   <th>title</th>
-                  <th>Email</th>
                   <th>User</th>
+                  <th>Email</th>
                 </tr>
               </thead>
               <tbody>
@@ -105,17 +106,19 @@
                 {% else %}
                   <tr  onClick="location.href='{% url 'community:qna_detail' q.pk %}'">
                 {% endif %}
-                    <td>{{ q.id }}</td>
-                    <td><img src="{{ q.image.url }}" alt=""></td>
-                    <td>{{ q.title }}</td>
+
+                <td><img src="{{ q.image.url }}" alt=""></td>
+                <td>{{ q.title }}</td>
+                    <td>{{ q.user.nickname }}</td>
                     <td>{{ q.user.email }}</td>
-                    <td>{{ q.user.username }}</td>
                   </tr>
                 {% endfor %}
               </tbody>
             </table>
           </div>
-
+          <div class="link-box">
+            <a class="qna-link" href="{% url 'community:qna' %}">Q&A 작성</a>
+          </div>
         </div>
 
         <!-- 실시간 채팅 -->

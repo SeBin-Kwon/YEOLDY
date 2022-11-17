@@ -8,7 +8,7 @@
 
 {% block content %}
 
-  <h1 class="col-10 m-auto mb-5">장바구니</h1>
+  <h1 class="col-10 m-auto mb-5">Cart</h1>
   {% if not cart_items %}
     <h2 class="col-10 m-auto mb-5 text-center">장바구니가 비었습니다.</h2>
   {% else %}
@@ -49,8 +49,8 @@
                     <input class="count-num" id="cart_quantity{{forloop.counter}}" type="text" name="cart_quantity" value="{{ cart_item.quantity }}">
                     <button class="pmbtn" type="button" id="plus{{forloop.counter}}">+</button>
                   </div>
-                  <div>
-                    <button class="changebtn" type="submit">수량 변경하기</button>
+                  <div style="margin-top:10px; line-height:0;">
+                    <button class="changebtn" type="submit">변경</button>
                   </div>
                 </form>
               </div>
@@ -60,7 +60,9 @@
                 {{ cart_item.sub_total }}원</p>
             </td>
             <td>
-              <a class="btn btn-danger" href="{% url 'cart:delete_cart' cart_item.id cart_item.color cart_item.size %}">X</a>
+              <a class="cancel-btn" href="{% url 'cart:delete_cart' cart_item.id cart_item.color cart_item.size %}">
+                <i class="bi bi-x-lg"></i>
+              </a>
             </td>
           </tr>
         {% endfor %}
@@ -70,7 +72,13 @@
 
   <div class="col-10 m-auto">
     {% if cart_items %}
-      <a class="btn btn-primary" href="{% url 'cart:clear_cart' %}">장바구니 비우기</a>
+      <div class="mb-5 d-flex justify-content-end">
+        <a class="cart-clear-link" href="{% url 'cart:clear_cart' %}">
+          <div class="cart-clear-btn ">
+            장바구니 비우기
+          </div>
+        </a>
+      </div>
     {% endif %}
 
     <div class="finalbox">
@@ -121,5 +129,7 @@
       })
     }
   </script>
+
+  <a class="btn btn-dark" href="{% url 'kakaopay:order_list' %}">주문하기</a>
 
 {% endblock %}

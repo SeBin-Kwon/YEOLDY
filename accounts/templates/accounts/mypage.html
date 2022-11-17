@@ -11,55 +11,84 @@
 <div class="mypage">
   <h1>My Page</h1>
   <div class="section row container">
-      <div class="col-12 col-md-7 mb-4">
-        {% if user.profile_image %}
-          <div class="profile-crop" style="background-image: url('{{ user.profile_image.url }}');">
-          </div>
-            {% comment %} <img class="profile-image"  src="{{ user.profile_image.url }}"> {% endcomment %}
-        {% else %}
-            <div class="profile-crop" style="background-image: url('https://dummyimage.com/300X400')"></div>
-        {% endif %}
+    <div class="col-12 col-md-7 mb-4">
+      {% if user.profile_image %}
+      <div class="profile-crop" style="background-image: url('{{ user.profile_image.url }}');">
       </div>
+      {% comment %} <img class="profile-image" src="{{ user.profile_image.url }}"> {% endcomment %}
+      {% else %}
+      <div class="profile-crop" style="background-image: url('https://dummyimage.com/300X400')"></div>
+      {% endif %}
+    </div>
     <div class="col-12 col-md-5">
       <div class="info">
         <div class="info-box">
           <p>이름 :
-            <span class="info-name">{{ user.nickname }}</p>
+            <span class="info-name">{{ user.nickname }}
+          </p>
           <p>아이디 :
-            <span class="info-content">{{ user.username }}</span></p>
+            <span class="info-content">{{ user.username }}</span>
+          </p>
           <p>휴대폰 번호 :
-            <span class="info-content">{{ user.phone_number }}</span></p>
+            <span class="info-content">{{ user.phone_number }}</span>
+          </p>
           <p>이메일 :
-            <span class="info-content">{{ user.email }}</span></p>
+            <span class="info-content">{{ user.email }}</span>
+          </p>
           <p>생일 :
-            <span class="info-content">{{ user.birth }}</span></p>
+            <span class="info-content">{{ user.birth }}</span>
+          </p>
           <p>성별 :
             {% if request.user.gender == 'M'%}
-              <span class="info-content">남자</span></p>
-            {% else %}
-              <span class="info-content">여자</span></p>
-            {% endif %}
+            <span class="info-content">남자</span>
+          </p>
+          {% else %}
+          <span class="info-content">여자</span></p>
+          {% endif %}
         </div>
-          <div class="mypage-btn">
-            <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
-            <a class="btn btn-outline-danger" href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
-          </div>
+        <div class="mypage-btn">
+          <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
+          <a class="btn btn-outline-danger" href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
+        </div>
       </div>
       {% if request.user != user %}
-        <form action="{% url 'accounts:follow' user.pk %}" method="POST">
-          {% if request.user.is_authenticated %}
-            {% csrf_token %}
-            {% if request.user in user.followers.all %}
-              {% bootstrap_button button_type="submit" content="팔로우취소"%}
-            {% else %}
-              {% bootstrap_button button_type="submit" content="팔로우"%}
-            {% endif %}
-          </form>
+      <form action="{% url 'accounts:follow' user.pk %}" method="POST">
+        {% if request.user.is_authenticated %}
+        {% csrf_token %}
+        {% if request.user in user.followers.all %}
+        {% bootstrap_button button_type="submit" content="팔로우취소"%}
         {% else %}
-          {% bootstrap_button button_type="submit" content="로그인 필요"%}
+        {% bootstrap_button button_type="submit" content="팔로우"%}
         {% endif %}
+      </form>
+      {% else %}
+      {% bootstrap_button button_type="submit" content="로그인 필요"%}
       {% endif %}
-      </div>
+      {% endif %}
+    </div>
+    <div>
+      <p>마이 스타일</p>
+      {% for style in my_style %}
+      <a href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
+      {% endfor %}
+    </div>
+    <div>
+      <p>마이 리뷰</p>
+      {% for review in my_review %}
+      <a href="{% url 'products:detail' review.product_id %}">{{ review.title }}</a>
+      {% endfor %}
+    </div>
+    <div>
+      <p>마이 QnA</p>
+      {% for qna in my_qna %}
+      {% if qna.Product_id %}
+      <a href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
+      {% else %}
+      <a href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
+      {% endif %}
+      {% endfor %}
+    </div>
   </div>
 </div>
+
 {% endblock %}

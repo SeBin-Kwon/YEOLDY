@@ -3,6 +3,11 @@
     justify-content: center;
 }
 
+.product-image-list {
+    margin-bottom: 10px;
+    border: 1px solid lightgray;
+}
+
 .imgBox {
     height: 500px;
     display: flex;
@@ -52,12 +57,21 @@
     flex-direction: column;
 }
 
+.product-cart-box {
+    margin: 20px 0;
+}
+
 .count-btn {
     padding: 5px 10px;
     font-size: 18px;
-    border: none;
+    background: rgb(49, 228, 174);
+    font-weight: 600;
     border-radius: 5px;
-    background: rgb(51, 226, 182);
+    border: 0px;
+}
+
+.count-input {
+    width: 30px;
 }
 
 .cart-btn {

@@ -46,16 +46,18 @@
             <div class="client-comment">
               <div class="comment">
                 <p>{{ review.content }}</p>
-                <div class="swiper mySwiper1">
-                  <div class="swiper-wrapper">
-                    {% for photo1 in review.photo_set.all%}
-                      <div class="swiper-slide"><img class="comment-img" src="{{ photo1.image.url }}" alt=""></div>
-                    {% endfor %}
+                {% if review.photo_set.all %}
+                  <div class="swiper mySwiper1">
+                    <div class="swiper-wrapper">
+                      {% for photo1 in review.photo_set.all%}
+                        <div class="swiper-slide"><img class="comment-img" src="{{ photo1.image.url }}" alt=""></div>
+                      {% endfor %}
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+
                   </div>
-
-                  <div class="swiper-pagination"></div>
-
-                </div>
+                {% endif %}
 
               </div>
 
@@ -66,7 +68,7 @@
                 {% endif %}
 
                 {% if request.user == review.user %}
-                  <a class="review-btnd" href="{% url 'community:review_delete' review.pk %}">
+                  <a class="review-btnd mx-1" href="{% url 'community:review_delete' review.pk %}">
                     <i class="bi bi-trash"></i>
                   </a>
                   <a class="review-btnu" href="{% url 'community:review_update' review.pk %}">
