@@ -9,7 +9,11 @@
 {% block content %}
 
 <div class="mypage">
-  <h1>My Page</h1>
+  {% if request.user == user %}
+    <h1>My Page</h1>
+  {% else %}
+    <h1>{{ user.nickname }}'s Page</h1>
+  {% endif %}
   <div class="section row container">
     <div class="col-12 col-md-7 mb-4">
       {% if user.profile_image %}
@@ -50,13 +54,26 @@
           <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
           <a class="btn btn-outline-danger" href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
         </div>
+
+        {% if request.user == user %}
+          <div class="mypage-btn">
+            <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
+            <a class="btn btn-outline-danger" href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
+          </div>
+          {% endif %}
       </div>
       {% if request.user != user %}
-      <form action="{% url 'accounts:follow' user.pk %}" method="POST">
-        {% if request.user.is_authenticated %}
-        {% csrf_token %}
-        {% if request.user in user.followers.all %}
-        {% bootstrap_button button_type="submit" content="팔로우취소"%}
+        <form action="{% url 'accounts:follow' user.pk %}" method="POST">
+          {% if request.user.is_authenticated %}
+            {% csrf_token %}
+            {% if request.user in user.followers.all %}
+              <div id="follow-btn" data-post-id="{{ mypage.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow</div>
+              {% else %}
+              <div id="follow-btn" data-post-id="{{ mypage.user.pk }}" class=" btn btn-outline-primary" type="submit">
+                Follow
+              </div>
+              {% endif %}
+          </form>
         {% else %}
         {% bootstrap_button button_type="submit" content="팔로우"%}
         {% endif %}
@@ -81,7 +98,11 @@
     <div>
       <p>마이 QnA</p>
       {% for qna in my_qna %}
+      {% if qna.Product_id %}
       <a href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
+      {% else %}
+      <a href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
+      {% endif %}
       {% endfor %}
     </div>
   </div>

@@ -39,26 +39,125 @@
         <div class="user-details">
             
         <div class="input-box">
-          <span class="details">이름</span>
-          <input type="text" placeholder="이름을 입력해 주세요" required="required" id="nickname" name="nickname" value="{{request.user.nickname}}">
-        </div>
-        <div class="input-box">
-          <span class="details">아이디</span>
-          <input type="text" placeholder="아이디를 입력해 주세요" required="required" id="username" name="username" value="{{request.user.username}}">
-        </div>
-        <div class="input-box">
-          <span class="details">이메일</span>
-          <input type="email" placeholder="이메일을 입력해 주세요" required="required" id="email" name="email" value="{{request.user.email}}">
-        </div>
-        <div class="input-box">
-          <span class="details">핸드폰</span>
-          <input type="tel" placeholder="번호를 입력해 주세요" required="required" id="phone_number" name="phone_number" value="{{request.user.phone_number}}">
+          <label class="details" name="label_nickname" for="{{ form.nickname.id_for_label }}">{{ form.nickname.label }}</label>
+          {{ form.nickname }}
         </div>
 
         <div class="input-box">
+          <label class="details" name="label_username" for="{{ form.username.id_for_label}}">{{ form.username.label}}</label>
+          {{ form.username }}
+          <script type="text/javascript">
+            if (document.getElementsByName('username')[0].value != '') {
+              document
+                .getElementsByName('label_username')[0]
+                .setAttribute('class', 'active');
+            }
+          </script>
+          {% if form.username.errors %}
+            <script type="text/javascript">
+              document
+                .getElementsByName('username')[0]
+                .setAttribute('class', 'is-invalid')
+            </script>
+            {% for error in form.username.errors %}
+              <div class="invalid-feedback">
+                {{ error }}
+              </div>
+            {% endfor %}
+          {% endif %}
+          
+        </div>
+        {% comment %} <div class="input-box">
+          <span class="details">아이디</span>
+          <input type="text" placeholder="아이디를 입력해 주세요" required="required" id="username" name="username" value="{{request.user.username}}">
+        </div> {% endcomment %}
+
+        <div class="input-box">
+          <label class="details" name="label_email" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+          {{ form.email }}
+          <script type="text/javascript">
+            if (document.getElementsByName('email')[0].value != '') {
+              document
+                .getElementsByName('label_email')[0]
+                .setAttribute('class', 'active');
+            }
+          </script>
+          {% if form.email.errors %}
+            <script type="text/javascript">
+              document
+                .getElementsByName('email')[0]
+                .setAttribute('class', 'is-invalid')
+            </script>
+            {% for error in form.email.errors %}
+              <div class="invalid-feedback">
+                {{ error }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+        {% comment %} <div class="input-box">
+          <span class="details">이메일</span>
+          <input type="email" placeholder="이메일을 입력해 주세요" required="required" id="email" name="email" value="{{request.user.email}}">
+        </div> {% endcomment %}
+
+
+        <div class="input-box">
+          <label class="details" name="label_phone_number" for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}(ex : 01012345678)</label>
+          {% comment %} <input type="tel" placeholder="번호를 입력해 주세요" required="required" id="phone_number" name="phone_number"> {% endcomment %}
+          {{ form.phone_number }}
+          <script type="text/javascript">
+            if (document.getElementsByName('phone_number')[0].value != '') {
+              document
+                .getElementsByName('label_phone_number')[0]
+                .setAttribute('class', 'active');
+            }
+          </script>
+          {% if form.phone_number.errors %}
+            <script type="text/javascript">
+              document
+                .getElementsByName('phone_number')[0]
+                .setAttribute('class', 'is-invalid')
+            </script>
+            {% for error in form.phone_number.errors %}
+              <div class="invalid-feedback">
+                {{ error }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+        {% comment %} <div class="input-box">
+          <span class="details">핸드폰</span>
+          <input type="tel" placeholder="번호를 입력해 주세요" required="required" id="phone_number" name="phone_number" value="{{request.user.phone_number}}">
+        </div> {% endcomment %}
+
+
+        <div class="input-box">
+          <lable class="details" name="label_birth" for="{{ form.birth.id_for_label }}">생년월일(ex:961123)</lable>
+          {{ form.birth }}
+          <script type="text/javascript">
+            if (document.getElementsByName('birth')[0].value != '') {
+              document
+                .getElementsByName('label_birth')[0]
+                .setAttribute('class', 'active');
+            }
+          </script>
+          {% if form.birth.errors %}
+            <script type="text/javascript">
+              document
+                .getElementsByName('birth')[0]
+                .setAttribute('class', 'is-invalid')
+            </script>
+            {% for error in form.birth.errors %}
+              <div class="invalid-feedback">
+                {{ error }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+        {% comment %} <div class="input-box">
           <span class="details">생년월일</span>
           <input type="number" required="required" placeholder="생년월일을 입력해 주세요" id="birth" name="birth" value="{{request.user.birth}}">
-        </div>
+        </div> {% endcomment %}
 
         <div class="gender-details">
           <div class="gender-title">

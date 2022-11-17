@@ -3,10 +3,14 @@
 
 {% block content %}
 
+<h1>주문자 정보</h1>
+<hr>
+
 <form action="" method="POST">
     {% csrf_token %}
+
     {% bootstrap_form form %}
-    {% bootstrap_button button_type="submit" content="저장" %}
+    <button class="btn btn-warning" type="submit">카카오페이로 결제하기</button>
 </form>
 
 {% endblock %}

@@ -28,7 +28,7 @@ class CustomUserCreationForm(UserCreationForm):
             "password2": "비밀번호확인",
             "email": "이메일주소",
             "phone_number": "휴대폰번호",
-            "birth": "생일",
+            "birth": "생일(6자리)",
             "gender": "성별",
         }
 
@@ -65,19 +65,19 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         self.fields["old_password"].label = "기존 비밀번호"
         self.fields["old_password"].widget.attrs.update(
             {
-                "class": "form-control",
+                "class": "details",
                 "autofocus": False,
             }
         )
         self.fields["new_password1"].label = "새 비밀번호"
         self.fields["new_password1"].widget.attrs.update(
             {
-                "class": "form-control",
+                "class": "details",
             }
         )
         self.fields["new_password2"].label = "새 비밀번호 확인"
         self.fields["new_password2"].widget.attrs.update(
             {
-                "class": "form-control",
+                "class": "details",
             }
         )

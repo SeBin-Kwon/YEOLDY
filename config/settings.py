@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "products",
     "community",
     "style",
+    "chat",
     "cart",
     "kakaopay",
     "phonenumber_field",

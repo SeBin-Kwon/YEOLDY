@@ -72,6 +72,7 @@ def update(request, pk):
 # 상품 디테일 연결 기능
 def detail(request, pk):
     product = Products.objects.get(pk=pk)
+    product_images = product.photo_set.all()
     reviews = product.review_set.all().order_by("-pk")
     qna = product.qna_set.all().order_by("-pk")
     colors = list(str(product.color).split(", "))
@@ -83,6 +84,7 @@ def detail(request, pk):
         "review_list": reviews,
         "colors": colors,
         "sizes": sizes,
+        "product_images": product_images,
     }
     return render(request, "products/detail.html", context)
 
@@ -142,11 +144,12 @@ def search_main(request):
         "search_ranking": search_ranking,
     }
     return render(request, "products/search_main.html", context)
-#새상품
+
+
+# 새상품
 def new_products(request):
-    new_products = Products.objects.filter(Q(new_product='1'))
+    new_products = Products.objects.filter(Q(new_product="1"))
     context = {
         "new_products": new_products,
     }
     return render(request, "products/new_products.html", context)
-

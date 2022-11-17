@@ -20,6 +20,7 @@ def index(request):
 def qna_create(request, product_pk):
     if request.method == "POST":
         qna_form = QnaForm(request.POST, request.FILES)
+
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
@@ -37,7 +38,7 @@ def qna_create(request, product_pk):
 # 상품이 아닌 일반적인 문의
 def qna(request):
     if request.method == "POST":
-        qna_form = QnaForm_2(request.POST)
+        qna_form = QnaForm_2(request.POST, request.FILES)
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
@@ -51,11 +52,12 @@ def qna(request):
     return render(request, "community/qna_create.html", context)
 
 
+@login_required
 def qna_detail(request, qna_pk):
     qna = QnA.objects.get(pk=qna_pk)
-    if qna.password:
-        return redirect("community:qna_password", qna.pk)
-    context = {"qna": qna}
+    context = {
+        "qna": qna,
+    }
     return render(request, "community/qna_detail.html", context)
 
 
@@ -75,6 +77,7 @@ def qna_update(request, qna_pk):
             qna_form = UpdateQnaForm(instance=qna)
         context = {
             "qna_form": qna_form,
+            "qna": qna,
         }
         return render(request, "community/community_create.html", context)
     else:
@@ -175,7 +178,10 @@ def review_update(request, review_pk):
             review_form = ReviewForm(instance=review)
         context = {
             "review_form": review_form,
+            "review": review,
+            "photo": photo,
         }
+        print(photo)
         return render(request, "community/community_create.html", context)
     else:
         messages.success(request, "작성자만 수정가 가능함")
@@ -193,7 +199,8 @@ def review_delete(request, review_pk):
         messages.success(request, "작성자만 삭제가 가능함")
         return redirect("community:review_index")
 
-#베스트 상품
+
+# 베스트 상품
 def best_products(request):
     best_products = Review.objects.all().order_by('grade')
     context = {

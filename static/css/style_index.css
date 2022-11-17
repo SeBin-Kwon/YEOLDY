@@ -75,10 +75,25 @@
   border: solid 1px rgba(193, 193, 193, 0.704);
 }
 
-lord-icon {
+.like {
   position: absolute;
   right: 25px;
-  bottom: 20px;
+  bottom: 15px;
+}
+
+.like i span {
+  text-align: center;
+  left: 35%;
+  top: 15%;
+  position: absolute;
+  font-size: 13px;
+  color: white;
+}
+
+.like i {
+  position: relative;
+  font-size: 26px;
+  color: rgb(238, 97, 97);
 }
 
 @media ( max-width: 1400px ) {
@@ -88,6 +103,9 @@ lord-icon {
   }
   .style-username {
     font-size: 18px;
+  }
+  .like i {
+    font-size: 23px;
   }
 }
 

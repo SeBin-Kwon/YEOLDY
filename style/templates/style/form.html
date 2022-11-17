@@ -1,16 +1,19 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% load static %}
-{% block content %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/style_form.css' %}">
+{% endblock css %}
 
-<body>
+{% block content %}
+<div class="section">
   {% if request.resolver_match.url_name == 'create' %}
-  <h1 class="text-center post-color pb-4">
-    스타일등록
+  <h1 class="form-title text-center pb-4">
+    My style 공유
   </h1>
   {% else %}
-  <h1 class="text-center post-color">
-    스타일 수정
+  <h1 class="form-title text-center pb-4">
+    My style 수정
   </h1>
   {% endif %}
 
@@ -18,10 +21,8 @@
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form style_form %}
-    <label for="imgs">Image</label><br>
-    <input id="imgs" type="file" name="imgs" multiple>
     <div class="d-grid gap-2">
-      <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">등록
+      <button type="submit" class="btn form-btn">등록
       </button>
     </div>
   </form>
@@ -39,5 +40,5 @@
   </form>
   {% endif %}
 
-</body>
+</div>
 {% endblock content %}
