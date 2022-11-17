@@ -5,7 +5,7 @@ table p {
 
 thead {
     text-align: center;
-    border-bottom: 4px solid rgb(49, 194, 150);
+    border-bottom: 2px solid rgb(49, 194, 150);
 }
 
 th, td {
@@ -47,11 +47,12 @@ td {
 }
 
 .pmbtn {
-    width: 25px;
+    width: 30px;
     border: 0;
-    background: rgb(165, 240, 217);
+    background: #fff;
     /* border-radius: 5px; */
     border: 1px solid lightgray;
+    font-weight: 200;
 }
 
 .count-num {
@@ -60,14 +61,34 @@ td {
     text-align: center;
     border: 1px solid lightgray;
     border-width: 1px 0 1px 0;
+    font-weight: 200;
 }
 
 .changebtn {
     line-height: 30px;
-    background: rgb(49, 228, 174);
     font-weight: 600;
+    background: rgb(255, 255, 255);
     border-radius: 5px;
-    border: 0px;
+    border : 1px solid rgb(95, 95, 95);
+    transition: 0.3s;
+}
+
+.changebtn:hover {
+    background: rgb(156, 156, 156);
+    border : 1px solid rgb(156, 156, 156);
+    color: #fff;
+    transition: 0.3s;
+}
+
+.cancel-btn {
+    font-size: 20px;
+    color: #000;
+    transition: 0.3s;
+}
+
+.cancel-btn:hover {
+    color: red;
+    transition: 0.3s;
 }
 
 .product-total-price {
@@ -75,10 +96,31 @@ td {
     font-weight: 600;
 }
 
+.cart-clear-btn {
+    padding: 10px;
+    border : 1px solid rgb(95, 95, 95);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.cart-clear-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.cart-clear-btn:hover,
+.cart-clear-btn:hover .cart-clear-link {
+    padding: 10px;
+    border : 1px solid rgb(156, 156, 156);
+    background: rgb(156, 156, 156);
+    color: #fff;
+    transition: 0.3s;
+}
+
 .finalbox {
     margin-top: 50px;
-    border: 4px solid rgb(49, 194, 150);
-    border-width: 4px 0 4px 0;
+    border: 2px solid rgb(49, 194, 150);
+    border-width: 2px 0 2px 0;
 }
 
 .titlebox, .pricebox {
@@ -90,7 +132,7 @@ td {
 }
 
 .titlebox {
-    border-bottom: 2px solid rgb(49, 194, 150);
+    border-bottom: 1px solid rgb(187, 187, 187);
 }
 
 .pricebox-title {

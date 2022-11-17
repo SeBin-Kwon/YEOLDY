@@ -1,25 +1,23 @@
-*,
-*::before,
-*::after{
+*{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-img{
+/* img{
   width: 100%;
-}
+} */
 
-body{
+/* body{
   width: 100%;
   height: 100%;
   background-color: #eee;
   padding: 0 1.5rem;
-}
+} */
 
 .qna-post{
   width: 100%;
-  max-width: 98rem;
+  max-width: 90rem;
   margin: auto;
   padding: 5rem;
   background-color: #fff;
@@ -43,6 +41,7 @@ body{
   object-fit: cover;
   display: block;
   border-radius: .8rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .qna-post_img::before{

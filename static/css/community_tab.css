@@ -153,6 +153,29 @@ body{
   font-size: 15px !important;
 }
 
+.link-box{
+  display: flex;
+  justify-content: end;
+  font-size: 25px;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.qna-link{
+  width: 100px;
+  padding: 10px 0;
+  background: #0DB295;
+  color: #fff;
+  border: 0;
+  outline: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  font-size: 15px !important;
+}
+
 .container .content .text-content p{
   text-align: justify;
 }
