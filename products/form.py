@@ -11,8 +11,4 @@ class ProductsForm(forms.ModelForm):
             "category",
             "color",
             "size",
-            "image",
         ]
-        labels = {
-            "image": ("Thumbnail"),
-        }

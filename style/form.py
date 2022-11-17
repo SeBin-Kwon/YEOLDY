@@ -11,9 +11,6 @@ class StyleForm(forms.ModelForm):
             "tag",
             "image",
         ]
-        labels = {
-            "image": ("Thumbnail"),
-        }
 
 
 class ReviewForm(forms.ModelForm):
