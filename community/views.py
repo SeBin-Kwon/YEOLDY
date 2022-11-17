@@ -52,6 +52,7 @@ def qna(request):
     return render(request, "community/qna_create.html", context)
 
 
+@login_required
 def qna_detail(request, qna_pk):
     qna = QnA.objects.get(pk=qna_pk)
     context = {
@@ -198,9 +199,10 @@ def review_delete(request, review_pk):
         messages.success(request, "작성자만 삭제가 가능함")
         return redirect("community:review_index")
 
-#베스트 상품
+
+# 베스트 상품
 def best_products(request):
-    best_products = Review.objects.order_by('grade')
+    best_products = Review.objects.order_by("grade")
     print(best_products)
     context = {
         "best_products": best_products,

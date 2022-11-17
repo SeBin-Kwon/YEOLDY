@@ -81,7 +81,11 @@
     <div>
       <p>마이 QnA</p>
       {% for qna in my_qna %}
+      {% if qna.Product_id %}
       <a href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
+      {% else %}
+      <a href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
+      {% endif %}
       {% endfor %}
     </div>
   </div>
