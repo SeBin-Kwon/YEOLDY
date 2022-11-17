@@ -1,0 +1,17 @@
+.section {
+  padding: 0 8rem;
+}
+
+.form-title {
+  font-size: 35px;
+  font-weight: 200;
+}
+
+.form-btn {
+  border: 1px solid #05bb7e;;
+}
+
+.form-btn:hover {
+  background-color: #05bb7e;
+  color: white;
+}

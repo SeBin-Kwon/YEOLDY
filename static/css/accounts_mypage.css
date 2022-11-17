@@ -75,6 +75,9 @@
   .mypage {
     width: 700px;
   }
+  .base-div{
+    min-height: 800px !important;
+  }
   /* .mypage-btn .btn {
     --bs-btn-font-size: 12px !important;
   } */
