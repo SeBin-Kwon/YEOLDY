@@ -6,11 +6,11 @@
 <h1>주문자 정보</h1>
 <hr>
 
-<form action="" method="post">
+<form action="" method="POST">
     {% csrf_token %}
 
     {% bootstrap_form form %}
-    <button class="btn btn-warning">카카오페이로 결제하기</button>
+    <button class="btn btn-warning" type="submit">카카오페이로 결제하기</button>
 </form>
 
 {% endblock %}
