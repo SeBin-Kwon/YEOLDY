@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def add_cart(request, product_id):
+    product = Products.objects.get(id=product_id)
     if request.method == "POST":
         cart_quantity = request.POST["cart_quantity"]
         color = request.POST["color"]
@@ -14,8 +15,10 @@ def add_cart(request, product_id):
         print(cart_quantity)
         print(color)
         print(size)
-    # 장바구니에 들어가는 product
-    product = Products.objects.get(id=product_id)
+        # 장바구니에 들어가는 product
+        img = product.photo_set.filter(product_id=product_id)[0].image
+        product.image = img
+        product.save()
 
     # cart_item이 있는지 없는지 여부 확인
     try:
