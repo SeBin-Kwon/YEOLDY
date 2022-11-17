@@ -27,4 +27,5 @@ urlpatterns = [
     path("<int:product_pk>/save/", views.save, name="save"),
     path("search/", views.search, name="search"),
     path("search_main/", views.search_main, name="search_main"),
+    path("new_products/", views.new_products, name="new_products"),
 ]

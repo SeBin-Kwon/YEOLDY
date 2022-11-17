@@ -146,3 +146,11 @@ def search_main(request):
     }
 
     return render(request, "products/search_main.html", context)
+#새상품
+def new_products(request):
+    new_products = Products.objects.filter(Q(new_product='1'))
+    context = {
+        "new_products": new_products,
+    }
+    return render(request, "products/new_products.html", context)
+
