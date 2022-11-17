@@ -9,7 +9,7 @@
         <div>
         <div class="my-3 row"><div class="h5 col-6">주문번호</div><div class="h6 col-6 text-right">{{ res.partner_order_id }}</div></div>
         <div class="my-3 row"><div class="h5 col-6">상품명</div><div class="h6 col-6 text-right">{{ res.item_name }}</div></div>
-        <div class="my-3 row"><div class="h5 col-6">결제금액</div><div class="h6 col-6 text-right">원</div></div>
+        <div class="my-3 row"><div class="h5 col-6">결제금액</div><div class="h6 col-6 text-right">{{ res.total_amount }}원</div></div>
         <div class="my-3 row"><div class="h5 col-6">결제승인시각</div><div class="h6 col-6 text-right">{{ res.approved_at }}</div></div>
         </div>
         <div class="mt-5 pt-3 text-center">
