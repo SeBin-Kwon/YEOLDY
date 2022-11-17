@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Products, Search
+from .models import Products, Search, Photo
 from django.http import JsonResponse
 from .form import ProductsForm
 from django.db.models import F  # 검색 순위 조회수 증가
@@ -26,25 +26,36 @@ def create(request):
             product = products_form.save(commit=False)
             product.user = request.user
             product.save()
+            for img in request.FILES.getlist("imgs"):
+                photo = Photo()
+                photo.product = product
+                photo.image = img
+                photo.save()
             return redirect("products:index")
 
     else:
         products_form = ProductsForm()
-        context = {
-            "products_form": products_form,
-        }
-        return render(request, "products/form.html", context)
+    context = {
+        "products_form": products_form,
+    }
+    return render(request, "products/form.html", context)
 
 
 # 상품 등록 수정 기능
 @login_required
 def update(request, pk):
     product = Products.objects.get(id=pk)
+    photo = product.photo_set.all()
     if request.user == product.user:
         if request.method == "POST":
             products_form = ProductsForm(request.POST, request.FILES, instance=product)
             if products_form.is_valid():
                 products_form.save()
+                for img in request.FILES.getlist("imgs"):
+                    photo = Photo()
+                    photo.product = product
+                    photo.image = img
+                    photo.save()
                 return redirect("products:detail", product.pk)
 
         else:
@@ -61,6 +72,7 @@ def update(request, pk):
 # 상품 디테일 연결 기능
 def detail(request, pk):
     product = Products.objects.get(pk=pk)
+    product_image = product.photo_set.all()
     reviews = product.review_set.all().order_by("-pk")
     qna = product.qna_set.all().order_by("-pk")
     colors = list(str(product.color).split(", "))
@@ -72,6 +84,7 @@ def detail(request, pk):
         "review_list": reviews,
         "colors": colors,
         "sizes": sizes,
+        "product_image": product_image,
     }
     return render(request, "products/detail.html", context)
 
@@ -125,7 +138,7 @@ def search(request):
         "search": search,
         "products": products,
     }
-    return render(request, "products/search.html", context)
+    return render(request, "products/search_main.html", context)
 
 
 def search_main(request):
@@ -135,3 +148,11 @@ def search_main(request):
     }
 
     return render(request, "products/search_main.html", context)
+#새상품
+def new_products(request):
+    new_products = Products.objects.filter(Q(new_product='1'))
+    context = {
+        "new_products": new_products,
+    }
+    return render(request, "products/new_products.html", context)
+

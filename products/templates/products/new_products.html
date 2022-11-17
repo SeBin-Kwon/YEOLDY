@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block content %}
+  {% for new_product in new_products %}
+    <div>
+      <a href="{% url 'products:detail' new_product.pk %}">{{ new_product.name }}</a>
+    </div>
+  {% endfor %}
+{% endblock content %}

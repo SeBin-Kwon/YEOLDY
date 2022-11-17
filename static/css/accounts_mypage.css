@@ -58,6 +58,7 @@
   background-position: center;
   background-size: cover;
   margin: auto;
+    border: solid 1px rgba(193, 193, 193, 0.588);
 }
 
 /* .profile-image {

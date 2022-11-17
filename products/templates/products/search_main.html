@@ -1,18 +1,67 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock css %}
 
 {% block content %}
+  <div class="container" style="min-height:950px;">
+    <div class="col-5 m-auto">
+      <form class="search-form d-flex justify-content-between" role="search" action="{% url 'products:search' %}" method="GET">
+        <div class="d-flex search-input">
+          <input class="searchbox me-2" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="search">
+        </div>
 
-<div>
-    <form class="d-flex" role="search" action="{% url 'products:search' %}" method="GET">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-            value="{{search}} 0개의 검색결과" name="search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-    {% for z in search_ranking %}
-    <a href="/products/search/?search={{z.search_text}}">{{ z.search_text }}</a>
+        <div class="d-flex text-center align-items-center">
+          <p class="search-result-p">
+            <span class="search-word">"{{search}}"</span>
+            {{ products.count }}개의 검색결과</p>
 
-    {% endfor %}
+          <button class="search-btn" type="submit">
+            <i class="search-btn-icon bi bi-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
 
+    <div class="popular-search-box">
+      <h4 class="search-title">인기 검색어</h4>
+      {% for z in search_ranking %}
+        <a class="popular-search" href="/products/search/?search={{z.search_text}}">
+          <span class="popular-search-rank">{{ forloop.counter }}</span>{{ z.search_text }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="search-result-products">
+      <h4 class="search-title">검색 결과</h4>
+      <div class="row product-list w-100 justify-content-start">
+        {% if products %}
+          {% for product in products %}
+            <div class="product-card col-2">
+              <a href="{% url 'products:detail' product.id %}">
+                <div class="imgBox">
+                  {% if product.image %}
+                    <img class="product-img" src="{{ product.image.url }}" alt="">
+                  {% else %}
+                    <img class="product-img" src="https://img.apti.co.kr/aptHome/images/sub/album_noimg.gif">
+                  {% endif %}
+
+                  <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+                </div>
+                <div class="contentBox">
+                  <h5 class="product-title">{{ product.name }}</h5>
+                  <p>
+                    <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+                  </p>
+                </div>
+              </a>
+            </div>
+          {% endfor %}
+        {% else %}
+          <h3 class="text-center fw-bold">YEOLDY에는 그런 상품 없어요😋</h3>
+        {% endif %}
+      </div>
+    </div>
   </div>
-
 {% endblock content %}

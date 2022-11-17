@@ -21,4 +21,5 @@ app_name = 'kakaopay'
 urlpatterns = [
     path('', views.index, name="index"),
     path('approval/', views.approval, name="approval"),
+    path('order_list/', views.order_list, name='order_list')
 ]

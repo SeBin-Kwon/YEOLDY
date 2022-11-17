@@ -38,8 +38,7 @@ def qna_create(request, product_pk):
 # 상품이 아닌 일반적인 문의
 def qna(request):
     if request.method == "POST":
-        qna_form = QnaForm_2(request.POST)
-        print(request.POST)
+        qna_form = QnaForm_2(request.POST, request.FILES)
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
@@ -55,7 +54,9 @@ def qna(request):
 
 def qna_detail(request, qna_pk):
     qna = QnA.objects.get(pk=qna_pk)
-    context = {"qna": qna}
+    context = {
+        "qna": qna,
+    }
     return render(request, "community/qna_detail.html", context)
 
 
@@ -196,3 +197,12 @@ def review_delete(request, review_pk):
     else:
         messages.success(request, "작성자만 삭제가 가능함")
         return redirect("community:review_index")
+
+#베스트 상품
+def best_products(request):
+    best_products = Review.objects.order_by('grade')
+    print(best_products)
+    context = {
+        "best_products": best_products,
+    }
+    return render(request, "community/best_products.html", context)

@@ -1,0 +1,140 @@
+table p {
+    margin: 0;
+    line-height: 25px;
+}
+
+thead {
+    text-align: center;
+    border-bottom: 2px solid rgb(49, 194, 150);
+}
+
+th, td {
+    line-height: 50px;
+    text-align: center;
+}
+
+td {
+    padding: 20px 30px;
+    border-bottom: 1px solid lightgray;
+}
+
+.product-info {
+    width: 500px;
+    height: 100px;
+}
+
+.product-link {
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.product-price {
+    font-size: 14px;
+    color: rgb(250, 75, 69);
+}
+
+.count {
+    display: flex;
+    flex-direction: column;
+}
+
+.countbox {
+    display: flex;
+    justify-content: center;
+    line-height: 30px;
+}
+
+.pmbtn {
+    width: 30px;
+    border: 0;
+    background: #fff;
+    /* border-radius: 5px; */
+    border: 1px solid lightgray;
+    font-weight: 200;
+}
+
+.count-num {
+    width: 30px;
+    margin: 0;
+    text-align: center;
+    border: 1px solid lightgray;
+    border-width: 1px 0 1px 0;
+    font-weight: 200;
+}
+
+.changebtn {
+    line-height: 30px;
+    font-weight: 600;
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    border : 1px solid rgb(95, 95, 95);
+    transition: 0.3s;
+}
+
+.changebtn:hover {
+    background: rgb(156, 156, 156);
+    border : 1px solid rgb(156, 156, 156);
+    color: #fff;
+    transition: 0.3s;
+}
+
+.cancel-btn {
+    font-size: 20px;
+    color: #000;
+    transition: 0.3s;
+}
+
+.cancel-btn:hover {
+    color: red;
+    transition: 0.3s;
+}
+
+.product-total-price {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.cart-clear-btn {
+    padding: 10px;
+    border : 1px solid rgb(95, 95, 95);
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.cart-clear-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.cart-clear-btn:hover,
+.cart-clear-btn:hover .cart-clear-link {
+    padding: 10px;
+    border : 1px solid rgb(156, 156, 156);
+    background: rgb(156, 156, 156);
+    color: #fff;
+    transition: 0.3s;
+}
+
+.finalbox {
+    margin-top: 50px;
+    border: 2px solid rgb(49, 194, 150);
+    border-width: 2px 0 2px 0;
+}
+
+.titlebox, .pricebox {
+    padding: 30px 0;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titlebox {
+    border-bottom: 1px solid rgb(187, 187, 187);
+}
+
+.pricebox-title {
+    margin: 0;
+}
