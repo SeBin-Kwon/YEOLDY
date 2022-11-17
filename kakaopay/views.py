@@ -101,6 +101,7 @@ def order_list(request):
 
     #post 요청이 들어왔을 때,    
     if request.method == "POST":
+        print('test')
 
         #데이터베이스에 주문자 정보 저장
         form = OrderlistForm(request.POST)

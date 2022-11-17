@@ -16,7 +16,7 @@ class OrderList(models.Model):
     location_name = models.CharField(max_length=20)
     order_name = models.CharField(max_length=20)
     location = models.TextField()
-    phone_number = PhoneNumberField(unique=True, null=True, blank=True, region="KR")
+    phone_number = models.IntegerField(unique=False, null=True)
     order_request = models.CharField(max_length=50, choices=order_requests)
     order_condition = models.BooleanField(default=0)
     product = models.TextField(blank=True)
