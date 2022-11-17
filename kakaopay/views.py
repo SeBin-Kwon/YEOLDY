@@ -2,17 +2,17 @@ from django.shortcuts import render, redirect
 import requests
 from accounts.models import User
 from cart.models import CartItem
+from .forms import OrderlistForm
 
 # Create your views here.
 def index(request):
+    #user
     user = User.objects.get(pk=request.user.pk)
 
     #cart_item_name
     cart_items = list(CartItem.objects.filter(user_id=request.user.pk))
     first_item = str(cart_items[0])
     cart_quantity = int(len(cart_items))
-    print(first_item)
-    print(cart_quantity, type(cart_quantity))
 
     #첫 아이템 말고는 외 ~건으로 처리
     if cart_quantity == 1:
@@ -61,7 +61,7 @@ def approval(request):
     params = {
         "cid": "TC0ONETIME",    # 테스트용 코드
         "tid": request.session['tid'],  # 결제 요청시 세션에 저장한 tid
-        "partner_order_id": "1001",     # 주문번호
+        "partner_order_id": "request.session['order_id']",     # 주문번호
         "partner_user_id": "german",    # 유저 아이디
         "pg_token": request.GET.get("pg_token"),     # 쿼리 스트링으로 받은 pg토큰
     }
@@ -74,3 +74,10 @@ def approval(request):
         # 'amount': amount,
     }
     return render(request, 'kakaopay/approval.html', context)
+
+def order_list(request):
+    form = OrderlistForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'kakaopay/order_list.html', context)
