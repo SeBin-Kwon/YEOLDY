@@ -2,15 +2,36 @@
 {% load django_bootstrap5 %}
 {% block content %}
 
-<body style="margin-top: 100px;">
+  <body>
+    <div class="qna-form">
+      <div class="title">QnA</div>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form qna_form %}
+        {% comment %} <div class="user-details">
+          <div class="input-box">
+            <span class="details">제목</span>
+            <input type="text" placeholder="제목을 입력해 주세요" required id="title" name="title">
+          </div>
+          <div class="input-box">
+            <span class="details">내용</span>
+            <input type="text" placeholder="내용을 입력해 주세요" required id="content" name="content">
+          </div>
+          <div class="input-box">
+            <span class="details">사진</span>
+            <input type="file" placeholder="사진을 넣어주세요" required id="id_image" name="image">
+          </div>
+          <div class="input-box">
+            <span class="details">비밀번호</span>
+            <input type="text" placeholder="비밀번호 넣어주세요" required id="password" name="password">
+          </div>
+        </div> {% endcomment %}
 
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form qna_form %}
-    {% bootstrap_button '확인' %}
-  </form>
+        {% bootstrap_button '확인' %}
 
-</body>
+      </form>
+    </div>
 
+  </body>
 
 {% endblock content %}

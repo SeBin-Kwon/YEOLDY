@@ -1,41 +1,162 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/community_qna_create.css' %}">
+{% endblock css %}
+
 {% block content %}
 
-<body style="margin-top: 100px;">
+  <body>
 
+    {% if request.resolver_match.url_name == 'qna_create' %}
+      <div class="create-form">
+        <div class="title">Q&A</div>
 
-  {% if request.resolver_match.url_name == 'qna_create' %}
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form qna_form %}
-    {% bootstrap_button '확인' %}
-  </form>
+        <form action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="user-details">
+            <div class="input-box">
+              <label class="details" for="id_title" name="label_title">제목</label>
+              <input type="text" name="title" placeholder="제목" required="required" id="id_title">
+            </div>
+
+            <div class="input-box">
+              <label class="details" for="id_content">내용</label>
+              <textarea name="content" cols="40" rows="10" placeholder="내용" required="required" id="id_contnet"></textarea>
+            </div>
+
+            <div class="input-box">
+              <label class="details" for="id_image">이미지</label>
+              <input type="file" name="image" required="required" id="id_image">
+            </div>
+            <div class="input-box">
+              <label class="details" for="id_password">비밀번호</label>
+              <input type="password" name="password" maxlength="20" placeholder="비밀번호" required="required" id="id_password">
+            </div>
+          </div>
+
+          <div class="button">
+            <input type="submit" value="제출">
+          </div>
+        </div>
+      </form>
+    </div>
 
   {% elif request.resolver_match.url_name == 'qna_update' %}
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form qna_form %}
-    {% bootstrap_button '확인' %}
-  </form>
+    <div class="create-form">
+      <div class="title">Q&A</div>
 
-  {% elif request.resolver_match.url_name == 'review_update' %}
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form review_form %}
-    <input type="file" name="imgs" multiple>
-    {% bootstrap_button '확인' %}
-  </form>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="user-details">
+          <div class="input-box">
+            <label class="details" for="id_title" name="label_title">제목</label>
+            <input type="text" name="title" placeholder="제목" required="required" id="id_title" value="{{ qna.title }}">
+          </div>
+
+          <div class="input-box">
+            <label class="details" for="id_content">내용</label>
+            <textarea name="content" cols="40" rows="10" placeholder="{{qna.content}}" required="required" id="id_contnet">{{qna.content}}</textarea>
+          </div>
+
+          <div class="input-box">
+            <label class="details" for="id_image">이미지</label>
+            <input type="file" name="image" required="required" id="id_image">
+          </div>
+        </div>
+
+        <div class="button">
+          <input type="submit" value="제출">
+        </div>
+      </div>
+    </form>
+  </div>
+
+{% elif request.resolver_match.url_name == 'review_update' %}
+  <div class="create-form">
+
+    <div class="title">Review</div>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="user-details">
+        <div class="input-box">
+          <label class="details" for="id_title" name="label_title">제목</label>
+          <input type="text" name="title" placeholder="제목" required="required" id="id_title" value="{{review.title}}">
+        </div>
+
+        <div class="input-box">
+          <label class="details" for="id_content">내용</label>
+          <textarea name="content" cols="40" rows="10" placeholder="{{review.content}}" required="required" id="id_contnet">{{review.content}}</textarea>
+        </div>
+
+        <div class="input-box">
+          <label class="details" for="id_image">이미지</label>
+          <input type="file" name="imgs" multiple="multiple" value="{% static 'images/1.png'%}">
+        </div>
+
+        <div class="input-box" id="rate">
+          <label class="form-label mt-5" for="id_grade">평점</label>
+          <input type="rating" name="grade" class="form-control" placeholder="평점" required="required" id="id_grade" min="0" max="5" step="1" style="display:none;">
+          <link rel="stylesheet" href="/static/widgets/rateit/rateit.css">
+          <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+          <script src="/static/widgets/rateit/jquery.rateit.min.js"></script>
+          <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade">
+            <span></span>
+          </div>
+        </div>
+
+        <div class="button">
+          <input type="submit" value="제출">
+        </div>
+
+      </form>
+    </div>
 
   {% else %}
-  <form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% bootstrap_form review_form %}
-    <input type="file" name="imgs" multiple>
-    {% bootstrap_button '확인' %}
-  </form>
+    <div class="create-form">
+      <div class="title">Review</div>
 
-</body>
+      <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-{% endif %}
+        <div class="user-details">
+          <div class="input-box">
+            <label class="details" for="id_title" name="label_title">제목</label>
+            <input type="text" name="title" placeholder="제목" required="required" id="id_title">
+          </div>
+
+          <div class="input-box">
+            <label class="details" for="id_content">내용</label>
+            <textarea name="content" cols="40" rows="10" placeholder="내용" required="required" id="id_contnet"></textarea>
+          </div>
+
+          <div class="input-box">
+            <label class="details" for="id_image">이미지</label>
+            <input type="file" name="imgs" multiple="multiple">
+          </div>
+
+          <div class="input-box" id="rate">
+            <label class="form-label mt-5" for="id_grade">평점</label>
+            <input type="rating" name="grade" class="form-control" placeholder="평점" required="required" id="id_grade" min="0" max="5" step="1" style="display:none;">
+            <link rel="stylesheet" href="/static/widgets/rateit/rateit.css">
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+            <script src="/static/widgets/rateit/jquery.rateit.min.js"></script>
+            <div id="star_id_grade" class="rateit rateit-bg" data-rateit-backingfld="#id_grade">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="button">
+            <input type="submit" value="제출">
+          </div>
+
+        </form>
+      </div>
+
+    </body>
+
+  {% endif %}
 {% endblock content %}
