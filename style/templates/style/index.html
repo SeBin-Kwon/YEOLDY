@@ -8,9 +8,9 @@
 
 {%block content %} 
   <div class="style-box row">
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="d-flex justify-content-between align-items-center mb-3">
       <h1 class="style-title">Style</h1>
-      <a class="style-create-link" href="{% url 'style:create' %}"><h5 class="m-0 style-create">My style 공유</h5></a>
+      <a class="style-create-link" href="{% url 'style:create' %}"><h5 class="m-0 style-create"><i class="bi bi-plus-lg"></i>My style 공유</h5></a>
     </div>
     {% for style in styles %}
     <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
@@ -31,28 +31,29 @@
               </div>
         
           </div>
-          {% if request.user.is_authenticated %}
+          <div class="like"><i class="bi bi-heart-fill"><span>{{ style.like_users.count }}</span></i></div>
+          <!-- {% if request.user.is_authenticated %}
           {% if request.user in style.like_users.all %}
-            <lord-icon class="" src="https://cdn.lordicon.com/iwaotjbp.json" trigger="click" colors="primary:#ee6d66,secondary:#ebe6ef" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
+            <lord-icon class="" src="https://cdn.lordicon.com/iwaotjbp.json" trigger="click" colors="primary:#ee6d66,secondary:#ebe6ef" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ style.pk }}"></lord-icon>
           {% else %}
-            <lord-icon class="" src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
+            <lord-icon class="" src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ style.pk }}"></lord-icon>
           {% endif %}
         {% else %}
-          <lord-icon class="" src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
-        {% endif %}
+          <lord-icon class="" src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ style.pk }}"></lord-icon>
+        {% endif %} -->
         </div>
       </a>
     </div>
     {% endfor %}
     </div>
-    <script>
+    <!-- <script>
       const saveBtn = document.querySelector('#save-btn')
       saveBtn.addEventListener('click', function (event) {
         console.log(event.target.dataset)
         axios({method: 'get', url: `/style/${event.target.dataset.postId}/like/`}).then(response => {
           console.log(response)
           console.log(response.data)
-          if (response.data.issaved === true) {
+          if (response.data.isliked === true) {
             event
               .target
               .setAttribute('src', 'https://cdn.lordicon.com/iwaotjbp.json')
@@ -70,7 +71,7 @@
           location.reload();
         })
       })
-      </script>
+      </script> -->
 {% endblock content %}
 
 <!-- <div class="col-3">

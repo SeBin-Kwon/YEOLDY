@@ -12,14 +12,16 @@
   <div>
     {% if style.image %}
       <img class="st-img" src="{{ style.image.url }}" alt="{{ style.image }}">
-
+    {% endif %}
   </div>
 
+  <p>{{ style.content }}</p>
+  <p>{{ style.created }}</p>
 
 
   <!-- 좋아요 -->
   {% if request.user.is_authenticated %}
-  {% if request.user in product.save_users.all %}
+  {% if request.user in style.like_users.all %}
   <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
   {% else %}
   <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
