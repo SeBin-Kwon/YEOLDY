@@ -37,7 +37,7 @@ def qna_create(request, product_pk):
 # 상품이 아닌 일반적인 문의
 def qna(request):
     if request.method == "POST":
-        qna_form = QnaForm_2(request.POST)
+        qna_form = QnaForm_2(request.POST, request.FILES)
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
@@ -53,9 +53,9 @@ def qna(request):
 
 def qna_detail(request, qna_pk):
     qna = QnA.objects.get(pk=qna_pk)
-    if qna.password:
-        return redirect("community:qna_password", qna.pk)
-    context = {"qna": qna}
+    context = {
+        "qna": qna,
+    }
     return render(request, "community/qna_detail.html", context)
 
 

@@ -72,6 +72,7 @@ def update(request, pk):
 # 상품 디테일 연결 기능
 def detail(request, pk):
     product = Products.objects.get(pk=pk)
+    product_image = product.photo_set.all()
     reviews = product.review_set.all().order_by("-pk")
     qna = product.qna_set.all().order_by("-pk")
     colors = list(str(product.color).split(", "))
@@ -83,6 +84,7 @@ def detail(request, pk):
         "review_list": reviews,
         "colors": colors,
         "sizes": sizes,
+        "product_image": product_image,
     }
     return render(request, "products/detail.html", context)
 
