@@ -12,5 +12,4 @@ class ProductsForm(forms.ModelForm):
             "color",
             "size",
             "new_product",
-            "image",
         ]

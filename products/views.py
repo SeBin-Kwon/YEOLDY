@@ -46,6 +46,7 @@ def create(request):
 def update(request, pk):
     product = Products.objects.get(id=pk)
     photo = product.photo_set.all()
+    photo.delete()
     if request.user == product.user:
         if request.method == "POST":
             products_form = ProductsForm(request.POST, request.FILES, instance=product)
@@ -118,9 +119,11 @@ def save(request, product_pk):
 # 검색 기능
 def search(request):
     products = Products.objects.all().order_by("-pk")
-    search = request.GET.get("search",)
+    search = request.GET.get(
+        "search",
+    )
     search_create = Search.objects.filter(search_text=search)
-    search_ranking = Search.objects.order_by("-search_count")[:5] # 순위 
+    search_ranking = Search.objects.order_by("-search_count")[:5]  # 순위
     if search:
         products = Products.objects.filter(
             Q(name__icontains=search) | Q(category__icontains=search)
@@ -137,6 +140,7 @@ def search(request):
         "search": search,
     }
     return render(request, "products/search_main.html", context)
+
 
 def search_main(request):
     search_ranking = Search.objects.order_by("-search_count")[:5]
