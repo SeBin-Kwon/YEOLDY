@@ -18,8 +18,6 @@
   <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {% bootstrap_form style_form %}
-    <label for="imgs">Image</label><br>
-    <input id="imgs" type="file" name="imgs" multiple>
     <div class="d-grid gap-2">
       <button type="submit" class="btn" style="background-color: rgb(245, 132, 12); color: white;">등록
       </button>

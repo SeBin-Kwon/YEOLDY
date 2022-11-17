@@ -8,26 +8,26 @@
 
 
 {% block content %}
-  <!-- 스타일 게시글 -->
-  <div>
-    {% if style.image %}
-      <img class="st-img" src="{{ style.image.url }}" alt="{{ style.image }}">
+<!-- 스타일 게시글 -->
+<div>
+  {% if style.image %}
+  <img class="st-img" src="{{ style.image.url }}" alt="{{ style.image }}">
+</div>
+{% endif %}
 
-  </div>
 
 
+<!-- 좋아요 -->
+{% if request.user.is_authenticated %}
+{% if request.user in product.save_users.all %}
+<i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
+{% else %}
+<i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
 
-  <!-- 좋아요 -->
-  {% if request.user.is_authenticated %}
-  {% if request.user in product.save_users.all %}
-  <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
-  {% else %}
-  <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
-
-  {% endif %}
-  {% else %}
-  <i class=" bi bi-heart"></i>
-  {% endif %}
+{% endif %}
+{% else %}
+<i class=" bi bi-heart"></i>
+{% endif %}
 </div>
 
 <div>
