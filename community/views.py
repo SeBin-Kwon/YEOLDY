@@ -202,8 +202,7 @@ def review_delete(request, review_pk):
 
 # 베스트 상품
 def best_products(request):
-    best_products = Review.objects.order_by("grade")
-    print(best_products)
+    best_products = Review.objects.all().order_by('grade')
     context = {
         "best_products": best_products,
     }

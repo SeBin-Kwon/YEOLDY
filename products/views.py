@@ -117,11 +117,10 @@ def save(request, product_pk):
 
 # 검색 기능
 def search(request):
-    search_ranking = Search.objects.order_by("-search_count")
     products = Products.objects.all().order_by("-pk")
-    search = request.GET.get("search")
+    search = request.GET.get("search",)
     search_create = Search.objects.filter(search_text=search)
-    search_ranking = Search.objects.order_by("-search_count")[:5]  # 순위 5
+    search_ranking = Search.objects.order_by("-search_count")[:5] # 순위 
     if search:
         products = Products.objects.filter(
             Q(name__icontains=search) | Q(category__icontains=search)
@@ -136,17 +135,14 @@ def search(request):
         "products": products,
         "search_ranking": search_ranking,
         "search": search,
-        "products": products,
     }
     return render(request, "products/search_main.html", context)
-
 
 def search_main(request):
     search_ranking = Search.objects.order_by("-search_count")[:5]
     context = {
         "search_ranking": search_ranking,
     }
-
     return render(request, "products/search_main.html", context)
 
 

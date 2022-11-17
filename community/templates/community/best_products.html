@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% block content %}
+  {% for best_product in best_products %}
+    <div>
+      <a href="{% url 'products:detail' best_product.pk %}">{{ best_product.title }}{{ best_product.grade }}</a>
+    </div>
+  {% endfor %}
+{% endblock content %}
