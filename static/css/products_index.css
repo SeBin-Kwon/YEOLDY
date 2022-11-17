@@ -24,6 +24,8 @@ a {
 }
 
 .imgBox {
+    display: flex;
+    align-items: center;
     height: 60%;
     position: relative;
     overflow: hidden;
