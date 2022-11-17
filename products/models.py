@@ -55,6 +55,15 @@ class Products(models.Model):
     save_users = models.ManyToManyField(get_user_model(), related_name="save_products")
     new_product  = models.BooleanField(default=False)
 
+class Photo(models.Model):
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
+    image = ProcessedImageField(
+        upload_to="images/",
+        blank=True,
+        format="JPEG",
+    )
+
+
 class Search(models.Model):
     search_count = models.IntegerField(default=1)
     search_text = models.CharField(max_length=20)

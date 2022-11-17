@@ -1,32 +1,77 @@
-{% extends 'base.html' %} 
-{% load django_bootstrap5 %} 
-{% load static %} 
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/style_index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/style_index.css' %}">
+<script src="https://cdn.lordicon.com/qjzruarw.js"></script>
 {% endblock css %}
 
 {%block content %} 
-<!-- <div class="style-box row"> -->
   <div class="style-box row">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="style-title">Style</h1>
+      <a class="style-create-link" href="{% url 'style:create' %}"><h5 class="m-0 style-create">My style 공유</h5></a>
+    </div>
     {% for style in styles %}
     <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
       <a href="{% url 'style:detail' style.pk %}">
         <div class="style-card">
-          <img src="{{ style.image.url }}" class="card-img-top" alt="...">
-          <div class="style-content card-body">
-            <h5 class="style-title card-title">{{ style.title }}</h5>
-            <p class="card-text">{{ style.content }}</p>
+          <!-- 카드 사진 -->
+          <img src="{{ style.image.url }}" class="style-img card-img-top" alt="...">
+          <!-- 유저 -->
+          <div class="style-user">
+            <div class="d-flex align-items-center">
+                <!-- 프사 -->
+                <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
+                </div>
+                <!-- 유저 이름 -->
+                <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+                  <h5 class="style-username">{{ style.user.username }}</h5>
+                </a>
+              </div>
+        
           </div>
+          {% if request.user.is_authenticated %}
+          {% if request.user in style.like_users.all %}
+            <lord-icon class="" src="https://cdn.lordicon.com/iwaotjbp.json" trigger="click" colors="primary:#ee6d66,secondary:#ebe6ef" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
+          {% else %}
+            <lord-icon class="" src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
+          {% endif %}
+        {% else %}
+          <lord-icon class="" src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
+        {% endif %}
         </div>
       </a>
-          
     </div>
     {% endfor %}
     </div>
-  </div>
-  <a href="{% url 'style:create' %}"><h5 class="">style 작성</h5></a>
+    <script>
+      const saveBtn = document.querySelector('#save-btn')
+      saveBtn.addEventListener('click', function (event) {
+        console.log(event.target.dataset)
+        axios({method: 'get', url: `/style/${event.target.dataset.postId}/like/`}).then(response => {
+          console.log(response)
+          console.log(response.data)
+          if (response.data.issaved === true) {
+            event
+              .target
+              .setAttribute('src', 'https://cdn.lordicon.com/iwaotjbp.json')
+            event
+              .target
+              .setAttribute('colors', 'primary:#ee6d66,secondary:#ebe6ef')
+          } else {
+            event
+              .target
+              .setAttribute('src', 'https://cdn.lordicon.com/rjzlnunf.json')
+            event
+              .target
+              .setAttribute('colors', 'primary:#121331,secondary:#ee6d66')
+          }
+          location.reload();
+        })
+      })
+      </script>
 {% endblock content %}
-</div>
 
 <!-- <div class="col-3">
   <img src="{{ style.image.url }}" />

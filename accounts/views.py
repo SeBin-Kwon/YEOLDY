@@ -17,11 +17,14 @@ def index(request):
 
 
 def signup(request):
+    if request.user.is_authenticated:
+        return redirect("main")
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect("accounts:login")
+            user = form.save()
+            auth_login(request, user)
+            return redirect("main")
     else:
         form = CustomUserCreationForm()
     context = {"form": form}
@@ -30,6 +33,8 @@ def signup(request):
 
 
 def login(request):
+    if request.user.is_authenticated:
+        return redirect("main")
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
@@ -53,8 +58,14 @@ def logout(request):
 
 def mypage(request, pk):
     user = User.objects.get(pk=pk)
+    my_style = user.style_set.order_by("-pk")
+    my_qna = user.qna_set.order_by("-pk")
+    my_review = user.review_set.order_by("-pk")
     context = {
         "user": user,
+        "my_style": my_style,
+        "my_qna": my_qna,
+        "my_review": my_review,
     }
     return render(request, "accounts/mypage.html", context)
 
