@@ -5,6 +5,7 @@
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/products_detail.css' %}">
   <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 {% endblock css %}
 
 {% block content %}
@@ -138,7 +139,7 @@
         <div class="tab_menu">
           <ul class="list">
             <li class="is_on">
-              <a href="#tab1" class="btn">상품 후기</a>
+              <a href="#tab1" class="btn">상품 후기 ({{ reviews.count }})</a>
             </li>
             <li>
               <a href="#tab2" class="btn">상품 문의</a>
@@ -147,13 +148,25 @@
 
           <div class="cont_area">
             <div id="tab1" class="cont" style="display:block;">
-              <a href="{% url 'community:review_create' product.pk %}">리뷰작성</a>
+              <div class="cont-title-box">
+                <div class="cont-title">REVIEW | ({{ reviews.count }})</div>
+                <div>
+                  <a class="all-reviews" href="{% url 'community:review_index' %}">전체 상품 리뷰 보기
+                  </a>
+                </div>
+              </div>
+              <div class="create-review-box">
+                <div class="review-grade-box">
+                  <i class="review-grade-star bi bi-star-fill"></i>
+                  <span class="review-grade-score">5.0</span>
+                </div>
+                <a class="create-review-link" href="{% url 'community:review_create' product.pk %}">상품 리뷰 작성하기</a>
+              </div>
               {% for review in reviews %}
-                <a class="review-link" href="{% url 'community:review_detail' review.pk %}">
+                <div class="review-container">
                   <div class="review">
-                    <h3 class="grade">{{ review.get_grade_display }}
-                      <span class="review-title">{{ review.title }}</span>
-                    </h3>
+                    <h4 class="grade">{{ review.get_grade_display }}
+                    </h4>
                     <div class="d-flex align-items-center">
                       <div class="review-userimg me-3" style="width:40px; height:40px; background-image:url({{review.user.profile_image.url}}); background-repeat:no-repeat; background-position-center; background-size:cover;"></div>
                       <div>
@@ -162,9 +175,21 @@
                         </span>님의 리뷰입니다.
                       </div>
                     </div>
-                    <p class="review-content">{{ review.content }}</p>
+                    <div>
+                      <p class="review-title">{{ review.title }}</p>
+                      <p class="review-content">{{ review.content }}</p>
+                    </div>
                   </div>
-                </a>
+                  <div class="review-image-box">
+                    <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">
+                      <div class="review-image" style="background-image:url('{{ review.photo_set.first.image.url }}')"></div>
+                    </button>
+                    {% if review.photo_set.count > 1 %}
+                      <p class="review-image-count">외
+                        {{ review.photo_set.count|add:"-1" }}장</p>
+                    {% endif %}
+                  </div>
+                </div>
                 <hr>
               {% endfor %}
             </div>
@@ -174,6 +199,37 @@
           </div>
         </div>
       </div>
+
+      {% for review in reviews %}
+        <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header border-0 align-items-start">
+                <div class="d-flex flex-column">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <strong>이미지 상세 보기</strong>
+                  </h1>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+                <div class="swiper mySwiper1">
+                  <div class="swiper-wrapper">
+                    {% for photo in review.photo_set.all %}
+                      <div class="swiper-slide">
+                        <div class="modal-img w-100" style="height:700px; background-image:url('{{ photo.image.url }}')"></div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="swiper-pagination"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
 
     <!-- 장바구니 기능 -->
@@ -327,4 +383,17 @@
           });
       }
     </script>
+
+    <!-- 리뷰 이미지 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper('.mySwiper1', {
+        slidesPerView: 1,
+        pagination: {
+          el: ".swiper-pagination",
+          dynamicBullets: true
+        }
+      });
+    </script>
+
   {% endblock content %}
