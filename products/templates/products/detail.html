@@ -79,7 +79,7 @@
         </div>
         <div class="d-flex mb-2">
           <div class="service-label col-4">쇼핑팁</div>
-          <a class="service" href="">
+          <a class="service" href="#">
             <div>
               무이자 할부 혜택 보기
             </div>
@@ -179,12 +179,14 @@
                   </div>
                 </div>
                 <div class="review-image-box">
-                  <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">
-                    <div class="review-image" style="background-image:url('{{ review.photo_set.first.image.url }}')"></div>
-                  </button>
-                  {% if review.photo_set.count > 1 %}
-                    <p class="review-image-count">외
-                      {{ review.photo_set.count|add:"-1" }}장</p>
+                  {% if review.photo_set.all.count %}
+                    <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">
+                      <div class="review-image" style="background-image:url('{{ review.photo_set.first.image.url }}')"></div>
+                    </button>
+                    {% if review.photo_set.count > 1 %}
+                      <p class="review-image-count">외
+                        {{ review.photo_set.count|add:"-1" }}장</p>
+                    {% endif %}
                   {% endif %}
                 </div>
               </div>
