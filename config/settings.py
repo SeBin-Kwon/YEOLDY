@@ -63,6 +63,7 @@ else:
     )
 
 ALLOWED_HOSTS = [
+    "Yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com",
     "127.0.0.1",
     "localhost",
 ]
