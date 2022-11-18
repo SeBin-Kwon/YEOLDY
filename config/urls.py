@@ -27,5 +27,6 @@ urlpatterns = [
     path("accounts/", include("accounts.urls")),
     path("community/", include("community.urls")),
     path("cart/", include("cart.urls")),
+    path("chat/", include("chat.urls")),
     path("kakaopay/", include("kakaopay.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

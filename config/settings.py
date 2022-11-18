@@ -31,11 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
+    "channels",
+    "chat",
     "accounts",
     "products",
     "community",
     "style",
-    "chat",
     "cart",
     "kakaopay",
     "phonenumber_field",
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -77,6 +80,8 @@ TEMPLATES = [
         },
     },
 ]
+
+ASGI_APPLICATION = "config.asgi.application"
 
 WSGI_APPLICATION = "config.wsgi.application"
 
@@ -141,3 +146,15 @@ MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            # "hosts": [("127.0.0.1", 6379)],
+            "hosts": [
+                "redis://default:SLSPU9lknp3gMyw723Q9GufYtJ73W6I6@redis-17244.c54.ap-northeast-1-2.ec2.cloud.redislabs.com:17244"
+            ]
+        },
+    },
+}
