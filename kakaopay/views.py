@@ -3,7 +3,7 @@ import requests
 from accounts.models import User
 from cart.models import CartItem
 from .forms import OrderlistForm
-from .models import OrderList
+from .models import OrderList, OrderListFinal
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -59,11 +59,31 @@ def approval(request):
     user = User.objects.get(pk=request.user.pk)
 
     #cart_total
-    cart_items = list(CartItem.objects.filter(user_id=request.user.pk))
+    cart_items = CartItem.objects.filter(user_id=request.user.pk)
+    cart_quantity = int(len(cart_items))
 
     cart_total = 0
     for cart_item in cart_items:
         cart_total += cart_item.product.cost * cart_item.quantity
+
+    #[데이터베이스에 저장]
+
+    #방금 막 저장한 데이터를 불러옴
+    user_data = OrderList.objects.last()
+
+    for i in range(cart_quantity):
+        order_list = OrderListFinal.objects.create(
+            user = request.user,
+            location_name = user_data.location_name,
+            order_name = user_data.order_name,
+            location = user_data.location,
+            phone_number = user_data.phone_number,
+            order_request = user_data.order_request,
+            product = cart_items[i],
+            color = cart_items[i].color,
+            size = cart_items[i].size,
+            quantity = cart_items[i].quantity
+        )
 
     URL = 'https://kapi.kakao.com/v1/payment/approve'
     headers = {

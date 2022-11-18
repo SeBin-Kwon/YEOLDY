@@ -18,7 +18,14 @@ class OrderList(models.Model):
     location = models.TextField()
     phone_number = models.IntegerField(unique=False, null=True)
     order_request = models.CharField(max_length=50, choices=order_requests)
-    order_condition = models.BooleanField(default=0)
+
+class OrderListFinal(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    location_name = models.CharField(max_length=20)
+    order_name = models.CharField(max_length=20)
+    location = models.TextField()
+    phone_number = models.IntegerField(unique=False, null=True)
+    order_request = models.CharField(max_length=50, choices=order_requests)
     product = models.TextField(blank=True)
     color = models.CharField(max_length=20, blank=True)
     size = models.CharField(max_length=20, blank=True)
