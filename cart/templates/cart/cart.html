@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load django_bootstrap5 %}
+{% load humanize %}
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/cart.css' %}">
@@ -31,7 +32,7 @@
                   <p>
                     <a class="product-link" href="{% url 'products:detail' cart_item.product.id %}">{{ cart_item.product.name }}</a>
                   </p>
-                  <p class="product-price">{{ cart_item.product.cost }}원</p>
+                  <p class="product-price">{{ cart_item.product.cost|intcomma }}원</p>
                   <p>옵션 : [색상]
                     {{ cart_item.color }}
                     [사이즈]
@@ -57,7 +58,7 @@
             </td>
             <td>
               <p class="product-total-price">
-                {{ cart_item.sub_total }}원</p>
+                {{ cart_item.sub_total|intcomma }}원</p>
             </td>
             <td>
               <a class="cancel-btn" href="{% url 'cart:delete_cart' cart_item.id cart_item.color cart_item.size %}">
@@ -95,7 +96,7 @@
       </div>
       <div class="pricebox">
         <div class="col-3">
-          <h3 class="fw-bold">{{ total }}원</h3>
+          <h3 class="fw-bold">{{ total|intcomma }}원</h3>
           {{ cart_items.count }}개
         </div>
         <i class="bi bi-plus-circle-fill" style="font-size:30px;"></i>
@@ -104,7 +105,7 @@
         </div>
         <img src="{% static 'images/equal.png' %}" alt="" style="width:30px; height:30px;">
         <div class="col-3">
-          <h3 class="fw-bold">{{ total }}원</h3>
+          <h3 class="fw-bold">{{ total|intcomma }}원</h3>
         </div>
       </div>
     </div>
@@ -131,6 +132,16 @@
         eval("quantity" + i).value = num + 1
       })
     }
+
+    const cartQuantity = document.querySelector('.count-num')
+    const pmBtn = document.querySelector('.pmbtn')
+
+    console.log(cartQuantity.value)
+    pmBtn.addEventListener('click', function (event) {
+      if (cartQuantity.value < 1) {
+        cartQuantity.value = 1
+      }
+    });
   </script>
 
 {% endblock %}
