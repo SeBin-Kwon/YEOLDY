@@ -1,3 +1,13 @@
+.review-title-box {
+  padding: 3rem 8rem;
+  /* gap: 5px; */
+  justify-content: center;
+}
+
+.review-title {
+  font-weight: 200;
+  font-size: 40px;
+}
 
 #testimonials{
   display: flex;
