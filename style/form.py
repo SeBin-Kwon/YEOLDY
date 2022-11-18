@@ -9,6 +9,7 @@ class StyleForm(forms.ModelForm):
             "title",
             "content",
             "tag",
+            "image",
         ]
 
 
