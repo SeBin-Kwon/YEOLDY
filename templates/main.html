@@ -4,27 +4,23 @@
 <!DOCTYPE html>
 <html lang="kr">
 
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YEOLDY</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/main_nav.css' %}">
-  <link rel="stylesheet" href="{% static 'css/main_swiper.css' %}">
-  <link rel="stylesheet" href="{% static 'css/main_product_list.css' %}">
-  <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-  <link rel="shortcut icon" href="{% static 'images/yeoldy_favicon.ico' %}">
-</head>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YEOLDY</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main_nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_swiper.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_product_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+    <link rel="shortcut icon" href="{% static 'images/yeoldy_favicon.ico' %}">
+  </head>
 
   <body>
     <nav>
@@ -84,450 +80,425 @@
             <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
           </a>
         </div>
-      </li>
-      <li>
-        <a href="{% url 'style:index' %}">COMMUNITY</a>
-        <div class="drop">
-          <ul class="drop-menu">
-            <li>
-              <a href="{% url 'community:review_index' %}">Review</a>
-            </li>
-            <li>
-              <a href="{% url 'style:index' %}">Style</a>
-            </li>
-            <li>
-              <a href="{% url 'community:index' %}">Q&A</a>
-            </li>
-          </ul>
+      {% else %}
+        <div class="logo-div" style="padding-right: 6rem;">
+          <a class="logo-link" href="{% url 'main' %}">
+            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+            <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
+          </a>
         </div>
-      </li>
-    </ul>
-    {% if user.is_authenticated %}
-      <div class="logo-div" style="padding-right: 2.5rem;">
-        <a class="logo-link" href="{% url 'main' %}">
-          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-          <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
-        </a>
-      </div>
-    {% else %}
-      <div class="logo-div" style="padding-right: 6rem;">
-        <a class="logo-link" href="{% url 'main' %}">
-          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-          <img id="logo1" src="{% static 'images/logo_white.png' %}" style="width:8rem">
-        </a>
-      </div>
-    {% endif %}
-    <ul class="nav-right" style="padding-left: 4rem;">
-      <li>
-        <a href="{% url 'products:search_main' %}">
-          <i class="bi bi-search"></i>
-        </a>
-      </li>
-      <li>
-        <a href="{% url 'cart:cart_detail' %}">
-          <i class="bi bi-cart"></i>
-        </a>
-      </li>
-      {% if user.is_authenticated %}
+      {% endif %}
+      <ul class="nav-right" style="padding-left: 4rem;">
         <li>
-          <a href="{% url 'accounts:mypage' user.pk %}">
-            <i class="bi bi-person-fill"></i>
+          <a href="{% url 'products:search_main' %}">
+            <i class="bi bi-search"></i>
           </a>
         </li>
         <li>
-          <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+          <a href="{% url 'cart:cart_detail' %}">
+            <i class="bi bi-cart"></i>
+          </a>
         </li>
-      {% else %}
-        <li>
-          <a href="{% url 'accounts:login' %}">LOGIN</a>
-        </li>
-      {% endif %}
-    </ul>
-  </nav>
+        {% if user.is_authenticated %}
+          <li>
+            <a href="{% url 'accounts:mypage' user.pk %}">
+              <i class="bi bi-person-fill"></i>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+          </li>
+        {% else %}
+          <li>
+            <a href="{% url 'accounts:login' %}">LOGIN</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
 
-  <!-- swiper -->
-  <div class="section1">
-    <div class="swiper mySwiper1">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/e5291548629d18379a95750b841c7474.jpg" alt=""></div>
-        <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/14af5cd64ee9aac75ffd8007c12687ea.jpg" alt=""></div>
-        <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/2a21354a4ac98f6a2754e41aae4a37e3.jpg" alt=""></div>
+    <!-- swiper -->
+    <div class="section1">
+      <div class="swiper mySwiper1">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/e5291548629d18379a95750b841c7474.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/14af5cd64ee9aac75ffd8007c12687ea.jpg" alt=""></div>
+          <div class="swiper-slide"><img src="https://whoisnerdy.com/web/upload/appfiles/ZaReJam3QiELznoZeGGkMG/2a21354a4ac98f6a2754e41aae4a37e3.jpg" alt=""></div>
 
-      </div>
+        </div>
 
-      <div class="swiper-scrollbar"></div>
+        <div class="swiper-scrollbar"></div>
 
-    </div>
-  </div>
-
-  <!-- slider -->
-  <div class="slider">
-
-    <dli class="slide-track">
-
-      <!-- 9 SLIDES -->
-
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/19/9b/a6/199ba600fb64fed1fcd3a88098a0e634.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/91/be/7e/91be7e01ec04758c849307cb08296dcd.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/f5/64/55/f56455e1e772e4b7374682e4768347d5.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/e6/0c/5a/e60c5a901b9e8612b1811e2a2362ce78.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/36/d9/b9/36d9b91050f9aff0344006a57c6d27c8.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/97/4b/9e/974b9eb563d2c8f68f4a48d730595d8d.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/ca/54/c0/ca54c0f793d7fb7f0ca8bf8bd8c935fa.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/32/f0/0b/32f00b840675dfb0f0ea0dc0840fa118.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/e2/4d/b9/e24db987b4953014af7d86590da6f916.jpg" alt="">
-      </div>
-
-      <!-- 9 SLIDES (DOUBLED) -->
-
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/19/9b/a6/199ba600fb64fed1fcd3a88098a0e634.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/91/be/7e/91be7e01ec04758c849307cb08296dcd.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/f5/64/55/f56455e1e772e4b7374682e4768347d5.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/e6/0c/5a/e60c5a901b9e8612b1811e2a2362ce78.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/36/d9/b9/36d9b91050f9aff0344006a57c6d27c8.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/97/4b/9e/974b9eb563d2c8f68f4a48d730595d8d.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/ca/54/c0/ca54c0f793d7fb7f0ca8bf8bd8c935fa.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/32/f0/0b/32f00b840675dfb0f0ea0dc0840fa118.jpg" alt="">
-      </div>
-      <div class="slide">
-        <img class="slider-img" src="https://i.pinimg.com/236x/e2/4d/b9/e24db987b4953014af7d86590da6f916.jpg" alt="">
-      </div>
-
-    </dli>
-
-  </div>
-
-  <!-- 상품리스트 & 개발자 리스트 -->
-  <div class="container">
-    <h1 class="fw-bold fst-italic">YEOLDY's PICK</h1>
-    <div class="product-list w-100 justify-content-evenly">
-      <div class="card1 col-2">
-        <div class="imgBox">
-          <img src="{% static 'images/1.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-          <div class="size">
-            <h3>Size :
-            </h3>
-            <span>S</span>
-            <span>M</span>
-            <span>L</span>
-            <span>XL</span>
-          </div>
-          <div class="color">
-            <h3>Color :
-            </h3>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <a href="#">Buy Now</a>
-        </div>
-        <div class="infoBox">
-          <h5 class="product-title">뮬리 에코 퍼 자켓</h5>
-          <p>
-            <span class="sale">20%</span><span class="cost">135,200</span>원
-          </p>
-        </div>
-      </div>
-      <div class="card1 col-2">
-        <div class="imgBox">
-          <img src="{% static 'images/2.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-          <div class="size">
-            <h3>Size :
-            </h3>
-            <span>S</span>
-            <span>M</span>
-            <span>L</span>
-            <span>XL</span>
-          </div>
-          <div class="color">
-            <h3>Color :
-            </h3>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <a href="#">Buy Now</a>
-        </div>
-        <div class="infoBox">
-          <h5 class="product-title">트위스트 풀오버 후드 세트</h5>
-          <p>
-            <span class="sale">19%</span><span class="cost">140,940</span>원
-          </p>
-        </div>
-      </div>
-      <div class="card1 col-2">
-        <div class="imgBox">
-          <img src="{% static 'images/3.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-          <div class="size">
-            <h3>Size :
-            </h3>
-            <span>S</span>
-            <span>M</span>
-            <span>L</span>
-            <span>XL</span>
-          </div>
-          <div class="color">
-            <h3>Color :
-            </h3>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <a href="#">Buy Now</a>
-        </div>
-        <div class="infoBox">
-          <h5 class="product-title">카라 플러스 자켓</h5>
-          <p>
-            <span class="sale">20%</span><span class="cost">103,200</span>원
-          </p>
-        </div>
-      </div>
-      <div class="card1 col-2">
-        <div class="imgBox">
-          <img src="{% static 'images/4.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-          <div class="size">
-            <h3>Size :
-            </h3>
-            <span>S</span>
-            <span>M</span>
-            <span>L</span>
-            <span>XL</span>
-          </div>
-          <div class="color">
-            <h3>Color :
-            </h3>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <a href="#">Buy Now</a>
-        </div>
-        <div class="infoBox">
-          <h5 class="product-title">엔와이 트랙 세트</h5>
-          <p>
-            <span class="sale">3S%</span><span class="cost">105,840</span>원
-          </p>
-        </div>
-      </div>
-      <div class="card1 col-2">
-        <div class="imgBox">
-          <img src="{% static 'images/5.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-          <div class="size">
-            <h3>Size :
-            </h3>
-            <span>S</span>
-            <span>M</span>
-            <span>L</span>
-            <span>XL</span>
-          </div>
-          <div class="color">
-            <h3>Color :
-            </h3>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <a href="#">Buy Now</a>
-        </div>
-        <div class="infoBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원
-          </p>
-        </div>
       </div>
     </div>
 
-    <div class="admin">
-      <div class="admin-title">
-        <h2 class="fw-bold">나를 가장 나답게,<br/>
-          <span>YEOLDIST</span>
-        </h2>
-        <p>YEOLDY는 오늘을 살아가는<br/>모든 개발자들을 응원합니다.</p>
-        <a class="link" href="https://youtu.be/d9TnW7VQRPk">개발자들에게 희망을 주는 영상 보기</a>
+    <!-- slider -->
+    <div class="slider">
+
+      <dli class="slide-track">
+
+        <!-- 9 SLIDES -->
+
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/19/9b/a6/199ba600fb64fed1fcd3a88098a0e634.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/91/be/7e/91be7e01ec04758c849307cb08296dcd.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/f5/64/55/f56455e1e772e4b7374682e4768347d5.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/e6/0c/5a/e60c5a901b9e8612b1811e2a2362ce78.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/36/d9/b9/36d9b91050f9aff0344006a57c6d27c8.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/97/4b/9e/974b9eb563d2c8f68f4a48d730595d8d.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/ca/54/c0/ca54c0f793d7fb7f0ca8bf8bd8c935fa.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/32/f0/0b/32f00b840675dfb0f0ea0dc0840fa118.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/e2/4d/b9/e24db987b4953014af7d86590da6f916.jpg" alt="">
+        </div>
+
+        <!-- 9 SLIDES (DOUBLED) -->
+
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/19/9b/a6/199ba600fb64fed1fcd3a88098a0e634.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/91/be/7e/91be7e01ec04758c849307cb08296dcd.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/f5/64/55/f56455e1e772e4b7374682e4768347d5.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/e6/0c/5a/e60c5a901b9e8612b1811e2a2362ce78.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/36/d9/b9/36d9b91050f9aff0344006a57c6d27c8.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/97/4b/9e/974b9eb563d2c8f68f4a48d730595d8d.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/ca/54/c0/ca54c0f793d7fb7f0ca8bf8bd8c935fa.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/32/f0/0b/32f00b840675dfb0f0ea0dc0840fa118.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img class="slider-img" src="https://i.pinimg.com/236x/e2/4d/b9/e24db987b4953014af7d86590da6f916.jpg" alt="">
+        </div>
+
+      </dli>
+
+    </div>
+
+    <!-- 상품리스트 & 개발자 리스트 -->
+    <div class="container">
+      <h1 class="fw-bold fst-italic">YEOLDY's PICK</h1>
+      <div class="product-list w-100 justify-content-evenly">
+        <div class="card1 col-2">
+          <div class="imgBox">
+            <img src="{% static 'images/1.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
+            <div class="size">
+              <h3>Size :
+              </h3>
+              <span>S</span>
+              <span>M</span>
+              <span>L</span>
+              <span>XL</span>
+            </div>
+            <div class="color">
+              <h3>Color :
+              </h3>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <a href="#">Buy Now</a>
+          </div>
+          <div class="infoBox">
+            <h5 class="product-title">뮬리 에코 퍼 자켓</h5>
+            <p>
+              <span class="sale">20%</span><span class="cost">135,200</span>원
+            </p>
+          </div>
+        </div>
+        <div class="card1 col-2">
+          <div class="imgBox">
+            <img src="{% static 'images/2.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
+            <div class="size">
+              <h3>Size :
+              </h3>
+              <span>S</span>
+              <span>M</span>
+              <span>L</span>
+              <span>XL</span>
+            </div>
+            <div class="color">
+              <h3>Color :
+              </h3>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <a href="#">Buy Now</a>
+          </div>
+          <div class="infoBox">
+            <h5 class="product-title">트위스트 풀오버 후드 세트</h5>
+            <p>
+              <span class="sale">19%</span><span class="cost">140,940</span>원
+            </p>
+          </div>
+        </div>
+        <div class="card1 col-2">
+          <div class="imgBox">
+            <img src="{% static 'images/3.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
+            <div class="size">
+              <h3>Size :
+              </h3>
+              <span>S</span>
+              <span>M</span>
+              <span>L</span>
+              <span>XL</span>
+            </div>
+            <div class="color">
+              <h3>Color :
+              </h3>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <a href="#">Buy Now</a>
+          </div>
+          <div class="infoBox">
+            <h5 class="product-title">카라 플러스 자켓</h5>
+            <p>
+              <span class="sale">20%</span><span class="cost">103,200</span>원
+            </p>
+          </div>
+        </div>
+        <div class="card1 col-2">
+          <div class="imgBox">
+            <img src="{% static 'images/4.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
+            <div class="size">
+              <h3>Size :
+              </h3>
+              <span>S</span>
+              <span>M</span>
+              <span>L</span>
+              <span>XL</span>
+            </div>
+            <div class="color">
+              <h3>Color :
+              </h3>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <a href="#">Buy Now</a>
+          </div>
+          <div class="infoBox">
+            <h5 class="product-title">엔와이 트랙 세트</h5>
+            <p>
+              <span class="sale">3S%</span><span class="cost">105,840</span>원
+            </p>
+          </div>
+        </div>
+        <div class="card1 col-2">
+          <div class="imgBox">
+            <img src="{% static 'images/5.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
+            <div class="size">
+              <h3>Size :
+              </h3>
+              <span>S</span>
+              <span>M</span>
+              <span>L</span>
+              <span>XL</span>
+            </div>
+            <div class="color">
+              <h3>Color :
+              </h3>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <a href="#">Buy Now</a>
+          </div>
+          <div class="infoBox">
+            <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+            <p>
+              <span class="sale">10%</span><span class="cost">89,100</span>원
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div class="admin-content">
-        <div class="swiper mySwiper2">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <a href="https://github.com/w00ye0l">
-                <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
-                <div class="info">
-                  <h2>Lee Woo Yeol</h2>
-                  <img src="{% static 'images/github.png' %}" alt="">
-                </div>
-              </a>
+      <div class="admin">
+        <div class="admin-title">
+          <h2 class="fw-bold">나를 가장 나답게,<br/>
+            <span>YEOLDIST</span>
+          </h2>
+          <p>YEOLDY는 오늘을 살아가는<br/>모든 개발자들을 응원합니다.</p>
+          <a class="link" href="https://youtu.be/d9TnW7VQRPk">개발자들에게 희망을 주는 영상 보기</a>
+        </div>
+
+        <div class="admin-content">
+          <div class="swiper mySwiper2">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <a href="https://github.com/w00ye0l">
+                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <div class="info">
+                    <h2>Lee Woo Yeol</h2>
+                    <img src="{% static 'images/github.png' %}" alt="">
+                  </div>
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="https://github.com/SeBin-Kwon">
+                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <div class="info">
+                    <h2>Kwon Se Bin</h2>
+                    <img src="{% static 'images/github.png' %}" alt="">
+                  </div>
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="https://github.com/ANDONGWOO">
+                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <div class="info">
+                    <h2>An Dong Woo</h2>
+                    <img src="{% static 'images/github.png' %}" alt="">
+                  </div>
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="https://github.com/Yodayeong">
+                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <div class="info">
+                    <h2>Yeo Da Yeong</h2>
+                    <img src="{% static 'images/github.png' %}" alt="">
+                  </div>
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="https://github.com/suyoung049">
+                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <div class="info">
+                    <h2>Lee Su Young</h2>
+                    <img src="{% static 'images/github.png' %}" alt="">
+                  </div>
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <a href="https://github.com/wxxk">
+                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <div class="info">
+                    <h2>Lee Sang Wook</h2>
+                    <img src="{% static 'images/github.png' %}" alt="">
+                  </div>
+                </a>
+              </div>
             </div>
-            <div class="swiper-slide">
-              <a href="https://github.com/SeBin-Kwon">
-                <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
-                <div class="info">
-                  <h2>Kwon Se Bin</h2>
-                  <img src="{% static 'images/github.png' %}" alt="">
-                </div>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="https://github.com/ANDONGWOO">
-                <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
-                <div class="info">
-                  <h2>An Dong Woo</h2>
-                  <img src="{% static 'images/github.png' %}" alt="">
-                </div>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="https://github.com/Yodayeong">
-                <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
-                <div class="info">
-                  <h2>Yeo Da Yeong</h2>
-                  <img src="{% static 'images/github.png' %}" alt="">
-                </div>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="https://github.com/suyoung049">
-                <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
-                <div class="info">
-                  <h2>Lee Su Young</h2>
-                  <img src="{% static 'images/github.png' %}" alt="">
-                </div>
-              </a>
-            </div>
-            <div class="swiper-slide">
-              <a href="https://github.com/wxxk">
-                <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
-                <div class="info">
-                  <h2>Lee Sang Wook</h2>
-                  <img src="{% static 'images/github.png' %}" alt="">
-                </div>
-              </a>
-            </div>
+            <div class="swiper-pagination"></div>
           </div>
-          <div class="swiper-pagination"></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-  <script type="text/javascript" defer="defer" src="{% static 'javascript/nav.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script type="text/javascript" defer="defer" src="{% static 'javascript/nav.js' %}"></script>
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-  <!-- Initialize Swiper -->
-  <script>
-    const swiper1 = new Swiper('.mySwiper1', {
-      autoplay: {
-        delay: 3000,
-        disableOnInteraction: false
-      },
-      scrollbar: {
-        el: ".swiper-scrollbar",
-        hide: true
-      }
-    });
-
-    const swiper2 = new Swiper(".mySwiper2", {
-      slidesPerView: 1,
-      spaceBetween: 10,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true
-      },
-      breakpoints: {
-        "@0.00": {
-          slidesPerView: 1,
-          spaceBetween: 5
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+      const swiper1 = new Swiper('.mySwiper1', {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
         },
-        "@0.75": {
-          slidesPerView: 2,
-          spaceBetween: 10
-        },
-        "@1.00": {
-          slidesPerView: 3,
-          spaceBetween: 20
+        scrollbar: {
+          el: ".swiper-scrollbar",
+          hide: true
         }
-      }
-    });
-  </script>
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-    var Tawk_API = Tawk_API || {},
-      Tawk_LoadStart = new Date();
-    (function () {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = 'https://embed.tawk.to/63771df8b0d6371309cfaeb7/1gi4kq508';
-      s1.charset = 'UTF-8';
-      s1.setAttribute('crossorigin', '*');
-      s0
-        .parentNode
-        .insertBefore(s1, s0);
-    })();
-  </script>
+      });
 
-  <!-- footer -->
-  <footer>
-    <img src="{% static 'images/logo_white.png' %}" style="width:4rem;">
-    <span>(주) 열디</span><br>
-    <div class="footer-content">
-      <p>대표이사 : 이우열<br>
-        소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
-      <p>
-        문의 : contact@yeoldy.com / 02-123-4567<br>
-        평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
-    </div>
-  </footer>
-</body>
+      const swiper2 = new Swiper(".mySwiper2", {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        breakpoints: {
+          "@0.00": {
+            slidesPerView: 1,
+            spaceBetween: 5
+          },
+          "@0.75": {
+            slidesPerView: 2,
+            spaceBetween: 10
+          },
+          "@1.00": {
+            slidesPerView: 3,
+            spaceBetween: 20
+          }
+        }
+      });
+    </script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+      var Tawk_API = Tawk_API || {},
+        Tawk_LoadStart = new Date();
+      (function () {
+        var s1 = document.createElement("script"),
+          s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/63771df8b0d6371309cfaeb7/1gi4kq508';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0
+          .parentNode
+          .insertBefore(s1, s0);
+      })();
+    </script>
+
+    <!-- footer -->
+    <footer>
+      <img src="{% static 'images/logo_white.png' %}" style="width:4rem;">
+      <span>(주) 열디</span><br>
+      <div class="footer-content">
+        <p>대표이사 : 이우열<br>
+          소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
+        <p>
+          문의 : contact@yeoldy.com / 02-123-4567<br>
+          평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
+      </div>
+    </footer>
+  </body>
 
 </html>
