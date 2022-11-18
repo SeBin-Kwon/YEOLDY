@@ -93,307 +93,305 @@
 
       <hr>
 
-      <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
-        {% csrf_token %}
-        <!-- 색상 -->
-        <div class="form-option select-option">
-          <label for="color">색상</label>
-          <select name="color" id="color" onchange="handleOnChangeColor(this)">
-            <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
-            <option value="" disabled="disabled">--------------------------</option>
-            {% for color in colors %}
-              <option value="{{ color }}">{{ color }}</option>
-            {% endfor %}
-          </select>
-        </div>
-
-        <!-- 사이즈 -->
-        <div class="form-option select-option">
-          <label for="size">사이즈</label>
-          <select name="size" id="size" onchange="handleOnChangeSize(this)">
-            <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
-            <option value="" disabled="disabled">--------------------------</option>
-            {% for size in sizes %}
-              <option value="{{ size }}">{{ size }}</option>
-            {% endfor %}
-          </select>
-        </div>
-
-        <!-- 장바구니 -->
-        <div id="cart">
-          <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
-            {% csrf_token %}
-            <div class="product-cart-box d-flex justify-content-between">
-              <div class="count-box d-flex">
-                <button class="count-btn" type="button" id="minus">-</button>
-                <input class="count-input" id="cart_quantity" type="text" name="cart_quantity" value="1">
-                <button class="count-btn" type="button" id="plus">+</button>
-              </div>
-              <button class="cart-btn" type="submit" id="creatCart">장바구니 담기</button>
-            </div>
-          </form>
-        </div>
+      <!-- 색상 -->
+      <div class="form-option select-option">
+        <label for="color">색상</label>
+        <select name="color" id="color" onchange="handleOnChangeColor(this)">
+          <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
+          <option value="" disabled="disabled">--------------------------</option>
+          {% for color in colors %}
+            <option value="{{ color }}">{{ color }}</option>
+          {% endfor %}
+        </select>
       </div>
 
-      <div class="product container col-9">
-        <div class="tab_menu">
-          <ul class="list">
-            <li class="is_on">
-              <a href="#tab1" class="btn">상품 후기 ({{ reviews.count }})</a>
-            </li>
-            <li>
-              <a href="#tab2" class="btn">상품 문의</a>
-            </li>
-          </ul>
-
-          <div class="cont_area">
-            <div id="tab1" class="cont" style="display:block;">
-              <div class="cont-title-box">
-                <div class="cont-title">REVIEW | ({{ reviews.count }})</div>
-                <div>
-                  <a class="all-reviews" href="{% url 'community:review_index' %}">전체 상품 리뷰 보기
-                  </a>
-                </div>
-              </div>
-              <div class="create-review-box">
-                <div class="review-grade-box">
-                  <i class="review-grade-star bi bi-star-fill"></i>
-                  <span class="review-grade-score">5.0</span>
-                </div>
-                <a class="create-review-link" href="{% url 'community:review_create' product.pk %}">상품 리뷰 작성하기</a>
-              </div>
-              {% for review in reviews %}
-                <div class="review-container">
-                  <div class="review">
-                    <h4 class="grade">{{ review.get_grade_display }}
-                    </h4>
-                    <div class="d-flex align-items-center">
-                      <div class="review-userimg me-3" style="width:40px; height:40px; background-image:url({{review.user.profile_image.url}}); background-repeat:no-repeat; background-position-center; background-size:cover;"></div>
-                      <div>
-                        <span class="review-user">
-                          {{ review.user.username }}
-                        </span>님의 리뷰입니다.
-                      </div>
-                    </div>
-                    <div>
-                      <p class="review-title">{{ review.title }}</p>
-                      <p class="review-content">{{ review.content }}</p>
-                    </div>
-                  </div>
-                  <div class="review-image-box">
-                    <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">
-                      <div class="review-image" style="background-image:url('{{ review.photo_set.first.image.url }}')"></div>
-                    </button>
-                    {% if review.photo_set.count > 1 %}
-                      <p class="review-image-count">외
-                        {{ review.photo_set.count|add:"-1" }}장</p>
-                    {% endif %}
-                  </div>
-                </div>
-                <hr>
-              {% endfor %}
-            </div>
-            <div id="tab2" class="cont">
-              <a href="{% url 'community:qna_create' product.pk %}">문의하기</a>
-            </div>
-          </div>
-        </div>
+      <!-- 사이즈 -->
+      <div class="form-option select-option">
+        <label for="size">사이즈</label>
+        <select name="size" id="size" onchange="handleOnChangeSize(this)">
+          <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
+          <option value="" disabled="disabled">--------------------------</option>
+          {% for size in sizes %}
+            <option value="{{ size }}">{{ size }}</option>
+          {% endfor %}
+        </select>
       </div>
 
-      {% for review in reviews %}
-        <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-
-              <div class="modal-header border-0 align-items-start">
-                <div class="d-flex flex-column">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">
-                    <strong>이미지 상세 보기</strong>
-                  </h1>
-                </div>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-
-              <div class="modal-body">
-                <div class="swiper mySwiper1">
-                  <div class="swiper-wrapper">
-                    {% for photo in review.photo_set.all %}
-                      <div class="swiper-slide">
-                        <div class="modal-img w-100" style="height:700px; background-image:url('{{ photo.image.url }}')"></div>
-                      </div>
-                    {% endfor %}
-                  </div>
-                  <div class="swiper-pagination"></div>
-                </div>
-              </div>
+      <!-- 장바구니 -->
+      <div id="cart">
+        <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
+          {% csrf_token %}
+          <div class="product-cart-box d-flex justify-content-between">
+            <div class="count-box d-flex">
+              <button class="count-btn" type="button" id="minus">-</button>
+              <input class="count-input" id="cart_quantity" type="text" name="cart_quantity" value="1">
+              <button class="count-btn" type="button" id="plus">+</button>
             </div>
+            <button class="cart-btn" type="submit" id="creatCart">장바구니 담기</button>
           </div>
-        </div>
-      {% endfor %}
+        </form>
+      </div>
     </div>
 
-    <!-- 장바구니 기능 -->
-    <script>
-      const quantity = document.querySelector('#cart_quantity')
+    <div class="product container col-9">
+      <div class="tab_menu">
+        <ul class="list">
+          <li class="is_on">
+            <a href="#tab1" class="btn">상품 후기 ({{ reviews.count }})</a>
+          </li>
+          <li>
+            <a href="#tab2" class="btn">상품 문의</a>
+          </li>
+        </ul>
 
-      const minus = document.querySelector('#minus')
-      minus.addEventListener('click', function () {
-        quantity.value -= 1
+        <div class="cont_area">
+          <div id="tab1" class="cont" style="display:block;">
+            <div class="cont-title-box">
+              <div class="cont-title">REVIEW | ({{ reviews.count }})</div>
+              <div>
+                <a class="all-reviews" href="{% url 'community:review_index' %}">전체 상품 리뷰 보기
+                </a>
+              </div>
+            </div>
+            <div class="create-review-box">
+              <div class="review-grade-box">
+                <i class="review-grade-star bi bi-star-fill"></i>
+                <span class="review-grade-score">5.0</span>
+              </div>
+              <a class="create-review-link" href="{% url 'community:review_create' product.pk %}">상품 리뷰 작성하기</a>
+            </div>
+            {% for review in reviews %}
+              <div class="review-container">
+                <div class="review">
+                  <h4 class="grade">{{ review.get_grade_display }}
+                  </h4>
+                  <div class="d-flex align-items-center">
+                    <div class="review-userimg me-3" style="width:40px; height:40px; background-image:url({{review.user.profile_image.url}}); background-repeat:no-repeat; background-position-center; background-size:cover;"></div>
+                    <div>
+                      <span class="review-user">
+                        {{ review.user.username }}
+                      </span>님의 리뷰입니다.
+                    </div>
+                  </div>
+                  <div>
+                    <p class="review-title">{{ review.title }}</p>
+                    <p class="review-content">{{ review.content }}</p>
+                  </div>
+                </div>
+                <div class="review-image-box">
+                  <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">
+                    <div class="review-image" style="background-image:url('{{ review.photo_set.first.image.url }}')"></div>
+                  </button>
+                  {% if review.photo_set.count > 1 %}
+                    <p class="review-image-count">외
+                      {{ review.photo_set.count|add:"-1" }}장</p>
+                  {% endif %}
+                </div>
+              </div>
+              <hr>
+            {% endfor %}
+          </div>
+          <div id="tab2" class="cont">
+            <a href="{% url 'community:qna_create' product.pk %}">문의하기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% for review in reviews %}
+      <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header border-0 align-items-start">
+              <div class="d-flex flex-column">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  <strong>이미지 상세 보기</strong>
+                </h1>
+              </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+              <div class="swiper mySwiper1">
+                <div class="swiper-wrapper">
+                  {% for photo in review.photo_set.all %}
+                    <div class="swiper-slide">
+                      <div class="modal-img w-100" style="height:700px; background-image:url('{{ photo.image.url }}')"></div>
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- 장바구니 기능 -->
+  <script>
+    const quantity = document.querySelector('#cart_quantity')
+
+    const minus = document.querySelector('#minus')
+    minus.addEventListener('click', function () {
+      quantity.value -= 1
+    })
+
+    const plus = document.querySelector('#plus')
+    plus.addEventListener('click', function () {
+      console.log(quantity)
+      num = parseInt(quantity.value)
+      quantity.value = num + 1
+    })
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <!-- 찜하기 -->
+  <script>
+    const saveBtn = document.querySelector('#save-btn')
+    saveBtn.addEventListener('click', function (event) {
+      console.log(event.target.dataset)
+      axios({method: 'get', url: `/products/${event.target.dataset.postId}/save/`}).then(response => {
+        console.log(response)
+        console.log(response.data)
+        if (response.data.issaved === true) {
+          event
+            .target
+            .setAttribute('src', 'https://cdn.lordicon.com/iwaotjbp.json')
+          event
+            .target
+            .setAttribute('colors', 'primary:#ee6d66,secondary:#ebe6ef')
+        } else {
+          event
+            .target
+            .setAttribute('src', 'https://cdn.lordicon.com/rjzlnunf.json')
+          event
+            .target
+            .setAttribute('colors', 'primary:#121331,secondary:#ee6d66')
+        }
+        location.reload();
       })
+    })
 
-      const plus = document.querySelector('#plus')
-      plus.addEventListener('click', function () {
-        console.log(quantity)
-        num = parseInt(quantity.value)
-        quantity.value = num + 1
-      })
-    </script>
+    // 장바구니
+    function handleOnChangeColor(e) {
+      const color = e
+        .options[e.selectedIndex]
+        .text;
 
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- 찜하기 -->
-    <script>
-      const saveBtn = document.querySelector('#save-btn')
-      saveBtn.addEventListener('click', function (event) {
-        console.log(event.target.dataset)
-        axios({method: 'get', url: `/products/${event.target.dataset.postId}/save/`}).then(response => {
-          console.log(response)
-          console.log(response.data)
-          if (response.data.issaved === true) {
-            event
-              .target
-              .setAttribute('src', 'https://cdn.lordicon.com/iwaotjbp.json')
-            event
-              .target
-              .setAttribute('colors', 'primary:#ee6d66,secondary:#ebe6ef')
-          } else {
-            event
-              .target
-              .setAttribute('src', 'https://cdn.lordicon.com/rjzlnunf.json')
-            event
-              .target
-              .setAttribute('colors', 'primary:#121331,secondary:#ee6d66')
+      console.log(color)
+    }
+
+    function handleOnChangeSize(e) {
+      const size = e
+        .options[e.selectedIndex]
+        .text;
+
+      console.log(size)
+    }
+
+    const colorSelect = document.querySelector("#color")
+    const sizeSelect = document.querySelector("#size")
+    const creatCart = document.querySelector("#creatCart")
+
+    creatCart.addEventListener("click", function (event) {
+      const colorboxOption = colorSelect
+        .options[colorSelect.selectedIndex]
+        .value;
+      const sizeboxOption = sizeSelect
+        .options[sizeSelect.selectedIndex]
+        .value;
+
+      console.log(colorboxOption, sizeboxOption)
+      if (colorboxOption == "none" || sizeboxOption == "none") {
+        alert("필수 항목을 입력해주세요")
+        event.preventDefault();
+      }
+    })
+  </script>
+
+  <script>
+    // 상품 후기 & 문의 탭 분리
+    const tabList = document.querySelectorAll('.tab_menu .list li');
+    const contents = document.querySelectorAll('.tab_menu .cont_area .cont');
+    let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
+
+    for (let i = 0; i < tabList.length; i++) {
+      tabList[i]
+        .querySelector('.btn')
+        .addEventListener('click', function (e) {
+          e.preventDefault();
+          for (let j = 0; j < tabList.length; j++) {
+            // 나머지 버튼 클래스 제거
+            tabList[j]
+              .classList
+              .remove('is_on');
+
+            // 나머지 컨텐츠 display:none 처리
+            contents[j].style.display = 'none';
           }
-          location.reload();
-        })
-      })
 
-      // 장바구니
-      function handleOnChangeColor(e) {
-        const color = e
-          .options[e.selectedIndex]
-          .text;
+          // 버튼 관련 이벤트
+          this
+            .parentNode
+            .classList
+            .add('is_on');
 
-        console.log(color)
-      }
+          // 버튼 클릭시 컨텐츠 전환
+          activeCont = this.getAttribute('href');
 
-      function handleOnChangeSize(e) {
-        const size = e
-          .options[e.selectedIndex]
-          .text;
+          document
+            .querySelector(activeCont)
+            .style
+            .display = 'block';
+        });
+    }
 
-        console.log(size)
-      }
+    // 이미지 바꾸기
+    const imgList = document.querySelectorAll('.img-list .product-image-list');
+    const productImage = document.querySelectorAll('.imgBox');
+    let activeImage = '';
 
-      const colorSelect = document.querySelector("#color")
-      const sizeSelect = document.querySelector("#size")
-      const creatCart = document.querySelector("#creatCart")
-
-      creatCart.addEventListener("click", function (event) {
-        const colorboxOption = colorSelect
-          .options[colorSelect.selectedIndex]
-          .value;
-        const sizeboxOption = sizeSelect
-          .options[sizeSelect.selectedIndex]
-          .value;
-
-        console.log(colorboxOption, sizeboxOption)
-        if (colorboxOption == "none" || sizeboxOption == "none") {
-          alert("필수 항목을 입력해주세요")
-          event.preventDefault();
-        }
-      })
-    </script>
-
-    <script>
-      // 상품 후기 & 문의 탭 분리
-      const tabList = document.querySelectorAll('.tab_menu .list li');
-      const contents = document.querySelectorAll('.tab_menu .cont_area .cont');
-      let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
-
-      for (let i = 0; i < tabList.length; i++) {
-        tabList[i]
-          .querySelector('.btn')
-          .addEventListener('click', function (e) {
-            e.preventDefault();
-            for (let j = 0; j < tabList.length; j++) {
-              // 나머지 버튼 클래스 제거
-              tabList[j]
-                .classList
-                .remove('is_on');
-
-              // 나머지 컨텐츠 display:none 처리
-              contents[j].style.display = 'none';
-            }
-
-            // 버튼 관련 이벤트
-            this
-              .parentNode
+    for (let i = 0; i < imgList.length; i++) {
+      imgList[i]
+        .querySelector('.image-btn')
+        .addEventListener('click', function (e) {
+          e.preventDefault();
+          for (let j = 0; j < imgList.length; j++) {
+            imgList[j]
               .classList
-              .add('is_on');
+              .remove('on-image');
 
-            // 버튼 클릭시 컨텐츠 전환
-            activeCont = this.getAttribute('href');
+            productImage[j].style.display = 'none';
+          }
 
-            document
-              .querySelector(activeCont)
-              .style
-              .display = 'block';
-          });
+          this
+            .parentNode
+            .classList
+            .add('on-image');
+
+          activeImage = this.getAttribute('href');
+
+          document
+            .querySelector(activeImage)
+            .style
+            .display = 'flex';
+        });
+    }
+  </script>
+
+  <!-- 리뷰 이미지 -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.mySwiper1', {
+      slidesPerView: 1,
+      pagination: {
+        el: ".swiper-pagination",
+        dynamicBullets: true
       }
+    });
+  </script>
 
-      // 이미지 바꾸기
-      const imgList = document.querySelectorAll('.img-list .product-image-list');
-      const productImage = document.querySelectorAll('.imgBox');
-      let activeImage = '';
-
-      for (let i = 0; i < imgList.length; i++) {
-        imgList[i]
-          .querySelector('.image-btn')
-          .addEventListener('click', function (e) {
-            e.preventDefault();
-            for (let j = 0; j < imgList.length; j++) {
-              imgList[j]
-                .classList
-                .remove('on-image');
-
-              productImage[j].style.display = 'none';
-            }
-
-            this
-              .parentNode
-              .classList
-              .add('on-image');
-
-            activeImage = this.getAttribute('href');
-
-            document
-              .querySelector(activeImage)
-              .style
-              .display = 'flex';
-          });
-      }
-    </script>
-
-    <!-- 리뷰 이미지 -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    <script>
-      const swiper = new Swiper('.mySwiper1', {
-        slidesPerView: 1,
-        pagination: {
-          el: ".swiper-pagination",
-          dynamicBullets: true
-        }
-      });
-    </script>
-
-  {% endblock content %}
+{% endblock content %}
