@@ -70,6 +70,13 @@
   transform: translate(-50%,-50%);
 } */
 
+.mypost {
+  padding: 3rem;
+  width: 400px;
+  border-radius: 20px;
+  box-shadow: 3px 6px 14px 2px rgba(0, 0, 0, 0.086);
+}
+
 
 @media ( max-width: 1023px ) {
   .mypage {

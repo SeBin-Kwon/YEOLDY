@@ -8,6 +8,7 @@
 
 {% block content %}
 
+<div>
 <div class="mypage">
   {% if request.user == user %}
     <h1>My Page</h1>
@@ -49,10 +50,10 @@
           <span class="info-content">여자</span></p>
           {% endif %}
         </div>
-        <div class="mypage-btn">
+        <!-- <div class="mypage-btn">
           <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
           <a class="btn btn-outline-danger" href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
-        </div>
+        </div> -->
 
         {% if request.user == user %}
           <div class="mypage-btn">
@@ -73,37 +74,38 @@
               </div>
               {% endif %}
           </form>
-        {% else %}
-        {% bootstrap_button button_type="submit" content="팔로우"%}
-        {% endif %}
-      </form>
-      {% else %}
-      {% bootstrap_button button_type="submit" content="로그인 필요"%}
+          {% else %}
+          {% bootstrap_button button_type="submit" content="로그인 필요"%}
       {% endif %}
-    </div>
-    <div>
-      <p>마이 스타일</p>
-      {% for style in my_style %}
-      <a href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
-      {% endfor %}
-    </div>
-    <div>
-      <p>마이 리뷰</p>
-      {% for review in my_review %}
-      <a href="{% url 'products:detail' review.product_id %}">{{ review.title }}</a>
-      {% endfor %}
-    </div>
-    <div>
-      <p>마이 QnA</p>
-      {% for qna in my_qna %}
-      {% if qna.Product_id %}
-      <a href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
-      {% else %}
-      <a href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
       {% endif %}
-      {% endfor %}
     </div>
   </div>
 </div>
 
+<div class="mypost">
+  <h3>내가 쓴 글</h3>
+  <div>
+    <p>마이 스타일</p>
+    {% for style in my_style %}
+    <a href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
+    {% endfor %}
+  </div>
+  <div>
+    <p>마이 리뷰</p>
+    {% for review in my_review %}
+    <a href="{% url 'products:detail' review.product_id %}">{{ review.title }}</a>
+    {% endfor %}
+  </div>
+  <div>
+    <p>마이 QnA</p>
+    {% for qna in my_qna %}
+    {% if qna.Product_id %}
+    <a href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
+    {% else %}
+    <a href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+</div>
 {% endblock %}
