@@ -92,35 +92,34 @@
       </div>
 
       <hr>
+      <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
+        {% csrf_token %}
+        <!-- 색상 -->
+        <div class="form-option select-option">
+          <label for="color">색상</label>
+          <select name="color" id="color" onchange="handleOnChangeColor(this)">
+            <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
+            <option value="" disabled="disabled">--------------------------</option>
+            {% for color in colors %}
+              <option value="{{ color }}">{{ color }}</option>
+            {% endfor %}
+          </select>
+        </div>
 
-      <!-- 색상 -->
-      <div class="form-option select-option">
-        <label for="color">색상</label>
-        <select name="color" id="color" onchange="handleOnChangeColor(this)">
-          <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
-          <option value="" disabled="disabled">--------------------------</option>
-          {% for color in colors %}
-            <option value="{{ color }}">{{ color }}</option>
-          {% endfor %}
-        </select>
-      </div>
+        <!-- 사이즈 -->
+        <div class="form-option select-option">
+          <label for="size">사이즈</label>
+          <select name="size" id="size" onchange="handleOnChangeSize(this)">
+            <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
+            <option value="" disabled="disabled">--------------------------</option>
+            {% for size in sizes %}
+              <option value="{{ size }}">{{ size }}</option>
+            {% endfor %}
+          </select>
+        </div>
 
-      <!-- 사이즈 -->
-      <div class="form-option select-option">
-        <label for="size">사이즈</label>
-        <select name="size" id="size" onchange="handleOnChangeSize(this)">
-          <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
-          <option value="" disabled="disabled">--------------------------</option>
-          {% for size in sizes %}
-            <option value="{{ size }}">{{ size }}</option>
-          {% endfor %}
-        </select>
-      </div>
-
-      <!-- 장바구니 -->
-      <div id="cart">
-        <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
-          {% csrf_token %}
+        <!-- 장바구니 -->
+        <div id="cart">
           <div class="product-cart-box d-flex justify-content-between">
             <div class="count-box d-flex">
               <button class="count-btn" type="button" id="minus">-</button>
@@ -129,8 +128,8 @@
             </div>
             <button class="cart-btn" type="submit" id="creatCart">장바구니 담기</button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
 
     <div class="product container col-9">
