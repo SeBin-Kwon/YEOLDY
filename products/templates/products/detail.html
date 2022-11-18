@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load django_bootstrap5 %}
+{% load humanize %}
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/products_detail.css' %}">
@@ -67,7 +68,7 @@
 
       <p class="costBox">
         <span class="cost-label">판매가</span>
-        <span class="cost">{{ product.cost }}원</span>
+        <span class="cost">{{ product.cost|intcomma }}원</span>
       </p>
 
       <hr>
@@ -251,6 +252,17 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <!-- 찜하기 -->
   <script>
+    const cartQuantity = document.querySelector('#cart_quantity')
+    const plusBtn = document.querySelector('#plus')
+    const minusBtn = document.querySelector('#minus')
+
+    console.log(cartQuantity.value)
+    minusBtn.addEventListener('click', function (event) {
+      if (cartQuantity.value < 1) {
+        cartQuantity.value = 1
+      }
+    });
+
     const saveBtn = document.querySelector('#save-btn')
     saveBtn.addEventListener('click', function (event) {
       console.log(event.target.dataset)

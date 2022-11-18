@@ -64,6 +64,7 @@
 
 .count-btn {
     padding: 5px 10px;
+    width: 40px;
     font-size: 18px;
     background: #fff;
     font-weight: 600;
@@ -72,10 +73,10 @@
 
 .count-input {
     text-align: center;
-    width: 30px;
+    width: 40px;
     background: #fff;
-    border-width: 1px 0 1px 0;
     border: 1px solid lightgray;
+    border-width: 1px 0 1px 0;
 }
 
 .cart-btn {
