@@ -8,14 +8,44 @@ from django.db.models import Q  # 검색 기능
 
 # Create your views here.
 
-# 상품 리스트 기능(메인페이지로 대체?)
+# 상품 리스트 기능(메인페이지로 대체?)카테고리전체
 def index(request):
-    products = Products.objects.order_by("-pk")
+    products = Products.objects.all()
     context = {
         "products": products,
     }
     return render(request, "products/index.html", context)
-
+#카테고리 별
+def index_1(request):
+    products = Products.objects.filter(category="상의")
+    context = {
+        "products": products,
+    }
+    return render(request, "products/index.html", context)
+def index_2(request):
+    products = Products.objects.filter(category="하의")
+    context = {
+        "products": products,
+    }
+    return render(request, "products/index.html", context)
+def index_3(request):
+    products = Products.objects.filter(category="아우터")
+    context = {
+        "products": products,
+    }
+    return render(request, "products/index.html", context)
+def index_4(request):
+    products = Products.objects.filter(category="신발")
+    context = {
+        "products": products,
+    }
+    return render(request, "products/index.html", context) 
+def index_5(request):
+    products = Products.objects.filter(category="악세사리")
+    context = {
+        "products": products,
+    }
+    return render(request, "products/index.html", context)
 
 # 상품 등록 기능
 @login_required
