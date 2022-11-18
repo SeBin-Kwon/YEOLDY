@@ -138,3 +138,55 @@ td {
 .pricebox-title {
     margin: 0;
 }
+
+.button-box{
+    display: flex;
+    margin: 3rem;
+    justify-content: center;
+}
+
+.button-box .main{
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 60px;
+    text-decoration: none;
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+    font-size: 24px;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.button-box .main:hover{
+    color: #0DB295;
+}
+
+.button-box .order{
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 60px;
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bolder;
+    border-radius: 10px;
+}
+
+.button-box .order:hover{
+    color: #fff;
+    background-color: #0DB295;
+}
+
+/* 
+.button-box .order{
+    background: #fff;
+    color: #000;
+} */
