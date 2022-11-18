@@ -62,6 +62,7 @@ def update(request, pk):
             style_form = StyleForm(instance=style)
         context = {
             "style_form": style_form,
+            "style": style,
         }
 
         return render(request, "style/form.html", context)
@@ -78,7 +79,7 @@ def detail(request, pk):
         "style": style,
         "review_form": review_form,
         "reviews": reviews,
-        "style_image": style_image,
+        "style_images": style_image,
     }
     return render(request, "style/detail.html", context)
 
