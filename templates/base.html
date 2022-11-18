@@ -24,39 +24,63 @@
   {% bootstrap_javascript %}
   {% block css %}{% endblock css %}
 </head>
-
-<body>
-  <nav>
-    <ul class="nav-items" style="padding-right: 0.5rem;">
-      <li>
-        <a href="{% url 'products:new_products' %}">NEW</a>
-      </li>
-      <li>
-        <a href="{% url 'community:best_products' %}">BEST</a>
-      </li>
-      <li>
-        <a href="{% url 'products:index' %}">APPAREL</a>
-        <div class="drop">
-          <ul class="drop-menu">
-            <li>
-              <a href="{% url 'products:index' %}">모든 제품</a>
-            </li>
-            <li>
-              <a href="#">상의</a>
-            </li>
-            <li>
-              <a href="#">하의</a>
-            </li>
-            <li>
-              <a href="#">아우터</a>
-            </li>
-            <li>
-              <a href="#">신발</a>
-            </li>
-            <li>
-              <a href="#">악세서리</a>
-            </li>
-          </ul>
+  <body>
+    <nav>
+      <ul class="nav-items" style="padding-right: 0.5rem;">
+        <li>
+          <a href="{% url 'products:new_products' %}">NEW</a>
+        </li>
+        <li>
+          <a href="{% url 'community:best_products' %}">BEST</a>
+        </li>
+        <li>
+          <a href="{% url 'products:index' %}">APPAREL</a>
+          <div class="drop">
+            <ul class="drop-menu">
+              <li>
+                <a href="{% url 'products:index' %}">모든 제품</a>
+              </li>
+              <li>
+                <a href="{% url 'products:index_1' %}">상의</a>
+              </li>
+              <li>
+                <a href="{% url 'products:index_2' %}">하의</a>
+              </li>
+              <li>
+                <a href="{% url 'products:index_3' %}">아우터</a>
+              </li>
+              <li>
+                <a href="{% url 'products:index_4' %}">신발</a>
+              </li>
+              <li>
+                <a href="{% url 'products:index_5' %}">악세서리</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <a href="{% url 'style:index' %}">COMMUNITY</a>
+          <div class="drop">
+            <ul class="drop-menu">
+              <li>
+                <a href="{% url 'community:review_index' %}">Review</a>
+              </li>
+              <li>
+                <a href="{% url 'style:index' %}">Style</a>
+              </li>
+              <li>
+                <a href="{% url 'community:index' %}">Q&A</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      {% if user.is_authenticated %}
+        <div class="logo-div" style="padding-right: 2.5rem;">
+          <a class="logo-link" href="{% url 'main' %}">
+            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+            <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+          </a>
         </div>
       </li>
       <li>
