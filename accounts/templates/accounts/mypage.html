@@ -9,103 +9,139 @@
 {% block content %}
 
 <div>
-<div class="mypage">
-  {% if request.user == user %}
+  <div class="mypage">
+    {% if request.user == user %}
     <h1>My Page</h1>
-  {% else %}
+    {% else %}
     <h1>{{ user.nickname }}'s Page</h1>
-  {% endif %}
-  <div class="section row container">
-    <div class="col-12 col-md-7 mb-4">
-      {% if user.profile_image %}
-      <div class="profile-crop" style="background-image: url('{{ user.profile_image.url }}');">
-      </div>
-      {% else %}
-      <div class="profile-crop" style="background-image: url('https://dummyimage.com/300X400')"></div>
-      {% endif %}
-    </div>
-    <div class="col-12 col-md-5">
-      <div class="info">
-        <div class="info-box">
-          <p>이름 :
-            <span class="info-name">{{ user.nickname }}
-          </p>
-          <p>아이디 :
-            <span class="info-content">{{ user.username }}</span>
-          </p>
-          <p>휴대폰 번호 :
-            <span class="info-content">{{ user.phone_number }}</span>
-          </p>
-          <p>이메일 :
-            <span class="info-content">{{ user.email }}</span>
-          </p>
-          <p>생일 :
-            <span class="info-content">{{ user.birth }}</span>
-          </p>
-          <p>성별 :
-            {% if request.user.gender == 'M'%}
-            <span class="info-content">남자</span>
-          </p>
-          {% else %}
-          <span class="info-content">여자</span></p>
-          {% endif %}
+    {% endif %}
+    <div class="section row container">
+      <div class="col-12 col-md-7 mb-4">
+        {% if user.profile_image %}
+        <div class="profile-crop" style="background-image: url('{{ user.profile_image.url }}');">
         </div>
-        <!-- <div class="mypage-btn">
+        {% else %}
+        <div class="profile-crop" style="background-image: url('https://dummyimage.com/300X400')"></div>
+        {% endif %}
+      </div>
+      <div class="col-12 col-md-5">
+        <div class="info">
+          <div class="info-box">
+            <p>이름 :
+              <span class="info-name">{{ user.nickname }}
+            </p>
+            <p>아이디 :
+              <span class="info-content">{{ user.username }}</span>
+            </p>
+            <p>휴대폰 번호 :
+              <span class="info-content">{{ user.phone_number }}</span>
+            </p>
+            <p>이메일 :
+              <span class="info-content">{{ user.email }}</span>
+            </p>
+            <p>생일 :
+              <span class="info-content">{{ user.birth }}</span>
+            </p>
+            <p>성별 :
+              {% if request.user.gender == 'M'%}
+              <span class="info-content">남자</span>
+            </p>
+            {% else %}
+            <span class="info-content">여자</span></p>
+            {% endif %}
+          </div>
+          <!-- <div class="mypage-btn">
           <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
           <a class="btn btn-outline-danger" href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
         </div> -->
 
-        {% if request.user == user %}
+          {% if request.user == user %}
           <div class="mypage-btn">
             <a class="btn btn-outline-primary me-2" href="{% url 'accounts:mypage-update' user.pk %}">회원정보 수정하기</a>
             <a class="btn btn-outline-danger" href="{% url 'accounts:mypage-delete' user.pk %}">회원 탈퇴하기</a>
           </div>
           {% endif %}
-      </div>
-      {% if request.user != user %}
+        </div>
+        {% if request.user != user %}
         <form action="{% url 'accounts:follow' user.pk %}" method="POST">
           {% if request.user.is_authenticated %}
-            {% csrf_token %}
-            {% if request.user in user.followers.all %}
-              <div id="follow-btn" data-post-id="{{ mypage.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow</div>
-              {% else %}
-              <div id="follow-btn" data-post-id="{{ mypage.user.pk }}" class=" btn btn-outline-primary" type="submit">
-                Follow
-              </div>
-              {% endif %}
-          </form>
+          {% csrf_token %}
+          {% if request.user in user.followers.all %}
+          <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-danger" type="submit">
+            Unfollow</div>
           {% else %}
-          {% bootstrap_button button_type="submit" content="로그인 필요"%}
+          <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-primary" type="submit">
+            Follow
+          </div>
+          {% endif %}
+        </form>
+        {% else %}
+        {% bootstrap_button button_type="submit" content="로그인 필요"%}
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="mypost">
+    <h3>내가 쓴 글</h3>
+    <div>
+      <p>마이 스타일</p>
+      {% for style in my_style %}
+      <a href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
+      {% endfor %}
+    </div>
+    <div>
+      <p>마이 리뷰</p>
+      {% for review in my_review %}
+      <a href="{% url 'products:detail' review.product_id %}">{{ review.title }}</a>
+      {% endfor %}
+    </div>
+    <div>
+      <p>마이 QnA</p>
+      {% for qna in my_qna %}
+      {% if qna.Product_id %}
+      <a href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
+      {% else %}
+      <a href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
       {% endif %}
-      {% endif %}
+      {% endfor %}
     </div>
   </div>
 </div>
 
-<div class="mypost">
-  <h3>내가 쓴 글</h3>
-  <div>
-    <p>마이 스타일</p>
-    {% for style in my_style %}
-    <a href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
-    {% endfor %}
-  </div>
-  <div>
-    <p>마이 리뷰</p>
-    {% for review in my_review %}
-    <a href="{% url 'products:detail' review.product_id %}">{{ review.title }}</a>
-    {% endfor %}
-  </div>
-  <div>
-    <p>마이 QnA</p>
-    {% for qna in my_qna %}
-    {% if qna.Product_id %}
-    <a href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
-    {% else %}
-    <a href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
-    {% endif %}
-    {% endfor %}
-  </div>
-</div>
-</div>
+
+<!-- 팔로우 비동기 -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+  const followBtn = document.querySelector('#follow-btn')
+  followBtn.addEventListener('click', function (event) {
+    console.log(event.target.dataset)
+    axios({ method: 'get', url: `/accounts/${event.target.dataset.postId}/follow/` }).then(response => {
+      console.log(event.target.dataset)
+      console.log(response.data)
+      if (response.data.is_followed === true) {
+        event
+          .target
+          .classList
+          .add('btn-outline-danger')
+        event
+          .target
+          .classList
+          .remove('btn-outline-primary')
+        followBtn.innerText = "Unfollow"
+      } else {
+        event
+          .target
+          .classList
+          .add('btn-outline-primary')
+        event
+          .target
+          .classList
+          .remove('btn-outline-danger')
+        followBtn.innerText = "Follow"
+      }
+    })
+  })
+</script>
 {% endblock %}

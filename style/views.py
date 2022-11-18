@@ -13,7 +13,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 def index(request):
     styles = Style.objects.order_by("-pk")
-
     context = {
         "styles": styles,
     }
