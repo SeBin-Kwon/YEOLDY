@@ -13,6 +13,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 def index(request):
     styles = Style.objects.order_by("-pk")
+
     context = {
         "styles": styles,
     }
@@ -78,7 +79,7 @@ def detail(request, pk):
         "style": style,
         "review_form": review_form,
         "reviews": reviews,
-        "style_image": style_image,
+        "style_images": style_image,
     }
     return render(request, "style/detail.html", context)
 

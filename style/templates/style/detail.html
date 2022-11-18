@@ -8,35 +8,35 @@
 
 
 {% block content %}
-  <!-- 스타일 게시글 -->
-  <div class="section">
-    <div class="back">
-      <a href="{% url 'style:index' %}">
-        <i class="bi bi-chevron-left"></i><span>&nbsp;BACK</span>
-      </a>
-    </div>
-    {% if style.image %}
-    <div class="img-div">
-      <img class="st-img" src="{{ style.image.url }}" alt="{{ style.image }}">
-    {% endif %}
-  <div class="info">
+<!-- 스타일 게시글 -->
+<div class="section">
+  <div class="back">
+    <a href="{% url 'style:index' %}">
+      <i class="bi bi-chevron-left"></i><span>&nbsp;BACK</span>
+    </a>
+  </div>
+  {% for style_image in style_images %}
+  <div class="img-div">
+    <img class="st-img" src="{{ style_image.image.url }}" alt="{{ style.image }}">
+    {% endfor %}
+    <div class="info">
       <div class="style-user mt-4 mb-3">
         <div class="d-flex align-items-center">
-            <!-- 프사 -->
-            {% if style.user.profile_image %}
-                <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
-                </div>
-                {% comment %} <img class="profile-image" src="{{ user.profile_image.url }}"> {% endcomment %}
-                {% else %}
-
-                <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
-                {% endif %}
-            <!-- 유저 이름 -->
-            <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
-              <p class="style-username">{{ style.user.username }}</p>
-            </a>
+          <!-- 프사 -->
+          {% if style.user.profile_image %}
+          <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
           </div>
-          
+          {% comment %} <img class="profile-image" src="{{ user.profile_image.url }}"> {% endcomment %}
+          {% else %}
+
+          <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+          {% endif %}
+          <!-- 유저 이름 -->
+          <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+            <p class="style-username">{{ style.user.username }}</p>
+          </a>
+        </div>
+
       </div>
       <div class="st-top mb-3">
         <h1 class="st-title">{{ style.title }}</h1>
@@ -45,97 +45,99 @@
           <a class="btn btn-sm btn-outline-primary me-1" href="{% url 'style:update' style.pk %}">
             <i class="bi bi-pencil-square"></i>
           </a>
-          <a class="btn btn-sm btn-outline-danger" href="{% url 'style:delete' style.pk %}"><i class="bi bi-trash"></i></a>
+          <a class="btn btn-sm btn-outline-danger" href="{% url 'style:delete' style.pk %}"><i
+              class="bi bi-trash"></i></a>
           {% endif %}
         </div>
       </div>
 
       <p class="st-content d-flex">{{ style.content }}</p>
     </div>
-</div>
+  </div>
 
   <div class="center-btn">
-    
-  <div class="follow me-3">  
-    <!-- 팔로우 -->
-    {% if request.user != style.user %}
+
+    <div class="follow me-3">
+      <!-- 팔로우 -->
+      {% if request.user != style.user %}
       {% if request.user in style.user.followers.all %}
-      <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow</div>
+      <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow
+      </div>
       {% else %}
       <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-primary" type="submit">
         Follow
       </div>
       {% endif %}
-    {% endif %}
-  </div>
+      {% endif %}
+    </div>
 
-  <!-- 좋아요 -->
-  <div class="d-flex flex-column justify-content-center text-center">
-    {% if request.user.is_authenticated %}
-    {% if request.user in style.like_users.all %}
+    <!-- 좋아요 -->
+    <div class="d-flex flex-column justify-content-center text-center">
+      {% if request.user.is_authenticated %}
+      {% if request.user in style.like_users.all %}
       <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart-fill"></i>
       {% else %}
       <i id="like-btn" data-post-id="{{ style.pk }}" class="bi bi-heart"></i>
 
       {% endif %}
-    {% else %}
+      {% else %}
       <i class=" bi bi-heart"></i>
-    {% endif %}
-    <div>{{ style.like_users.count }}</div>
-  </div>
-  </div>
-
-
-<div class="card">
-  <div class="card-header bg-white">
-    <div class="col-md-12">
-      {% csrf_token %}
-      <div class="form-group row">
-        <textarea class="form-control" id="content_id" rows="3" placeholder="댓글을 입력해주세요."></textarea>
-      </div>
-      <div class="text-right" style="float:right">
-        <button id="review_write" class="btn btn-sm">댓글달기</button>
-      </div>
-    </div>
-    <hr>
-    <div id="more_review">
-      {% if reviews %}
-      {% for review in reviews %}
-      <div id='{{ review.id }}'>
-        {% if review.deleted %}
-        <span>삭제된 댓글입니다.</span>
-        <hr>
-        {% else %}
-        {% if review.user == style.user %}
-        <span style="font-weight: 500;">{{ review.user }}&nbsp;<span>(글쓴이)</span></span>
-        {% else %}
-        <strong>{{ review.user }}</strong>
-        {% endif %}
-        <span style="float:right; font-size: 13px; color: gray;">{{ review.created }}</span>
-        {% if review.user == request.user or request.user.level == '0' or request.user.level == '1' %}
-        <div>
-          <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
-          <div style="text-align: right;">
-            <a class="comment-delete" onclick="reviewDelete('{{review.id}}');">삭제</a>
-          </div>
-        </div>
-        <hr>
-        {% else %}
-        <div>
-          <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
-        </div>
-        <hr>
-        {% endif %}
-        {% endif %}
-      </div>
-      <div class='{{ review.id }}'></div>
-      {% endfor %}
       {% endif %}
-      <input type="hidden" id="review_user" value="{{request.user}}">
-      <div id="review_list"></div>
+      <div>{{ style.like_users.count }}</div>
     </div>
   </div>
-</div>
+
+
+  <div class="card">
+    <div class="card-header bg-white">
+      <div class="col-md-12">
+        {% csrf_token %}
+        <div class="form-group row">
+          <textarea class="form-control" id="content_id" rows="3" placeholder="댓글을 입력해주세요."></textarea>
+        </div>
+        <div class="text-right" style="float:right">
+          <button id="review_write" class="btn btn-sm">댓글달기</button>
+        </div>
+      </div>
+      <hr>
+      <div id="more_review">
+        {% if reviews %}
+        {% for review in reviews %}
+        <div id='{{ review.id }}'>
+          {% if review.deleted %}
+          <span>삭제된 댓글입니다.</span>
+          <hr>
+          {% else %}
+          {% if review.user == style.user %}
+          <span style="font-weight: 500;">{{ review.user }}&nbsp;<span>(글쓴이)</span></span>
+          {% else %}
+          <strong>{{ review.user }}</strong>
+          {% endif %}
+          <span style="float:right; font-size: 13px; color: gray;">{{ review.created }}</span>
+          {% if review.user == request.user or request.user.level == '0' or request.user.level == '1' %}
+          <div>
+            <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
+            <div style="text-align: right;">
+              <a class="comment-delete" onclick="reviewDelete('{{review.id}}');">삭제</a>
+            </div>
+          </div>
+          <hr>
+          {% else %}
+          <div>
+            <div style="white-space:pre-wrap; text-align:left;">{{ review.content }}</div>
+          </div>
+          <hr>
+          {% endif %}
+          {% endif %}
+        </div>
+        <div class='{{ review.id }}'></div>
+        {% endfor %}
+        {% endif %}
+        <input type="hidden" id="review_user" value="{{request.user}}">
+        <div id="review_list"></div>
+      </div>
+    </div>
+  </div>
 </div>
 <!-- 댓글 비동기 처리 -->
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
