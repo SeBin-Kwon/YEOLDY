@@ -77,13 +77,15 @@ def approval(request):
             user = request.user,
             location_name = user_data.location_name,
             order_name = user_data.order_name,
-            location = user_data.location,
             phone_number = user_data.phone_number,
             order_request = user_data.order_request,
             product = cart_items[i],
             color = cart_items[i].color,
             size = cart_items[i].size,
-            quantity = cart_items[i].quantity
+            quantity = cart_items[i].quantity,
+            location_zipcode = cart_items[i].zipcode,
+            location_address = cart_items[i].location_address,
+            location_detail = cart_items[i].location_detail
         )
 
     #[장바구니에서 삭제]
