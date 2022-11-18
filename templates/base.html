@@ -24,6 +24,7 @@
   {% bootstrap_javascript %}
   {% block css %}{% endblock css %}
 </head>
+
   <body>
     <nav>
       <ul class="nav-items" style="padding-right: 0.5rem;">
@@ -101,19 +102,19 @@
       </li>
     </ul>
     {% if user.is_authenticated %}
-    <div class="logo-div" style="padding-right: 2.5rem;">
-      <a class="logo-link" href="{% url 'main' %}">
-        <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-        <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
-      </a>
-    </div>
+      <div class="logo-div" style="padding-right: 2.5rem;">
+        <a class="logo-link" href="{% url 'main' %}">
+          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+          <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+        </a>
+      </div>
     {% else %}
-    <div class="logo-div" style="padding-right: 6rem;">
-      <a class="logo-link" href="{% url 'main' %}">
-        <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-        <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
-      </a>
-    </div>
+      <div class="logo-div" style="padding-right: 6rem;">
+        <a class="logo-link" href="{% url 'main' %}">
+          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+          <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+        </a>
+      </div>
     {% endif %}
     <ul class="nav-right" style="padding-left: 4rem;">
       <li>
@@ -127,18 +128,18 @@
         </a>
       </li>
       {% if user.is_authenticated %}
-      <li>
-        <a href="{% url 'accounts:mypage' user.pk %}">
-          <i class="bi bi-person-fill"></i>
-        </a>
-      </li>
-      <li>
-        <a href="{% url 'accounts:logout' %}">LOGOUT</a>
-      </li>
+        <li>
+          <a href="{% url 'accounts:mypage' user.pk %}">
+            <i class="bi bi-person-fill"></i>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+        </li>
       {% else %}
-      <li>
-        <a href="{% url 'accounts:login' %}">LOGIN</a>
-      </li>
+        <li>
+          <a href="{% url 'accounts:login' %}">LOGIN</a>
+        </li>
       {% endif %}
     </ul>
   </nav>
@@ -177,14 +178,18 @@
   </script>
   <!--Start of Tawk.to Script-->
   <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    var Tawk_API = Tawk_API || {},
+      Tawk_LoadStart = new Date();
     (function () {
-      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
       s1.async = true;
       s1.src = 'https://embed.tawk.to/63771df8b0d6371309cfaeb7/1gi4kq508';
       s1.charset = 'UTF-8';
       s1.setAttribute('crossorigin', '*');
-      s0.parentNode.insertBefore(s1, s0);
+      s0
+        .parentNode
+        .insertBefore(s1, s0);
     })();
   </script>
   <!--End of Tawk.to Script-->
