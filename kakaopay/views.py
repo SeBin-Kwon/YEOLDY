@@ -71,6 +71,7 @@ def approval(request):
     #방금 막 저장한 데이터를 불러옴
     user_data = OrderList.objects.last()
 
+    #cart에 담긴 제품들을 모두 데이터베이스에 저장
     for i in range(cart_quantity):
         order_list = OrderListFinal.objects.create(
             user = request.user,
@@ -84,6 +85,9 @@ def approval(request):
             size = cart_items[i].size,
             quantity = cart_items[i].quantity
         )
+
+    #[장바구니에서 삭제]
+    cart_items.delete()
 
     URL = 'https://kapi.kakao.com/v1/payment/approve'
     headers = {
