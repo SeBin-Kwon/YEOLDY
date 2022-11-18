@@ -9,38 +9,55 @@
 
   <body>
     <div class="create-form">
+
       <div class="title">Q&A</div>
 
       <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="user-details">
-          <div class="input-box">
-            <label class="details" for="id_title" name="label_title">제목</label>
-            <input type="text" name="title" placeholder="제목" required="required" id="id_title">
-          </div>
 
-          <div class="input-box">
-            <label class="details" for="id_content">내용</label>
-            <textarea name="content" cols="40" rows="10" placeholder="내용" required="required" id="id_contnet"></textarea>
-          </div>
+          <div class="row">
+            <div class="col-6">
+              <div class="d-flex flex-column">
 
-          <div class="input-box">
-            <label class="details" for="id_image">이미지</label>
-            <input type="file" name="image" required="required" id="id_image">
-          </div>
-          <div class="input-box">
-            <label class="details" for="id_password">비밀번호</label>
-            <input type="password" name="password" maxlength="20" placeholder="비밀번호" required="required" id="id_password">
+                <div class="input-box">
+                  <label class="details" for="id_title" name="label_title">제목</label>
+                  <input type="text" name="title" placeholder="제목" required="required" id="id_title">
+                </div>
+
+                <div class="input-box">
+                  <label class="details" for="id_image">이미지</label>
+                  <input type="file" name="image" required="required" id="id_image">
+                </div>
+
+                <div class="input-box">
+                  <label class="details" for="id_password">비밀번호</label>
+                  <input type="password" name="password" maxlength="20" placeholder="비밀번호" required="required" id="id_password">
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-6">
+
+              <div class="input-box">
+                <label class="details" for="id_content">내용</label>
+                <textarea name="content" cols="40" rows="10" placeholder="내용" required="required" id="id_contnet"></textarea>
+              </div>
+
+              <div class="button">
+                <input type="submit" value="제출">
+              </div>
+
+            </div>
+
           </div>
         </div>
 
-        <div class="button">
-          <input type="submit" value="제출">
-        </div>
-      </div>
-    </form>
-  </div>
+      </form>
 
-</body>
+    </div>
+
+  </body>
 
 {% endblock content %}

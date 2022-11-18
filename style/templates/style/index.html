@@ -6,48 +6,42 @@
 <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
 {% endblock css %}
 
-{%block content %}
-<div class="style-box row">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="style-title">Style</h1>
-    <a class="style-create-link" href="{% url 'style:create' %}">
-      <h5 class="m-0 style-create"><i class="bi bi-plus-lg"></i>My style 공유</h5>
-    </a>
-  </div>
-  {% for style in styles %}
-  <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
-    <a href="{% url 'style:detail' style.pk %}">
-      {% for img in style.photo_set.all %}
-      {% if forloop.first %}
-      <div class="style-card">
-        <!-- 카드 사진 -->
-        <img src="{{ img.image.url }}" class="style-img card-img-top" alt="...">
-        {% endif %}
-        {% endfor %}
-        <!-- 유저 -->
-        <div class="style-user">
-          <div class="d-flex align-items-center">
-            <!-- 프사 -->
+{%block content %} 
+  <div class="style-box row">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="style-title">Style</h1>
+      <a class="style-create-link" href="{% url 'style:create' %}"><h5 class="m-0 style-create"><i class="bi bi-plus-lg"></i>My style 공유</h5></a>
+    </div>
+    {% for style in styles %}
+    <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
+      <a href="{% url 'style:detail' style.pk %}">
+        <div class="style-card">
+          <!-- 카드 사진 -->
+          <img src="{{ style.image.url }}" class="style-img card-img-top" alt="...">
+          <!-- 유저 -->
+          <div class="style-user">
+            <div class="d-flex align-items-center">
+                <!-- 프사 -->
 
-            {% if style.user.profile_image %}
-            <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
-            </div>
-            {% comment %} <img class="profile-image" src="{{ user.profile_image.url }}"> {% endcomment %}
-            {% else %}
+                {% if style.user.profile_image %}
+                <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
+                </div>
+                {% comment %} <img class="profile-image" src="{{ user.profile_image.url }}"> {% endcomment %}
+                {% else %}
 
-            <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
-            {% endif %}
+                <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+                {% endif %}
 
-
-            <!-- 유저 이름 -->
-            <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
-              <h5 class="style-username">{{ style.user.username }}</h5>
-            </a>
+                
+                <!-- 유저 이름 -->
+                <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+                  <h5 class="style-username">{{ style.user.username }}</h5>
+                </a>
+              </div>
+        
           </div>
-
-        </div>
-        <div class="like"><i class="bi bi-heart-fill"><span>{{ style.like_users.count }}</span></i></div>
-        <!-- {% if request.user.is_authenticated %}
+          <div class="like"><i class="bi bi-heart-fill"><span>{{ style.like_users.count }}</span></i></div>
+          <!-- {% if request.user.is_authenticated %}
           {% if request.user in style.like_users.all %}
             <lord-icon class="" src="https://cdn.lordicon.com/iwaotjbp.json" trigger="click" colors="primary:#ee6d66,secondary:#ebe6ef" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ style.pk }}"></lord-icon>
           {% else %}
@@ -56,35 +50,35 @@
         {% else %}
           <lord-icon class="" src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:25px;height:25px;z-index: 999;" id="save-btn" data-post-id="{{ style.pk }}"></lord-icon>
         {% endif %} -->
-      </div>
-    </a>
-  </div>
-  {% endfor %}
-</div>
-<script>
-  const saveBtn = document.querySelector('#save-btn')
-  saveBtn.addEventListener('click', function (event) {
-    console.log(event.target.dataset)
-    axios({ method: 'get', url: `/style/${event.target.dataset.postId}/like/` }).then(response => {
-      console.log(response)
-      console.log(response.data)
-      if (response.data.isliked === true) {
-        event
-          .target
-          .setAttribute('src', 'https://cdn.lordicon.com/iwaotjbp.json')
-        event
-          .target
-          .setAttribute('colors', 'primary:#ee6d66,secondary:#ebe6ef')
-      } else {
-        event
-          .target
-          .setAttribute('src', 'https://cdn.lordicon.com/rjzlnunf.json')
-        event
-          .target
-          .setAttribute('colors', 'primary:#121331,secondary:#ee6d66')
-      }
-      location.reload();
-    })
-  })
-</script>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+    </div>
+    <script>
+      const saveBtn = document.querySelector('#save-btn')
+      saveBtn.addEventListener('click', function (event) {
+        console.log(event.target.dataset)
+        axios({method: 'get', url: `/style/${event.target.dataset.postId}/like/`}).then(response => {
+          console.log(response)
+          console.log(response.data)
+          if (response.data.isliked === true) {
+            event
+              .target
+              .setAttribute('src', 'https://cdn.lordicon.com/iwaotjbp.json')
+            event
+              .target
+              .setAttribute('colors', 'primary:#ee6d66,secondary:#ebe6ef')
+          } else {
+            event
+              .target
+              .setAttribute('src', 'https://cdn.lordicon.com/rjzlnunf.json')
+            event
+              .target
+              .setAttribute('colors', 'primary:#121331,secondary:#ee6d66')
+          }
+          location.reload();
+        })
+      })
+      </script>
 {% endblock content %}
