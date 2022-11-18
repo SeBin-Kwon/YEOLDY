@@ -1,10 +1,17 @@
 .container {
     justify-content:center;
-    align-items:center;
+    align-items:start;
     display:flex;
     flex-direction: column;
     font-family:Arial, Helvetica, sans-serif;
     /* min-height:90vh; */
+}
+
+.banner {
+    max-width: 1296px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
 }
 
 .banner h1 {
