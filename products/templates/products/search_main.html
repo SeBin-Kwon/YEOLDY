@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load django_bootstrap5 %}
+{% load humanize %}
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/search.css' %}">
@@ -52,7 +54,7 @@
                 <div class="contentBox">
                   <h5 class="product-title">{{ product.name }}</h5>
                   <p>
-                    <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+                    <span class="sale">10%</span><span class="cost">{{ product.cost|intcomma }}</span>원
                   </p>
                 </div>
               </a>
