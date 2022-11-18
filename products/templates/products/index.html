@@ -12,7 +12,6 @@
   <div class="container">
       <div class="banner">
         <h1>전체</h1>
-        <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
         <p>총 {{ products.count }}개의 상품이 있습니다.</p>
         <a href="{% url 'products:create' %}">상품 등록</a>
       </div>
@@ -44,7 +43,7 @@
   <div class="container">
       <div class="banner">
         <h1>상의</h1>
-        <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
+        <img src="{% static 'images/products_banner_top.jpg' %}" alt="banner">
         <p>총 {{ products.count }}개의 상품이 있습니다.</p>
         <a href="{% url 'products:create' %}">상품 등록</a>
       </div>
@@ -75,7 +74,7 @@
   <div class="container">
       <div class="banner">
         <h1>하의</h1>
-        <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
+        <img src="{% static 'images/products_banner_bottom.jpg' %}" alt="banner">
         <p>총 {{ products.count }}개의 상품이 있습니다.</p>
         <a href="{% url 'products:create' %}">상품 등록</a>
       </div>
@@ -106,7 +105,7 @@
   <div class="container">
       <div class="banner">
         <h1>아우터</h1>
-        <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
+        <img src="{% static 'images/products_banner_outer.jpg' %}" alt="banner">
         <p>총 {{ products.count }}개의 상품이 있습니다.</p>
         <a href="{% url 'products:create' %}">상품 등록</a>
       </div>
@@ -137,7 +136,7 @@
   <div class="container">
       <div class="banner">
         <h1>신발</h1>
-        <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
+        <img src="{% static 'images/products_banner_shoes.jpg' %}" alt="banner">
         <p>총 {{ products.count }}개의 상품이 있습니다.</p>
         <a href="{% url 'products:create' %}">상품 등록</a>
       </div>
@@ -168,7 +167,6 @@
   <div class="container">
       <div class="banner">
         <h1>악세사리</h1>
-        <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
         <p>총 {{ products.count }}개의 상품이 있습니다.</p>
         <a href="{% url 'products:create' %}">상품 등록</a>
       </div>
