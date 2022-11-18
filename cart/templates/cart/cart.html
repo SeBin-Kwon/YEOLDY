@@ -109,7 +109,10 @@
       </div>
     </div>
   </div>
-
+  <div class="button-box">
+    <a class="main" href="{% url 'main' %}">계속 쇼핑하기</a>
+    <a class="order" href="{% url 'kakaopay:order_list' %}">주문하기</a>
+  </div>
   <!-- 스크립트 -->
   <script>
     const cart_items = "{{cart_length}}"
@@ -129,7 +132,5 @@
       })
     }
   </script>
-
-  <a class="btn btn-dark" href="{% url 'kakaopay:order_list' %}">주문하기</a>
 
 {% endblock %}
