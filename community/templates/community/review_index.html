@@ -52,7 +52,7 @@
                   <div class="swiper mySwiper1">
                     <div class="swiper-wrapper">
                       {% for photo1 in review.photo_set.all%}
-                        <div class="swiper-slide"><img class="comment-img" src="{{ photo1.image.url }}" alt=""></div>
+                        <div class="swiper-slide" style="height:250px; background-image:url('{{ photo1.image.url }}'); background-repeat:no-repeat; background-position:center; background-size:contain"></div>
                       {% endfor %}
                     </div>
 
