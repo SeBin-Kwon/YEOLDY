@@ -3,21 +3,21 @@
 {% block content %}
 
   <p>{{ review.title }}</p>
-  {% comment %} {% if request.user == review.user %} {% endcomment %}
-  <form action="{% url 'community:review_delete' review.pk %}" method="POST">
-    {% csrf_token %}
-    <input class="" type="submit" value="삭제">
-    <a href="{% url 'community:review_index' %}" class="btn btn-outline-secondary">뒤로</a>
-  </form>
-  <form action="{% url 'community:review_update' review.pk %}" method="POST">
-    {% csrf_token %}
-    <a href="{% url 'community:review_update' review.pk %}" method="POST">수정</a>
-    <a href="{% url 'community:review_index' %}" class="btn btn-outline-secondary">뒤로</a>
-  </form>
-  {% comment %} {% endif %} {% endcomment %}
+  {% if request.user == review.user %}
+    <form action="{% url 'community:review_delete' review.pk %}" method="POST">
+      {% csrf_token %}
+      <input class="" type="submit" value="삭제">
+      <a href="{% url 'community:review_index' %}" class="btn btn-outline-secondary">뒤로</a>
+    </form>
+    <form action="{% url 'community:review_update' review.pk %}" method="POST">
+      {% csrf_token %}
+      <a href="{% url 'community:review_update' review.pk %}" method="POST">수정</a>
+      <a href="{% url 'community:review_index' %}" class="btn btn-outline-secondary">뒤로</a>
+    </form>
+  {% endif %}
 
   {% for photo in review.photo_set.all%}
-  <img src="{{photo.image.url}}" style="width: 100px; height:100px"><br>
+    <img src="{{photo.image.url}}" style="width: 100px; height:100px"><br>
   {% endfor %}
 </body>
 {% endblock content %}
