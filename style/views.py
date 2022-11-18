@@ -13,7 +13,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 def index(request):
     styles = Style.objects.order_by("-pk")
-
     context = {
         "styles": styles,
     }
@@ -63,6 +62,7 @@ def update(request, pk):
             style_form = StyleForm(instance=style)
         context = {
             "style_form": style_form,
+            "style": style,
         }
 
         return render(request, "style/form.html", context)

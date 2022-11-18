@@ -88,7 +88,7 @@ def mypage_update(request, pk):
 def mypage_delete(request, pk):
     user = User.objects.get(pk=pk)
     user.delete()
-    return redirect("accounts:index")
+    return redirect("main")
 
 
 @login_required

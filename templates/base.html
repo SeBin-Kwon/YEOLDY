@@ -80,74 +80,116 @@
             <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
           </a>
         </div>
-      {% else %}
-        <div class="logo-div" style="padding-right: 6rem;">
-          <a class="logo-link" href="{% url 'main' %}">
-            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-            <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
-          </a>
+      </li>
+      <li>
+        <a href="{% url 'style:index' %}">COMMUNITY</a>
+        <div class="drop">
+          <ul class="drop-menu">
+            <li>
+              <a href="{% url 'community:review_index' %}">Review</a>
+            </li>
+            <li>
+              <a href="{% url 'style:index' %}">Style</a>
+            </li>
+            <li>
+              <a href="{% url 'community:index' %}">Q&A</a>
+            </li>
+          </ul>
         </div>
-      {% endif %}
-      <ul class="nav-right" style="padding-left: 4rem;">
-        <li>
-          <a href="{% url 'products:search_main' %}">
-            <i class="bi bi-search"></i>
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'cart:cart_detail' %}">
-            <i class="bi bi-cart"></i>
-          </a>
-        </li>
-        {% if user.is_authenticated %}
-          <li>
-            <a href="{% url 'accounts:mypage' user.pk %}">
-              <i class="bi bi-person-fill"></i>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'accounts:logout' %}">LOGOUT</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{% url 'accounts:login' %}">LOGIN</a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
-
-    <div class="base-div">
-      {% block content %}{% endblock content %}
-    </div>
-
-    <!-- footer -->
-    <footer>
-      <img src="{% static 'images/logo_white.png' %}" style="width:4rem;">
-      <span>(주) 열디</span><br>
-      <div class="footer-content">
-        <p>대표이사 : 이우열<br>
-          소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
-        <p>
-          문의 : contact@yeoldy.com / 02-123-4567<br>
-          평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
+      </li>
+    </ul>
+    {% if user.is_authenticated %}
+      <div class="logo-div" style="padding-right: 2.5rem;">
+        <a class="logo-link" href="{% url 'main' %}">
+          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+          <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+        </a>
       </div>
-    </footer>
+    {% else %}
+      <div class="logo-div" style="padding-right: 6rem;">
+        <a class="logo-link" href="{% url 'main' %}">
+          <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+          <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+        </a>
+      </div>
+    {% endif %}
+    <ul class="nav-right" style="padding-left: 4rem;">
+      <li>
+        <a href="{% url 'products:search_main' %}">
+          <i class="bi bi-search"></i>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'cart:cart_detail' %}">
+          <i class="bi bi-cart"></i>
+        </a>
+      </li>
+      {% if user.is_authenticated %}
+        <li>
+          <a href="{% url 'accounts:mypage' user.pk %}">
+            <i class="bi bi-person-fill"></i>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+        </li>
+      {% else %}
+        <li>
+          <a href="{% url 'accounts:login' %}">LOGIN</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 
-    <script>
-      window.addEventListener("scroll", function () {
-        const nav = document.querySelector("nav");
-        nav
-          .classList
-          .toggle("sticky", window.scrollY > 0)
-        const logo = document.querySelector("#logo1");
+  <div class="base-div">
+    {% block content %}{% endblock content %}
+  </div>
 
-        if (window.scrollY > 0) {
-          nav.style.height = "4rem";
-        } else {
-          nav.style.height = "6rem";
-        }
-      })
-    </script>
-  </body>
+  <!-- footer -->
+  <footer>
+    <img src="{% static 'images/logo_white.png' %}" style="width:4rem;">
+    <span>(주) 열디</span><br>
+    <div class="footer-content">
+      <p>대표이사 : 이우열<br>
+        소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
+      <p>
+        문의 : contact@yeoldy.com / 02-123-4567<br>
+        평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener("scroll", function () {
+      const nav = document.querySelector("nav");
+      nav
+        .classList
+        .toggle("sticky", window.scrollY > 0)
+      const logo = document.querySelector("#logo1");
+
+      if (window.scrollY > 0) {
+        nav.style.height = "4rem";
+      } else {
+        nav.style.height = "6rem";
+      }
+    })
+  </script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+      Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/63771df8b0d6371309cfaeb7/1gi4kq508';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0
+        .parentNode
+        .insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
 
 </html>

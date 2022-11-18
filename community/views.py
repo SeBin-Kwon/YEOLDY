@@ -137,7 +137,7 @@ def review_create(request, product_pk):
                 photo.review = review
                 photo.image = img
                 photo.save()
-            return redirect("community:review_index")
+            return redirect("products:detail", product_pk)
     else:
         review_form = ReviewForm()
     context = {
@@ -202,7 +202,7 @@ def review_delete(request, review_pk):
 
 # 베스트 상품
 def best_products(request):
-    best_products = Review.objects.all().order_by('grade')
+    best_products = Review.objects.all().order_by("grade")
     context = {
         "best_products": best_products,
     }
