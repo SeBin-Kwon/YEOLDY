@@ -4,197 +4,40 @@
 {% load humanize %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/products_index.css' %}">
+<link rel="stylesheet" href="{% static 'css/products_index.css' %}">
 {% endblock css %}
 
 {% block content %}
 {% if request.resolver_match.url_name == 'index' %}
-  <div class="container">
-      <div class="banner">
-        <h1>전체</h1>
-        <p>총 {{ products.count }}개의 상품이 있습니다.</p>
-        <a href="{% url 'products:create' %}">상품 등록</a>
-      </div>
+<div class="container">
+  <div class="banner">
+    <h1>전체</h1>
+    <p>총 {{ products.count }}개의 상품이 있습니다.</p>
+    <a href="{% url 'products:create' %}">상품 등록</a>
+  </div>
 
-      <div class="row product-list w-100 justify-content-evenly">
-        {% for product in products %}
-          <div class="product-card col-2">
-            <a href="{% url 'products:detail' product.id %}">
-              <div class="imgBox">
-                {% for product_image in product.photo_set.all %}
-                  {% if forloop.counter == 1%}
-                    <img class="product-img" src="{{ product_image.image.url }}" alt="">
-                  {% endif %}
-                {% endfor %}
-                <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-              </div>
-              <div class="contentBox">
-                <h5 class="product-title">{{ product.name }}</h5>
-                <p>
-                  <span class="sale">10%</span><span class="cost">{{ product.cost|intcomma }}</span>원
-                </p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-  </div>
-  {% elif request.resolver_match.url_name == 'index_1' %}
-  <div class="container">
-      <div class="banner">
-        <h1>상의</h1>
-        <img src="{% static 'images/products_banner_top.jpg' %}" alt="banner">
-        <p>총 {{ products.count }}개의 상품이 있습니다.</p>
-        <a href="{% url 'products:create' %}">상품 등록</a>
-      </div>
-      <div class="row product-list w-100 justify-content-evenly">
-        {% for product in products %}
-          <div class="product-card col-2">
-            <a href="{% url 'products:detail' product.id %}">
-              <div class="imgBox">
-                {% for product_image in product.photo_set.all %}
-                  {% if forloop.counter == 1%}
-                    <img class="product-img" src="{{ product_image.image.url }}" alt="">
-                  {% endif %}
-                {% endfor %}
-                <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-              </div>
-              <div class="contentBox">
-                <h5 class="product-title">{{ product.name }}</h5>
-                <p>
-                  <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
-                </p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-  </div>
-  {% elif request.resolver_match.url_name == 'index_2' %}
-  <div class="container">
-      <div class="banner">
-        <h1>하의</h1>
-        <img src="{% static 'images/products_banner_bottom.jpg' %}" alt="banner">
-        <p>총 {{ products.count }}개의 상품이 있습니다.</p>
-        <a href="{% url 'products:create' %}">상품 등록</a>
-      </div>
-      <div class="row product-list w-100 justify-content-evenly">
-        {% for product in products %}
-          <div class="product-card col-2">
-            <a href="{% url 'products:detail' product.id %}">
-              <div class="imgBox">
-                {% for product_image in product.photo_set.all %}
-                  {% if forloop.counter == 1%}
-                    <img class="product-img" src="{{ product_image.image.url }}" alt="">
-                  {% endif %}
-                {% endfor %}
-                <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-              </div>
-              <div class="contentBox">
-                <h5 class="product-title">{{ product.name }}</h5>
-                <p>
-                  <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
-                </p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-  </div>
-  {% elif request.resolver_match.url_name == 'index_3' %}
-  <div class="container">
-      <div class="banner">
-        <h1>아우터</h1>
-        <img src="{% static 'images/products_banner_outer.jpg' %}" alt="banner">
-        <p>총 {{ products.count }}개의 상품이 있습니다.</p>
-        <a href="{% url 'products:create' %}">상품 등록</a>
-      </div>
-      <div class="row product-list w-100 justify-content-evenly">
-        {% for product in products %}
-          <div class="product-card col-2">
-            <a href="{% url 'products:detail' product.id %}">
-              <div class="imgBox">
-                {% for product_image in product.photo_set.all %}
-                  {% if forloop.counter == 1%}
-                    <img class="product-img" src="{{ product_image.image.url }}" alt="">
-                  {% endif %}
-                {% endfor %}
-                <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-              </div>
-              <div class="contentBox">
-                <h5 class="product-title">{{ product.name }}</h5>
-                <p>
-                  <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
-                </p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-  </div>
-  {% elif request.resolver_match.url_name == 'index_4' %}
-  <div class="container">
-      <div class="banner">
-        <h1>신발</h1>
-        <img src="{% static 'images/products_banner_shoes.jpg' %}" alt="banner">
-        <p>총 {{ products.count }}개의 상품이 있습니다.</p>
-        <a href="{% url 'products:create' %}">상품 등록</a>
-      </div>
-      <div class="row product-list w-100 justify-content-evenly">
-        {% for product in products %}
-          <div class="product-card col-2">
-            <a href="{% url 'products:detail' product.id %}">
-              <div class="imgBox">
-                {% for product_image in product.photo_set.all %}
-                  {% if forloop.counter == 1%}
-                    <img class="product-img" src="{{ product_image.image.url }}" alt="">
-                  {% endif %}
-                {% endfor %}
-                <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-              </div>
-              <div class="contentBox">
-                <h5 class="product-title">{{ product.name }}</h5>
-                <p>
-                  <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
-                </p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-  </div>
-{% elif request.resolver_match.url_name == 'index_5' %}
-  <div class="container">
-      <div class="banner">
-        <h1>악세사리</h1>
-        <p>총 {{ products.count }}개의 상품이 있습니다.</p>
-        <a href="{% url 'products:create' %}">상품 등록</a>
-      </div>
-      <div class="row product-list w-100 justify-content-evenly">
-        {% for product in products %}
-          <div class="product-card col-2">
-            <a href="{% url 'products:detail' product.id %}">
-              <div class="imgBox">
-                {% for product_image in product.photo_set.all %}
-                  {% if forloop.counter == 1%}
-                    <img class="product-img" src="{{ product_image.image.url }}" alt="">
-                  {% endif %}
-                {% endfor %}
-                <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-              </div>
-              <div class="contentBox">
-                <h5 class="product-title">{{ product.name }}</h5>
-                <p>
-                  <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
-                </p>
-              </div>
-            </a>
-          </div>
-        {% endfor %}
-      </div>
-  </div>
-{% endif %}  
-    {% comment %} <div class="product-card col-2">
+  <div class="row product-list w-100 justify-content-evenly">
+    {% for product in products %}
+    <div class="product-card col-2">
+      <a href="{% url 'products:detail' product.id %}">
+        <div class="imgBox">
+          {% for product_image in product.photo_set.all %}
+          {% if forloop.counter == 1%}
+          <img class="product-img" src="{{ product_image.image.url }}" alt="">
+          {% endif %}
+          {% endfor %}
+          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+        </div>
+        <div class="contentBox">
+          <h5 class="product-title">{{ product.name }}</h5>
+          <p>
+            <span class="sale">10%</span><span class="cost">{{ product.cost|intcomma }}</span>원
+          </p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+    <div class="product-card col-2">
       <div class="imgBox">
         <img class="product-img img-fluid" src="{% static 'images/5.png' %}" alt="">
         <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
@@ -204,119 +47,231 @@
         <p>
           <span class="sale">10%</span><span class="cost">89,100</span>원
         </p>
-
-  <div class="container">
-    <div class="banner">
-      <h1>상의</h1>
-      <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
-      <p>총 00개의 상품이 있습니다.</p>
-      <a href="{% url 'products:create' %}">상품 등록</a>
+      </div>
+    </div>
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/1.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+      </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
     </div>
 
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/2.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+      </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
+    </div>
+
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/3.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+      </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
+    </div>
+
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/4.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+      </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
+    </div>
+    <div class="product-card col-2">
+      <div class="imgBox">
+        <img class="product-img img-fluid" src="{% static 'images/5.png' %}" alt="">
+        <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+      </div>
+      <div class="contentBox">
+        <h5 class="product-title">플러피 플리스 후드 자켓</h5>
+        <p>
+          <span class="sale">10%</span><span class="cost">89,100</span>원
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% elif request.resolver_match.url_name == 'index_1' %}
 <div class="container">
   <div class="banner">
     <h1>상의</h1>
-    <img src="{% static 'images/products_banner.jpg' %}" alt="banner">
-    <p>총 00개의 상품이 있습니다.</p>
+    <img src="{% static 'images/products_banner_top.jpg' %}" alt="banner">
+    <p>총 {{ products.count }}개의 상품이 있습니다.</p>
     <a href="{% url 'products:create' %}">상품 등록</a>
   </div>
+  <div class="row product-list w-100 justify-content-evenly">
+    {% for product in products %}
+    <div class="product-card col-2">
+      <a href="{% url 'products:detail' product.id %}">
+        <div class="imgBox">
+          {% for product_image in product.photo_set.all %}
+          {% if forloop.counter == 1%}
+          <img class="product-img" src="{{ product_image.image.url }}" alt="">
+          {% endif %}
+          {% endfor %}
+          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+        </div>
+        <div class="contentBox">
+          <h5 class="product-title">{{ product.name }}</h5>
+          <p>
+            <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+          </p>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% elif request.resolver_match.url_name == 'index_2' %}
+  <div class="container">
+    <div class="banner">
+      <h1>하의</h1>
+      <img src="{% static 'images/products_banner_bottom.jpg' %}" alt="banner">
+      <p>총 {{ products.count }}개의 상품이 있습니다.</p>
+      <a href="{% url 'products:create' %}">상품 등록</a>
+    </div>
     <div class="row product-list w-100 justify-content-evenly">
       {% for product in products %}
-        <div class="product-card col-2">
-          <a href="{% url 'products:detail' product.id %}">
-            <div class="imgBox">
-              {% for product_image in product.photo_set.all %}
-                {% if forloop.counter == 1%}
-                  <img class="product-img" src="{{ product_image.image.url }}" alt="">
-                {% endif %}
-              {% endfor %}
-              <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-            </div>
-            <div class="contentBox">
-              <h5 class="product-title">{{ product.name }}</h5>
-              <p>
-                <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
-              </p>
-            </div>
-          </a>
-        </div>
+      <div class="product-card col-2">
+        <a href="{% url 'products:detail' product.id %}">
+          <div class="imgBox">
+            {% for product_image in product.photo_set.all %}
+            {% if forloop.counter == 1%}
+            <img class="product-img" src="{{ product_image.image.url }}" alt="">
+            {% endif %}
+            {% endfor %}
+            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <h5 class="product-title">{{ product.name }}</h5>
+            <p>
+              <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+            </p>
+          </div>
+        </a>
+      </div>
       {% endfor %}
-
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/5.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원
-          </p>
-        </div>
-      </div>
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/1.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원
-          </p>
-        </div>
-      </div>
-
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/2.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원
-          </p>
-        </div>
-      </div>
-
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/3.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원
-          </p>
-        </div>
-      </div>
-
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/4.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원
-          </p>
-        </div>
-      </div>
-      <div class="product-card col-2">
-        <div class="imgBox">
-          <img class="product-img img-fluid" src="{% static 'images/5.png' %}" alt="">
-          <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-        </div>
-        <div class="contentBox">
-          <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-          <p>
-            <span class="sale">10%</span><span class="cost">89,100</span>원
-          </p>
-        </div>
-      </div>
     </div>
-  </div> {% endcomment %}
+  </div>
+  {% elif request.resolver_match.url_name == 'index_3' %}
+  <div class="container">
+    <div class="banner">
+      <h1>아우터</h1>
+      <img src="{% static 'images/products_banner_outer.jpg' %}" alt="banner">
+      <p>총 {{ products.count }}개의 상품이 있습니다.</p>
+      <a href="{% url 'products:create' %}">상품 등록</a>
+    </div>
+    <div class="row product-list w-100 justify-content-evenly">
+      {% for product in products %}
+      <div class="product-card col-2">
+        <a href="{% url 'products:detail' product.id %}">
+          <div class="imgBox">
+            {% for product_image in product.photo_set.all %}
+            {% if forloop.counter == 1%}
+            <img class="product-img" src="{{ product_image.image.url }}" alt="">
+            {% endif %}
+            {% endfor %}
+            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <h5 class="product-title">{{ product.name }}</h5>
+            <p>
+              <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+            </p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% elif request.resolver_match.url_name == 'index_4' %}
+  <div class="container">
+    <div class="banner">
+      <h1>신발</h1>
+      <img src="{% static 'images/products_banner_shoes.jpg' %}" alt="banner">
+      <p>총 {{ products.count }}개의 상품이 있습니다.</p>
+      <a href="{% url 'products:create' %}">상품 등록</a>
+    </div>
+    <div class="row product-list w-100 justify-content-evenly">
+      {% for product in products %}
+      <div class="product-card col-2">
+        <a href="{% url 'products:detail' product.id %}">
+          <div class="imgBox">
+            {% for product_image in product.photo_set.all %}
+            {% if forloop.counter == 1%}
+            <img class="product-img" src="{{ product_image.image.url }}" alt="">
+            {% endif %}
+            {% endfor %}
+            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <h5 class="product-title">{{ product.name }}</h5>
+            <p>
+              <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+            </p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% elif request.resolver_match.url_name == 'index_5' %}
+  <div class="container">
+    <div class="banner">
+      <h1>악세사리</h1>
+      <p>총 {{ products.count }}개의 상품이 있습니다.</p>
+      <a href="{% url 'products:create' %}">상품 등록</a>
+    </div>
+    <div class="row product-list w-100 justify-content-evenly">
+      {% for product in products %}
+      <div class="product-card col-2">
+        <a href="{% url 'products:detail' product.id %}">
+          <div class="imgBox">
+            {% for product_image in product.photo_set.all %}
+            {% if forloop.counter == 1%}
+            <img class="product-img" src="{{ product_image.image.url }}" alt="">
+            {% endif %}
+            {% endfor %}
+            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+          </div>
+          <div class="contentBox">
+            <h5 class="product-title">{{ product.name }}</h5>
+            <p>
+              <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+            </p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+</div>
 {% endblock content %}
