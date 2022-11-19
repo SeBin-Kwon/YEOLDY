@@ -1,19 +1,4 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* img{
-  width: 100%;
-} */
-
-/* body{
-  width: 100%;
-  height: 100%;
-  background-color: #eee;
-  padding: 0 1.5rem;
-} */
 
 .qna-post{
   max-width: 90rem;
@@ -27,49 +12,24 @@
 }
 
 .qna-post_img{
+  margin-right: 30px;
   min-width: 35rem;
   max-width: 35rem;
   height: 35rem;
-  transform: translateX(-8rem);
   position: relative;
 }
 
-.qna-post_img img{
+.qna-post_img .qna-image{
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
-  border-radius: .8rem;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.065) */
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 
-/* .qna-post_img::before{
-  content: '';
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  box-shadow: .5rem .5rem 3rem 1px rgba(0, 0, 0, 0.05);
-  border-radius: .8rem;
-} */
-
-.qna-post_date span{
-  /* display: block; */
-  color: rgba(0, 0, 0, .5);
-  font-size: 18px;
-  font-weight: 600;
-  margin: .5rem 0;
-}
-
-.qna-post_title{
-  font-size: 2.5rem;
-  margin: 1.5rem 0 2rem;
-  text-transform: uppercase;
-}
-
-.qna-post_text{
-  margin-bottom: 3rem;
+.qna-post_text {
   font-size: 1.4rem;
   color: rgba(0, 0, 0, 0.7);
 }
@@ -146,22 +106,41 @@
 }
 
 .qna-post_info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
   width: 90%;
   height: 500px;
+  box-shadow: 5px 4px 14px 1px rgb(46 80 114 / 9%);
+}
+
+.post-title {
+  margin-bottom: 20px;
+  border-bottom: 1px solid lightgray;
 }
 
 .qna-post_info .qna-post_title{
   text-align: center;
 }
 
-.post-head{
-  height: 10%;
+.post-title{
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
 }
 
-.post-body{
-  height: 80%;
-  margin-top: 3rem;
+.qna-user-image {
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 1px solid lightgray;
+}
+
+.qna-post_username {
+  margin: 0;
+  font-size: 18px;
 }
