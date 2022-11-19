@@ -61,11 +61,15 @@ def mypage(request, pk):
     my_style = user.style_set.order_by("-pk")
     my_qna = user.qna_set.order_by("-pk")
     my_review = user.review_set.order_by("-pk")
+    like_style = user.like_style.all().order_by("-pk")
+    save_product = user.save_products.all().order_by("-pk")
     context = {
         "user": user,
         "my_style": my_style,
         "my_qna": my_qna,
         "my_review": my_review,
+        "like_style": like_style,
+        "save_product": save_product,
     }
     return render(request, "accounts/mypage.html", context)
 
