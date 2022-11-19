@@ -27,7 +27,12 @@
 }
 
 .title {
-    margin-bottom: 20px;
+    margin: 0;
+}
+
+.product-sub-review {
+    font-size: 16px;
+    font-weight: 300;
 }
 
 .costBox {
@@ -81,10 +86,17 @@
 
 .cart-btn {
     padding: 5px 10px;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
     background: #0DB295;
+    color: #fff;
+    transition: 0.3s;
+    font-weight: 600;
+}
+
+.cart-btn:hover {
+    background: #07937a;
 }
 
 ul{
@@ -111,13 +123,12 @@ ul{
 
 .tab_menu .list li.is_on .btn{
     color: #0DB295;
-    /* border: none; */
     border-radius: 0;
     border-bottom: 3px solid #0DB295;
 }
 
 .tab_menu .list .btn{
-    font-size: 20px;
+    font-size: 18px;
     border: none;
     width: 100%;
 }
@@ -134,12 +145,12 @@ ul{
     display: flex;
     justify-content: space-between;
     padding-bottom: 20px;
-    border-bottom: 1px solid #0DB295;
+    border-bottom: 1px solid lightgray;
 }
 
 .cont-title {
     font-size: 26px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .all-reviews {
@@ -164,6 +175,10 @@ ul{
     margin-bottom: 20px;
 }
 
+.review-grade-star {
+    color: #0DB295;
+}
+
 .create-review-box .review-grade-star {
     margin-right: 10px;
     font-size: 40px;
@@ -171,25 +186,26 @@ ul{
 }
 
 .create-review-box .review-grade-score {
+    color: #333;
     font-size: 40px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .create-review-link {
     display: inline-block;
-    width: 200px;
-    padding: 20px;
+    width: 180px;
+    padding: 10px;
     background:#0DB295;
     color: #fff;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 5px;
     transition: background 0.3s, color 0.3s;
 }
 
 .create-review-link:hover {
-    padding: 19px;
-    color: #000;
+    padding: 9px;
+    color: #0DB295;
     background: #fff;
     border: 1px solid #0DB295;
     transition: background 0.3s, color 0.3s;
@@ -273,4 +289,40 @@ ul{
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
+}
+
+.qna-link {
+    color: #000;
+    text-decoration: none;
+}
+
+.qna-link:hover {
+    color: #0DB295;
+}
+
+.create-qna-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+.create-qna-link {
+    display: inline-block;
+    width: 120px;
+    padding: 4px;
+    color: #0DB295;
+    background: #fff;
+    border: 1px solid #0DB295;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.create-qna-link:hover {
+    padding: 4px;
+    color: #000;
+    background:#0DB295;
+    color: #fff;
+    transition: background 0.3s, color 0.3s;
 }
