@@ -130,7 +130,7 @@ def database(request):
 
 def database_naver(request):
     jsonObject = json.loads(request.body)
-    username = jsonObject.get("id")
+    username = list(jsonObject.get("email").split("@"))[0]
 
     users = User.objects.filter(username=username)
     if users:
@@ -139,7 +139,7 @@ def database_naver(request):
 
     else:
         user = User()
-        user.username = jsonObject.get("id")
+        user.username = list(jsonObject.get("email").split("@"))[0]
 
         user.nickname = jsonObject.get("name")
         user.email = jsonObject.get("email")
