@@ -177,9 +177,12 @@
               <h4 class="grade">{{ review.get_grade_display }}
               </h4>
               <div class="d-flex align-items-center">
+
                 <div class="review-userimg me-3"
                   style="width:40px; height:40px; background-image:url({{review.user.profile_image.url}}); background-repeat:no-repeat; background-position-center; background-size:cover;">
                 </div>
+
+
                 <div>
                   <span class="review-user">
                     {{ review.user.username }}

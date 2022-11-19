@@ -197,6 +197,7 @@
             {% endif %}
             {% endfor %}
             <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+
           </div>
           <div class="contentBox">
             <h5 class="product-title">{{ product.name }}</h5>
@@ -206,6 +207,7 @@
           </div>
         </a>
       </div>
+      {{ product.average_rating }}
       {% endfor %}
     </div>
   </div>
