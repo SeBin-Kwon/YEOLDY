@@ -167,9 +167,9 @@ def order_list(request):
             "quantity": "{}".format(cart_quantity),                # 구매 물품 수량
             "total_amount": "{}".format(cart_total),        # 구매 물품 가격
             "tax_free_amount": "0",         # 구매 물품 비과세
-            "approval_url": "http://127.0.0.1:8000/kakaopay/approval/",
-            "cancel_url": "http://127.0.0.1:8000",
-            "fail_url": "http://127.0.0.1:8000",
+            "approval_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/kakaopay/approval/",
+            "cancel_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/",
+            "fail_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/",
         }
         print(params)
 
