@@ -33,7 +33,7 @@
           {% endif %}
           <!-- 유저 이름 -->
           <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
-            <p class="style-username">{{ style.user.username }}</p>
+            <p class="style-username">{{ style.user.username }}{{ style.hits }}</p>
           </a>
         </div>
 

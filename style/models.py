@@ -24,7 +24,7 @@ class Style(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     tag = MultiSelectField(choices=STYLE_CATEGORY)
     like_users = models.ManyToManyField(get_user_model(), related_name="like_style")
-
+    hits = models.PositiveIntegerField(default=0, verbose_name='조회수')
 
 class Photo(models.Model):
     style = models.ForeignKey(Style, on_delete=models.CASCADE, null=True)
