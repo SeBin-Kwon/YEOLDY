@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_safe
-
+from datetime import date, datetime, timedelta
 # Create your views here.
 
 
@@ -59,11 +59,26 @@ def qna(request):
 @login_required
 def qna_detail(request, qna_pk):
     qna = QnA.objects.get(pk=qna_pk)
+    qna_hits = get_object_or_404(QnA, pk=qna_pk)
     context = {
         "qna": qna,
+        "qna_hits":qna_hits,
     }
-    return render(request, "community/qna_detail.html", context)
+    response = render(request, "community/qna_detail.html", context)
+    expire_date, now = datetime.now(), datetime.now()
+    expire_date += timedelta(days=1)
+    expire_date = expire_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    expire_date -= now
+    max_age = expire_date.total_seconds()
 
+    cookie_value = request.COOKIES.get('hitboard_1', '_')
+
+    if f'_{qna_pk}_' not in cookie_value:
+        cookie_value += f'{qna_pk}_'
+        response.set_cookie('hitboard_1', value=cookie_value, max_age=max_age, httponly=True)
+        qna_hits.hits += 1
+        qna_hits.save()
+    return response
 
 @login_required
 def qna_update(request, qna_pk):
