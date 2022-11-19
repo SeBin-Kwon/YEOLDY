@@ -33,4 +33,5 @@ urlpatterns = [
     path("search/", views.search, name="search"),
     path("search_main/", views.search_main, name="search_main"),
     path("new_products/", views.new_products, name="new_products"),
+    path("best_products/", views.best_products, name="best_products"),#베스트 상품
 ]

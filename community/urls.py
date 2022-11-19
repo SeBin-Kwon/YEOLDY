@@ -31,5 +31,4 @@ urlpatterns = [
     path("<int:review_pk>/review_detail/", views.review_detail, name="review_detail"),
     path("<int:review_pk>/review_update/", views.review_update, name="review_update"),
     path("<int:review_pk>/review_delete/", views.review_delete, name="review_delete"),
-    path("best_products/", views.best_products, name="best_products"),#베스트 상품
 ]

@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from .form import ProductsForm
 from django.db.models import F  # 검색 순위 조회수 증가
 from django.db.models import Q  # 검색 기능
-
+from community.models import Review as review
 # Create your views here.
 
 # 상품 리스트 기능(메인페이지로 대체?)카테고리전체
@@ -211,3 +211,7 @@ def new_products(request):
         "new_products": new_products,
     }
     return render(request, "products/new_products.html", context)
+
+# 베스트 상품
+def best_products(request):
+    return render(request, "products/best_products.html")

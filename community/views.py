@@ -202,11 +202,3 @@ def review_delete(request, review_pk):
         messages.success(request, "작성자만 삭제가 가능함")
         return redirect("community:review_index")
 
-
-# 베스트 상품
-def best_products(request):
-    best_products = Review.objects.all().order_by("grade")
-    context = {
-        "best_products": best_products,
-    }
-    return render(request, "community/best_products.html", context)
