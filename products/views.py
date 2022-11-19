@@ -214,4 +214,18 @@ def new_products(request):
 
 # 베스트 상품
 def best_products(request):
-    return render(request, "products/best_products.html")
+    best_products = Products.objects.filter(average_rating__isnull=False).order_by("-average_rating")[:5]#top5/NULL제외
+    best_products_1 = Products.objects.filter(average_rating__isnull=False,category="상의").order_by("-average_rating")[:5]#상의top/5/NULL제외
+    best_products_2 = Products.objects.filter(average_rating__isnull=False,category="하의").order_by("-average_rating")[:5]#하의top5/NULL제외
+    best_products_3 = Products.objects.filter(average_rating__isnull=False,category="아우터").order_by("-average_rating")[:5]#아우터top5/NULL제외
+    best_products_4 = Products.objects.filter(average_rating__isnull=False,category="신발").order_by("-average_rating")[:5]#신발top5/NULL제외
+    best_products_5 = Products.objects.filter(average_rating__isnull=False,category="악세사리").order_by("-average_rating")[:5]#악세사리top5/NULL제외
+    context = {
+        "best_products": best_products,
+        "best_products_1":best_products_1,
+        "best_products_2":best_products_2,
+        "best_products_3":best_products_3,
+        "best_products_4":best_products_4,
+        "best_products_5":best_products_5,
+    }
+    return render(request, "products/best_products.html", context)
