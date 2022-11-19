@@ -53,7 +53,9 @@ class Products(models.Model):
         format="JPEG",
     )
     save_users = models.ManyToManyField(get_user_model(), related_name="save_products")
-    new_product  = models.BooleanField(default=False)
+    new_product = models.BooleanField(default=False)
+    average_rating = models.IntegerField(null=True)
+
 
 class Photo(models.Model):
     product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)

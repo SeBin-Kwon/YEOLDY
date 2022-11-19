@@ -126,6 +126,7 @@ def review_index(request):
     return render(request, "community/review_index.html", context)
 
 
+@login_required
 def review_create(request, product_pk):
     if request.method == "POST":
         review_form = ReviewForm(request.POST, request.FILES)
