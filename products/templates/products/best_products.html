@@ -1,3 +1,57 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
-{% block content %}{% endblock content %}
+{% block content %}
+<div>
+<h4>전체</h4>
+  {% for best_product in best_products %}{% comment %} 전체 top5 {% endcomment %}
+    <div>
+      <a href="{% url 'products:detail' best_product.pk %}">{{ best_product.name }}{{ best_product.average_rating }}</a>
+    </div>
+  {% endfor %}
+</div>
+<div>
+<h4>상의</h4>
+  {% for best_product in best_products_1 %}{% comment %} 상의 top5 {% endcomment %}
+  
+    <div>
+      <a href="{% url 'products:detail' best_product.pk %}">{{ best_product.name }}{{ best_product.average_rating }}</a>
+    </div>
+  {% endfor %}
+</div>
+<div>
+<h4>하의</h4>
+  {% for best_product in best_products_2 %}{% comment %} 하의 top5 {% endcomment %}
+  
+    <div>
+      <a href="{% url 'products:detail' best_product.pk %}">{{ best_product.name }}{{ best_product.average_rating }}</a>
+    </div>
+  {% endfor %}
+</div>
+<div>
+<h4>아우터</h4>
+  {% for best_product in best_products_3 %}{% comment %} 아우터 top5 {% endcomment %}
+  
+    <div>
+      <a href="{% url 'products:detail' best_product.pk %}">{{ best_product.name }}{{ best_product.average_rating }}</a>
+    </div>
+  {% endfor %}
+</div>
+<div>
+<h4>신발</h4>
+  {% for best_product in best_products_4 %}{% comment %} 신발 top5 {% endcomment %}
+
+    <div>
+      <a href="{% url 'products:detail' best_product.pk %}">{{ best_product.name }}{{ best_product.average_rating }}</a>
+    </div>
+  {% endfor %}
+</div>
+<div>
+<h4>악세사리</h4>
+  {% for best_product in best_products_5 %}{% comment %} 악세사리 top5 {% endcomment %}
+  
+    <div>
+      <a href="{% url 'products:detail' best_product.pk %}">{{ best_product.name }}{{ best_product.average_rating }}</a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock content %}
