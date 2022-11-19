@@ -3,167 +3,169 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/style_form.css' %}">
+<link rel="stylesheet" href="{% static 'css/style_form.css' %}">
 {% endblock css %}
 
 {% block content %}
 
-  {% if request.resolver_match.url_name == 'create' %}
-    <div class="create-form">
-      <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="user-details">
+{% if request.resolver_match.url_name == 'create' %}
+<div class="create-form">
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="user-details">
 
-          <div class="row">
+      <div class="row">
 
-            <div class="col-6">
-              <div class="input-box">
-                <label class="details" for="id_title">Title</label>
-                <input type="text" name="title" maxlength="20" placeholder="Title" required="required" id="id_title">
-              </div>
-
-              <div class="input-box">
-                <label class="details" for="id_image">Image</label>
-                <input type="file" name="image" accept="image/*" id="id_image">
-              </div>
-            </div>
-
-            <div class="col-6">
-              <div class="input-box">
-                <label class="details" for="id_contnet">Content</label>
-                <textarea name="content" id="id_content" cols="40" rows="10" placeholder="Content" required="required"></textarea>
-              </div>
-            </div>
-
+        <div class="col-6">
+          <div class="input-box">
+            <label class="details" for="id_title">Title</label>
+            <input type="text" name="title" maxlength="20" placeholder="Title" required="required" id="id_title">
           </div>
 
-          <label class="details">Tag</label>
-
-          <div class="box">
-            <div id="id_tag">
-              <label for="id_tag_0">
-                <input type="checkbox" name="tag" id="id_tag_0" value="캐주얼룩">
-                <span>#캐주얼룩</span>
-              </label>
-            </div>
-
-            <div class="id_tag">
-              <label for="id_tag_1">
-                <input type="checkbox" name="tag" id="id_tag_1" value="데이트룩">
-                <span>#데이트룩</span>
-              </label>
-            </div>
-
-            <div class="id_tag">
-              <label for="id_tag_2">
-                <input type="checkbox" name="tag" id="id_tag_2" value="포멀룩">
-                <span>#포멀룩</span>
-              </label>
-            </div>
-
-            <div class="id_tag">
-              <label for="id_tag_3">
-                <input type="checkbox" name="tag" id="id_tag_3" value="스트릿룩">
-                <span>#스트릿룩</span>
-              </label>
-            </div>
-
-            <div class="id_tag">
-              <label for="id_tag_4">
-                <input type="checkbox" name="tag" id="id_tag_4" value="걸리쉬룩">
-                <span>#걸리쉬룩</span>
-              </label>
-            </div>
-
+          <div class="input-box">
+            <label class="details" for="id_image">image</label>
+            <input type="file" name="imgs" multiple="multiple">
           </div>
-
-          <div class="button">
-            <input type="submit" value="제출">
-          </div>
-
         </div>
-      </form>
+
+        <div class="col-6">
+          <div class="input-box">
+            <label class="details" for="id_contnet">Content</label>
+            <textarea name="content" id="id_content" cols="40" rows="10" placeholder="Content"
+              required="required"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <label class="details">Tag</label>
+
+      <div class="box">
+        <div id="id_tag">
+          <label for="id_tag_0">
+            <input type="checkbox" name="tag" id="id_tag_0" value="캐주얼룩">
+            <span>#캐주얼룩</span>
+          </label>
+        </div>
+
+        <div class="id_tag">
+          <label for="id_tag_1">
+            <input type="checkbox" name="tag" id="id_tag_1" value="데이트룩">
+            <span>#데이트룩</span>
+          </label>
+        </div>
+
+        <div class="id_tag">
+          <label for="id_tag_2">
+            <input type="checkbox" name="tag" id="id_tag_2" value="포멀룩">
+            <span>#포멀룩</span>
+          </label>
+        </div>
+
+        <div class="id_tag">
+          <label for="id_tag_3">
+            <input type="checkbox" name="tag" id="id_tag_3" value="스트릿룩">
+            <span>#스트릿룩</span>
+          </label>
+        </div>
+
+        <div class="id_tag">
+          <label for="id_tag_4">
+            <input type="checkbox" name="tag" id="id_tag_4" value="걸리쉬룩">
+            <span>#걸리쉬룩</span>
+          </label>
+        </div>
+
+      </div>
+
+      <div class="button">
+        <input type="submit" value="제출">
+      </div>
+
     </div>
+  </form>
+</div>
 
-  {% else %}
-    <div class="create-form">
+{% else %}
+<div class="create-form">
 
-      <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+  <form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
 
-        <div class="user-details">
+    <div class="user-details">
 
-          <div class="row">
+      <div class="row">
 
-            <div class="col-6">
-              <div class="input-box">
-                <label class="details" for="id_title">Title</label>
-                <input type="text" name="title" maxlength="20" placeholder="Title" required="required" id="id_title" value="{{ style.title }}">
-              </div>
-
-              <div class="input-box">
-                <label class="details" for="id_image">Image</label>
-                <input type="file" name="image" accept="image/*" id="id_image">
-              </div>
-            </div>
-
-            <div class="col-6">
-              <div class="input-box">
-                <label class="details" for="id_contnet">Content</label>
-                <textarea name="content" id="id_content" cols="40" rows="10" placeholder="Content" required="required">{{style.content}}</textarea>
-              </div>
-            </div>
-
+        <div class="col-6">
+          <div class="input-box">
+            <label class="details" for="id_title">Title</label>
+            <input type="text" name="title" maxlength="20" placeholder="Title" required="required" id="id_title"
+              value="{{ style.title }}">
           </div>
 
-          <label class="details">Tag</label>
-          <div class="box">
-            <div id="id_tag">
-              <label for="id_tag_0">
-                <input type="checkbox" name="tag" id="id_tag_0" value="캐주얼룩">
-                <span>#캐주얼룩</span>
-              </label>
-            </div>
-
-            <div for="id_tag">
-              <label for="id_tag_1">
-                <input type="checkbox" name="tag" id="id_tag_1" value="데이트룩">
-                <span>#데이트룩</span>
-              </label>
-            </div>
-
-            <div for="id_tag">
-              <label for="id_tag_2">
-                <input type="checkbox" name="tag" id="id_tag_2" value="포멀룩">
-                <span>#포멀룩</span>
-              </label>
-            </div>
-
-            <div for="id_tag">
-              <label for="id_tag_3">
-                <input type="checkbox" name="tag" id="id_tag_3" value="스트릿룩">
-                <span>#스트릿룩</span>
-              </label>
-            </div>
-
-            <div for="id_tag">
-              <label for="id_tag_4">
-                <input type="checkbox" name="tag" id="id_tag_4" value="걸리쉬룩">
-                <span>#걸리쉬룩</span>
-              </label>
-            </div>
-
+          <div class="input-box">
+            <label class="details" for="id_image">이미지</label>
+            <input type="file" name="imgs" multiple="multiple">
           </div>
 
-          <div class="button">
-            <input type="submit" value="제출">
+          <div class="col-6">
+            <div class="input-box">
+              <label class="details" for="id_contnet">Content</label>
+              <textarea name="content" id="id_content" cols="40" rows="10" placeholder="Content"
+                required="required">{{style.content}}</textarea>
+            </div>
           </div>
 
         </div>
 
-      </form>
+        <label class="details">Tag</label>
+        <div class="box">
+          <div id="id_tag">
+            <label for="id_tag_0">
+              <input type="checkbox" name="tag" id="id_tag_0" value="캐주얼룩">
+              <span>#캐주얼룩</span>
+            </label>
+          </div>
 
-    </div>
-  {% endif %}
+          <div for="id_tag">
+            <label for="id_tag_1">
+              <input type="checkbox" name="tag" id="id_tag_1" value="데이트룩">
+              <span>#데이트룩</span>
+            </label>
+          </div>
+
+          <div for="id_tag">
+            <label for="id_tag_2">
+              <input type="checkbox" name="tag" id="id_tag_2" value="포멀룩">
+              <span>#포멀룩</span>
+            </label>
+          </div>
+
+          <div for="id_tag">
+            <label for="id_tag_3">
+              <input type="checkbox" name="tag" id="id_tag_3" value="스트릿룩">
+              <span>#스트릿룩</span>
+            </label>
+          </div>
+
+          <div for="id_tag">
+            <label for="id_tag_4">
+              <input type="checkbox" name="tag" id="id_tag_4" value="걸리쉬룩">
+              <span>#걸리쉬룩</span>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="button">
+          <input type="submit" value="제출">
+        </div>
+
+      </div>
+
+  </form>
+
+</div>
+{% endif %}
 
 {% endblock content %}
