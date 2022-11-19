@@ -3,147 +3,161 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/community_tab.css' %}">
-  <script src="https://kit.fontawesome.com/44d20d6c0e.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'css/community_tab.css' %}">
+<script src="https://kit.fontawesome.com/44d20d6c0e.js" crossorigin="anonymous"></script>
 {% endblock css %}
 
 {% block content %}
 
-  <div class="container">
-    <!-- <div class="main-title">고객센터</div> -->
-    <div class="content">
-      <input type="radio" name="indicator" checked="checked" id="home">
-      <input type="radio" name="indicator" id="blog">
-      <input type="radio" name="indicator" id="help">
-      <input type="radio" name="indicator" id="code">
-      <input type="radio" name="indicator" id="about">
-      <div class="list">
-        <label for="home" class="home">
-          FAQ
-        </label>
-        <label for="blog" class="blog">
-          Q&A
-        </label>
-        <label for="help" class="help">
-          CHAT
-        </label>
-        {% comment %} <label for="code" class="code">
-          리뷰
-        </label> {% endcomment %}
+<div class="container">
+  <!-- <div class="main-title">고객센터</div> -->
+  <div class="content">
+    <input type="radio" name="indicator" checked="checked" id="home">
+    <input type="radio" name="indicator" id="blog">
+    <input type="radio" name="indicator" id="help">
+    <input type="radio" name="indicator" id="code">
+    <input type="radio" name="indicator" id="about">
+    <div class="list">
+      <label for="home" class="home">
+        FAQ
+      </label>
+      <label for="blog" class="blog">
+        Q&A
+      </label>
+      <label for="help" class="help">
+        CHAT
+      </label>
+      {% comment %} <label for="code" class="code">
+        리뷰
+      </label> {% endcomment %}
 
-        <div class="indicator"></div>
-      </div>
-      <div class="text-content">
+      <div class="indicator"></div>
+    </div>
+    <div class="text-content">
 
-        <!-- 자주 묻는 질문 -->
-        <div class="home text">
-          <div class="title">FAQ</div>
-          <div class="qnacontainer">
-            <div class="tab">
-              <input type="radio" name="acc" id="acc1">
-              <label for="acc1">
-                <h2>01</h2>
-                <h3>How do I apply?</h3>
-              </label>
-              <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias voluptate, porro ea sequi nostrum!</p>
-              </div>
+      <!-- 자주 묻는 질문 -->
+      <div class="home text">
+        <div class="title">FAQ</div>
+        <div class="qnacontainer">
+          <div class="tab">
+            <input type="radio" name="acc" id="acc1">
+            <label for="acc1">
+              <h2>01</h2>
+              <h3>How do I apply?</h3>
+            </label>
+            <div class="content">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto
+                reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias
+                voluptate, porro ea sequi nostrum!</p>
             </div>
-            <div class="tab">
-              <input type="radio" name="acc" id="acc2">
-              <label for="acc2">
-                <h2>02</h2>
-                <h3>Lost or forgotten your password?</h3>
-              </label>
-              <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias voluptate, porro ea sequi nostrum!</p>
-              </div>
+          </div>
+          <div class="tab">
+            <input type="radio" name="acc" id="acc2">
+            <label for="acc2">
+              <h2>02</h2>
+              <h3>Lost or forgotten your password?</h3>
+            </label>
+            <div class="content">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto
+                reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias
+                voluptate, porro ea sequi nostrum!</p>
             </div>
-            <div class="tab">
-              <input type="radio" name="acc" id="acc3">
-              <label for="acc3">
-                <h2 style="padding: 0 8px;">03</h2>
-                <h3>How can I make a change to my application?</h3>
-              </label>
-              <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias voluptate, porro ea sequi nostrum!</p>
-              </div>
+          </div>
+          <div class="tab">
+            <input type="radio" name="acc" id="acc3">
+            <label for="acc3">
+              <h2 style="padding: 0 8px;">03</h2>
+              <h3>How can I make a change to my application?</h3>
+            </label>
+            <div class="content">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto
+                reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias
+                voluptate, porro ea sequi nostrum!</p>
             </div>
-            <div class="tab">
-              <input type="radio" name="acc" id="acc4">
-              <label for="acc4">
-                <h2>04</h2>
-                <h3>How can I update my name?</h3>
-              </label>
-              <div class="content">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias voluptate, porro ea sequi nostrum!</p>
-              </div>
+          </div>
+          <div class="tab">
+            <input type="radio" name="acc" id="acc4">
+            <label for="acc4">
+              <h2>04</h2>
+              <h3>How can I update my name?</h3>
+            </label>
+            <div class="content">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus facilis aspernatur esse iusto
+                reiciendis eaque error vel culpa asperiores perspiciatis ut autem dignissimos, beatae, molestias
+                voluptate, porro ea sequi nostrum!</p>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- 문의하기 -->
-        <div class="blog text">
-          <div class="title">
-            <div class="title">Q&N</div>
+      <!-- 문의하기 -->
+      <div class="blog text">
+        <div class="title">
+          <div class="title">Q&N</div>
 
-          </div>
-          <div class="table_section">
-            <table>
-              <thead>
-                <tr>
+        </div>
+        <div class="table_section">
+          <table>
+            <thead>
+              <tr>
 
-                  <th>Product</th>
-                  <th>title</th>
-                  <th>User</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for q in qna %}
-                {% if q.password %}
-                  <tr onClick="location.href='{% url 'community:qna_password' q.pk %}'">
+                <th>Product</th>
+                <th>title</th>
+                <th>User</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for q in qna %}
+              {% if q.password %}
+              <tr onClick="location.href='{% url 'community:qna_password' q.pk %}'">
                 {% else %}
-                  <tr onClick="location.href='{% url 'community:qna_detail' q.pk %}'">
+              <tr onClick="location.href='{% url 'community:qna_detail' q.pk %}'">
                 {% endif %}
 
+                {% if q.image %}
                 <td><img src="{{ q.image.url }}" alt=""></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+
                 <td>{{ q.title }}</td>
-                    <td>{{ q.user.nickname }}</td>
-                    <td>{{ q.user.email }}</td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
-          <div class="link-box">
-            <a class="qna-link" href="{% url 'community:qna' %}">Q&A 작성</a>
-          </div>
+                <td>{{ q.user.nickname }}</td>
+                <td>{{ q.user.email }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-
-        <!-- 실시간 채팅 -->
-        <div class="help text">
-          <div class="title">Help content</div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid nemo non quaerat dolorem aut fuga amet voluptas nostrum ut veniam debitis, nam accusamus officia earum, saepe sit ea odit itaque!</p>
+        <div class="link-box">
+          <a class="qna-link" href="{% url 'community:qna' %}">Q&A 작성</a>
         </div>
-
       </div>
+
+      <!-- 실시간 채팅 -->
+      <div class="help text">
+        <div class="title">Help content</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid nemo non quaerat dolorem aut fuga amet
+          voluptas nostrum ut veniam debitis, nam accusamus officia earum, saepe sit ea odit itaque!</p>
+      </div>
+
     </div>
   </div>
+</div>
 
-  <script>
-    let popup = document.getElementById("popup");
+<script>
+  let popup = document.getElementById("popup");
 
-    function openPopup() {
-      popup
-        .classList
-        .add("open-popup");
-    }
+  function openPopup() {
+    popup
+      .classList
+      .add("open-popup");
+  }
 
-    function closePopup() {
-      popup
-        .classList
-        .remove("open-popup");
-    }
-  </script>
+  function closePopup() {
+    popup
+      .classList
+      .remove("open-popup");
+  }
+</script>
 {% endblock content %}

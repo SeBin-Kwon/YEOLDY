@@ -15,11 +15,12 @@ class QnA(models.Model):
     image = models.FileField(
         upload_to="images/",
         validators=[FileExtensionValidator(allowed_extensions=["jpg", "png"])],
+        blank=True,
     )
     solve = models.BooleanField(default=False)
     Product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    password = models.CharField(max_length=20, default=None, null=True)
+    password = models.CharField(max_length=20, blank=True, null=True)
 
 
 class Review(models.Model):
