@@ -15,37 +15,48 @@ def index(request):
         "products": products,
     }
     return render(request, "products/index.html", context)
-#카테고리 별
+
+
+# 카테고리 별
 def index_1(request):
     products = Products.objects.filter(category="상의")
     context = {
         "products": products,
     }
     return render(request, "products/index.html", context)
+
+
 def index_2(request):
     products = Products.objects.filter(category="하의")
     context = {
         "products": products,
     }
     return render(request, "products/index.html", context)
+
+
 def index_3(request):
     products = Products.objects.filter(category="아우터")
     context = {
         "products": products,
     }
     return render(request, "products/index.html", context)
+
+
 def index_4(request):
     products = Products.objects.filter(category="신발")
     context = {
         "products": products,
     }
-    return render(request, "products/index.html", context) 
+    return render(request, "products/index.html", context)
+
+
 def index_5(request):
     products = Products.objects.filter(category="악세사리")
     context = {
         "products": products,
     }
     return render(request, "products/index.html", context)
+
 
 # 상품 등록 기능
 @login_required
@@ -105,6 +116,12 @@ def detail(request, pk):
     product = Products.objects.get(pk=pk)
     product_images = product.photo_set.all()
     reviews = product.review_set.all().order_by("-pk")
+    points = 0
+    for review in reviews:
+        points += review.grade
+    if len(reviews):
+        points = round(points / len(reviews), 1)
+
     qna = product.qna_set.all().order_by("-pk")
     colors = list(str(product.color).split(", "))
     sizes = list(str(product.size).split(", "))
@@ -116,6 +133,7 @@ def detail(request, pk):
         "colors": colors,
         "sizes": sizes,
         "product_images": product_images,
+        "points": points,
     }
     return render(request, "products/detail.html", context)
 
@@ -161,9 +179,9 @@ def search(request):
     if search_create:
         search_exist = Search.objects.get(search_text=search)
         if len(products):
-            search_exist.search_count += 1#있다면 +1
+            search_exist.search_count += 1  # 있다면 +1
         else:
-            search_exist.search_count -= 1#없다면 -1
+            search_exist.search_count -= 1  # 없다면 -1
         search_exist.save()
     else:
         Search.objects.create(search_text=search)
