@@ -125,12 +125,12 @@ def detail(request, pk):
     product.average_rating = points
     product.save()
 
-    qna = product.qna_set.all().order_by("-pk")
+    qnas = product.qna_set.all().order_by("-pk")
     colors = list(str(product.color).split(", "))
     sizes = list(str(product.size).split(", "))
     context = {
         "reviews": reviews,
-        "qna": qna,
+        "qnas": qnas,
         "product": product,
         "review_list": reviews,
         "colors": colors,
