@@ -14,7 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script type="text/javascript">
-  var naver_id_login = new naver_id_login("zjLdxtDw_nRiWWquH1wK", "http://127.0.0.1:8000/accounts/callback/");
+  var naver_id_login = new naver_id_login("zjLdxtDw_nRiWWquH1wK", "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/accounts/callback/");
   // 접근 토큰 값 출력
   // $('body').append('<h4>접속토큰:'+naver_id_login.oauthParams.access_token+'</h4>');
   // 네이버 사용자 프로필 조회
@@ -50,7 +50,7 @@
     }).then(response => {
     // location.reload();
     //window.close()
-    window.location.replace("http://127.0.0.1:8000/");
+    window.location.replace("http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/");
     })
   }
 </script>
