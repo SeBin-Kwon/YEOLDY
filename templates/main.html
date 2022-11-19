@@ -96,7 +96,9 @@
         </li>
         <li>
           <a href="{% url 'cart:cart_detail' %}">
-            <i class="bi bi-cart"></i>
+            <i class="bi bi-cart position-relative"><span class="position-absolute translate-middle badge rounded-pill top-0 start-100 text-center" style="--bs-badge-font-size: 0.55rem !important; font-weight:500; background-color: #0DB295;">
+              {{ user.cartitem_set.all.count }}
+            </span></i>
           </a>
         </li>
         {% if user.is_authenticated %}
@@ -495,7 +497,7 @@
         <p>대표이사 : 이우열<br>
           소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
         <p>
-          문의 : contact@yeoldy.com / 02-123-4567<br>
+          문의 : contact@yeoldy.com / 1544-1010<br>
           평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
       </div>
     </footer>
