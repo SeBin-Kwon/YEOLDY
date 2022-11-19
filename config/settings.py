@@ -72,9 +72,9 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
-    "storages",
-    "daphne",
     "channels",
+    "daphne",
+    "storages",
     "chat",
     "accounts",
     "products",

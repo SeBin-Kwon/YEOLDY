@@ -17,6 +17,7 @@ def index(request):
 
 
 # 상품에 대한 문의
+@login_required
 def qna_create(request, product_pk):
     if request.method == "POST":
         qna_form = QnaForm(request.POST, request.FILES)
@@ -36,6 +37,7 @@ def qna_create(request, product_pk):
 
 
 # 상품이 아닌 일반적인 문의
+@login_required
 def qna(request):
     if request.method == "POST":
         qna_form = QnaForm_2(request.POST, request.FILES)
@@ -99,15 +101,15 @@ def qna_delete(request, qna_pk):
 
 def qna_password(request, qna_pk):
     qna = get_object_or_404(QnA, pk=qna_pk)
-    if request.user == qna.user:
-        if request.method == "POST":
-            if request.POST["password"] == qna.password:
-                return redirect("community:qna_detail", qna_pk)
 
-            else:
-                return redirect("community:index")
+    if request.method == "POST":
+        if request.POST["password"] == qna.password:
+            return redirect("community:qna_detail", qna_pk)
+
         else:
-            return render(request, "community/qna_password.html")
+            return redirect("community:index")
+    else:
+        return render(request, "community/qna_password.html")
 
 
 # 리뷰
