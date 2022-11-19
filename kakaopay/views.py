@@ -83,9 +83,9 @@ def approval(request):
             color = cart_items[i].color,
             size = cart_items[i].size,
             quantity = cart_items[i].quantity,
-            location_zipcode = cart_items[i].zipcode,
-            location_address = cart_items[i].location_address,
-            location_detail = cart_items[i].location_detail
+            location_zipcode = user_data.location_zipcode,
+            location_address = user_data.location_address,
+            location_detail = user_data.location_detail
         )
 
     #[장바구니에서 삭제]
@@ -144,6 +144,14 @@ def order_list(request):
             order = form.save(commit=False)
             order.user = request.user
             order.save()
+
+        print('test')
+        now_orderlist = OrderList.objects.last()
+        now_orderlist.location_zipcode = request.POST["zipcode"]
+        now_orderlist.location_address = request.POST["address"]
+        now_orderlist.location_detail = request.POST["detail"]
+        now_orderlist.save()
+        print(now_orderlist)
         
         #카카오페이 연결
         URL = 'https://kapi.kakao.com/v1/payment/ready'
