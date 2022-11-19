@@ -41,10 +41,12 @@ def qna_create(request, product_pk):
 def qna(request):
     if request.method == "POST":
         qna_form = QnaForm_2(request.POST, request.FILES)
+
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
             qna.save()
+
             return redirect("community:index")
     else:
         qna_form = QnaForm_2()
