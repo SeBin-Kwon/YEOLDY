@@ -1,6 +1,7 @@
 window.onresize = function() {
   const width = window.innerWidth;
   let nav = document.getElementById('nav');
+  const text = document.querySelector('text');
   // const height = window.innerHeight;	
   
   console.log(width);
