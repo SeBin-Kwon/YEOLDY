@@ -9,7 +9,7 @@ from django.db.models import Q  # 검색 기능
 import json
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
-
+from datetime import date, datetime, timedelta
 
 def index(request):
     styles = Style.objects.order_by("-pk")
@@ -72,6 +72,7 @@ def update(request, pk):
 
 def detail(request, pk):
     style = Style.objects.get(pk=pk)
+    style_hits = get_object_or_404(Style, pk=pk)
     style_image = style.photo_set.all()
     review_form = ReviewForm()
     reviews = style.style_review_set.all().order_by("-pk")
@@ -81,9 +82,23 @@ def detail(request, pk):
         "reviews": reviews,
         "style_images": style_image,
     }
-    return render(request, "style/detail.html", context)
+    response = render(request, "style/detail.html", context)
 
+    expire_date, now = datetime.now(), datetime.now()
+    expire_date += timedelta(days=1)
+    expire_date = expire_date.replace(hour=0, minute=0, second=0, microsecond=0)
+    expire_date -= now
+    max_age = expire_date.total_seconds()
 
+    cookie_value = request.COOKIES.get('hitboard', '_')
+
+    if f'_{pk}_' not in cookie_value:
+        cookie_value += f'{pk}_'
+        response.set_cookie('hitboard', value=cookie_value, max_age=max_age, httponly=True)
+        style_hits.hits += 1
+        style_hits.save()
+    return response
+    
 @login_required
 def delete(request, pk):
     style = Style.objects.get(pk=pk)

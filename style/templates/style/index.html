@@ -7,7 +7,7 @@
 {% endblock css %}
 
 {%block content %}
-  <div class="style-box row">
+  <div class="style-box">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h1 class="style-title">Style</h1>
       <a class="style-create-link" href="{% url 'style:create' %}">
@@ -15,43 +15,45 @@
           <i class="bi bi-plus-lg"></i>My style 공유</h5>
       </a>
     </div>
-    {% for style in styles %}
-      <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
-        <div class="style-card">
-          <!-- 카드 사진 -->
-          {% for img in style.photo_set.all %}
-            {% if forloop.counter == 1%}
-              <a href="{% url 'style:detail' style.pk %}">
-                <img src="{{ img.image.url }}" class="style-img card-img-top" alt="...">
-              </a>
-            {% endif %}
-          {% endfor %}
+    <div class="row justify-content-center">
+      {% for style in styles %}
+        <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
+          <div class="style-card">
+            <!-- 카드 사진 -->
+            {% for img in style.photo_set.all %}
+              {% if forloop.counter == 1%}
+                <a href="{% url 'style:detail' style.pk %}">
+                  <img src="{{ img.image.url }}" class="style-img card-img-top" alt="...">
+                </a>
+              {% endif %}
+            {% endfor %}
 
-          <!-- 유저 -->
-          <div class="style-user">
-            <div class="d-flex align-items-center">
-              <a class="d-flex align-items-center style-link" href="{% url 'accounts:mypage' style.user.pk %}">
-                <!-- 프사 -->
-                {% if style.user.profile_image %}
-                  <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')"></div>
-                {% else %}
+            <!-- 유저 -->
+            <div class="style-user">
+              <div class="d-flex align-items-center">
+                <a class="d-flex align-items-center style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+                  <!-- 프사 -->
+                  {% if style.user.profile_image %}
+                    <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')"></div>
+                  {% else %}
 
-                  <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
-                {% endif %}
+                    <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+                  {% endif %}
 
-                <!-- 유저 이름 -->
-                <h5 class="style-username">{{ style.user.username }}</h5>
-              </a>
-            </div>
+                  <!-- 유저 이름 -->
+                  <h5 class="style-username">{{ style.user.username }}</h5>
+                </a>
+              </div>
 
-            <div class="like">
-              <i class="bi bi-heart-fill">
-                <span>{{ style.like_users.count }}</span></i>
+              <div class="like">
+                <i class="bi bi-heart-fill">
+                  <span>{{ style.like_users.count }}</span></i>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
   </div>
 
   <script>
