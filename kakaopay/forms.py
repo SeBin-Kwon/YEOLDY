@@ -9,11 +9,11 @@ class OrderlistForm(forms.ModelForm):
             "location_name",
             "order_name",
             "phone_number",
-            "order_request"
+            "order_request",
         ]
         labels = {
             "location_name": "배송지명",
             "order_name": "주문자",
             "phone_number": "연락처",
-            "order_request": "배송시 요청사항"
+            "order_request": "배송시 요청사항",
         }
