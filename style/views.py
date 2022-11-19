@@ -90,11 +90,11 @@ def detail(request, pk):
     expire_date -= now
     max_age = expire_date.total_seconds()
 
-    cookie_value = request.COOKIES.get('hitboard', '_')
+    cookie_value = request.COOKIES.get('hitboard_2', '_')
 
     if f'_{pk}_' not in cookie_value:
         cookie_value += f'{pk}_'
-        response.set_cookie('hitboard', value=cookie_value, max_age=max_age, httponly=True)
+        response.set_cookie('hitboard_2', value=cookie_value, max_age=max_age, httponly=True)
         style_hits.hits += 1
         style_hits.save()
     return response
