@@ -41,6 +41,7 @@
 }
 
 .style-user {
+  width: 81%;
   position: absolute;
   bottom: 20px;
   display: flex;
@@ -60,6 +61,8 @@
 }
 
 .style-username {
+  display: flex;
+  justify-content: space-between;
   font-size: 22px;
   font-weight: 400;
   z-index: 999;
@@ -75,11 +78,6 @@
   border: solid 1px rgba(193, 193, 193, 0.704);
 }
 
-.like {
-  position: absolute;
-  right: 25px;
-  bottom: 15px;
-}
 
 .like i span {
   text-align: center;
