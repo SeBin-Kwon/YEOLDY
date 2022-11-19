@@ -54,7 +54,7 @@ class Products(models.Model):
     )
     save_users = models.ManyToManyField(get_user_model(), related_name="save_products")
     new_product = models.BooleanField(default=False)
-    average_rating = models.IntegerField(null=True)
+    average_rating = models.FloatField(null=True)
 
 
 class Photo(models.Model):

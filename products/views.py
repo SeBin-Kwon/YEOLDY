@@ -10,7 +10,7 @@ from django.db.models import Q  # 검색 기능
 
 # 상품 리스트 기능(메인페이지로 대체?)카테고리전체
 def index(request):
-    products = Products.objects.all()
+    products = Products.objects.all().order_by("-pk")
     context = {
         "products": products,
     }
@@ -121,6 +121,9 @@ def detail(request, pk):
         points += review.grade
     if len(reviews):
         points = round(points / len(reviews), 1)
+
+    product.average_rating = points
+    product.save()
 
     qna = product.qna_set.all().order_by("-pk")
     colors = list(str(product.color).split(", "))
