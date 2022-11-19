@@ -109,7 +109,7 @@ def change_password(request):
 
 def database(request):
     jsonObject = json.loads(request.body)
-    username = jsonObject.get("username")
+    username = list(jsonObject.get("email").split("@"))[0] + "_kakao"
     users = User.objects.filter(username=username)
 
     if users:
@@ -117,7 +117,7 @@ def database(request):
         auth_login(request, user)
     else:
         user = User()
-        user.username = jsonObject.get("username")
+        user.username = list(jsonObject.get("email").split("@"))[0] + "_kakao"
         user.email = jsonObject.get("email")
         user.gender = jsonObject.get("gender")
         user.save()
@@ -130,7 +130,7 @@ def database(request):
 
 def database_naver(request):
     jsonObject = json.loads(request.body)
-    username = list(jsonObject.get("email").split("@"))[0]
+    username = list(jsonObject.get("email").split("@"))[0] + "_naver"
 
     users = User.objects.filter(username=username)
     if users:
@@ -139,7 +139,7 @@ def database_naver(request):
 
     else:
         user = User()
-        user.username = list(jsonObject.get("email").split("@"))[0]
+        user.username = list(jsonObject.get("email").split("@"))[0] + "_naver"
 
         user.nickname = jsonObject.get("name")
         user.email = jsonObject.get("email")
