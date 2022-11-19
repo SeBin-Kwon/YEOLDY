@@ -19,6 +19,7 @@ class QnA(models.Model):
     )
     solve = models.BooleanField(default=False)
     Product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     password = models.CharField(max_length=20, blank=True, null=True)
 
@@ -28,6 +29,7 @@ class Review(models.Model):
     content = models.TextField()
     product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
     RATING = [
         (1, "⭐"),
         (2, "⭐⭐"),

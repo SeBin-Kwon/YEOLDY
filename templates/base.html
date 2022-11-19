@@ -26,9 +26,6 @@
     <nav>
       <ul class="nav-items" style="padding-right: 0.5rem;">
         <li>
-          <a href="{% url 'products:new_products' %}">NEW</a>
-        </li>
-        <li>
           <a href="{% url 'products:best_products' %}">BEST</a>
         </li>
         <li>
@@ -66,23 +63,23 @@
               <li>
                 <a href="{% url 'style:index' %}">Style</a>
               </li>
-              <li>
-                <a href="{% url 'community:index' %}">Q&A</a>
-              </li>
             </ul>
           </div>
+        </li>
+        <li>
+          <a href="{% url 'community:index' %}">SERVICE CENTER</a>
         </li>
       </ul>
 
       {% if user.is_authenticated %}
-        <div class="logo-div" style="padding-right: 2.5rem;">
+        <div class="logo-div" style="padding-right: 8rem;">
           <a class="logo-link" href="{% url 'main' %}">
             <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
             <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
           </a>
         </div>
       {% else %}
-        <div class="logo-div" style="padding-right: 6rem;">
+        <div class="logo-div" style="padding-right: 11.5rem;">
           <a class="logo-link" href="{% url 'main' %}">
             <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
             <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
