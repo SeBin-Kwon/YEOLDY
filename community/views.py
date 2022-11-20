@@ -60,17 +60,24 @@ def qna(request):
 
 @login_required
 def qna_detail(request, qna_pk):
+
     qna = QnA.objects.get(pk=qna_pk)
-    qna_hits = get_object_or_404(QnA, pk=qna_pk)
-    qna_review_form = Qna_ReviewForm()
-    qna_reviews = qna.qna_review_set.all()
-    context = {
-        "qna": qna,
-        "qna_hits": qna_hits,
-        "qna_review_form": qna_review_form,
-        "qna_reviews": qna_reviews,
-    }
-    response = render(request, "community/qna_detail.html", context)
+    if (request.user == qna.user) or (request.user.is_staff):
+        qna_hits = get_object_or_404(QnA, pk=qna_pk)
+        qna_review_form = Qna_ReviewForm()
+        qna_reviews = qna.qna_review_set.all()
+        if qna_reviews:
+            qna.solve = True
+            qna.save()
+        context = {
+            "qna": qna,
+            "qna_hits": qna_hits,
+            "qna_review_form": qna_review_form,
+            "qna_reviews": qna_reviews,
+        }
+        response = render(request, "community/qna_detail.html", context)
+    else:
+        return redirect("community:index")
 
     expire_date, now = datetime.now(), datetime.now()
     expire_date += timedelta(days=1)
