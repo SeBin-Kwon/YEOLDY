@@ -24,7 +24,7 @@
           <div class="mb-3 d-flex align-items-center">
             <div class="qna-user-image" style="background-image:url('{{ qna.user.profile_image.url }}')"></div>
             <p class="qna-post_username">
-              {{ qna.user.username }}
+              {{ qna.user.username }}|{{ qna_hits.hits }}{% comment %} #qna 조회수 {% endcomment %}
             </p>
           </div>
         </div>
