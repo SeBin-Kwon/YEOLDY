@@ -12,7 +12,7 @@ from datetime import date, datetime, timedelta
 
 
 def index(request):
-    qna = QnA.objects.all().order_by(-"pk")
+    qna = QnA.objects.all().order_by("-pk")
     context = {"qna": qna}
     return render(request, "community/index.html", context)
 
