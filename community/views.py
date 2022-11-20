@@ -62,11 +62,16 @@ def qna(request):
 def qna_detail(request, qna_pk):
     qna = QnA.objects.get(pk=qna_pk)
     qna_hits = get_object_or_404(QnA, pk=qna_pk)
+    qna_review_form = Qna_ReviewForm()
+    qna_reviews = qna.review_set.all()
     context = {
         "qna": qna,
         "qna_hits": qna_hits,
+        "qna_review_form": qna_review_form,
+        "qna_reviews": qna_reviews,
     }
     response = render(request, "community/qna_detail.html", context)
+
     expire_date, now = datetime.now(), datetime.now()
     expire_date += timedelta(days=1)
     expire_date = expire_date.replace(hour=0, minute=0, second=0, microsecond=0)
@@ -135,21 +140,15 @@ def qna_password(request, qna_pk):
 
 
 @login_required
-def qna_review(request):
-    if request.method == "POST":
+def qna_review(request, qna_pk):
+    if request.user.is_staff == True:
         qna_review_form = Qna_ReviewForm(request.POST)
-
         if qna_review_form.is_valid():
             qna_review = qna_review_form.save(commit=False)
+            qna_review.qna = Products.objects.get(pk=qna_pk)
             qna_review.user = request.user
             qna.save()
-            return redirect("community:index")
-    else:
-        qna_review_form = Qna_ReviewForm()
-    context = {
-        "qna_review_form": qna_review_form,
-    }
-    return render(request, "community/qna_create.html", context)
+            return redirect("community:qna_detail", qna_pk)
 
 
 # 리뷰
