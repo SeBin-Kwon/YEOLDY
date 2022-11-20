@@ -65,12 +65,12 @@ def mypage(request, pk):
     my_review = user.review_set.order_by("-pk")
     like_style = user.like_style.all().order_by("-pk")
     save_product = user.save_products.all().order_by("-pk")
-    orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
-    first_item = str(orderlists[0].product)
-    if len(orderlists) == 1:
-        orderlist = first_item
-    else:
-        orderlist = first_item + " 외 " + str(len(orderlists)-1) + "건"
+    # orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
+    # first_item = str(orderlists[0].product)
+    # if len(orderlists) == 1:
+    #     orderlist = first_item
+    # else:
+    #     orderlist = first_item + " 외 " + str(len(orderlists)-1) + "건"
     context = {
         "user": user,
         "my_style": my_style,
@@ -78,7 +78,7 @@ def mypage(request, pk):
         "my_review": my_review,
         "like_style": like_style,
         "save_product": save_product,
-        "orderlist": orderlist,
+        # "orderlist": orderlist,
     }
     return render(request, "accounts/mypage.html", context)
 

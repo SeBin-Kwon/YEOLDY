@@ -28,6 +28,7 @@ class QnA(models.Model):
 class QnA_Review(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
     QnA = models.ForeignKey(QnA, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
 

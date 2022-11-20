@@ -7,108 +7,109 @@
 {% endblock css %}
 
 {% block content %}
-  <div class="mypage">
-    {% if request.user == user %}
-    <h1>My Page</h1>
-    {% else %}
-    <h1>{{ user.nickname }}'s Page</h1>
-    {% endif %}
-    <div class="section row container">
-      <div class="col-12 col-md-7 mb-4">
-        {% if user.profile_image %}
-        <div class="profile-crop" style="background-image: url('{{ user.profile_image.url }}');">
-        </div>
-        {% else %}
-        <div class="profile-crop" style="background-image: url('https://dummyimage.com/300X400')"></div>
-        {% endif %}
+<div class="mypage">
+  {% if request.user == user %}
+  <h1>My Page</h1>
+  {% else %}
+  <h1>{{ user.nickname }}'s Page</h1>
+  {% endif %}
+  <div class="section row container">
+    <div class="col-12 col-md-7 mb-4">
+      {% if user.profile_image %}
+      <div class="profile-crop" style="background-image: url('{{ user.profile_image.url }}');">
       </div>
-      <div class="col-12 col-md-5">
-        <div class="info">
-          <div class="info-box">
-            <p>이름 :
-              <span class="info-name">{{ user.nickname }}
-            </p>
-            <p>아이디 :
-              <span class="info-content">{{ user.username }}</span>
-            </p>
-            <p>휴대폰 번호 :
-              <span class="info-content">{{ user.phone_number }}</span>
-            </p>
-            <p>이메일 :
-              <span class="info-content">{{ user.email }}</span>
-            </p>
-            <p>생일 :
-              <span class="info-content">{{ user.birth }}</span>
-            </p>
-            <p>성별 :
-              {% if request.user.gender == 'M'%}
-              <span class="info-content">남자</span>
-            </p>
-            {% else %}
-            <span class="info-content">여자</span></p>
-            {% endif %}
-          </div>
-
-          {% if request.user == user %}
-          <div class="mypage-btn">
-            <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:mypage-update' user.pk %}"><i class="bi bi-pencil-square"></i> 수정하기</a>
-          </div>
-          {% endif %}
-        </div>
-        {% if request.user != user %}
-        <form action="{% url 'accounts:follow' user.pk %}" method="POST">
-          {% if request.user.is_authenticated %}
-          {% csrf_token %}
-          {% if request.user in user.followers.all %}
-          <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-danger" type="submit">
-            Unfollow</div>
+      {% else %}
+      <div class="profile-crop" style="background-image: url('https://dummyimage.com/300X400')"></div>
+      {% endif %}
+    </div>
+    <div class="col-12 col-md-5">
+      <div class="info">
+        <div class="info-box">
+          <p>이름 :
+            <span class="info-name">{{ user.nickname }}
+          </p>
+          <p>아이디 :
+            <span class="info-content">{{ user.username }}</span>
+          </p>
+          <p>휴대폰 번호 :
+            <span class="info-content">{{ user.phone_number }}</span>
+          </p>
+          <p>이메일 :
+            <span class="info-content">{{ user.email }}</span>
+          </p>
+          <p>생일 :
+            <span class="info-content">{{ user.birth }}</span>
+          </p>
+          <p>성별 :
+            {% if request.user.gender == 'M'%}
+            <span class="info-content">남자</span>
+          </p>
           {% else %}
-          <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-primary" type="submit">
-            Follow
-          </div>
+          <span class="info-content">여자</span></p>
           {% endif %}
-        </form>
-        {% else %}
-        {% bootstrap_button button_type="submit" content="로그인 필요"%}
-        {% endif %}
+        </div>
+
+        {% if request.user == user %}
+        <div class="mypage-btn">
+          <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:mypage-update' user.pk %}"><i
+              class="bi bi-pencil-square"></i> 수정하기</a>
+        </div>
         {% endif %}
       </div>
+      {% if request.user != user %}
+      <form action="{% url 'accounts:follow' user.pk %}" method="POST">
+        {% if request.user.is_authenticated %}
+        {% csrf_token %}
+        {% if request.user in user.followers.all %}
+        <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-danger" type="submit">
+          Unfollow</div>
+        {% else %}
+        <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-primary" type="submit">
+          Follow
+        </div>
+        {% endif %}
+      </form>
+      {% else %}
+      {% bootstrap_button button_type="submit" content="로그인 필요"%}
+      {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- 주문 내역 및 내가 쓴 글, 좋아요한 글 -->
+  {% if request.user == user %}
+  <!-- 사이드바 -->
+  <div class="tab_menu d-flex justify-content-center" style="margin-top: 3rem;">
+    <div id="nav" class="navigation tab_menu">
+      <ul>
+        <li class="list active is_on">
+          <a href="#tab1" class="btns">
+            <span class="icon"><i class="bi bi-basket"></i></span>
+            <span class="text">주문내역</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#tab2" class="btns">
+            <span class="icon"><i class="bi bi-file-earmark-text"></i></span>
+            <span class="text">내가 쓴 글</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#tab3" class="btns">
+            <span class="icon"><i class="bi bi-clipboard-heart"></i></span>
+            <span class="text">좋아요한 스타일</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#tab4" class="btns">
+            <span class="icon"><i class="bi bi-bookmark-heart"></i></span>
+            <span class="text">찜한 목록</span>
+          </a>
+        </li>
+      </ul>
     </div>
 
-<!-- 주문 내역 및 내가 쓴 글, 좋아요한 글 -->
-    {% if request.user == user %}
-    <!-- 사이드바 -->
-    <div class="tab_menu d-flex justify-content-center" style="margin-top: 3rem;">
-      <div id="nav" class="navigation tab_menu">
-        <ul>
-          <li class="list active is_on">
-            <a href="#tab1" class="btns">
-              <span class="icon"><i class="bi bi-basket"></i></span>
-              <span class="text">주문내역</span>
-            </a>
-          </li>
-          <li class="list">
-            <a href="#tab2" class="btns">
-              <span class="icon"><i class="bi bi-file-earmark-text"></i></span>
-              <span class="text">내가 쓴 글</span>
-            </a>
-          </li>
-          <li class="list">
-            <a href="#tab3" class="btns">
-              <span class="icon"><i class="bi bi-clipboard-heart"></i></span>
-              <span class="text">좋아요한 스타일</span>
-            </a>
-          </li>
-          <li class="list">
-            <a href="#tab4" class="btns">
-              <span class="icon"><i class="bi bi-bookmark-heart"></i></span>
-              <span class="text">찜한 목록</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-        <!-- 주문 내역 -->
+    <!-- 주문 내역 -->
     <!-- 주문내역 -->
     <div class="info">
       <div id="tab1" class="mypost" style="display:block;">
@@ -116,80 +117,80 @@
         <!-- 주문 내역이 있다면 -->
         <div>
           <div class="order-img"></div>
-          <p><a href="{% url 'kakaopay:show_order_list' %}">{{ orderlist }} 이(가) 배송 중입니다.</a></p>
+
         </div>
         <!-- 없다면 -->
         <div class="d-flex align-items-center justify-content-center h-75">
           <p class="m-0" style="font-size: 14px; color:gray;">주문 내역이 없습니다.</p>
         </div>
-  
+
       </div>
       <!-- 내가 쓴 글 -->
       <!-- <div class="d-flex mt-4 justify-content-center"> -->
-        <div id="tab2" class="mypost">
-          <h3 class="sub-title">내가 쓴 글</h3>
-            <!-- 테이블 -->
-            <table class="table table-hover mt-4">
-              <thead>
-                <tr>
-                  <th scope="col">글 종류</th>
-                  <th scope="col">제목</th>
-                  <th scope="col">작성 날짜</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for style in my_style %}
-                <tr>
-                  <th scope="row">Style</th>
-                    <td><a class="links" href="{% url 'style:detail' style.pk %}">{{ style.title }}</a></td>
-                    <!-- <td>{{ style.created_at }}</td>
+      <div id="tab2" class="mypost">
+        <h3 class="sub-title">내가 쓴 글</h3>
+        <!-- 테이블 -->
+        <table class="table table-hover mt-4">
+          <thead>
+            <tr>
+              <th scope="col">글 종류</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성 날짜</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for style in my_style %}
+            <tr>
+              <th scope="row">Style</th>
+              <td><a class="links" href="{% url 'style:detail' style.pk %}">{{ style.title }}</a></td>
+              <!-- <td>{{ style.created_at }}</td>
                     <td>{{ style.hits }}</td> -->
-                </tr>
-                {% endfor %}
-                {% for review in my_review %}
-                <tr>
-                  <th scope="row">Review</th>
-                  <td><a class="links" href="{% url 'products:detail' review.product_id %}">
-                    {{ review.title }}</a></td>
-                    <td></td>
-                </tr>
-                {% endfor %}
-                {% for qna in my_qna %}
-                  {% if qna.Product_id %}
-                  <tr>
-                      <th scope="row">Q&A</th>
-                      <td><a class="links" href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a></td>
-                      <td></td>
-                  </tr>
-                {% else %}
-                  <tr>
-                      <th scope="row">Q&A</th>
-                      <td><a class="links" href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a></td>
-                      <td></td>
-                  </tr>
-                  {% endif %}
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
+            </tr>
+            {% endfor %}
+            {% for review in my_review %}
+            <tr>
+              <th scope="row">Review</th>
+              <td><a class="links" href="{% url 'products:detail' review.product_id %}">
+                  {{ review.title }}</a></td>
+              <td></td>
+            </tr>
+            {% endfor %}
+            {% for qna in my_qna %}
+            {% if qna.Product_id %}
+            <tr>
+              <th scope="row">Q&A</th>
+              <td><a class="links" href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a></td>
+              <td></td>
+            </tr>
+            {% else %}
+            <tr>
+              <th scope="row">Q&A</th>
+              <td><a class="links" href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a></td>
+              <td></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
 
-        <!-- 좋아요한 글 -->
-        <div id="tab3" class="mypost">
-          <h3 class="sub-title">좋아요한 스타일</h3>
-          
-          
-        </div>
+      <!-- 좋아요한 글 -->
+      <div id="tab3" class="mypost">
+        <h3 class="sub-title">좋아요한 스타일</h3>
 
 
-        <div id="tab4" class="mypost">
-          <h3 class="sub-title">찜한 목록</h3>
-        </div>
+      </div>
+
+
+      <div id="tab4" class="mypost">
+        <h3 class="sub-title">찜한 목록</h3>
+      </div>
       <!-- </div> -->
     </div>
 
   </div>
 </div>
-  {% endif %}
+{% endif %}
 
 
 
