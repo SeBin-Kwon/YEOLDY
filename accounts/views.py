@@ -56,6 +56,7 @@ def logout(request):
     return redirect("main")
 
 
+@login_required
 def mypage(request, pk):
     user = User.objects.get(pk=pk)
     my_style = user.style_set.order_by("-pk")
@@ -154,6 +155,7 @@ def database_naver(request):
     return JsonResponse({"username": user.username, "email": user.email})
 
 
+@login_required
 def follow(request, pk):
     user = get_object_or_404(get_user_model(), pk=pk)
 
