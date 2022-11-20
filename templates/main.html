@@ -1,5 +1,6 @@
 {% load django_bootstrap5 %}
 {% load static %}
+{% load humanize %}
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -97,11 +98,11 @@
               {% if user.is_authenticated %}
                 {% if user.cartitem_set.all.count != 0 %}
                   <span class="position-absolute translate-middle badge rounded-pill top-0 start-100 text-center" style="--bs-badge-font-size: 0.55rem !important; font-weight:500; background-color: #0DB295;">
-                  {{ user.cartitem_set.all.count }}
-                </span>
+                    {{ user.cartitem_set.all.count }}
+                  </span>
+                {% endif %}
               {% endif %}
-            {% endif %}
-          </i>
+            </i>
           </a>
         </li>
         {% if user.is_authenticated %}
@@ -209,156 +210,31 @@
     <div class="container">
       <h1 class="fw-bold fst-italic">YEOLDY's PICK</h1>
       <div class="product-list w-100 justify-content-evenly">
-        <div class="card1 col-2">
-          <div class="imgBox">
-            <img src="{% static 'images/1.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-            <div class="size">
-              <h3>Size :
-              </h3>
-              <span>S</span>
-              <span>M</span>
-              <span>L</span>
-              <span>XL</span>
+        {% for best_product in best_products %}
+          <div class="card1 col-2">
+            <div class="imgBox">
+              <span class="badge m-1 position-absolute top-0 start-0 text-bg-danger">BEST</span>
+              {% for best_product_image in best_product.photo_set.all %}
+                {% if forloop.counter == 1 %}
+                  <img src="{{ best_product_image.image.url }}" alt="">
+                {% endif %}
+              {% endfor %}
             </div>
-            <div class="color">
-              <h3>Color :
-              </h3>
-              <span></span>
-              <span></span>
-              <span></span>
+            <div class="contentBox">
+              <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
+              <p>
+                <i class="bi bi-star-fill" style="color:#0db295;"></i>
+                {{ best_product.average_rating }}</p>
+              <a href="{% url 'products:detail' best_product.pk %}">Buy Now</a>
             </div>
-            <a href="#">Buy Now</a>
-          </div>
-          <div class="infoBox">
-            <h5 class="product-title">뮬리 에코 퍼 자켓</h5>
-            <p>
-              <span class="sale">20%</span><span class="cost">135,200</span>원
-            </p>
-          </div>
-        </div>
-        <div class="card1 col-2">
-          <div class="imgBox">
-            <img src="{% static 'images/2.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-            <div class="size">
-              <h3>Size :
-              </h3>
-              <span>S</span>
-              <span>M</span>
-              <span>L</span>
-              <span>XL</span>
+            <div class="infoBox">
+              <h5 class="product-title">{{ best_product.name }}</h5>
+              <p>
+                <span class="sale">{{ best_product.sale_percent }}%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+              </p>
             </div>
-            <div class="color">
-              <h3>Color :
-              </h3>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <a href="#">Buy Now</a>
           </div>
-          <div class="infoBox">
-            <h5 class="product-title">트위스트 풀오버 후드 세트</h5>
-            <p>
-              <span class="sale">19%</span><span class="cost">140,940</span>원
-            </p>
-          </div>
-        </div>
-        <div class="card1 col-2">
-          <div class="imgBox">
-            <img src="{% static 'images/3.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-            <div class="size">
-              <h3>Size :
-              </h3>
-              <span>S</span>
-              <span>M</span>
-              <span>L</span>
-              <span>XL</span>
-            </div>
-            <div class="color">
-              <h3>Color :
-              </h3>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <a href="#">Buy Now</a>
-          </div>
-          <div class="infoBox">
-            <h5 class="product-title">카라 플러스 자켓</h5>
-            <p>
-              <span class="sale">20%</span><span class="cost">103,200</span>원
-            </p>
-          </div>
-        </div>
-        <div class="card1 col-2">
-          <div class="imgBox">
-            <img src="{% static 'images/4.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-            <div class="size">
-              <h3>Size :
-              </h3>
-              <span>S</span>
-              <span>M</span>
-              <span>L</span>
-              <span>XL</span>
-            </div>
-            <div class="color">
-              <h3>Color :
-              </h3>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <a href="#">Buy Now</a>
-          </div>
-          <div class="infoBox">
-            <h5 class="product-title">엔와이 트랙 세트</h5>
-            <p>
-              <span class="sale">35%</span><span class="cost">105,840</span>원
-            </p>
-          </div>
-        </div>
-        <div class="card1 col-2">
-          <div class="imgBox">
-            <img src="{% static 'images/5.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <img class="img-fluid" src="{% static 'images/logo_green.png' %}" alt="">
-            <div class="size">
-              <h3>Size :
-              </h3>
-              <span>S</span>
-              <span>M</span>
-              <span>L</span>
-              <span>XL</span>
-            </div>
-            <div class="color">
-              <h3>Color :
-              </h3>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <a href="#">Buy Now</a>
-          </div>
-          <div class="infoBox">
-            <h5 class="product-title">플러피 플리스 후드 자켓</h5>
-            <p>
-              <span class="sale">10%</span><span class="cost">89,100</span>원
-            </p>
-          </div>
-        </div>
+        {% endfor %}
       </div>
 
       <div class="admin">
@@ -375,7 +251,7 @@
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <a href="https://github.com/w00ye0l">
-                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <img src="{% static 'images/wooyeol.png' %}" alt="">
                   <div class="info">
                     <h2>Lee Woo Yeol</h2>
                     <img src="{% static 'images/github.png' %}" alt="">
@@ -384,7 +260,7 @@
               </div>
               <div class="swiper-slide">
                 <a href="https://github.com/SeBin-Kwon">
-                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <img src="{% static 'images/sebin.jfif' %}" alt="">
                   <div class="info">
                     <h2>Kwon Se Bin</h2>
                     <img src="{% static 'images/github.png' %}" alt="">
@@ -393,7 +269,7 @@
               </div>
               <div class="swiper-slide">
                 <a href="https://github.com/ANDONGWOO">
-                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <img src="{% static 'images/dongwoo.png' %}" alt="">
                   <div class="info">
                     <h2>An Dong Woo</h2>
                     <img src="{% static 'images/github.png' %}" alt="">
@@ -402,7 +278,7 @@
               </div>
               <div class="swiper-slide">
                 <a href="https://github.com/Yodayeong">
-                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <img src="{% static 'images/dayeong.png' %}" alt="">
                   <div class="info">
                     <h2>Yeo Da Yeong</h2>
                     <img src="{% static 'images/github.png' %}" alt="">
@@ -411,7 +287,7 @@
               </div>
               <div class="swiper-slide">
                 <a href="https://github.com/suyoung049">
-                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <img src="{% static 'images/suyoung.png' %}" alt="">
                   <div class="info">
                     <h2>Lee Su Young</h2>
                     <img src="{% static 'images/github.png' %}" alt="">
@@ -420,7 +296,7 @@
               </div>
               <div class="swiper-slide">
                 <a href="https://github.com/wxxk">
-                  <img src="https://static.wikia.nocookie.net/pokemon/images/1/1f/025Pikachu_BDSP.png/revision/latest?cb=20210820064930" alt="">
+                  <img src="{% static 'images/sangwook.jfif' %}" alt="">
                   <div class="info">
                     <h2>Lee Sang Wook</h2>
                     <img src="{% static 'images/github.png' %}" alt="">
