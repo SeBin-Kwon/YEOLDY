@@ -4,173 +4,177 @@
 <!DOCTYPE html>
 <html lang="kr">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YEOLDY</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/base_nav.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="shortcut icon" href="{% static 'images/yeoldy_favicon.ico' %}">
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-    {% block css %}{% endblock css %}
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YEOLDY</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/base_nav.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base_footer.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link rel="shortcut icon" href="{% static 'images/yeoldy_favicon.ico' %}">
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+  {% block css %}{% endblock css %}
+</head>
 
-  <body>
-    <nav>
-      <ul class="nav-items" style="padding-right: 0.5rem;">
-        <li>
-          <a href="{% url 'products:best_products' %}">BEST</a>
-        </li>
-        <li>
-          <a href="{% url 'products:index' %}">APPAREL</a>
-          <div class="drop">
-            <ul class="drop-menu">
-              <li>
-                <a href="{% url 'products:index' %}">모든 제품</a>
-              </li>
-              <li>
-                <a href="{% url 'products:index_1' %}">상의</a>
-              </li>
-              <li>
-                <a href="{% url 'products:index_2' %}">하의</a>
-              </li>
-              <li>
-                <a href="{% url 'products:index_3' %}">아우터</a>
-              </li>
-              <li>
-                <a href="{% url 'products:index_4' %}">신발</a>
-              </li>
-              <li>
-                <a href="{% url 'products:index_5' %}">악세서리</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a href="{% url 'style:index' %}">COMMUNITY</a>
-          <div class="drop">
-            <ul class="drop-menu">
-              <li>
-                <a href="{% url 'community:review_index' %}">Review</a>
-              </li>
-              <li>
-                <a href="{% url 'style:index' %}">Style</a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li>
-          <a href="{% url 'community:index' %}">SERVICE CENTER</a>
-        </li>
-      </ul>
-
-      {% if user.is_authenticated %}
-        <div class="logo-div" style="padding-right: 8rem;">
-          <a class="logo-link" href="{% url 'main' %}">
-            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-            <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
-          </a>
+<body>
+  <nav>
+    <ul class="nav-items" style="padding-right: 0.5rem;">
+      <li>
+        <a href="{% url 'products:best_products' %}">BEST</a>
+      </li>
+      <li>
+        <a href="{% url 'products:index' %}">APPAREL</a>
+        <div class="drop">
+          <ul class="drop-menu">
+            <li>
+              <a href="{% url 'products:index' %}">모든 제품</a>
+            </li>
+            <li>
+              <a href="{% url 'products:index_1' %}">상의</a>
+            </li>
+            <li>
+              <a href="{% url 'products:index_2' %}">하의</a>
+            </li>
+            <li>
+              <a href="{% url 'products:index_3' %}">아우터</a>
+            </li>
+            <li>
+              <a href="{% url 'products:index_4' %}">신발</a>
+            </li>
+            <li>
+              <a href="{% url 'products:index_5' %}">악세서리</a>
+            </li>
+          </ul>
         </div>
-      {% else %}
-        <div class="logo-div" style="padding-right: 11.5rem;">
-          <a class="logo-link" href="{% url 'main' %}">
-            <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
-            <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
-          </a>
+      </li>
+      <li>
+        <a href="{% url 'style:index' %}">COMMUNITY</a>
+        <div class="drop">
+          <ul class="drop-menu">
+            <li>
+              <a href="{% url 'community:review_index' %}">Review</a>
+            </li>
+            <li>
+              <a href="{% url 'style:index' %}">Style</a>
+            </li>
+          </ul>
         </div>
-      {% endif %}
-      <ul class="nav-right" style="padding-left: 4rem;">
-        <li>
-          <a href="{% url 'products:search_main' %}">
-            <i class="bi bi-search"></i>
-          </a>
-        </li>
-        <li>
-          <a href="{% url 'cart:cart_detail' %}">
-            <i class="bi bi-cart position-relative">
-              {% if user.is_authenticated %}
-                {% if user.cartitem_set.all.count != 0 %}
-                  <span class="position-absolute translate-middle badge rounded-pill top-0 start-100 text-center" style="--bs-badge-font-size: 0.55rem !important; font-weight:500; background-color: #0DB295;">
-                  {{ user.cartitem_set.all.count }}
-                </span>
-              {% endif %}
-            {% endif %}
-            </i>
-          </a>
-        </li>
-        {% if request.user.is_authenticated %}
-          <li>
-            <a href="{% url 'accounts:mypage' request.user.pk %}">
-              <i class="bi bi-person-fill"></i>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'accounts:logout' %}">LOGOUT</a>
-          </li>
-        {% else %}
-          <li>
-            <a href="{% url 'accounts:login' %}">LOGIN</a>
-          </li>
-        {% endif %}
-      </ul>
-    </nav>
+      </li>
+      <li>
+        <a href="{% url 'community:index' %}">SERVICE CENTER</a>
+      </li>
+    </ul>
 
-    <div class="base-div">
-      {% block content %}{% endblock content %}
+    {% if user.is_authenticated %}
+    <div class="logo-div" style="padding-right: 8rem;">
+      <a class="logo-link" href="{% url 'main' %}">
+        <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+        <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+      </a>
     </div>
+    {% else %}
+    <div class="logo-div" style="padding-right: 11.5rem;">
+      <a class="logo-link" href="{% url 'main' %}">
+        <img id="logo2" src="{% static 'images/logo_green.png' %}" style="width:8rem">
+        <img id="logo1" src="{% static 'images/logo_black.png' %}" style="width:8rem">
+      </a>
+    </div>
+    {% endif %}
+    <ul class="nav-right" style="padding-left: 4rem;">
+      <li>
+        <a href="{% url 'products:search_main' %}">
+          <i class="bi bi-search"></i>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'cart:cart_detail' %}">
+          <i class="bi bi-cart position-relative">
+            {% if request.user.is_authenticated %}
+            {% if user.cartitem_set.all.count != 0 %}
+            <span class="position-absolute translate-middle badge rounded-pill top-0 start-100 text-center"
+              style="--bs-badge-font-size: 0.55rem !important; font-weight:500; background-color: #0DB295;">
+              {{ request.user.cartitem_set.all.count }}
+            </span>
+            {% endif %}
+            {% endif %}
+          </i>
+        </a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li>
+        <a href="{% url 'accounts:mypage' request.user.pk %}">
+          <i class="bi bi-person-fill"></i>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'accounts:logout' %}">LOGOUT</a>
+      </li>
+      {% else %}
+      <li>
+        <a href="{% url 'accounts:login' %}">LOGIN</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
 
-    <!-- footer -->
-    <footer>
-      <img src="{% static 'images/logo_white.png' %}" style="width:4rem;">
-      <span>(주) 열디</span><br>
-      <div class="footer-content">
-        <p>대표이사 : 이우열<br>
-          소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
-        <p>
-          문의 : contact@yeoldy.com / 1544-1010<br>
-          평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
-      </div>
-    </footer>
+  <div class="base-div">
+    {% block content %}{% endblock content %}
+  </div>
 
-    <script>
-      window.addEventListener("scroll", function () {
-        const nav = document.querySelector("nav");
-        nav
-          .classList
-          .toggle("sticky", window.scrollY > 0)
-        const logo = document.querySelector("#logo1");
+  <!-- footer -->
+  <footer>
+    <img src="{% static 'images/logo_white.png' %}" style="width:4rem;">
+    <span>(주) 열디</span><br>
+    <div class="footer-content">
+      <p>대표이사 : 이우열<br>
+        소재지 : 서울특별시 강남구 KDT로 0704 12층</p>
+      <p>
+        문의 : contact@yeoldy.com / 1544-1010<br>
+        평일 : 9:00 ~ 16:00, 주말 / 공휴일 제외</p>
+    </div>
+  </footer>
 
-        if (window.scrollY > 0) {
-          nav.style.height = "4rem";
-        } else {
-          nav.style.height = "6rem";
-        }
-      })
-    </script>
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-      var Tawk_API = Tawk_API || {},
-        Tawk_LoadStart = new Date();
-      (function () {
-        var s1 = document.createElement("script"),
-          s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/63771df8b0d6371309cfaeb7/1gi4kq508';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0
-          .parentNode
-          .insertBefore(s1, s0);
-      })();
-    </script>
-    <!--End of Tawk.to Script-->
-  </body>
+  <script>
+    window.addEventListener("scroll", function () {
+      const nav = document.querySelector("nav");
+      nav
+        .classList
+        .toggle("sticky", window.scrollY > 0)
+      const logo = document.querySelector("#logo1");
+
+      if (window.scrollY > 0) {
+        nav.style.height = "4rem";
+      } else {
+        nav.style.height = "6rem";
+      }
+    })
+  </script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+      Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/63771df8b0d6371309cfaeb7/1gi4kq508';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0
+        .parentNode
+        .insertBefore(s1, s0);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
 
 </html>

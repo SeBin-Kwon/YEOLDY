@@ -63,7 +63,7 @@ def qna_detail(request, qna_pk):
     qna = QnA.objects.get(pk=qna_pk)
     qna_hits = get_object_or_404(QnA, pk=qna_pk)
     qna_review_form = Qna_ReviewForm()
-    qna_reviews = qna.review_set.all()
+    qna_reviews = qna.qna_review_set.all()
     context = {
         "qna": qna,
         "qna_hits": qna_hits,
@@ -126,28 +126,33 @@ def qna_delete(request, qna_pk):
         return redirect("community:index")
 
 
+@login_required
 def qna_password(request, qna_pk):
     qna = get_object_or_404(QnA, pk=qna_pk)
+    if request.user.is_staff:
+        return redirect("community:qna_detail", qna_pk)
 
-    if request.method == "POST":
-        if request.POST["password"] == qna.password:
-            return redirect("community:qna_detail", qna_pk)
-
-        else:
-            return redirect("community:index")
     else:
-        return render(request, "community/qna_password.html")
+
+        if request.method == "POST":
+            if request.POST["password"] == qna.password:
+                return redirect("community:qna_detail", qna_pk)
+
+            else:
+                return redirect("community:index")
+        else:
+            return render(request, "community/qna_password.html")
 
 
 @login_required
 def qna_review(request, qna_pk):
-    if request.user.is_staff == True:
+    if request.user.is_staff:
         qna_review_form = Qna_ReviewForm(request.POST)
         if qna_review_form.is_valid():
             qna_review = qna_review_form.save(commit=False)
-            qna_review.qna = Products.objects.get(pk=qna_pk)
+            qna_review.QnA = QnA.objects.get(pk=qna_pk)
             qna_review.user = request.user
-            qna.save()
+            qna_review.save()
             return redirect("community:qna_detail", qna_pk)
 
 
