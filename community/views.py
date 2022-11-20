@@ -7,11 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_safe
 from datetime import date, datetime, timedelta
+
 # Create your views here.
 
 
 def index(request):
-    qna = QnA.objects.all()
+    qna = QnA.objects.all().order_by(-"pk")
     context = {"qna": qna}
     return render(request, "community/index.html", context)
 
@@ -62,7 +63,7 @@ def qna_detail(request, qna_pk):
     qna_hits = get_object_or_404(QnA, pk=qna_pk)
     context = {
         "qna": qna,
-        "qna_hits":qna_hits,
+        "qna_hits": qna_hits,
     }
     response = render(request, "community/qna_detail.html", context)
     expire_date, now = datetime.now(), datetime.now()
@@ -71,14 +72,17 @@ def qna_detail(request, qna_pk):
     expire_date -= now
     max_age = expire_date.total_seconds()
 
-    cookie_value = request.COOKIES.get('hitboard_1', '_')
+    cookie_value = request.COOKIES.get("hitboard_1", "_")
 
-    if f'_{qna_pk}_' not in cookie_value:
-        cookie_value += f'{qna_pk}_'
-        response.set_cookie('hitboard_1', value=cookie_value, max_age=max_age, httponly=True)
+    if f"_{qna_pk}_" not in cookie_value:
+        cookie_value += f"{qna_pk}_"
+        response.set_cookie(
+            "hitboard_1", value=cookie_value, max_age=max_age, httponly=True
+        )
         qna_hits.hits += 1
         qna_hits.save()
     return response
+
 
 @login_required
 def qna_update(request, qna_pk):
@@ -218,4 +222,3 @@ def review_delete(request, review_pk):
     else:
         messages.success(request, "작성자만 삭제가 가능함")
         return redirect("community:review_index")
-
