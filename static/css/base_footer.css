@@ -20,3 +20,24 @@ footer p {
   display: flex;
   justify-content: space-between;
 }
+
+.top-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 23px;
+}
+
+.top-btn div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:60px;
+  height:60px;
+  background-color:#fff;
+  border-radius: 50%;
+  box-shadow: 4px 4px 25px 0px #0714271f;
+}
+
+.top-btn div i {
+  font-size: 25px;
+}
