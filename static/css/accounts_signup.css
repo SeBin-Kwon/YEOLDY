@@ -119,8 +119,10 @@ form input[type="radio"]{
 }
 
 form .button {
+  display: flex;
+  justify-content: end;
   height: 45px;
-  margin: 45px 0;
+  margin: 35px 0;
   min-width: 300px;
 }
 
@@ -130,7 +132,7 @@ form .button input:hover {
 
 form .button input{
   height: 100%;
-  width: 100%;
+  width: 180px;
   outline: none;
   color: #fff;
   border: none;
@@ -161,4 +163,9 @@ form .button input{
   .user-details::-webkit-scrollbar{
     width: 0;
   }
+}
+
+.ex{
+  color: #999;
+  font-size: 14px;
 }

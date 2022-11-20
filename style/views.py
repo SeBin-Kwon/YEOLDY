@@ -11,6 +11,7 @@ from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 from datetime import date, datetime, timedelta
 
+
 def index(request):
     styles = Style.objects.order_by("-pk")
     context = {
@@ -76,11 +77,13 @@ def detail(request, pk):
     style_image = style.photo_set.all()
     review_form = ReviewForm()
     reviews = style.style_review_set.all().order_by("-pk")
+    style_tags = list(str(style.tag).split(", "))
     context = {
         "style": style,
         "review_form": review_form,
         "reviews": reviews,
         "style_images": style_image,
+        "style_tags": style_tags,
     }
     response = render(request, "style/detail.html", context)
 
@@ -90,15 +93,18 @@ def detail(request, pk):
     expire_date -= now
     max_age = expire_date.total_seconds()
 
-    cookie_value = request.COOKIES.get('hitboard_2', '_')
+    cookie_value = request.COOKIES.get("hitboard_2", "_")
 
-    if f'_{pk}_' not in cookie_value:
-        cookie_value += f'{pk}_'
-        response.set_cookie('hitboard_2', value=cookie_value, max_age=max_age, httponly=True)
+    if f"_{pk}_" not in cookie_value:
+        cookie_value += f"{pk}_"
+        response.set_cookie(
+            "hitboard_2", value=cookie_value, max_age=max_age, httponly=True
+        )
         style_hits.hits += 1
         style_hits.save()
     return response
-    
+
+
 @login_required
 def delete(request, pk):
     style = Style.objects.get(pk=pk)
