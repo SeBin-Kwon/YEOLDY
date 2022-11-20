@@ -25,9 +25,18 @@
       <div class="col-12 col-md-5">
         <div class="info">
           <div class="info-box">
+            <div class="d-flex justify-content-between">
             <p>이름 :
               <span class="info-name">{{ user.nickname }}
             </p>
+            {% if request.user == user %}
+            <div class="">
+              <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:mypage-update' user.pk %}"><i class="bi bi-pencil-square"></i> 수정하기</a>
+            </div>
+            {% endif %}
+            </div>
+
+
             <p>아이디 :
               <span class="info-content">{{ user.username }}</span>
             </p>
@@ -49,29 +58,36 @@
             {% endif %}
           </div>
 
-          {% if request.user == user %}
-          <div class="mypage-btn">
-            <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:mypage-update' user.pk %}"><i class="bi bi-pencil-square"></i> 수정하기</a>
-          </div>
-          {% endif %}
+          
         </div>
-        {% if request.user != user %}
-        <form action="{% url 'accounts:follow' user.pk %}" method="POST">
-          {% if request.user.is_authenticated %}
-          {% csrf_token %}
-          {% if request.user in user.followers.all %}
-          <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-danger" type="submit">
-            Unfollow</div>
-          {% else %}
-          <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-primary" type="submit">
-            Follow
+        <div class="follow-div d-flex">
+          <div class="text-center me-4">
+            <h2>{{ user.followers.count}}</h2>
+            <p>Follower</p>
           </div>
-          {% endif %}
-        </form>
-        {% else %}
-        {% bootstrap_button button_type="submit" content="로그인 필요"%}
+          <div class="text-center me-4">
+            <h2>{{ user.followings.count}}</h2>
+            <p>Following</p>
+          </div>
+          {% if request.user != user %}
+            <form action="{% url 'accounts:follow' user.pk %}" method="POST">
+              {% if request.user.is_authenticated %}
+              {% csrf_token %}
+                {% if request.user in user.followers.all %}
+                <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-danger" type="submit">
+                  Unfollow</div>
+                {% else %}
+                <div id="follow-btn" data-post-id="{{ user.pk }}" class=" btn btn-outline-primary" type="submit">
+                  Follow
+                </div>
+                {% endif %}
+            </form>
+              {% else %}
+            {% bootstrap_button button_type="submit" content="로그인 필요"%}
+              {% endif %}
         {% endif %}
-        {% endif %}
+        </div>
+
       </div>
     </div>
 
@@ -129,11 +145,12 @@
         <div id="tab2" class="mypost">
           <h3 class="sub-title">내가 쓴 글</h3>
             <!-- 테이블 -->
-            <table class="table table-hover mt-4">
+            <table class="table table-hover mt-4 text-center">
               <thead>
                 <tr>
                   <th scope="col">글 종류</th>
                   <th scope="col">제목</th>
+                  <th scope="col">조회수</th>
                   <th scope="col">작성 날짜</th>
                 </tr>
               </thead>
@@ -142,8 +159,8 @@
                 <tr>
                   <th scope="row">Style</th>
                     <td><a class="links" href="{% url 'style:detail' style.pk %}">{{ style.title }}</a></td>
-                    <!-- <td>{{ style.created_at }}</td>
-                    <td>{{ style.hits }}</td> -->
+                    <td>{{ style.hits }}</td>
+                    <td style="font-size: 13px; color:gray;">{{ style.created_at }}</td>
                 </tr>
                 {% endfor %}
                 {% for review in my_review %}
@@ -151,7 +168,8 @@
                   <th scope="row">Review</th>
                   <td><a class="links" href="{% url 'products:detail' review.product_id %}">
                     {{ review.title }}</a></td>
-                    <td></td>
+                    <td>{{ review.hits }}</td>
+                    <td style="font-size: 13px; color:gray;">{{ review.created_at }}</td>
                 </tr>
                 {% endfor %}
                 {% for qna in my_qna %}
@@ -159,13 +177,15 @@
                   <tr>
                       <th scope="row">Q&A</th>
                       <td><a class="links" href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a></td>
-                      <td></td>
+                      <td>{{ qna.hits }}</td>
+                      <td style="font-size: 13px; color:gray;">{{ qna.created_at }}</td>
                   </tr>
                 {% else %}
                   <tr>
                       <th scope="row">Q&A</th>
                       <td><a class="links" href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a></td>
-                      <td></td>
+                      <td>{{ qna.hits }}</td>
+                      <td style="font-size: 13px; color:gray;">{{ qna.created_at }}</td>
                   </tr>
                   {% endif %}
                 {% endfor %}
@@ -173,16 +193,65 @@
             </table>
           </div>
 
-        <!-- 좋아요한 글 -->
-        <div id="tab3" class="mypost">
+        <!-- 좋아요한 스타일 -->
+        <div id="tab3" class="mypost" style="box-shadow: none !important;">
           <h3 class="sub-title">좋아요한 스타일</h3>
-          
-          
-        </div>
+          <div class="d-flex">
+            {% for style in like_style %}
+            <div class="like-style mt-4 me-3">
+              {% if style.image %}
+                <img src="{{ style.image.url }}">
+              {% endif %}
 
+              <div class="d-flex px-4 align-items-center">
+                {% if style.user.profile_image %}
+                  <a href="{% url 'style:detail' style.pk %}">
+                      <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')"></div></a>
+                    {% else %}
+  
+                      <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+                  {% endif %}
+                  {% comment %} {% if request.user == user %}
+                    <h5>{{ style.user.username }}</h5>
+                  {% else %} {% endcomment %}
+                    <a class="d-flex align-items-center style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+                  <h5>{{ style.user.username }}</h5></a>
+                {% comment %} {% endif %} {% endcomment %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
 
         <div id="tab4" class="mypost">
           <h3 class="sub-title">찜한 목록</h3>
+          <div class="row mt-4 product-list w-100 justify-content-start">
+          {% for product in save_product %}
+  
+          <div class="product-card col-12 col-md-6 col-lg-4">
+            <a href="{% url 'products:detail' product.id %}">
+              <div class="imgBox">
+                {% for product_image in product.photo_set.all %}
+                  {% if forloop.counter == 1%}
+                    <img class="product-img" src="{{ product_image.image.url }}" alt="">
+                  {% endif %}
+                {% endfor %}
+                <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+              </div>
+              <div class="contentBox">
+                <h5 class="product-title">{{ product.name }}</h5>
+                <p>
+                  <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+                </p>
+              </div>
+            </a>
+          </div>
+
+            {% comment %} <div class="like-product" style="background-image: url('{{ product.image.url }}')">
+              {{ product.name }}
+            </div> {% endcomment %}
+          {% endfor %}
+          </div>
         </div>
       <!-- </div> -->
     </div>
@@ -224,6 +293,7 @@
           .remove('btn-outline-danger')
         followBtn.innerText = "Follow"
       }
+      location.reload();
     })
   })
 </script>
