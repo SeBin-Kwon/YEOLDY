@@ -93,9 +93,15 @@
         </li>
         <li>
           <a href="{% url 'cart:cart_detail' %}">
-            <i class="bi bi-cart position-relative"><span class="position-absolute translate-middle badge rounded-pill top-0 start-100 text-center" style="--bs-badge-font-size: 0.55rem !important; font-weight:500; background-color: #0DB295;">
-              {{ user.cartitem_set.all.count }}
-            </span></i>
+            <i class="bi bi-cart position-relative">
+              {% if user.is_authenticated %}
+                {% if user.cartitem_set.all.count != 0 %}
+                  <span class="position-absolute translate-middle badge rounded-pill top-0 start-100 text-center" style="--bs-badge-font-size: 0.55rem !important; font-weight:500; background-color: #0DB295;">
+                  {{ user.cartitem_set.all.count }}
+                </span>
+              {% endif %}
+            {% endif %}
+          </i>
           </a>
         </li>
         {% if user.is_authenticated %}

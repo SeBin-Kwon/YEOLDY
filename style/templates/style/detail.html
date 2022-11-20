@@ -22,6 +22,7 @@
     <div class="info">
       <div class="style-user mt-4 mb-3">
         <div class="d-flex align-items-center">
+          <div>
           <!-- 프사 -->
           {% if style.user.profile_image %}
           <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
@@ -33,9 +34,13 @@
           {% endif %}
           <!-- 유저 이름 -->
           <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
-            <p class="style-username">{{ style.user.username }}|{{ style.hits }}</p>{% comment %} 조회수 {% endcomment %}
+            <p class="style-username">{{ style.user.username }}</p>
           </a>
         </div>
+
+        <div>{{ style.hits }}</div>
+        <div>{{ style.created_at }}</div>
+      </div>
 
       </div>
       <div class="st-top mb-3">
