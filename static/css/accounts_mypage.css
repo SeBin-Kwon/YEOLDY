@@ -131,6 +131,7 @@ table tbody tr td a:hover {
   .base-div{
     min-height: 800px !important;
   }
+  
   /* .mypage-btn .btn {
     --bs-btn-font-size: 12px !important;
   } */
@@ -210,8 +211,8 @@ table tbody tr td a:hover {
   border-radius: 10px;
   font-size: 1.75rem;
   line-height: 45px;
-  margin: 0 7px;
   border: 6px solid transparent;
+  border-right: 0;
   transition: 0.4s;
   color:#0DB295;
 }
