@@ -182,13 +182,12 @@ def search(request):
         )
     if search_create:
         search_exist = Search.objects.get(search_text=search)
-        if len(products):
-            search_exist.search_count += 1  # 있다면 +1
-        else:
-            search_exist.search_count = 0  # 없다면 -1
-        search_exist.save()
+        if products:
+            search_exist.search_count += 1  # 있다면 +1  # 없다면 0
+            search_exist.save()
     else:
-        Search.objects.create(search_text=search)
+        if products:
+            Search.objects.create(search_text=search)
     context = {
         "products": products,
         "search_ranking": search_ranking,
