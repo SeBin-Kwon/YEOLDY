@@ -179,7 +179,7 @@ def search(request):
     if search:
         products = Products.objects.filter(
             Q(name__icontains=search) | Q(category__icontains=search)
-        )
+        ).order_by("-pk")
     if search_create:
         search_exist = Search.objects.get(search_text=search)
         if products:

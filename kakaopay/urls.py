@@ -19,7 +19,7 @@ from . import views
 app_name = 'kakaopay'
 
 urlpatterns = [
-    path('', views.index, name="index"),
     path('approval/', views.approval, name="approval"),
-    path('order_list/', views.order_list, name='order_list')
+    path('order_list/', views.order_list, name='order_list'),
+    path('show_order_list/', views.show_order_list, name='show_order_list'),
 ]

@@ -22,7 +22,16 @@ class QnA(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     password = models.CharField(max_length=20, blank=True, null=True)
-    hits = models.PositiveIntegerField(default=0, verbose_name='조회수')
+    hits = models.PositiveIntegerField(default=0, verbose_name="조회수")
+
+
+class QnA_Review(models.Model):
+    title = models.CharField(max_length=50)
+    content = models.TextField()
+    QnA = models.ForeignKey(QnA, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True)
+
+
 class Review(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()

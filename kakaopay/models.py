@@ -21,6 +21,7 @@ class OrderList(models.Model):
     location_zipcode = models.CharField(max_length=20)
     location_address = models.CharField(max_length=50)
     location_detail = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class OrderListFinal(models.Model):
@@ -36,3 +37,4 @@ class OrderListFinal(models.Model):
     location_zipcode = models.CharField(max_length=20)
     location_address = models.CharField(max_length=50)
     location_detail = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
