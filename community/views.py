@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import QnaForm, ReviewForm, UpdateQnaForm, QnaForm_2
+from .forms import QnaForm, ReviewForm, UpdateQnaForm, QnaForm_2, Qna_ReviewForm
 from .models import QnA, Review, Photo
 from products.models import Products
 from django.contrib import messages
@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_safe
 from datetime import date, datetime, timedelta
+
 
 # Create your views here.
 
@@ -131,6 +132,24 @@ def qna_password(request, qna_pk):
             return redirect("community:index")
     else:
         return render(request, "community/qna_password.html")
+
+
+@login_required
+def qna_review(request):
+    if request.method == "POST":
+        qna_review_form = Qna_ReviewForm(request.POST)
+
+        if qna_review_form.is_valid():
+            qna_review = qna_review_form.save(commit=False)
+            qna_review.user = request.user
+            qna.save()
+            return redirect("community:index")
+    else:
+        qna_review_form = Qna_ReviewForm()
+    context = {
+        "qna_review_form": qna_review_form,
+    }
+    return render(request, "community/qna_create.html", context)
 
 
 # 리뷰

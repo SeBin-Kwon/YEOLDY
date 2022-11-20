@@ -26,6 +26,7 @@ urlpatterns = [
     path("<int:qna_pk>/qna_update/", views.qna_update, name="qna_update"),
     path("<int:qna_pk>/qna_delete/", views.qna_delete, name="qna_delete"),
     path("<int:qna_pk>/qna_password/", views.qna_password, name="qna_password"),
+    path("<int:qna_pk>/qna_review/", views.qna_review, name="qna_review"),
     path("review_index/", views.review_index, name="review_index"),  # 리뷰목록
     path("<int:product_pk>/review_create/", views.review_create, name="review_create"),
     path("<int:review_pk>/review_detail/", views.review_detail, name="review_detail"),
