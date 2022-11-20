@@ -2,172 +2,236 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% load humanize %}
+
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/products_index.css' %}">
+  <link rel="stylesheet" href="{% static 'css/products_best.css' %}">
 {% endblock css %}
+
 {% block content %}
   <div class="container">
-    <div class="banner m-5">
-      <h4>전체 top5</h4>
+    <div class="banner">
+      <h1>BEST 5<br>
+        <span style="font-size:24px;">리뷰 평점 기준 BEST 상품</span></h1>
+      <img src="{% static 'images/products_banner_best.jpg' %}" alt="banner">
+      <p class="text-start">베스트 상품은 리뷰 평점을 기준으로 선정된 상품입니다.</p>
     </div>
-    <div class="row product-list w-100 justify-content-start">
-      {% for best_product in best_products %}{% comment %} 전체 top5 {% endcomment %}
-      <div class="product-card col-2">
-        <a href="{% url 'products:detail' best_product.id %}">
-          <div class="imgBox">
-            {% for product_image in best_product.photo_set.all %}
-            {% if forloop.counter == 1%}
-            <img class="product-img" src="{{ product_image.image.url }}" alt="">
-            {% endif %}
-            {% endfor %}
-            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <h5 class="product-title">{{ best_product.name }}|{{ best_product.average_rating }}</h5>
-            <p>
-              <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
-            </p>
-          </div>
-        </a>
+    <div class="style-box">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="style-title">ALL BEST 5</h1>
       </div>
-      {% endfor %}
     </div>
-  </div>
-
-
-  <div class="container">
-    <div class="banner m-5">
-      <h4>상의 top5</h4>
-    </div>
-    <div class="row product-list w-100 justify-content-start">
-      {% for best_product in best_products_1 %}{% comment %} 상의 top5 {% endcomment %}
-      <div class="product-card col-2">
-        <a href="{% url 'products:detail' best_product.id %}">
-          <div class="imgBox">
-            {% for product_image in best_product.photo_set.all %}
-            {% if forloop.counter == 1%}
-            <img class="product-img" src="{{ product_image.image.url }}" alt="">
-            {% endif %}
-            {% endfor %}
-            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <h5 class="product-title">{{ best_product.name }}|{{ best_product.average_rating }}</h5>
-            <p>
-              <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
-            </p>
-          </div>
-        </a>
-      </div>
+    <div class="row mb-5 product-list w-100 justify-content-between">
+      <!-- 전체 top 5 -->
+      {% for best_product in best_products %}
+        <div class="product-card col-2">
+          <a href="{% url 'products:detail' best_product.id %}">
+            <div class="imgBox">
+              <span class="position-absolute top-0 start-0 badge rounded-0">
+                <p class="best-badge">BEST</p>{{ forloop.counter }}
+              </span>
+              {% for product_image in best_product.photo_set.all %}
+                {% if forloop.counter == 1%}
+                  <img class="product-img" src="{{ product_image.image.url }}" alt="">
+                {% endif %}
+              {% endfor %}
+              <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+            </div>
+            <div class="contentBox">
+              <h5 class="product-title">{{ best_product.name }}</h5>
+              <p style="color:#0db295; font-size:18px;">
+                <i class="me-2 bi bi-star-fill"></i>{{ best_product.average_rating }}
+              </p>
+              <p>
+                <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+              </p>
+            </div>
+          </a>
+        </div>
       {% endfor %}
+      <hr>
     </div>
   </div>
 
   <div class="container">
-    <div class="banner m-5">
-      <h4>하의 top5</h4>
-    </div>
-    <div class="row product-list w-100 justify-content-start">
-      {% for best_product in best_products_2 %}{% comment %} 하의 top5 {% endcomment %}
-      <div class="product-card col-2">
-        <a href="{% url 'products:detail' best_product.id %}">
-          <div class="imgBox">
-            {% for product_image in best_product.photo_set.all %}
-            {% if forloop.counter == 1%}
-            <img class="product-img" src="{{ product_image.image.url }}" alt="">
-            {% endif %}
-            {% endfor %}
-            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <h5 class="product-title">{{ best_product.name }}|{{ best_product.average_rating }}</h5>
-            <p>
-              <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
-            </p>
-          </div>
-        </a>
+    <div class="style-box">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="style-title">상의 BEST 5</h1>
       </div>
+    </div>
+    <div class="row mb-5 product-list w-100 justify-content-between">
+      {% for best_product in best_products_1 %}
+        <div class="product-card col-2">
+          <a href="{% url 'products:detail' best_product.id %}">
+            <div class="imgBox">
+              <span class="position-absolute top-0 start-0 badge rounded-0">
+                <p class="best-badge">BEST</p>{{ forloop.counter }}
+              </span>
+              {% for product_image in best_product.photo_set.all %}
+                {% if forloop.counter == 1%}
+                  <img class="product-img" src="{{ product_image.image.url }}" alt="">
+                {% endif %}
+              {% endfor %}
+              <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+            </div>
+            <div class="contentBox">
+              <h5 class="product-title">{{ best_product.name }}</h5>
+              <p style="color:#0db295; font-size:18px;">
+                <i class="me-2 bi bi-star-fill"></i>{{ best_product.average_rating }}
+              </p>
+              <p>
+                <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+              </p>
+            </div>
+          </a>
+        </div>
       {% endfor %}
+      <hr>
     </div>
   </div>
+
   <div class="container">
-    <div class="banner m-5">
-      <h4>아우터 top5</h4>
-    </div>
-    <div class="row product-list w-100 justify-content-start">
-      {% for best_product in best_products_3 %}{% comment %} 아우터 top5 {% endcomment %}
-      <div class="product-card col-2">
-        <a href="{% url 'products:detail' best_product.id %}">
-          <div class="imgBox">
-            {% for product_image in best_product.photo_set.all %}
-            {% if forloop.counter == 1%}
-            <img class="product-img" src="{{ product_image.image.url }}" alt="">
-            {% endif %}
-            {% endfor %}
-            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <h5 class="product-title">{{ best_product.name }}|{{ best_product.average_rating }}</h5>
-            <p>
-              <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
-            </p>
-          </div>
-        </a>
+    <div class="style-box">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="style-title">하의 BEST 5</h1>
       </div>
+    </div>
+    <div class="row mb-5 product-list w-100 justify-content-between">
+      {% for best_product in best_products_2 %}
+        <div class="product-card col-2">
+          <a href="{% url 'products:detail' best_product.id %}">
+            <div class="imgBox">
+              <span class="position-absolute top-0 start-0 badge rounded-0">
+                <p class="best-badge">BEST</p>{{ forloop.counter }}
+              </span>
+              {% for product_image in best_product.photo_set.all %}
+                {% if forloop.counter == 1%}
+                  <img class="product-img" src="{{ product_image.image.url }}" alt="">
+                {% endif %}
+              {% endfor %}
+              <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+            </div>
+            <div class="contentBox">
+              <h5 class="product-title">{{ best_product.name }}</h5>
+              <p style="color:#0db295; font-size:18px;">
+                <i class="me-2 bi bi-star-fill"></i>{{ best_product.average_rating }}
+              </p>
+              <p>
+                <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+              </p>
+            </div>
+          </a>
+        </div>
       {% endfor %}
+      <hr>
     </div>
   </div>
+
   <div class="container">
-    <div class="banner m-5">
-      <h4>신발 top5</h4>
-    </div>
-    <div class="row product-list w-100 justify-content-start">
-      {% for best_product in best_products_4 %}{% comment %} 신발 top5 {% endcomment %}
-      <div class="product-card col-2">
-        <a href="{% url 'products:detail' best_product.id %}">
-          <div class="imgBox">
-            {% for product_image in best_product.photo_set.all %}
-            {% if forloop.counter == 1%}
-            <img class="product-img" src="{{ product_image.image.url }}" alt="">
-            {% endif %}
-            {% endfor %}
-            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <h5 class="product-title">{{ best_product.name }}|{{ best_product.average_rating }}</h5>
-            <p>
-              <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
-            </p>
-          </div>
-        </a>
+    <div class="style-box">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="style-title">아우터 BEST 5</h1>
       </div>
+    </div>
+    <div class="row mb-5 product-list w-100 justify-content-between">
+      {% for best_product in best_products_3 %}
+        <div class="product-card col-2">
+          <a href="{% url 'products:detail' best_product.id %}">
+            <div class="imgBox">
+              <span class="position-absolute top-0 start-0 badge rounded-0">
+                <p class="best-badge">BEST</p>{{ forloop.counter }}
+              </span>
+              {% for product_image in best_product.photo_set.all %}
+                {% if forloop.counter == 1%}
+                  <img class="product-img" src="{{ product_image.image.url }}" alt="">
+                {% endif %}
+              {% endfor %}
+              <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+            </div>
+            <div class="contentBox">
+              <h5 class="product-title">{{ best_product.name }}</h5>
+              <p style="color:#0db295; font-size:18px;">
+                <i class="me-2 bi bi-star-fill"></i>{{ best_product.average_rating }}
+              </p>
+              <p>
+                <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+              </p>
+            </div>
+          </a>
+        </div>
       {% endfor %}
+      <hr>
     </div>
   </div>
+
   <div class="container">
-    <div class="banner m-5">
-      <h4>악세사리 top5</h4>
-    </div>
-    <div class="row product-list w-100 justify-content-start">
-      {% for best_product in best_products_5 %}{% comment %} 악세사리 top5 {% endcomment %}
-      <div class="product-card col-2">
-        <a href="{% url 'products:detail' best_product.id %}">
-          <div class="imgBox">
-            {% for product_image in best_product.photo_set.all %}
-            {% if forloop.counter == 1%}
-            <img class="product-img" src="{{ product_image.image.url }}" alt="">
-            {% endif %}
-            {% endfor %}
-            <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-          </div>
-          <div class="contentBox">
-            <h5 class="product-title">{{ best_product.name }}|{{ best_product.average_rating }}</h5>
-            <p>
-              <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
-            </p>
-          </div>
-        </a>
+    <div class="style-box">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="style-title">신발 BEST 5</h1>
       </div>
+    </div>
+    <div class="row mb-5 product-list w-100 justify-content-between">
+      {% for best_product in best_products_4 %}
+        <div class="product-card col-2">
+          <a href="{% url 'products:detail' best_product.id %}">
+            <div class="imgBox">
+              <span class="position-absolute top-0 start-0 badge rounded-0">
+                <p class="best-badge">BEST</p>{{ forloop.counter }}
+              </span>
+              {% for product_image in best_product.photo_set.all %}
+                {% if forloop.counter == 1%}
+                  <img class="product-img" src="{{ product_image.image.url }}" alt="">
+                {% endif %}
+              {% endfor %}
+              <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+            </div>
+            <div class="contentBox">
+              <h5 class="product-title">{{ best_product.name }}</h5>
+              <p style="color:#0db295; font-size:18px;">
+                <i class="me-2 bi bi-star-fill"></i>{{ best_product.average_rating }}
+              </p>
+              <p>
+                <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+              </p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+      <hr>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="style-box">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="style-title">악세서리 BEST 5</h1>
+      </div>
+    </div>
+    <div class="row mb-5 product-list w-100 justify-content-between">
+      {% for best_product in best_products_5 %}
+        <div class="product-card col-2">
+          <a href="{% url 'products:detail' best_product.id %}">
+            <div class="imgBox">
+              <span class="position-absolute top-0 start-0 badge rounded-0">
+                <p class="best-badge">BEST</p>{{ forloop.counter }}
+              </span>
+              {% for product_image in best_product.photo_set.all %}
+                {% if forloop.counter == 1%}
+                  <img class="product-img" src="{{ product_image.image.url }}" alt="">
+                {% endif %}
+              {% endfor %}
+              <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+            </div>
+            <div class="contentBox">
+              <h5 class="product-title">{{ best_product.name }}</h5>
+              <p style="color:#0db295; font-size:18px;">
+                <i class="me-2 bi bi-star-fill"></i>{{ best_product.average_rating }}
+              </p>
+              <p>
+                <span class="sale">10%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+              </p>
+            </div>
+          </a>
+        </div>
       {% endfor %}
     </div>
   </div>

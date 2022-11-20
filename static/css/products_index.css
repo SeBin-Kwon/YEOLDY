@@ -33,9 +33,10 @@ a {
 .imgBox {
     display: flex;
     align-items: center;
-    height: 60%;
+    height: 230px;
     position: relative;
     overflow: hidden;
+    box-shadow: -4px -6px 32px 0px #0d224216;
 }
 
 .imgBox .product-img {
