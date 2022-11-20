@@ -149,3 +149,13 @@ def order_list(request):
         'form': form
     }
     return render(request, 'kakaopay/order_list.html', context)
+
+@login_required
+def show_order_list(request):
+    orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
+    first_item = orderlists[0]
+    context = {
+        'orderlists': orderlists,
+        'first_item': first_item,
+    }
+    return render(request, 'kakaopay/show_order_list.html', context)
