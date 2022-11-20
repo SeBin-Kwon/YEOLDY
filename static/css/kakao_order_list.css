@@ -85,10 +85,8 @@ form .user-details .input-box{
 
 
 form .button {
-  height: 45px;
-  margin: 45px 0;
-  min-width: 100%;
-  text-align: end;
+  margin: 55px 0;
+  text-align: center;
 }
 
 form .button input:hover {
@@ -96,19 +94,20 @@ form .button input:hover {
 }
 
 form .button input{
-  height: 38px;
-  width: 100px;
-  outline: none;
+  width: 300px;
+  height: 67px;
+  background: #000;
   color: #fff;
-  border: none;
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 5px;
-  letter-spacing: 1px;
-  background: #0DB295;
+  font-size: 19px;
+  font-weight: 600;
+  border-radius: 40px;
   transition: 0.3s;
+  border-style: none;
 }
 
+form .button .detail {
+  outline: none;
+}
 
 .user-address{
   max-width: 800px;
@@ -117,19 +116,24 @@ form .button input{
 }
 
 .user-address .input-box .add-btn{
-  height: 45px;
-  width: 150px;
-  margin: 45px 0;
-  text-align: center;
-  outline: none;
-  color: #fff;
-  border: none;
-  font-size: 18px;
-  font-weight: 500;
-  border-radius: 5px;
-  letter-spacing: 1px;
-  background: #0DB295;
-  transition: 0.3s;
+  height: 39px;
+    width: 100px;
+    margin: 46px 0;
+    text-align: center;
+    outline: none;
+    color: gray;
+    border: 1px solid gray;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    letter-spacing: -0.1px;
+    /* background: #0DB295; */
+    transition: 0.3s;
+}
+
+.user-address .input-box .add-btn:hover{
+  color: #0DB295;
+  border: 1px solid #0DB295;
 }
 
 form .user-details .input-box{

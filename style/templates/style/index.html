@@ -17,13 +17,15 @@
     </div>
     <div class="row justify-content-center">
       {% for style in styles %}
-        <div class="col-12 col-md-6 col-lg-4" style="padding: 0;">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3" style="padding: 0;">
           <div class="style-card">
             <!-- 카드 사진 -->
             {% for img in style.photo_set.all %}
               {% if forloop.counter == 1%}
-                <a href="{% url 'style:detail' style.pk %}">
-                  <img src="{{ img.image.url }}" class="style-img card-img-top" alt="...">
+              <a href="{% url 'style:detail' style.pk %}">
+                  <div class="h-100">
+                    <img src="{{ img.image.url }}" class="style-img   card-img-top w-100" alt="...">
+                  </div>
                 </a>
               {% endif %}
             {% endfor %}
