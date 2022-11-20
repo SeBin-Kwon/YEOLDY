@@ -64,6 +64,8 @@ def mypage(request, pk):
     my_qna = user.qna_set.order_by("-pk")
     my_review = user.review_set.order_by("-pk")
     like_style = user.like_style.all().order_by("-pk")
+    like_style2 = user.like_style.all().order_by("-pk")
+    like_style3 = user.like_style.all().order_by("-pk")
     save_product = user.save_products.all().order_by("-pk")
     orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
 
@@ -74,7 +76,7 @@ def mypage(request, pk):
         if len(orderlists) == 1:
             orderlist = first_item
         else:
-            orderlist = first_item + " 외 " + str(len(orderlists)-1) + "건"
+            orderlist = first_item + " 외 " + str(len(orderlists) - 1) + "건"
     print(orderlist)
     context = {
         "user": user,
@@ -82,6 +84,8 @@ def mypage(request, pk):
         "my_qna": my_qna,
         "my_review": my_review,
         "like_style": like_style,
+        "like_style2": like_style2,
+        "like_style3": like_style3,
         "save_product": save_product,
         "orderlist": orderlist,
     }

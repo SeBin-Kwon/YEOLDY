@@ -384,3 +384,12 @@ a {
   font-size: 16px;
   font-weight: 600;
 }
+
+.follow-btn{
+  border: none;
+  background: none;
+}
+
+.modal-body{
+  padding-left: 22px;
+}
