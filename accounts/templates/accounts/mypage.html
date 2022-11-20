@@ -142,7 +142,8 @@
                 <tr>
                   <th scope="row">Style</th>
                     <td><a class="links" href="{% url 'style:detail' style.pk %}">{{ style.title }}</a></td>
-                    <td></td>
+                    <!-- <td>{{ style.created_at }}</td>
+                    <td>{{ style.hits }}</td> -->
                 </tr>
                 {% endfor %}
                 {% for review in my_review %}
