@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>주문내역</h1>
+<hr>
+
+<p>배송지명 : {{ first_item.location_name }}</p>
+<p>배송자명 : {{ first_item.order_name }}</p>
+<p>휴대폰번호 : {{ first_item.phone_number }}</p>
+<p>배송요청사항 : {{ first_item.order_request }}</p>
+
+<hr>
+
+{% for orderlist in orderlists %}
+<p>제품명 : {{ orderlist.product }}</p>
+<p>색상 : {{ orderlist.color }}</p>
+<p>사이즈 : {{ orderlist.size }}</p>
+<p>수량 : {{ orderlist.quantity }}</p>
+{% endfor %}
+
+{% endblock %}
