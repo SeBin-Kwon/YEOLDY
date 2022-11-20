@@ -105,9 +105,9 @@
             </i>
           </a>
         </li>
-        {% if user.is_authenticated %}
+        {% if request.user.is_authenticated %}
           <li>
-            <a href="{% url 'accounts:mypage' user.pk %}">
+            <a href="{% url 'accounts:mypage' request.user.pk %}">
               <i class="bi bi-person-fill"></i>
             </a>
           </li>
