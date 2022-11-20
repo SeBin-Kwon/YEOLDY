@@ -6,6 +6,7 @@ from .form import ProductsForm
 from django.db.models import F  # 검색 순위 조회수 증가
 from django.db.models import Q  # 검색 기능
 from community.models import Review as review
+
 # Create your views here.
 
 # 상품 리스트 기능(메인페이지로 대체?)카테고리전체
@@ -184,7 +185,7 @@ def search(request):
         if len(products):
             search_exist.search_count += 1  # 있다면 +1
         else:
-            search_exist.search_count -= 1  # 없다면 -1
+            search_exist.search_count = 0  # 없다면 -1
         search_exist.save()
     else:
         Search.objects.create(search_text=search)
@@ -212,20 +213,45 @@ def new_products(request):
     }
     return render(request, "products/new_products.html", context)
 
+
 # 베스트 상품
 def best_products(request):
-    best_products = Products.objects.filter(average_rating__isnull=False).order_by("-average_rating")[:5]#top5/NULL제외
-    best_products_1 = Products.objects.filter(average_rating__isnull=False,category="상의").order_by("-average_rating")[:5]#상의top/5/NULL제외
-    best_products_2 = Products.objects.filter(average_rating__isnull=False,category="하의").order_by("-average_rating")[:5]#하의top5/NULL제외
-    best_products_3 = Products.objects.filter(average_rating__isnull=False,category="아우터").order_by("-average_rating")[:5]#아우터top5/NULL제외
-    best_products_4 = Products.objects.filter(average_rating__isnull=False,category="신발").order_by("-average_rating")[:5]#신발top5/NULL제외
-    best_products_5 = Products.objects.filter(average_rating__isnull=False,category="악세사리").order_by("-average_rating")[:5]#악세사리top5/NULL제외
+    best_products = Products.objects.filter(average_rating__isnull=False).order_by(
+        "-average_rating"
+    )[
+        :5
+    ]  # top5/NULL제외
+    best_products_1 = Products.objects.filter(
+        average_rating__isnull=False, category="상의"
+    ).order_by("-average_rating")[
+        :5
+    ]  # 상의top/5/NULL제외
+    best_products_2 = Products.objects.filter(
+        average_rating__isnull=False, category="하의"
+    ).order_by("-average_rating")[
+        :5
+    ]  # 하의top5/NULL제외
+    best_products_3 = Products.objects.filter(
+        average_rating__isnull=False, category="아우터"
+    ).order_by("-average_rating")[
+        :5
+    ]  # 아우터top5/NULL제외
+    best_products_4 = Products.objects.filter(
+        average_rating__isnull=False, category="신발"
+    ).order_by("-average_rating")[
+        :5
+    ]  # 신발top5/NULL제외
+    best_products_5 = Products.objects.filter(
+        average_rating__isnull=False, category="악세사리"
+    ).order_by("-average_rating")[
+        :5
+    ]  # 악세사리top5/NULL제외
     context = {
         "best_products": best_products,
-        "best_products_1":best_products_1,
-        "best_products_2":best_products_2,
-        "best_products_3":best_products_3,
-        "best_products_4":best_products_4,
-        "best_products_5":best_products_5,
+        "best_products_1": best_products_1,
+        "best_products_2": best_products_2,
+        "best_products_3": best_products_3,
+        "best_products_4": best_products_4,
+        "best_products_5": best_products_5,
     }
     return render(request, "products/best_products.html", context)
