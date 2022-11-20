@@ -10,6 +10,7 @@
 
 {% block content %}
 <!-- 스타일 게시글 -->
+
 <div class="section">
   <div class="back">
     <a href="{% url 'style:index' %}">
@@ -90,8 +91,15 @@
       </div>
 
       <p class="st-content d-flex">{{ style.content }}</p>
+      <!--태그-->
+      <div class="tag-box">
+        {% for style_tag in style_tags %}
+          <p class="tag">#{{ style_tag }}</p>
+        {% endfor %}
+      </div>
     </div>
   </div>
+
 
   <div class="center-btn">
     <!-- 좋아요 -->

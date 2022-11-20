@@ -262,6 +262,11 @@ form .button input{
   justify-content: end;
 }
 
+.ex {
+  color: #999;
+  font-size: 14px;
+}
+
 
 /* .img-input{
   position: relative;
