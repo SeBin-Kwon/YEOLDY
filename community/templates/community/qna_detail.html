@@ -16,22 +16,41 @@
     <div class="qna-image"></div>
     {% endif %}
   </div>
-
-  <div class="qna-post_info">
-    <div class="post-head d-flex flex-column">
-      <div class="post-title">
-        <h3 class="qna-post_title">{{ qna.title }}</h3>
-        <div class="mb-3 d-flex align-items-center">
-          <div class="qna-user-image" style="background-image:url('{{ qna.user.profile_image.url }}')"></div>
-          <p class="qna-post_username">
-            {{ qna.user.username }}|{{ qna_hits.hits }}{% comment %} #qna 조회수 {% endcomment %}
+    <div class="qna-post_info">
+      <div class="post-head d-flex flex-column">
+        <div class="post-title">
+          <div class="mb-3 d-flex justify-content-between w-100 align-items-center">
+            <div class="d-flex align-items-center">
+              <div class="qna-user-image" style="background-image:url('{{ qna.user.profile_image.url }}')"></div>
+              <p class="qna-post_username">
+                {{ qna.user.username }}
+              </p>
+            </div>
+            <span style="font-size: 14px; color:gray;">조회수 {{ qna_hits.hits }}</span>
+          </div>
+          <h3 class="qna-post_title">{{ qna.title }}</h3>
+        </div>
+        <div class="post-body">
+          <p class="qna-post_text">
+            {{ qna.content }}
           </p>
         </div>
       </div>
-      <div class="post-body">
-        <p class="qna-post_text">
-          {{ qna.content }}
-        </p>
+      <div class="qna-btn">
+        <span style="font-size: 14px; color:gray;">{{ qna.created_at }}</span>
+        {% if request.user == qna.user %}
+        <div>
+          <a class="delete-btn" href="{% url 'community:qna_delete' qna.pk %}">
+            <i class="bi bi-trash"></i>
+          </a>
+          <a class="update-btn mx-1" href="{% url 'community:qna_update' qna.pk %}">
+            <i class="bi bi-pencil-square"></i>
+          </a>
+        </div>
+        {% endif %}
+        <!-- <a class="btn btn-outline-secondary" href="{% url 'community:index' %}">
+          <i class="bi bi-arrow-left"></i>
+        </a> -->
       </div>
     </div>
     <div class="qna-btn">
