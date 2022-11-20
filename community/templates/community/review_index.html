@@ -105,7 +105,9 @@
                 <div class="swiper mySwiper2">
                   <div class="swiper-wrapper">
                     {% for photo2 in review_2.photo_set.all %}
-                      <div class="swiper-slide"><img class="modal-img" src="{{ photo2.image.url }}" alt="">
+                      <div class="swiper-slide">
+                        {% comment %} <img class="modal-img" src="{{ photo2.image.url }}" alt=""> {% endcomment %}
+                        <div class="modal-img w-100" style="height:700px; background-image:url('{{ photo2.image.url }}')"></div>
                       </div>
                     {% endfor %}
                   </div>

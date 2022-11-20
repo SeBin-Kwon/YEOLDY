@@ -8,8 +8,9 @@ order_requests = (
     ("부재 시 택배함에 넣어주세요", "부재 시 택배함에 넣어주세요"),
     ("부재 시 집 앞에 놔주세요", "부재 시 집 앞에 놔주세요"),
     ("배송 전 연락 바랍니다", "배송 전 연락 바랍니다"),
-    ("파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요.", "파손의 위험이 있는 상품입니다. 배송 시 주의해 주세요."),
+    ("파손의 위험이 있는 상품입니다. 주의해 주세요.", "파손의 위험이 있는 상품입니다. 주의해 주세요."),
 )
+
 
 class OrderList(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
@@ -20,6 +21,8 @@ class OrderList(models.Model):
     location_zipcode = models.CharField(max_length=20)
     location_address = models.CharField(max_length=50)
     location_detail = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+
 
 class OrderListFinal(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
@@ -34,3 +37,4 @@ class OrderListFinal(models.Model):
     location_zipcode = models.CharField(max_length=20)
     location_address = models.CharField(max_length=50)
     location_detail = models.CharField(max_length=50)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)

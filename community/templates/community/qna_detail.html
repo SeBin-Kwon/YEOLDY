@@ -3,20 +3,19 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/qna_detail.css'%}">
+<link rel="stylesheet" href="{% static 'css/qna_detail.css'%}">
 {% endblock css %}
 
 {% block content %}
 
-  <div class="qna-post">
-    <div class="qna-post_img">
-      {% if qna.image %}
-        <div class="qna-image" style="background-image:url('{{ qna.image.url }}')"></div>
-      {% else %}
-        <div class="qna-image"></div>
-      {% endif %}
-    </div>
-
+<div class="qna-post">
+  <div class="qna-post_img">
+    {% if qna.image %}
+    <div class="qna-image" style="background-image:url('{{ qna.image.url }}')"></div>
+    {% else %}
+    <div class="qna-image"></div>
+    {% endif %}
+  </div>
     <div class="qna-post_info">
       <div class="post-head d-flex flex-column">
         <div class="post-title">
@@ -54,6 +53,35 @@
         </a> -->
       </div>
     </div>
+    <div class="qna-btn">
+      {% if request.user == qna.user %}
+      <a class="delete-btn" href="{% url 'community:qna_delete' qna.pk %}">
+        <i class="bi bi-trash"></i>
+      </a>
+      <a class="update-btn mx-1" href="{% url 'community:qna_update' qna.pk %}">
+        <i class="bi bi-pencil-square"></i>
+      </a>
+      {% endif %}
+      <a class="btn btn-outline-secondary" href="{% url 'community:index' %}">
+        <i class="bi bi-arrow-left"></i>
+      </a>
+    </div>
   </div>
+</div>
+<div class="my-3">
+  {% if request.user.is_staff %}
+  <h2>답변</h2>
+  {% load django_bootstrap5 %}
+  <form action="{% url 'community:qna_review' qna.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form qna_review_form layout='inline' %}
+    <br>
+    {% bootstrap_button button_type="submit" content="댓글 작성" %}
+  </form>
+  {% endif %}
+</div>
+{% for answer in qna_reviews %}
+<p>{{answer.content}}</p>
+{% endfor %}
 
 {% endblock content %}

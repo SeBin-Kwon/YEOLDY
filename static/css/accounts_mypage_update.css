@@ -149,27 +149,87 @@ form input[type="radio"]{
 }
 
 form .button {
-  height: 38px;
-  margin-left: 3px;
+  height: 36px;
   min-width: 100px;
+  margin-left: 5px;
 }
 
 form .button input:hover {
   background-color: #07937a;
+  color: #fff;
 }
 
 form .button input{
   height: 100%;
   width: 100%;
   outline: none;
-  color: #fff;
-  border: none;
+  color: #000;
+  border: 1px solid #0DB295;
   font-size: 18px;
   font-weight: 500;
   border-radius: 5px;
   letter-spacing: 1px;
-  background: #0DB295;
   transition: 0.3s;
+  background: #fff;
+}
+
+.update-btn{
+  height: 100%;
+  border-radius: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.del-box{
+  border: 1px solid rgba(255, 0, 0, 0.642)
+}
+
+.pw-box{
+  border: 1px solid rgba(0, 60, 255, 0.408);
+}
+
+.del-btn:hover{
+  color: #fff;
+}
+
+.del-box:hover{
+  background: rgba(255, 0, 0, 0.642);
+  border: 1px solid rgba(255, 0, 0, 0.642);
+}
+
+.pw-btn:hover{
+  color: #fff;
+}
+
+.pw-box:hover{
+  background: rgba(0, 60, 255, 0.408);
+  border: 1px solid rgba(0, 60, 255, 0.408);
+}
+
+.del-btn{
+  text-decoration: none;
+  margin-left: 3px;
+  min-width: 100px;
+  color: #000;
+  margin: auto;
+  margin-right: 5px;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+
+.pw-btn{
+  text-decoration: none;
+  min-width: 100px;
+  color: #000;
+  margin: auto;
+  margin-right: 5px;
+  margin-left: 5px;
+  transition: 0.3s;
+}
+
+.update-sub .button input{
+  font-size: 16px;
 }
 
 @media (max-width: 584px) {
@@ -195,6 +255,13 @@ form .button input{
     width: 0;
   }
 }
+
+.update-sub{
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
 
 /* .img-input{
   position: relative;

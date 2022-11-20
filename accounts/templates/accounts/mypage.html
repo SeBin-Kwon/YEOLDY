@@ -129,15 +129,18 @@
     <div class="info">
       <div id="tab1" class="mypost" style="display:block;">
         <h3 class="sub-title">주문 내역</h3>
-        <!-- 주문 내역이 있다면 -->
-        <div>
-          <div class="order-img"></div>
-  
-        </div>
-        <!-- 없다면 -->
+        <!-- 주문 내역이 없다면 -->
+        {% if orderlist == 0 %}
         <div class="d-flex align-items-center justify-content-center h-75">
           <p class="m-0" style="font-size: 14px; color:gray;">주문 내역이 없습니다.</p>
         </div>
+        <!-- 주문 내역이 있다면 -->
+        {% else %}
+        <div>
+          <div class="order-img"></div>
+          <p><a href="{% url 'kakaopay:show_order_list' %}">{{ orderlist }} 이(가) 배송 중입니다.</a></p>
+        </div>
+        {% endif %}
   
       </div>
       <!-- 내가 쓴 글 -->

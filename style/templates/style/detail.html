@@ -3,6 +3,7 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/style_detail.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 {% endblock css %}
 
 
@@ -15,49 +16,64 @@
       <i class="bi bi-chevron-left"></i><span>&nbsp;BACK</span>
     </a>
   </div>
-  {% for img in style_images %}
   <div class="img-div">
-    <img class="st-img" src="{{ img.image.url }}" alt="{{ style.image }}">
-    {% endfor %}
+
+    <div class="swiper mySwiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        {% for img in style_images %}
+          <div class="swiper-slide">
+            <div class="modal-img w-100" style="height:700px; background-image:url('{{ img.image.url }}')"></div>
+            {% comment %} <img src="{{img.image.url}}" alt=""> {% endcomment %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+      {% comment %} <img class="st-img" src="{{ img.image.url }}" alt="{{ style.image }}"> {% endcomment %}
+
+
     <div class="info">
       <div class="style-user mt-4 mb-4">
         <div class="d-flex align-items-center justify-content-between">
           <div class="d-flex align-items-center">
-          <!-- 프사 -->
-          {% if style.user.profile_image %}
-          <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
-          </div>
-          {% comment %} <img class="profile-image" src="{{ user.profile_image.url }}"> {% endcomment %}
-          {% else %}
-
-          <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
-          {% endif %}
-          <!-- 유저 이름 -->
-          <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
-            <p class="style-username">{{ style.user.username }}</p>
-          </a>
-          <div class="follow ms-2">
-            <!-- 팔로우 -->
-            {% if request.user != style.user %}
-            {% if request.user in style.user.followers.all %}
-            <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-sm btn-outline-danger" type="submit">Unfollow
+            <!-- 프사 -->
+            {% if style.user.profile_image %}
+            <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
             </div>
+            {% comment %} <img class="profile-image" src="{{ user.profile_image.url }}"> {% endcomment %}
             {% else %}
-            <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-sm btn-outline-primary" type="submit">
-              Follow
+
+            <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+            {% endif %}
+            <!-- 유저 이름 -->
+            <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+              <p class="style-username">{{ style.user.username }}</p>
+            </a>
+            <div class="follow ms-2">
+              <!-- 팔로우 -->
+              {% if request.user != style.user %}
+              {% if request.user in style.user.followers.all %}
+              <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-sm btn-outline-danger"
+                type="submit">Unfollow
+              </div>
+              {% else %}
+              <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-sm btn-outline-primary"
+                type="submit">
+                Follow
+              </div>
+              {% endif %}
+              {% endif %}
             </div>
-            {% endif %}
-            {% endif %}
+          </div>
+
+          <!--생성 날짜 -->
+          <div>
+            <!-- 조회수 -->
+            <span class="detail-hits">조회수 {{ style.hits }}</span>
+            <span class="detail-date">| {{ style.created_at }}</span>
           </div>
         </div>
-
-        <!--생성 날짜 -->
-        <div>
-          <!-- 조회수 -->
-          <span class="detail-hits">조회수 {{ style.hits }}</span>
-          <span class="detail-date">| {{ style.created_at }}</span>
-        </div>
-      </div>
 
       </div>
       <div class="st-top mb-3">
@@ -98,6 +114,7 @@
   <div class="card">
     <div class="card-header bg-white">
       <div class="col-md-12">
+        {% if user.is_authenticated %}
         {% csrf_token %}
         <div class="form-group row">
           <textarea class="form-control" id="content_id" rows="3" placeholder="댓글을 입력해주세요."></textarea>
@@ -105,6 +122,7 @@
         <div class="text-right" style="float:right">
           <button id="review_write" class="btn btn-sm">댓글달기</button>
         </div>
+        {% endif %}
       </div>
       <hr>
       <div id="more_review">
@@ -146,6 +164,17 @@
     </div>
   </div>
 </div>
+
+<!--swiper -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    effect: "cards",
+    grabCursor: true,
+  });
+</script>
+
+
 <!-- 댓글 비동기 처리 -->
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
