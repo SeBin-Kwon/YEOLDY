@@ -3,6 +3,7 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/style_detail.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 {% endblock css %}
 
 
@@ -15,10 +16,23 @@
       <i class="bi bi-chevron-left"></i><span>&nbsp;BACK</span>
     </a>
   </div>
-  {% for img in style_images %}
   <div class="img-div">
-    <img class="st-img" src="{{ img.image.url }}" alt="{{ style.image }}">
-    {% endfor %}
+
+    <div class="swiper mySwiper">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+        {% for img in style_images %}
+          <div class="swiper-slide">
+            <div class="modal-img w-100" style="height:700px; background-image:url('{{ img.image.url }}')"></div>
+            {% comment %} <img src="{{img.image.url}}" alt=""> {% endcomment %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+      {% comment %} <img class="st-img" src="{{ img.image.url }}" alt="{{ style.image }}"> {% endcomment %}
+
+
     <div class="info">
       <div class="style-user mt-4 mb-4">
         <div class="d-flex align-items-center justify-content-between">
@@ -146,6 +160,17 @@
     </div>
   </div>
 </div>
+
+<!--swiper -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    effect: "cards",
+    grabCursor: true,
+  });
+</script>
+
+
 <!-- 댓글 비동기 처리 -->
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
