@@ -66,11 +66,16 @@ def mypage(request, pk):
     like_style = user.like_style.all().order_by("-pk")
     save_product = user.save_products.all().order_by("-pk")
     orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
-    first_item = str(orderlists[0].product)
-    if len(orderlists) == 1:
-        orderlist = first_item
+
+    if len(orderlists) == 0:
+        orderlist = 0
     else:
-        orderlist = first_item + " 외 " + str(len(orderlists)-1) + "건"
+        first_item = str(orderlists[0].product)
+        if len(orderlists) == 1:
+            orderlist = first_item
+        else:
+            orderlist = first_item + " 외 " + str(len(orderlists)-1) + "건"
+    print(orderlist)
     context = {
         "user": user,
         "my_style": my_style,
