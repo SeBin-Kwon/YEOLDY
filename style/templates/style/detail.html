@@ -20,9 +20,9 @@
     <img class="st-img" src="{{ img.image.url }}" alt="{{ style.image }}">
     {% endfor %}
     <div class="info">
-      <div class="style-user mt-4 mb-3">
-        <div class="d-flex align-items-center">
-          <div>
+      <div class="style-user mt-4 mb-4">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
           <!-- 프사 -->
           {% if style.user.profile_image %}
           <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')">
@@ -36,10 +36,27 @@
           <a class="style-link" href="{% url 'accounts:mypage' style.user.pk %}">
             <p class="style-username">{{ style.user.username }}</p>
           </a>
+          <div class="follow ms-2">
+            <!-- 팔로우 -->
+            {% if request.user != style.user %}
+            {% if request.user in style.user.followers.all %}
+            <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-sm btn-outline-danger" type="submit">Unfollow
+            </div>
+            {% else %}
+            <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-sm btn-outline-primary" type="submit">
+              Follow
+            </div>
+            {% endif %}
+            {% endif %}
+          </div>
         </div>
 
-        <div>{{ style.hits }}</div>
-        <div>{{ style.created_at }}</div>
+        <!--생성 날짜 -->
+        <div>
+          <!-- 조회수 -->
+          <span class="detail-hits">조회수 {{ style.hits }}</span>
+          <span class="detail-date">| {{ style.created_at }}</span>
+        </div>
       </div>
 
       </div>
@@ -61,21 +78,6 @@
   </div>
 
   <div class="center-btn">
-
-    <div class="follow me-3">
-      <!-- 팔로우 -->
-      {% if request.user != style.user %}
-      {% if request.user in style.user.followers.all %}
-      <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-danger" type="submit">Unfollow
-      </div>
-      {% else %}
-      <div id="follow-btn" data-post-id="{{ style.user.pk }}" class=" btn btn-outline-primary" type="submit">
-        Follow
-      </div>
-      {% endif %}
-      {% endif %}
-    </div>
-
     <!-- 좋아요 -->
     <div class="d-flex flex-column justify-content-center text-center">
       {% if request.user.is_authenticated %}

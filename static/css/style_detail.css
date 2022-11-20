@@ -102,6 +102,17 @@
   color: rgb(238, 97, 97);
 }
 
+.detail-date {
+  color: rgb(166, 166, 166);
+  font-size: 14px;
+}
+
+.detail-hits {
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+}
+
 @media ( max-width: 1024px ) {
   .section {
     padding: 0 8rem;
