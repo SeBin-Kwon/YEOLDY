@@ -89,7 +89,7 @@
         </div>
 
         <div class="input-box">
-          <label class="details" name="label_phone_number" for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}(ex : 01012345678)</label>
+          <label class="details" name="label_phone_number" for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }} <span class="ex">(ex : 01012345678)</span></label>
           {% comment %} <input type="tel" placeholder="번호를 입력해 주세요" required="required" id="phone_number" name="phone_number"> {% endcomment %}
           {{ form.phone_number }}
           <script type="text/javascript">
@@ -162,7 +162,7 @@
         </div>
 
         <div class="input-box">
-          <lable class="details" name="label_birth" for="{{ form.birth.id_for_label }}">생년월일(ex:961123)</lable>
+          <lable class="details" name="label_birth" for="{{ form.birth.id_for_label }}">생년월일 <span class="ex">(ex:961123)</span></lable>
           {{ form.birth }}
           <script type="text/javascript">
             if (document.getElementsByName('birth')[0].value != '') {

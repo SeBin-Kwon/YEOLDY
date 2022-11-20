@@ -1,8 +1,8 @@
 
 
 .qna-post{
+  margin: auto;
   max-width: 90rem;
-  margin: 3rem;
   padding: 5rem;
   /* background-color: #fff; */
   /* box-shadow: 0 1.4rem 8rem rgba(0, 0, 0, 0.2); */
@@ -11,10 +11,13 @@
   border-radius: .8rem;
 }
 
+.qna-post_info {
+  min-width: 400px;
+}
+
 .qna-post_img{
   margin-right: 30px;
   min-width: 35rem;
-  max-width: 35rem;
   height: 35rem;
   position: relative;
 }
@@ -30,7 +33,6 @@
 }
 
 .qna-post_text {
-  font-size: 1.4rem;
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -39,8 +41,8 @@
     max-width: 80rem;
   }
   .qna-post_img{
-    min-width: 30rem;
-    max-width: 30rem;
+    min-width: 27rem;
+    max-width: 27rem;
   }
 }
 
@@ -66,20 +68,24 @@
 .qna-btn{
   display: flex;
   height: 10%;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
 }
 
 .qna-btn .delete-btn{
+  position: relative;
   text-decoration: none;
-  padding: 10px 13.5px;
+  padding: 10px 21px;
   background: rgba(255, 85, 85, 0.8);
   color: #fff;
-  border: 0;
   outline: none;
   cursor: pointer;
-  border-radius: 30px;
   border-radius: 50%;
+}
+
+.qna-btn .delete-btn i{
+  position: absolute;
+  left: 31%;
 }
 
 
@@ -122,6 +128,7 @@
 
 .qna-post_info .qna-post_title{
   text-align: center;
+  font-size: 22px;
 }
 
 .post-title{
