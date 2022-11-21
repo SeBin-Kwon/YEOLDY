@@ -4,6 +4,7 @@ from django.contrib.auth.forms import (
     PasswordChangeForm,
 )
 from .models import User
+from django.forms import TextInput
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -56,6 +57,13 @@ class CustomUserChangeForm(UserChangeForm):
             "phone_number": "휴대폰번호",
             "birth": "생일",
             "gender": "성별",
+        }
+        widgets = {
+            "username": TextInput(
+                attrs={
+                    "disabled": "disabled",
+                }
+            )
         }
 
 
