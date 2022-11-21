@@ -89,7 +89,7 @@
         </div>
         {% if product.sale_percent > 0 %}
         <div class="d-flex">
-          <span class="origin-cost">{{ product.cost|intcomma }}원</span>
+          <span class="origin-cost">{{ product.cost_2|intcomma }}원</span>
           <span class="sale">{{ product.sale_percent }}%</span>
         </div>
         {% endif %}
