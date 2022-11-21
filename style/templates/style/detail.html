@@ -100,6 +100,16 @@
           <p class="tag">#{{ style_tag }}</p>
         {% endfor %}
       </div>
+
+      <!-- 착용한 상품 -->
+      <div>
+        <h1>착용한 상품</h1>
+        <div>
+          {% for orderlist in orderlists %}
+            <p>{{orderlist.name}}</p>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
 
