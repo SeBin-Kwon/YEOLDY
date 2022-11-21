@@ -211,7 +211,7 @@
 
                 <div>
                   <span class="review-user">
-                    {{ review.user.username }}
+                    {{ review.user.nickname }}
                   </span>님의 리뷰입니다.
                 </div>
               </div>
@@ -270,7 +270,7 @@
                     {% endif %}
                   </a>
               </td>
-              <td>{{ qna.user.username|first }}****</td>
+              <td>{{ qna.user.nickname|first }}****</td>
             </tr>
             {% endfor %}
           </table>
