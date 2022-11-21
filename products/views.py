@@ -87,8 +87,6 @@ def create(request):
 @login_required
 def update(request, pk):
     product = Products.objects.get(id=pk)
-    photo = product.photo_set.all()
-    photo.delete()
     if request.user == product.user:
         if request.method == "POST":
             products_form = ProductsForm(request.POST, request.FILES, instance=product)
@@ -129,6 +127,7 @@ def detail(request, pk):
     qnas = product.qna_set.all().order_by("-pk")
     colors = list(str(product.color).split(", "))
     sizes = list(str(product.size).split(", "))
+
     context = {
         "reviews": reviews,
         "qnas": qnas,
