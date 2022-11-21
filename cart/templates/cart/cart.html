@@ -13,7 +13,7 @@
   {% if not cart_items %}
     <h2 class="col-10 m-auto mb-5 text-center">장바구니가 비었습니다.</h2>
   {% else %}
-    <table class="col-10 m-auto mb-5">
+    <table class="col-10 m-auto mb-3">
       <thead>
         <tr>
           <th>제품명</th>
@@ -75,7 +75,7 @@
     {% if cart_items %}
       <div class="mb-5 d-flex justify-content-end">
         <a class="cart-clear-link" href="{% url 'cart:clear_cart' %}">
-          <div class="cart-clear-btn ">
+          <div class="cart-clear-btn">
             장바구니 비우기
           </div>
         </a>
@@ -96,16 +96,16 @@
       </div>
       <div class="pricebox">
         <div class="col-3">
-          <h3 class="fw-bold">{{ total|intcomma }}원</h3>
+          <h3 class="pricetext">{{ total|intcomma }}원</h3>
           {{ cart_items.count }}개
         </div>
-        <i class="bi bi-plus-circle-fill" style="font-size:30px;"></i>
+        <i class="bi bi-plus-circle-fill" style="font-size:30px; opacity:90%;"></i>
         <div class="col-3">
-          <h3 class="fw-bold">YEOLDY는 언제나<br/>배송비 무료</h3>
+          <h3 class="pricetext">YEOLDY는 언제나<br/>배송비 무료</h3>
         </div>
-        <img src="{% static 'images/equal.png' %}" alt="" style="width:30px; height:30px;">
+        <img src="{% static 'images/equal.png' %}" alt="" style="width:30px; height:30px; opacity:75%;">
         <div class="col-3">
-          <h3 class="fw-bold">{{ total|intcomma }}원</h3>
+          <h3 class="pricetext">{{ total|intcomma }}원</h3>
         </div>
       </div>
     </div>
