@@ -32,6 +32,8 @@
       {{ first_item.phone_number }}
     </div>
 
+<h1>총 금액 : {{orderlist_total}}</h1>
+
     <div class="d-flex align-items-center">
       <div class="detail me-3">
         <h5>요청사항</h5>
@@ -64,12 +66,3 @@
   </div>
 
 {% endblock %}
-
-<p>제품명 :
-  {{ orderlist.product }}</p>
-<p>색상 :
-  {{ orderlist.color }}</p>
-<p>사이즈 :
-  {{ orderlist.size }}</p>
-<p>수량 :
-  {{ orderlist.quantity }}</p>
