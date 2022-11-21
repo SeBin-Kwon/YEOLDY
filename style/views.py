@@ -23,6 +23,8 @@ def index(request):
 @login_required
 def create(request):
     if request.method == "POST":
+        category = request.POST.getlist("category", "")
+        print(category)
         style_form = StyleForm(request.POST, request.FILES)
         if style_form.is_valid():
             style = style_form.save(commit=False)
