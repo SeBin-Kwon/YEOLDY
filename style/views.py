@@ -101,12 +101,27 @@ def detail(request, pk):
     review_form = ReviewForm()
     reviews = style.style_review_set.all().order_by("-pk")
     style_tags = list(str(style.tag).split(", "))
+
+    #string으로 받은 orderlists들을 int형으로 바꿔줌
+    orderlist_final = []
+    temp = ''
+    for i in range(len(style.orderlists)):
+        if style.orderlists[i] != ',' and style.orderlists[i] != '\'' and style.orderlists[i] != '[' and style.orderlists[i] != ' ' and style.orderlists[i] != ']':
+            temp += style.orderlists[i]
+        if style.orderlists[i] == ',' or style.orderlists[i] == ']':
+            orderlist_final.append(temp)
+            temp = ''
+            print(orderlist_final)
+    orderlist = list(map(int, orderlist_final))
+
+
     context = {
         "style": style,
         "review_form": review_form,
         "reviews": reviews,
         "style_images": style_image,
         "style_tags": style_tags,
+        # "orderlists": orderlists,
     }
     response = render(request, "style/detail.html", context)
 
