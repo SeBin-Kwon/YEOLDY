@@ -163,54 +163,56 @@ form .button input{
   height: 100%;
   width: 100%;
   outline: none;
-  color: #000;
+  color: #fff;
   border: 1px solid #0DB295;
   font-size: 18px;
   font-weight: 500;
   border-radius: 5px;
   letter-spacing: 1px;
   transition: 0.3s;
-  background: #fff;
+  background: #0DB295;
 }
 
 .update-btn{
   height: 100%;
   border-radius: 5px;
-  margin-left: 5px;
+  margin-left: 12px;
   margin-right: 5px;
 }
 
-.del-box{
-  border: 1px solid rgba(255, 0, 0, 0.642)
-}
 
 .pw-box{
-  border: 1px solid rgba(0, 60, 255, 0.408);
-}
-
-.del-btn:hover{
-  color: #fff;
-}
-
-.del-box:hover{
-  background: rgba(255, 0, 0, 0.642);
-  border: 1px solid rgba(255, 0, 0, 0.642);
+  border: 1px solid rgba(0, 0, 0, 0.345);
 }
 
 .pw-btn:hover{
-  color: #fff;
+  color: rgba(0, 60, 255, 0.408);
 }
 
 .pw-box:hover{
-  background: rgba(0, 60, 255, 0.408);
+  /* background: rgba(0, 60, 255, 0.408); */
   border: 1px solid rgba(0, 60, 255, 0.408);
 }
+
+.del-box{
+  border: 1px solid rgba(0, 0, 0, 0.345)
+}
+
+.del-btn:hover{
+  color: rgba(255, 0, 0, 0.642)
+}
+
+.del-box:hover{
+  /* background: rgba(255, 0, 0, 0.642); */
+  border: 1px solid rgba(255, 0, 0, 0.642);
+}
+
 
 .del-btn{
   text-decoration: none;
   margin-left: 3px;
-  min-width: 100px;
-  color: #000;
+  min-width: 30px;
+  color: rgba(0, 0, 0, 0.345);
   margin: auto;
   margin-right: 5px;
   margin-left: 5px;
@@ -221,7 +223,7 @@ form .button input{
 .pw-btn{
   text-decoration: none;
   min-width: 100px;
-  color: #000;
+  color: rgba(0, 0, 0, 0.345);
   margin: auto;
   margin-right: 5px;
   margin-left: 5px;
