@@ -227,3 +227,9 @@ form .button input{
   color: #fff;
   box-shadow: 0 2px 20px #ffeb3b;
 } */
+
+
+.form-check{
+  display: flex;
+  justify-content: center;
+}
