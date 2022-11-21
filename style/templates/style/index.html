@@ -23,8 +23,8 @@
             {% for img in style.photo_set.all %}
               {% if forloop.counter == 1%}
               <a href="{% url 'style:detail' style.pk %}">
-                  <div class="h-100">
-                    <img src="{{ img.image.url }}" class="style-img   card-img-top w-100" alt="...">
+                  <div class="style-img h-100 card-img-top" style="background-image:url('{{ img.image.url }}')">
+                    {% comment %} <img src="{{ img.image.url }}" class="style-img   card-img-top w-100" alt="..."> {% endcomment %}
                   </div>
                 </a>
               {% endif %}
