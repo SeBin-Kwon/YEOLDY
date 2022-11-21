@@ -100,22 +100,23 @@
         <p class="tag">#{{ style_tag }}</p>
         {% endfor %}
       </div>
-
+    </div>
       <!-- 착용한 상품 -->
-      <div>
-        <h1>착용한 상품</h1>
+      <hr>
+      <h3 class="mb-3" style="font-size: 20px; text-align:start;">착용한 상품</h3>
+      <div class="d-flex">
         {% if products == 0 %}
-        <p>착용한 상품이 없습니다.</p>
+        <p class="mb-5" style="color:gray; font-size:14px;">착용한 상품이 없습니다.</p>
         {% else %}
-        <div>
-          {% for product in products %}
-          <p>{{product.name}}</p>
-          <p>{{ product.cost}}</p>
+        {% for product in products %}
+        <div class="mb-4 me-4 d-flex flex-column justify-content-center align-items-center">
+            <div class="product-userimage me-2"  style="background-image:url('{{ product.image.url}}');"></div>
+            <span class="mt-2" style="color:gray; font-size:14px;">{{product.name}}</span>
+          </div>
           {% endfor %}
-        </div>
         {% endif %}
       </div>
-    </div>
+    
   </div>
 
 
