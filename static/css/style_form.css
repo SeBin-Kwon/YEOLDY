@@ -191,7 +191,7 @@ form .button input{
 } */
 
 .box div label input[type="checkbox"]:checked ~ span{
-  background: rgba(0, 0, 0, 0.748);
+  background: #0DB295;
   color: #fff;
   border: 1px solid #0DB295;
   /* box-shadow: 0 2px 20px #0DB295; */
@@ -233,3 +233,4 @@ form .button input{
   display: flex;
   justify-content: center;
 }
+

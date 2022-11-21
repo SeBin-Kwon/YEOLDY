@@ -56,15 +56,17 @@
     </div>
   </div>
 </div>
-<div class="my-3 container">
+
+<div class="px-5 my-3 container">
   {% if request.user.is_staff %}
   <h2>답변</h2>
   {% load django_bootstrap5 %}
   <form action="{% url 'community:qna_review' qna.pk %}" method="POST">
     {% csrf_token %}
     {% bootstrap_form qna_review_form layout='inline' %}
-    <br>
-    {% bootstrap_button button_type="submit" content="댓글 작성" %}
+    <div class="mt-3 mb-4 d-flex justify-content-end">
+      {% bootstrap_button button_type="submit" content="답변 작성" %}
+    </div>
   </form>
   {% endif %}
   {% for answer in qna_reviews %}
