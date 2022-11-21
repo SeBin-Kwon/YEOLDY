@@ -74,7 +74,6 @@ ALLOWED_HOSTS = [
 INSTALLED_APPS = [
     "mathfilters",
     "channels",
-    "daphne",
     "storages",
     "chat",
     "accounts",
