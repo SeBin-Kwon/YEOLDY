@@ -110,8 +110,9 @@
       {% else %}
       {% for product in products %}
       <div class="mb-4 me-4 d-flex flex-column justify-content-center align-items-center">
-        <a href="{% url 'products:detail' product.pk %}"></a>
-        <div class="product-userimage me-2" style="background-image:url('{{ product.image.url}}');"></div>
+        <a href="{% url 'products:detail' product.pk %}">
+          <div class="product-userimage me-2" style="background-image:url('{{ product.image.url}}');"></div>
+        </a>
         <span class="mt-2" style="color:gray; font-size:14px;">{{ product.name }}</span>
       </div>
       {% endfor %}
@@ -162,9 +163,9 @@
           <hr>
           {% else %}
           {% if review.user == style.user %}
-          <span style="font-weight: 500;">{{ review.user }}&nbsp;<span>(글쓴이)</span></span>
+          <span style="font-weight: 500;">{{ review.user.nickname }}&nbsp;<span>(글쓴이)</span></span>
           {% else %}
-          <strong>{{ review.user }}</strong>
+          <strong>{{ review.user.nickname }}</strong>
           {% endif %}
           <span style="float:right; font-size: 13px; color: gray;">{{ review.created }}</span>
           {% if review.user == request.user or request.user.level == '0' or request.user.level == '1' %}
