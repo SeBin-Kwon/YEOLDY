@@ -32,6 +32,7 @@ def approval(request):
             order_name = user_data.order_name,
             phone_number = user_data.phone_number,
             order_request = user_data.order_request,
+            product_pk = cart_items[i].product_id,
             product = cart_items[i],
             color = cart_items[i].color,
             size = cart_items[i].size,
@@ -120,9 +121,9 @@ def order_list(request):
             "quantity": "{}".format(cart_quantity),                # 구매 물품 수량
             "total_amount": "{}".format(cart_total),        # 구매 물품 가격
             "tax_free_amount": "0",         # 구매 물품 비과세
-            "approval_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/kakaopay/approval/",
-            "cancel_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/",
-            "fail_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/",
+            "approval_url": "http://127.0.0.1:8000/kakaopay/approval/",
+            "cancel_url": "http://127.0.0.1:8000/",
+            "fail_url": "http://127.0.0.1:8000/",
         }
         # params = {
         #     "cid": "TC0ONETIME",    # 테스트용 코드
