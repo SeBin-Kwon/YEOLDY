@@ -84,9 +84,13 @@
 
           <!-- orderlists -->
           <label class="details">착용한 상품</label>
-          {% for orderlist in orderlists %}
-            <label><input type="checkbox" name="orders" id="orders" value="{{orderlist.pk}}">{{orderlist.name}}</label>
-          {% endfor %}
+          {% if orderlists == 0 %}
+          <p>구매한 상품이 없습니다.</p>
+          {% else %}
+            {% for orderlist in orderlists %}
+              <label><input type="checkbox" name="orders" id="orders" value="{{orderlist.pk}}">{{orderlist.name}}</label>
+            {% endfor %}
+          {% endif %}
 
 
           <!-- submit -->

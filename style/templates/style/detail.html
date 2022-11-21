@@ -104,12 +104,16 @@
       <!-- 착용한 상품 -->
       <div>
         <h1>착용한 상품</h1>
+        {% if products == 0 %}
+        <p>착용한 상품이 없습니다.</p>
+        {% else %}
         <div>
           {% for product in products %}
           <p>{{product.name}}</p>
           <p>{{ product.cost}}</p>
           {% endfor %}
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
