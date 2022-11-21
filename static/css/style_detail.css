@@ -26,7 +26,7 @@
 .img-div {
   width: 600px;
   margin: auto;
-  text-align: center;
+  /* text-align: center; */
 }
 
 
@@ -183,4 +183,13 @@
 
 .mySwiper .swiper-pagination-bullet {
   background-color: #0db295;
+}
+
+.product-userimage {
+  width: 5rem;
+  height: 5rem;
+  /* border-radius: 50%; */
+  background-position: center;
+  background-size: cover;
+  /* border: solid 1px rgba(193, 193, 193, 0.704); */
 }

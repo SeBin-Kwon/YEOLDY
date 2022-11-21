@@ -52,6 +52,7 @@ MY_CATEGORY = (
 class Products(models.Model):
     name = models.CharField(max_length=20)
     cost = models.IntegerField()
+    cost_2 = models.IntegerField(null=True)
     category = models.CharField(max_length=10, choices=MY_CATEGORY)
     color = MultiSelectField(choices=MY_COLOR)
     size = MultiSelectField(choices=MY_SIZE)
