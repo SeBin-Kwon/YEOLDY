@@ -170,6 +170,10 @@ table tbody tr td a:hover {
   .info-box {
     padding-left: 4rem;
   }
+
+  .follow-div {
+    justify-content: center;
+  }
   
 }
 

@@ -11,9 +11,11 @@
   <div class="mypage">
     {% if request.user == user %}
       <h1>My Page</h1>
+      
     {% else %}
       <h1>{{ user.nickname }}'s Page</h1>
     {% endif %}
+    
     <div class="section row container align-items-center">
 
       <div class="col-12 col-md-7 mb-4">
