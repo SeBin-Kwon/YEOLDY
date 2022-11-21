@@ -12,10 +12,10 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 class QnA(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
-    image = models.FileField(
+    image = ProcessedImageField(
         upload_to="images/",
-        validators=[FileExtensionValidator(allowed_extensions=["jpg", "png"])],
         blank=True,
+        format="JPEG",
     )
     solve = models.BooleanField(default=False)
     Product = models.ForeignKey(Products, on_delete=models.CASCADE, null=True)
