@@ -95,7 +95,7 @@
                   <h1 class="modal-title fs-5" id="exampleModalLabel">
                     <strong>{{review_2.user.nickname}}</strong>
                   </h1>
-                  <p class="m-0">{{review_2.product.name}}</p>
+                  <p class="m-0" style="font-size:14px; color:gray;">{{review_2.product.name}}</p>
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
@@ -107,7 +107,7 @@
                     {% for photo2 in review_2.photo_set.all %}
                       <div class="swiper-slide">
                         {% comment %} <img class="modal-img" src="{{ photo2.image.url }}" alt=""> {% endcomment %}
-                        <div class="modal-img w-100" style="height:700px; background-image:url('{{ photo2.image.url }}')"></div>
+                        <div class="modal-img w-100" style="height:475px; background-image:url('{{ photo2.image.url }}')"></div>
                       </div>
                     {% endfor %}
                   </div>

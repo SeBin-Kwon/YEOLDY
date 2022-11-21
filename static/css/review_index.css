@@ -55,8 +55,9 @@
   width: 750px;
   box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
-  padding: 20px;
+  padding: 3rem;
   margin: 15px;
+  border-radius: 25px;
   /* cursor: pointer; */
 }
 
@@ -121,6 +122,7 @@
   color: #4b4b4b;
   margin-right: 20px;
   padding: 10px;
+  padding-right: 2rem;
 }
 
 .client-comment .comment-img{
@@ -136,8 +138,7 @@
 
 @media(max-width:1060px){
   .testimonial-box{
-    width: 45%;
-    padding: 10px;
+    width: 70%;
   }
 }
 
@@ -203,7 +204,7 @@
 .mySwiper1 {
   width: 180px;
   height: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 0.5px solid lightgray;
   border-radius: 10px;
 }
 

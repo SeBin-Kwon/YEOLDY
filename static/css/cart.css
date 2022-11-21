@@ -65,18 +65,18 @@ td {
 }
 
 .changebtn {
-    line-height: 30px;
-    font-weight: 600;
+    line-height: 25px;
     background: rgb(255, 255, 255);
     border-radius: 5px;
     border : 1px solid rgb(95, 95, 95);
     transition: 0.3s;
+    font-size: 14px;
 }
 
 .changebtn:hover {
-    background: rgb(156, 156, 156);
-    border : 1px solid rgb(156, 156, 156);
-    color: #fff;
+    /* background: rgb(156, 156, 156); */
+    border : 1px solid #0DB295;
+    color: #0DB295;
     transition: 0.3s;
 }
 
@@ -92,14 +92,16 @@ td {
 }
 
 .product-total-price {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
 }
 
 .cart-clear-btn {
-    padding: 10px;
-    border : 1px solid rgb(95, 95, 95);
-    border-radius: 10px;
+    padding: 7px;
+    font-size: 13px;
+    border : 1px solid rgb(150,150,150);
+    color: rgb(150,150,150);
+    border-radius: 8px;
     transition: 0.3s;
 }
 
@@ -110,10 +112,8 @@ td {
 
 .cart-clear-btn:hover,
 .cart-clear-btn:hover .cart-clear-link {
-    padding: 10px;
-    border : 1px solid rgb(156, 156, 156);
-    background: rgb(156, 156, 156);
-    color: #fff;
+    border : 1px solid rgb(56,56,56);
+    color: rgb(56,56,56);
     transition: 0.3s;
 }
 
@@ -137,6 +137,16 @@ td {
 
 .pricebox-title {
     margin: 0;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.pricetext {
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #353535;
+    letter-spacing: -0.3px;
 }
 
 .button-box{
@@ -151,18 +161,20 @@ td {
     justify-content: center;
     align-items: center;
     width: 300px;
-    height: 60px;
+    height: 65px;
     text-decoration: none;
     background: #fff;
     color: #000;
     border: 1px solid #000;
-    font-size: 24px;
-    font-weight: bolder;
-    border-radius: 10px;
+    font-size: 19px;
+    font-weight: 600;
+    border-radius: 40px;
+    transition: 0.3s;
 }
 
 .button-box .main:hover{
     color: #0DB295;
+    border: 1px solid #0DB295;
 }
 
 .button-box .order{
@@ -171,13 +183,14 @@ td {
     justify-content: center;
     align-items: center;
     width: 300px;
-    height: 60px;
+    height: 65px;
     text-decoration: none;
     background: #000;
     color: #fff;
-    font-size: 24px;
-    font-weight: bolder;
-    border-radius: 10px;
+    font-size: 19px;
+    font-weight: 600;
+    border-radius: 40px;
+    transition: 0.3s;
 }
 
 .button-box .order:hover{
