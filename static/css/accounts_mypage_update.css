@@ -195,7 +195,8 @@ form .button input{
 }
 
 .del-box{
-  border: 1px solid rgba(0, 0, 0, 0.345)
+  border: 1px solid rgba(0, 0, 0, 0.345);
+  width: 45px;
 }
 
 .del-btn:hover{
