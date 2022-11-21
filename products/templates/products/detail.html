@@ -192,6 +192,7 @@
             <div class="review">
               <h4 class="grade">{{ review.get_grade_display }}
               </h4>
+              <p class="detail-date"> {{ review.created_at }}</p>
               <div class="d-flex align-items-center">
 
                 <div class="review-userimg me-3"
@@ -203,7 +204,9 @@
                     {{ review.user.username }}
                   </span>님의 리뷰입니다.
                 </div>
+
               </div>
+
               <div>
                 <p class="review-title">{{ review.title }}</p>
                 <p class="review-content">{{ review.content }}</p>
