@@ -69,6 +69,9 @@ def mypage(request, pk):
     save_product = user.save_products.all().order_by("-pk")
     orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
 
+    orderlist_total = 0
+    
+
     if len(orderlists) == 0:
         orderlist = 0
     else:
