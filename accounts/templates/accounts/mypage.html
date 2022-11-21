@@ -11,9 +11,11 @@
   <div class="mypage">
     {% if request.user == user %}
       <h1>My Page</h1>
+      
     {% else %}
       <h1>{{ user.nickname }}'s Page</h1>
     {% endif %}
+    
     <div class="section row container align-items-center">
 
       <div class="col-12 col-md-7 mb-4">
@@ -248,20 +250,21 @@
             <div class="swiper mySwiper pb-5 px-3">
               <div class="swiper-wrapper">
                 {% for style in like_style %}
-                  <div class="swiper-slide like-style mt-4">
-                    {% for style_image in style.photo_set.all %}
-                      {% if forloop.counter == 1 %}
+                <div class="swiper-slide like-style mt-4">
+                  {% for style_image in style.photo_set.all %}
+                  {% if forloop.counter == 1 %}
+                      <a href="{% url 'style:detail' style.pk %}" style="width:100%;">
                         <div class="like-style-image" style="background-image:url('{{ style_image.image.url }}')">
-                          <img class="img-fluid" src="" alt="">
                         </div>
+                      </a>
                       {% endif %}
                     {% endfor %}
 
                     <div class="d-flex px-4 align-items-center">
                       {% if style.user.profile_image %}
-                        <a href="{% url 'style:detail' style.pk %}">
+                        
                           <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')"></div>
-                        </a>
+                        
                       {% else %}
                         <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
                       {% endif %}
@@ -513,19 +516,19 @@
         },
         760: {
           slidesPerView: 2,
-          spaceBetween: 30
+          spaceBetween: 20
         },
         1024: {
           slidesPerView: 3,
-          spaceBetween: 50
+          spaceBetween: 20
         },
         1440: {
           slidesPerView: 4,
-          spaceBetween: 60
+          spaceBetween: 20
         },
         1770: {
           slidesPerView: 5,
-          spaceBetween: 70
+          spaceBetween: 20
         }
       }
     });
