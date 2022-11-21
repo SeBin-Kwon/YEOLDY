@@ -23,7 +23,6 @@ def index(request):
 def qna_create(request, product_pk):
     if request.method == "POST":
         qna_form = QnaForm(request.POST, request.FILES)
-
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
@@ -42,14 +41,14 @@ def qna_create(request, product_pk):
 @login_required
 def qna(request):
     if request.method == "POST":
+        print(1)
         qna_form = QnaForm_2(request.POST, request.FILES)
-
         if qna_form.is_valid():
             qna = qna_form.save(commit=False)
             qna.user = request.user
             qna.save()
-
             return redirect("community:index")
+
     else:
         qna_form = QnaForm_2()
     context = {
@@ -60,7 +59,6 @@ def qna(request):
 
 @login_required
 def qna_detail(request, qna_pk):
-
     qna = QnA.objects.get(pk=qna_pk)
     if (request.user == qna.user) or (request.user.is_staff):
         qna_hits = get_object_or_404(QnA, pk=qna_pk)
