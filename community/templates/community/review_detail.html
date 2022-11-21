@@ -16,8 +16,10 @@
     </form>
   {% endif %}
 
-  {% for photo in review.photo_set.all%}
-    <img src="{{photo.image.url}}" style="width: 100px; height:100px"><br>
-  {% endfor %}
+  {% if review.photo_set.all %}
+    {% for photo in review.photo_set.all %}
+      <img src="{{photo.image.url}}" style="width: 100px; height:100px"><br>
+    {% endfor %}
+  {% endif %}
 </body>
 {% endblock content %}

@@ -10,6 +10,7 @@ from django.http import JsonResponse
 import json
 from django.contrib.auth import get_user_model
 from kakaopay.models import OrderListFinal
+from products.models import Products
 
 
 # Create your views here.
@@ -69,6 +70,14 @@ def mypage(request, pk):
     save_product = user.save_products.all().order_by("-pk")
     orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
 
+    orderlist_total = 0
+    for orderlist in orderlists:
+        quantity = orderlist.quantity
+        product = Products.objects.get(pk=orderlist.product_pk)
+        price = product.cost
+        sub_total = quantity*price
+        orderlist_total += sub_total
+
     if len(orderlists) == 0:
         orderlist = 0
     else:
@@ -88,6 +97,7 @@ def mypage(request, pk):
         "like_style3": like_style3,
         "save_product": save_product,
         "orderlist": orderlist,
+        "orderlist_total": orderlist_total
     }
     return render(request, "accounts/mypage.html", context)
 

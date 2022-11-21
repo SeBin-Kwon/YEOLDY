@@ -11,7 +11,12 @@
 {% endblock css %}
 
 {% block content %}
-  <div class="product container row">
+  <div class="product container row position-relative">
+    <div class="back">
+      <a href="{% url 'products:index' %}">
+        <i class="bi bi-chevron-left"></i><span>&nbsp;BACK</span>
+      </a>
+    </div>
     <!-- 상품 이미지 리스트 -->
     <div class="col-1">
       <div class="img-list d-flex flex-column">
@@ -84,7 +89,7 @@
         </div>
         {% if product.sale_percent > 0 %}
         <div class="d-flex">
-          <span class="origin-cost">{{ product.cost|intcomma }}원</span>
+          <span class="origin-cost">{{ product.cost_2|intcomma }}원</span>
           <span class="sale">{{ product.sale_percent }}%</span>
         </div>
         {% endif %}

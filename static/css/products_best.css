@@ -58,7 +58,8 @@ a {
   height: 230px;
   position: relative;
   overflow: hidden;
-  box-shadow: -4px -6px 32px 0px #0d224216;
+  box-shadow: 3px 4px 13px 0px #0d22420f;
+  border-radius: 5px;
 }
 
 .badge {
@@ -104,6 +105,7 @@ a {
 
 .contentBox .product-title {
   font-weight: 400;
+  font-size: 18px;
 }
 
 .contentBox p {

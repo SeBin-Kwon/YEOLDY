@@ -1,3 +1,22 @@
+.back {
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 10px;
+    font-weight: 200;
+}
+
+.back a {
+    color: rgba(140, 140, 140, 0.705);
+    text-decoration: none;
+}
+
+@media ( max-width: 1024px ) {
+    .back span {
+    display: none;
+    } 
+}
+
 .product {
     margin: 100px auto;
     justify-content: center;

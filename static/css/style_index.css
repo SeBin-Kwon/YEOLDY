@@ -1,6 +1,6 @@
 
 .style-box {
-  padding: 3rem 7rem;
+  padding: 3rem 20rem;
   justify-content: center;
 }
 
@@ -26,9 +26,11 @@
 
 .style-card {
   padding: 2rem;
-  padding-bottom: 10rem;
-  margin: 14px;
-  height: 90%;
+  padding-bottom: 6rem;
+  margin: auto;
+  margin-bottom: 3rem;
+  max-width: 400px;
+  height: 600px;
   position: relative;
   border-radius: 8px;
   box-shadow: 5px 16px 32px 0px #0d224216;
@@ -37,6 +39,10 @@
 .style-img {
   margin: 0 !important;
   width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .style-user {
@@ -92,10 +98,33 @@
   color: rgb(238, 97, 97);
 }
 
+@media ( max-width: 2300px ) {
+  .style-box {
+    padding: 3rem 10rem;
+  }
+}
+
+@media ( max-width: 1928px ) {
+  .style-card {
+    margin: 14px;
+  }
+  .style-box {
+    padding: 3rem 7rem;
+  }
+}
+
+@media ( max-width: 1600px ) {
+  .style-card {
+    height: 500px;
+    margin: 14px;
+  }
+}
+
 @media ( max-width: 1400px ) {
   .style-card {
     padding: 2rem;
-    padding-bottom: 7rem;
+    padding-bottom: 5rem;
+    height: 350px;
   }
   .style-username {
     font-size: 18px;
@@ -105,10 +134,11 @@
   }
 }
 
-@media ( max-width: 1024px ) {
+@media ( max-width: 991px ) {
   .style-card {
     padding: 2rem;
     padding-bottom: 5rem;
+    height: 500px;
   }
   .style-username {
     font-size: 16px;
@@ -118,6 +148,7 @@
 @media ( max-width: 767px ) {
   .style-card {
     padding-bottom: 8rem;
+    height: 750px;
   }
   .style-box {
     padding: 3rem 5rem;
@@ -129,6 +160,7 @@
 @media ( max-width: 560px ) {
   .style-card {
     padding-bottom: 6rem;
+    height: 600px;
   }
 }
 
