@@ -85,7 +85,7 @@
           <!-- orderlists -->
           <label class="details">착용한 상품</label>
           {% for orderlist in orderlists %}
-            <label><input type="checkbox" name="orders" id="orders" value="{{orderlist.pk}}">{{orderlist.product}}/{{orderlist.color}}/{{orderlist.size}}</label>
+            <label><input type="checkbox" name="orders" id="orders" value="{{orderlist.pk}}">{{orderlist.name}}</label>
           {% endfor %}
 
 
