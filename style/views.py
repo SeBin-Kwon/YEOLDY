@@ -3,13 +3,14 @@ from django.contrib.auth.decorators import login_required
 from .models import Style, Style_Review, Photo
 from .form import StyleForm, ReviewForm
 from products.models import Products
-from django.http import JsonResponse
 from django.http import HttpResponse
 from django.db.models import Q  # 검색 기능
-import json
 from django.core import serializers
 from django.core.serializers.json import DjangoJSONEncoder
 from datetime import date, datetime, timedelta
+from kakaopay.models import OrderListFinal
+from django.http import JsonResponse
+import json
 
 
 def index(request):
@@ -23,8 +24,9 @@ def index(request):
 @login_required
 def create(request):
     if request.method == "POST":
-        category = request.POST.getlist("category", "")
-        print(category)
+        print(1)
+        # print(request.POST["orderlists[]"])
+        # now_orderlist.location_zipcode = request.POST["zipcode"]
         style_form = StyleForm(request.POST, request.FILES)
         if style_form.is_valid():
             style = style_form.save(commit=False)
@@ -35,13 +37,22 @@ def create(request):
                 photo.style = style
                 photo.image = img
                 photo.save()
+
+            now_orderlist = Style.objects.last()
+            now_orderlist.orderlists = request.POST.getlist("orders", "")
+            now_orderlist.save()
             return redirect("style:index")
     else:
         style_form = StyleForm()
+        orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
+        print(orderlists)
     context = {
         "style_form": style_form,
+        "orderlists": orderlists,
     }
     return render(request, "style/form.html", context)
+
+#구매한 내역이 없으면, 착용한 제품이 없습니다.
 
 
 @login_required
