@@ -27,7 +27,9 @@
 }
 
 .title {
+    font-size: 26px;
     margin: 0;
+    font-weight: 600;
 }
 
 .product-sub-review {
@@ -47,6 +49,16 @@
 .cost {
     font-size: 2rem;
     font-weight: 600;
+}
+
+.origin-cost {
+    width: 80px;
+    color: gray;
+    text-decoration: line-through;
+}
+
+.sale {
+    color: #e91e63;
 }
 
 .service {

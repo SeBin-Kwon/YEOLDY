@@ -2,6 +2,7 @@
 {% load static %}
 {% load django_bootstrap5 %}
 {% load humanize %}
+{% load mathfilters %}
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/products_detail.css' %}">
@@ -74,14 +75,26 @@
         </h5>
       </div>
 
-      <p class="costBox">
-        <span class="cost-label">판매가</span>
-        <span class="cost">{{ product.cost|intcomma }}원</span>
-      </p>
+      <div class="costBox w-100 d-flex justify-content-between">
+        <div class="d-flex w-100 align-items-center">
+          <span class="cost-label">판매가</span>
+          {% with sale=product.sale_percent|sub:100 %}
+          {% with cal_sale=sale|mul:-1 %}
+          <span class="cost">{{ product.cost|mul:cal_sale|div:100|floatformat:"0"|intcomma }}</span>원
+        </div>
+        {% if product.sale_percent > 0 %}
+        <div class="d-flex">
+          <span class="origin-cost">{{ product.cost|intcomma }}원</span>
+          <span class="sale">{{ product.sale_percent }}%</span>
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% endwith %}
+      </div>
 
       <hr>
-      <div>
 
+      <div>
         <div class="d-flex flex-column">
           <div class="d-flex mb-2">
             <div class="service-label col-4">배송비</div>
@@ -90,13 +103,14 @@
 
           <div class="d-flex mb-2">
             <div class="service-label col-4">배송안내</div>
-            <div class="service">무료배송</div>
+            <div class="service">
+              15시 이전 결제완료시 당일출고</div>
           </div>
-
         </div>
       </div>
 
       <hr>
+
       <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
         {% csrf_token %}
         <!-- 색상 -->
@@ -173,7 +187,7 @@
                   </h4>
                   <div class="d-flex align-items-center">
 
-                    <div class="review-userimg me-3" style="width:40px; height:40px; background-image:url({{review.user.profile_image.url}}); background-repeat:no-repeat; background-position-center; background-size:cover;"></div>
+                    <div class="review-userimg me-3" style="width:40px; height:40px; background-image:url({{review.user.profile_image.url}}); background-repeat:no-repeat; background-position:center; background-size:cover;"></div>
 
                     <div>
                       <span class="review-user">
@@ -209,7 +223,7 @@
                 </a>
               </div>
             </div>
-            <table class="table" style="">
+            <table class="table">
               <thead>
                 <tr>
                   <th>번호</th>
