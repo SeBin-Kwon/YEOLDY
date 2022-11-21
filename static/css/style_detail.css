@@ -175,3 +175,12 @@
   border-radius: 5px;
   padding: 5px;
 }
+
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal{
+  top: -30px !important;
+  z-index: -1;
+}
+
+.mySwiper .swiper-pagination-bullet {
+  background-color: #0db295;
+}
