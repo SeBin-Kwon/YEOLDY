@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/kakao_show_order_list.css' %}">
 {% endblock css %}
@@ -32,8 +33,6 @@
       {{ first_item.phone_number }}
     </div>
 
-<h1>총 금액 : {{orderlist_total}}</h1>
-
     <div class="d-flex align-items-center">
       <div class="detail me-3">
         <h5>요청사항</h5>
@@ -53,6 +52,7 @@
         </tr>
       </thead>
       <tbody>
+
         {% for orderlist in orderlists %}
           <tr>
             <th scope="row">{{ orderlist.product }}</th>
@@ -61,6 +61,11 @@
             <td>{{ orderlist.quantity }}</td>
           </tr>
         {% endfor %}
+
+        <tr class="table-group-divider">
+          <th colspan="2">총 금액</th>
+          <td colspan="2">{{orderlist_total|intcomma}}원</td>
+        </tr>
       </tbody>
     </table>
   </div>
