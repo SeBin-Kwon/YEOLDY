@@ -3,7 +3,7 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/style_detail.css' %}">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 {% endblock css %}
 
 
@@ -21,20 +21,20 @@
 
     <div class="swiper mySwiper">
 
-      
+
       <!-- Additional required wrapper -->
       <div class="swiper-pagination"></div>
       <div class="swiper-wrapper">
         <!-- Slides -->
         {% for img in style_images %}
-          <div class="swiper-slide">
-            <div class="modal-img w-100" style="height:700px; background-image:url('{{ img.image.url }}')"></div>
-            {% comment %} <img src="{{img.image.url}}" alt=""> {% endcomment %}
-          </div>
+        <div class="swiper-slide">
+          <div class="modal-img w-100" style="height:700px; background-image:url('{{ img.image.url }}')"></div>
+          {% comment %} <img src="{{img.image.url}}" alt=""> {% endcomment %}
+        </div>
         {% endfor %}
       </div>
     </div>
-      {% comment %} <img class="st-img" src="{{ img.image.url }}" alt="{{ style.image }}"> {% endcomment %}
+    {% comment %} <img class="st-img" src="{{ img.image.url }}" alt="{{ style.image }}"> {% endcomment %}
 
 
     <div class="info">
@@ -97,7 +97,7 @@
       <!--태그-->
       <div class="tag-box">
         {% for style_tag in style_tags %}
-          <p class="tag">#{{ style_tag }}</p>
+        <p class="tag">#{{ style_tag }}</p>
         {% endfor %}
       </div>
 
@@ -105,8 +105,9 @@
       <div>
         <h1>착용한 상품</h1>
         <div>
-          {% for orderlist in orderlists %}
-            <p>{{orderlist.name}}</p>
+          {% for product in products %}
+          <p>{{product.name}}</p>
+          <p>{{ product.cost}}</p>
           {% endfor %}
         </div>
       </div>
