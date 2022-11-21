@@ -274,17 +274,50 @@ table tbody tr td a:hover {
 }
 
 .like-style {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   padding-top: 18px;
-  width: 14rem;
+  /* width: 14rem; */
   height: 320px;
   background-color: white;
   border-radius: 5px;
   box-shadow: 5px 4px 14px 1px rgb(46 80 114 / 9%);
 }
 
-.like-style img {
-  width: 11rem;
+.swiper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: flex-start;
+}
+
+.like-style-image {
+  margin-bottom: 20px;
+  width: 100%;
+  height: 20rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .like-style h5 {
@@ -311,6 +344,15 @@ table tbody tr td a:hover {
   background-position: center;
   background-size: cover;
   border: solid 1px rgba(193, 193, 193, 0.704);
+}
+
+.mySwiper .swiper-pagination-bullet {
+  background-color: #0db295;
+}
+
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+  /* position: absolute; */
+  bottom: -5px !important;
 }
 
 /* .like-product {
