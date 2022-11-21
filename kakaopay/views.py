@@ -136,7 +136,7 @@ def order_list(request):
         #     "tax_free_amount": "0",         # 구매 물품 비과세
         #     "approval_url": "http://127.0.0.1:8000/kakaopay/approval/",
         #     "cancel_url": "http://127.0.0.1:8000/",
-        #     "fail_url": "http://127.0.0.1:8000/",
+        #     "fail_url": "http://127.0.0.1:8000/",/"http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/"
         # }
         print(params)
 

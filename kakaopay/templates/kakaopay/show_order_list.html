@@ -49,6 +49,7 @@
           <th scope="col">색상</th>
           <th scope="col">사이즈</th>
           <th scope="col">수량</th>
+          <th scope="col">비고</th>
         </tr>
       </thead>
       <tbody>
@@ -59,11 +60,12 @@
             <td>{{ orderlist.color }}</td>
             <td>{{ orderlist.size }}</td>
             <td>{{ orderlist.quantity }}</td>
+            <td><a class="btn btn-sm btn-outline-primary" href="{% url 'community:review_create' orderlist.product_pk %}">리뷰쓰기</a></td>
           </tr>
         {% endfor %}
 
         <tr class="table-group-divider">
-          <th colspan="2">총 금액</th>
+          <th colspan="3">총 금액</th>
           <td colspan="2">{{orderlist_total|intcomma}}원</td>
         </tr>
       </tbody>
