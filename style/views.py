@@ -25,8 +25,6 @@ def index(request):
 def create(request):
     if request.method == "POST":
         print(1)
-        # print(request.POST["orderlists[]"])
-        # now_orderlist.location_zipcode = request.POST["zipcode"]
         style_form = StyleForm(request.POST, request.FILES)
         if style_form.is_valid():
             style = style_form.save(commit=False)
@@ -46,9 +44,21 @@ def create(request):
         style_form = StyleForm()
         orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
         print(orderlists)
+
+        orderlist_final = []
+        for orderlist in orderlists:
+            if orderlist.product_pk not in orderlist_final:
+                orderlist_final.append(orderlist.product_pk)
+        print(orderlist_final)
+        
+        orderlist_objects = []
+        for orderlist in orderlist_final:
+            object = Products.objects.get(pk=orderlist)
+            orderlist_objects.append(object)
+
     context = {
         "style_form": style_form,
-        "orderlists": orderlists,
+        "orderlists": orderlist_objects,
     }
     return render(request, "style/form.html", context)
 
