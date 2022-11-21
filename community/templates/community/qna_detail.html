@@ -3,89 +3,90 @@
 {% load static %}
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/qna_detail.css'%}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="{% static 'css/qna_detail.css'%}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 {% endblock css %}
 
 {% block content %}
 
-  <div class="qna-post position-relative">
-    <div class="back">
-      <a href="{% url 'community:index' %}">
-        <i class="bi bi-chevron-left"></i>
-        <span>&nbsp;BACK</span>
-      </a>
-    </div>
-    <div class="qna-post_img">
-      {% if qna.image %}
-        <div class="qna-image" style="background-image:url('{{ qna.image.url }}')"></div>
-      {% else %}
-        <div class="qna-image"></div>
-      {% endif %}
-    </div>
-    <div class="qna-post_info">
-      <div class="post-head d-flex flex-column">
-        <div class="post-title">
-          <div class="mb-3 d-flex justify-content-between w-100 align-items-center">
-            <div class="d-flex align-items-center">
-              {% if na.user.profile_image %}
-                <div class="qna-user-image" style="background-image:url('{{ qna.user.profile_image.url }}')"></div>
-              {% else %}
-                <div class="qna-user-image"></div>
-              {% endif %}
-              <p class="qna-post_username">
-                {{ qna.user.username }}
-              </p>
-            </div>
-            <span style="font-size: 14px; color:gray;">조회수
-              {{ qna_hits.hits }}</span>
-          </div>
-          <h3 class="qna-post_title">{{ qna.title }}</h3>
-        </div>
-        <div class="post-body">
-          <p class="qna-post_text">
-            {{ qna.content }}
-          </p>
-        </div>
-      </div>
-
-      <div class="qna-btn d-flex justify-content-between">
-        <span style="font-size: 14px; color:gray;">{{ qna.created_at }}</span>
-        <div>
-          {% if request.user == qna.user %}
-            <a class="delete-btn" href="{% url 'community:qna_delete' qna.pk %}">
-              <i class="bi bi-trash"></i>
-            </a>
-            <a class="update-btn mx-1" href="{% url 'community:qna_update' qna.pk %}">
-              <i class="bi bi-pencil-square"></i>
-            </a>
-
-          {% endif %}
-          <!-- <a class="btn btn-outline-secondary" href="{% url 'community:index' %}"> <i class="bi bi-arrow-left"></i> </a> -->
-        </div>
-      </div>
-    </div>
+<div class="qna-post position-relative">
+  <div class="back">
+    <a href="{% url 'community:index' %}">
+      <i class="bi bi-chevron-left"></i><span>&nbsp;BACK</span>
+    </a>
   </div>
-
-  <div class="px-5 my-3 container">
-    {% if request.user.is_staff %}
-      <h2>답변</h2>
-      {% load django_bootstrap5 %}
-      <form action="{% url 'community:qna_review' qna.pk %}" method="POST">
-        {% csrf_token %}
-        {% bootstrap_form qna_review_form layout = 'inline' %}
-        <div class="mt-3 mb-4 d-flex justify-content-end">
-          {% bootstrap_button button_type = "submit" content = "답변 작성" %}
-        </div>
-      </form>
+  <div class="qna-post_img">
+    {% if qna.image %}
+    <div class="qna-image" style="background-image:url('{{ qna.image.url }}')"></div>
+    {% else %}
+    <div class="qna-image"></div>
     {% endif %}
-    {% for answer in qna_reviews %}
-      <div class="card">
-        <div class="card-body">
-          {{ answer.content }}
+  </div>
+  <div class="qna-post_info">
+    <div class="post-head d-flex flex-column">
+      <div class="post-title">
+        <div class="mb-3 d-flex justify-content-between w-100 align-items-center">
+          <div class="d-flex align-items-center">
+            {% if qna.user.profile_image%}
+            <div class="qna-user-image" style="background-image:url('{{ qna.user.profile_image.url }}')"></div>
+            {% endif %}
+            <p class="qna-post_username">
+              {{ qna.user.username }}
+            </p>
+          </div>
+          <span style="font-size: 14px; color:gray;">조회수 {{ qna_hits.hits }}</span>
         </div>
-      {% endfor %}
+        <h3 class="qna-post_title">{{ qna.title }}</h3>
+      </div>
+      <div class="post-body">
+        <p class="qna-post_text">
+          {{ qna.content }}
+        </p>
+      </div>
+    </div>
+
+    <div class="qna-btn d-flex justify-content-between">
+      <span style="font-size: 14px; color:gray;">{{ qna.created_at }}</span>
+      <div>
+        {% if request.user == qna.user %}
+        <a class="delete-btn" href="{% url 'community:qna_delete' qna.pk %}">
+          <i class="bi bi-trash"></i>
+        </a>
+        <a class="update-btn mx-1" href="{% url 'community:qna_update' qna.pk %}">
+          <i class="bi bi-pencil-square"></i>
+        </a>
+
+        {% endif %}
+        <!-- <a class="btn btn-outline-secondary" href="{% url 'community:index' %}">
+        <i class="bi bi-arrow-left"></i>
+      </a> -->
+      </div>
     </div>
   </div>
+</div>
+
+<div class="px-5 my-3 container">
+  {% if request.user.is_staff %}
+  <h2>답변</h2>
+  {% load django_bootstrap5 %}
+  <form action="{% url 'community:qna_review' qna.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form qna_review_form layout='inline' %}
+    <div class="mt-3 mb-4 d-flex justify-content-end">
+      {% bootstrap_button button_type="submit" content="답변 작성" %}
+    </div>
+  </form>
+  {% endif %}
+  {% for answer in qna_reviews %}
+  <div class="card">
+    <div class="card-body">
+      {{ answer.content }}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+
 
 {% endblock content %}
