@@ -27,7 +27,6 @@
         {% if request.user == user %}
           <div class="info">
 
-
             <div class="info-box">
               <div class="d-flex justify-content-between">
                 <p>이름 :
@@ -492,4 +491,42 @@
     })
   </script>
   <script type="text/javascript" defer="defer" src="{% static 'javascript/mypage_sidemenu.js' %}"></script>
+
+  <!-- 좋아요한 스타일 swiper -->
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 10,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        760: {
+          slidesPerView: 2,
+          spaceBetween: 30
+        },
+        1024: {
+          slidesPerView: 3,
+          spaceBetween: 50
+        },
+        1440: {
+          slidesPerView: 4,
+          spaceBetween: 60
+        },
+        1770: {
+          slidesPerView: 5,
+          spaceBetween: 70
+        }
+      }
+    });
+  </script>
 {% endblock %}
