@@ -4,11 +4,17 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/qna_detail.css'%}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
 {% endblock css %}
 
 {% block content %}
 
-<div class="qna-post">
+<div class="qna-post position-relative">
+  <div class="back">
+    <a href="{% url 'community:index' %}">
+      <i class="bi bi-chevron-left"></i><span>&nbsp;BACK</span>
+    </a>
+  </div>
   <div class="qna-post_img">
     {% if qna.image %}
     <div class="qna-image" style="background-image:url('{{ qna.image.url }}')"></div>

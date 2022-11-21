@@ -10,7 +10,8 @@
 
   <!-- create -->
   {% if request.resolver_match.url_name == 'create' %}
-    <div class="create-form">
+  <div class="create-form">
+      <h1 style="font-size:35px; font-weight:200; margin-bottom:3rem;">My Style 공유</h1>
       <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="user-details">
@@ -90,7 +91,7 @@
             <p>구매한 상품이 없습니다.</p>
             {% else %}
             {% for orderlist in orderlists %}
-            <label><input class="form-check-input" type="checkbox" name="orders" id="orders" value="{{orderlist.pk}} ">{{orderlist.name}}</label>
+            <label class="form-check-label mt-3 me-4"><input class="form-check-input" type="checkbox" name="orders" id="orders" value="{{orderlist.pk}} "> {{orderlist.name}}</label>
             {% endfor %}
             {% endif %}
           </div>
