@@ -20,7 +20,10 @@
   <div class="img-div">
 
     <div class="swiper mySwiper">
+
+      
       <!-- Additional required wrapper -->
+      <div class="swiper-pagination"></div>
       <div class="swiper-wrapper">
         <!-- Slides -->
         {% for img in style_images %}
@@ -179,6 +182,11 @@
   var swiper = new Swiper(".mySwiper", {
     effect: "cards",
     grabCursor: true,
+
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
   });
 </script>
 
