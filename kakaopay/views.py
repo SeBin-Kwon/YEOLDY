@@ -32,6 +32,7 @@ def approval(request):
             order_name = user_data.order_name,
             phone_number = user_data.phone_number,
             order_request = user_data.order_request,
+            product_pk = cart_items[i].product_id,
             product = cart_items[i],
             color = cart_items[i].color,
             size = cart_items[i].size,
