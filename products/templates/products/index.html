@@ -2,6 +2,7 @@
 {% load static %}
 {% load django_bootstrap5 %}
 {% load humanize %}
+{% load mathfilters %}
 
 {% block css %}
   <link rel="stylesheet" href="{% static 'css/products_index.css' %}">
@@ -34,7 +35,12 @@
               <div class="contentBox">
                 <h5 class="product-title">{{ product.name }}</h5>
                 <p>
-                  <span class="sale">{{ product.sale_percent }}%</span><span class="cost">{{ product.cost|intcomma }}</span>원
+                  {% if product.sale_percent > 0 %}
+                    <span class="sale">
+                      {{ product.sale_percent }}%
+                    </span>
+                  {% endif %}
+                  <span class="cost">{{ product.cost|intcomma }}</span>원
                 </p>
               </div>
             </a>
@@ -67,7 +73,12 @@
               <div class="contentBox">
                 <h5 class="product-title">{{ product.name }}</h5>
                 <p>
-                  <span class="sale">{{ product.sale_percent }}%</span><span class="cost">{{ product.cost|intcomma }}</span>원
+                  {% if product.sale_percent > 0 %}
+                    <span class="sale">
+                      {{ product.sale_percent }}%
+                    </span>
+                  {% endif %}
+                  <span class="cost">{{ product.cost|intcomma }}</span>원
                 </p>
               </div>
             </a>
@@ -99,7 +110,12 @@
                 <div class="contentBox">
                   <h5 class="product-title">{{ product.name }}</h5>
                   <p>
-                    <span class="sale">{{ product.sale_percent }}%</span><span class="cost">{{ product.cost|intcomma }}</span>원
+                    {% if product.sale_percent > 0 %}
+                      <span class="sale">
+                        {{ product.sale_percent }}%
+                      </span>
+                    {% endif %}
+                    <span class="cost">{{ product.cost|intcomma }}</span>원
                   </p>
                 </div>
               </a>
@@ -132,7 +148,12 @@
                 <div class="contentBox">
                   <h5 class="product-title">{{ product.name }}</h5>
                   <p>
-                    <span class="sale">{{ product.sale_percent }}%</span><span class="cost">{{ product.cost|intcomma }}</span>원
+                    {% if product.sale_percent > 0 %}
+                      <span class="sale">
+                        {{ product.sale_percent }}%
+                      </span>
+                    {% endif %}
+                    <span class="cost">{{ product.cost|intcomma }}</span>원
                   </p>
                 </div>
               </a>
@@ -164,7 +185,12 @@
                 <div class="contentBox">
                   <h5 class="product-title">{{ product.name }}</h5>
                   <p>
-                    <span class="sale">{{ product.sale_percent }}%</span><span class="cost">{{ product.cost|intcomma }}</span>원
+                    {% if product.sale_percent > 0 %}
+                      <span class="sale">
+                        {{ product.sale_percent }}%
+                      </span>
+                    {% endif %}
+                    <span class="cost">{{ product.cost|intcomma }}</span>원
                   </p>
                 </div>
               </a>
@@ -195,7 +221,12 @@
                 <div class="contentBox">
                   <h5 class="product-title">{{ product.name }}</h5>
                   <p>
-                    <span class="sale">{{ product.sale_percent }}%</span><span class="cost">{{ product.cost|intcomma }}</span>원
+                    {% if product.sale_percent > 0 %}
+                      <span class="sale">
+                        {{ product.sale_percent }}%
+                      </span>
+                    {% endif %}
+                    <span class="cost">{{ product.cost|intcomma }}</span>원
                   </p>
                 </div>
               </a>

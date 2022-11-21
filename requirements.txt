@@ -27,6 +27,7 @@ django-appconf==1.0.5
 django-bootstrap5==22.1
 django-extensions==3.2.1
 django-imagekit==4.1.0
+django-mathfilters==1.0.0
 django-multiselectfield==0.1.12
 django-phonenumber-field==7.0.0
 django-storages==1.13.1
@@ -73,8 +74,11 @@ sqlparse==0.4.3
 stack-data==0.5.1
 tomli==2.0.1
 traitlets==5.4.0
+Twisted==22.10.0
+twisted-iocpsupport==1.0.2
 txaio==22.2.1
 typing_extensions==4.4.0
+tzdata==2022.6
 urllib3==1.26.10
 wcwidth==0.2.5
 whitenoise==6.2.0

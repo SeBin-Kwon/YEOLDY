@@ -72,6 +72,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "mathfilters",
     "channels",
     "daphne",
     "storages",
@@ -142,10 +143,10 @@ WSGI_APPLICATION = "config.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "yeoldy_rds",  # 코드 블럭 아래 이미지 참고하여 입력
+        "NAME": os.getenv("DATABASE_NAME"),  # 코드 블럭 아래 이미지 참고하여 입력
         "USER": "postgres",
-        "PASSWORD": "yeoldy123!",  # 데이터베이스 생성 시 작성한 패스워드
-        "HOST": "yeoldy-rds.c7t5l08dqy4o.ap-northeast-2.rds.amazonaws.com",  # 코드 블럭 아래 이미지 참고하여 입력
+        "PASSWORD": os.getenv("DATABASE_PASSWORD"),  # 데이터베이스 생성 시 작성한 패스워드
+        "HOST": os.getenv("DATABASE_HOST"),  # 코드 블럭 아래 이미지 참고하여 입력
         "PORT": "5432",
     }
 }

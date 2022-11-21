@@ -230,7 +230,10 @@
             <div class="infoBox">
               <h5 class="product-title">{{ best_product.name }}</h5>
               <p>
-                <span class="sale">{{ best_product.sale_percent }}%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+                {% if product.sale_percent > 0 %}
+                  <span class="sale">{{ best_product.sale_percent }}%</span>
+                {% endif %}
+                <span class="cost">{{ best_product.cost|intcomma }}</span>원
               </p>
             </div>
           </div>
