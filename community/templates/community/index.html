@@ -3,170 +3,157 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/community_tab.css' %}">
-<script src="https://kit.fontawesome.com/44d20d6c0e.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'css/community_tab.css' %}">
+  <script src="https://kit.fontawesome.com/44d20d6c0e.js" crossorigin="anonymous"></script>
 {% endblock css %}
 
 {% block content %}
-<div class="style-box">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="style-title">Sevice Center</h1>
-  </div>
-</div>
-
-<div class="container">
-  <!-- <div class="main-title">고객센터</div> -->
-  <div class="content">
-    <input type="radio" name="indicator" checked="checked" id="home">
-    <input type="radio" name="indicator" id="blog">
-    <input type="radio" name="indicator" id="help">
-    <input type="radio" name="indicator" id="code">
-    <input type="radio" name="indicator" id="about">
-
-    <div class="list">
-      <label for="home" class="home">
-        FAQ
-      </label>
-      <label for="blog" class="blog">
-        Q&A
-      </label>
-      <label for="help" class="help">
-        CHAT
-      </label>
-
-      <div class="indicator"></div>
-    </div>
-
-    <div class="text-content">
-      <!-- 자주 묻는 질문 -->
-      <div class="home text">
-        <div class="title">FAQ</div>
-        <div class="qnacontainer">
-          <div class="tab">
-            <input type="radio" name="acc" id="acc1">
-            <label for="acc1">
-              <h2>01</h2>
-              <h3>[반품/교환문의] 구입한 상품 어떻게 반품하나요?</h3>
-            </label>
-            <div class="content">
-              <p>구입하신 상품을 반품하시는군요!<br><br>반품 신청하실 수 있는 방법은<br>1. 직접 반품 요청<br>2. Q&A게시판 접수<br>3.고객센터(☎1544-1010)로 연락주시어
-                반품<br><br>총 3가지이며, 아래에서 알려드리겠습니다.<br><br>첫번째로 먼저 직접 반품 요청하시는 경우입니다.<br>
-                <strong>직접 반품 접수 경우 [단순변심 반품] 만 가능하며, 수거 주소지 변경이 어렵습니다.<br>또한, 상품 불량으로 인한 반품은 고객센터(☎1544-1010)로 접수
-                  부탁드립니다.</strong><br><br>로그인 후 >MY PAGE > 주문내역을 [클릭]해주세요!
-              </p>
-            </div>
-          </div>
-          <div class="tab">
-            <input type="radio" name="acc" id="acc2">
-            <label for="acc2">
-              <h2>02</h2>
-              <h3>[회원정보 문의] 회원탈퇴는 어떻게 하나요?</h3>
-            </label>
-            <div class="content">
-              <p>탈퇴하시려구요 ㅠ_ㅠ..?<br>YEOLDY는 탈퇴란 없습니다!!!<br><br>알아서 찾아서 탈퇴하세요😑</p>
-            </div>
-          </div>
-          <div class="tab">
-            <input type="radio" name="acc" id="acc3">
-            <label for="acc3">
-              <h2 style="padding: 0 8px;">03</h2>
-              <h3>[주문/결제문의] 전화주문도 가능한가요?</h3>
-            </label>
-            <div class="content">
-              <p>고객님, 죄송스럽게도 저희 YEOLDY는 아직 전화주문을 도와드릴 수 있는 시스템이 구축되지 않아<br>주문은 온라인 홈페이지에서 구매해주셔야 되는 점 양해
-                부탁드립니다.<br><br>더욱 좋은 서비스를 제공해드리기 위해 항상 최선을 다하는 YEOLDY가 되겠습니다 😊</p>
-            </div>
-          </div>
-          <div class="tab">
-            <input type="radio" name="acc" id="acc4">
-            <label for="acc4">
-              <h2>04</h2>
-              <h3>[배송문의] 토요일에도 배송이 되나요?</h3>
-            </label>
-            <div class="content">
-              <p>토요일에는 상품 출고 작업이 진행되지 않습니다.
-                <br><br>
-                YEOLDY는 주말에 일하지 않아요<br>
-                평일을 기다려주세요.😤
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 문의하기 -->
-      <div class="blog text">
-        <div class="title">
-          <div class="title">Q&A</div>
-
-        </div>
-        <div class="table_section">
-          <table>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>title</th>
-                <th>User</th>
-                <th>답변 여부</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for q in qna %}
-              {% if q.password %}
-              <tr onclick="location.href='{% url 'community:qna_password' q.pk %}'">
-                {% else %}
-              <tr onclick="location.href='{% url 'community:qna_detail' q.pk %}'">
-                {% endif %}
-                {% if q.image %}
-                <td>
-                  <div class="qna-image" style="background-image:url('{{ q.image.url }}')"></div>
-                </td>
-                {% else %}
-                <td>
-                  <div class="qna-image"></div>
-                </td>
-                {% endif %}
-                <td>{{ q.title }}</td>
-                <td>{{ q.user.nickname }}</td>
-                {% if q.solve %}
-                <td>답변 완료</td>
-                {% else%}
-                <td></td>
-                {% endif %}
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        <div class="link-box">
-          <a class="qna-link" href="{% url 'community:qna' %}">Q&A 작성</a>
-        </div>
-      </div>
-
-      <!-- 실시간 채팅 -->
-      <div class="help text">
-        <div class="title">Help content</div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid nemo non quaerat dolorem aut fuga amet
-          voluptas nostrum ut veniam debitis, nam accusamus officia earum, saepe sit ea odit itaque!</p>
-      </div>
-
+  <div class="style-box">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="style-title">Sevice Center</h1>
     </div>
   </div>
-</div>
 
-<script>
-  let popup = document.getElementById("popup");
+  <div class="container">
+    <!-- <div class="main-title">고객센터</div> -->
+    <div class="content">
+      <input type="radio" name="indicator" checked="checked" id="home">
+      <input type="radio" name="indicator" id="blog">
+      <input type="radio" name="indicator" id="help">
+      <input type="radio" name="indicator" id="code">
+      <input type="radio" name="indicator" id="about">
 
-  function openPopup() {
-    popup
-      .classList
-      .add("open-popup");
-  }
+      <div class="list">
+        <label for="home" class="home">
+          FAQ
+        </label>
+        <label for="blog" class="blog">
+          Q&A
+        </label>
 
-  function closePopup() {
-    popup
-      .classList
-      .remove("open-popup");
-  }
-</script>
-{% endblock content %}
+        <div class="indicator"></div>
+      </div>
+
+      <div class="text-content">
+        <!-- 자주 묻는 질문 -->
+        <div class="home text">
+          <div class="title">FAQ</div>
+          <div class="qnacontainer">
+            <div class="tab">
+              <input type="radio" name="acc" id="acc1">
+              <label for="acc1">
+                <h2>01</h2>
+                <h3>[반품/교환문의] 구입한 상품 어떻게 반품하나요?</h3>
+              </label>
+              <div class="content">
+                <p>구입하신 상품을 반품하시는군요!<br><br>반품 신청하실 수 있는 방법은<br>1. 직접 반품 요청<br>2. Q&A게시판 접수<br>3.고객센터(☎1544-1010)로 연락주시어 반품<br><br>총 3가지이며, 아래에서 알려드리겠습니다.<br><br>첫번째로 먼저 직접 반품 요청하시는 경우입니다.<br>
+                  <strong>직접 반품 접수 경우 [단순변심 반품] 만 가능하며, 수거 주소지 변경이 어렵습니다.<br>또한, 상품 불량으로 인한 반품은 고객센터(☎1544-1010)로 접수 부탁드립니다.</strong><br><br>로그인 후 >MY PAGE > 주문내역을 [클릭]해주세요!
+                </p>
+              </div>
+            </div>
+            <div class="tab">
+              <input type="radio" name="acc" id="acc2">
+              <label for="acc2">
+                <h2>02</h2>
+                <h3>[회원정보 문의] 회원탈퇴는 어떻게 하나요?</h3>
+              </label>
+              <div class="content">
+                <p>탈퇴하시려구요 ㅠ_ㅠ..?<br>YEOLDY는 탈퇴란 없습니다!!!<br><br>알아서 찾아서 탈퇴하세요😑</p>
+              </div>
+            </div>
+            <div class="tab">
+              <input type="radio" name="acc" id="acc3">
+              <label for="acc3">
+                <h2 style="padding: 0 8px;">03</h2>
+                <h3>[주문/결제문의] 전화주문도 가능한가요?</h3>
+              </label>
+              <div class="content">
+                <p>고객님, 죄송스럽게도 저희 YEOLDY는 아직 전화주문을 도와드릴 수 있는 시스템이 구축되지 않아<br>주문은 온라인 홈페이지에서 구매해주셔야 되는 점 양해 부탁드립니다.<br><br>더욱 좋은 서비스를 제공해드리기 위해 항상 최선을 다하는 YEOLDY가 되겠습니다 😊</p>
+              </div>
+            </div>
+            <div class="tab">
+              <input type="radio" name="acc" id="acc4">
+              <label for="acc4">
+                <h2>04</h2>
+                <h3>[배송문의] 토요일에도 배송이 되나요?</h3>
+              </label>
+              <div class="content">
+                <p>토요일에는 상품 출고 작업이 진행되지 않습니다.
+                  <br><br>
+                  YEOLDY는 주말에 일하지 않아요<br>
+                  평일을 기다려주세요.😤
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 문의하기 -->
+        <div class="blog text">
+          <div class="title">
+            <div class="title">Q&A</div>
+
+          </div>
+          <div class="table_section">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>title</th>
+                  <th>User</th>
+                  <th>답변 여부</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for q in qna %}
+                  {% if q.password %}
+                    <tr onclick="location.href='{% url 'community:qna_password' q.pk %}'">
+                    {% else %}
+                      <tr onclick="location.href='{% url 'community:qna_detail' q.pk %}'">
+                      {% endif %}
+                      {% if q.image %}
+                        <td>
+                          <div class="qna-image" style="background-image:url('{{ q.image.url }}')"></div>
+                        </td>
+                      {% else %}
+                        <td>
+                          <div class="qna-image"></div>
+                        </td>
+                      {% endif %}
+                      <td>{{ q.title }}</td>
+                      <td>{{ q.user.nickname }}</td>
+                      {% if q.solve %}
+                        <td>답변 완료</td>
+                        {% else%}
+                        <td></td>
+                      {% endif %}
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            <div class="link-box">
+              <a class="qna-link" href="{% url 'community:qna' %}">Q&A 작성</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let popup = document.getElementById("popup");
+
+      function openPopup() {
+        popup
+          .classList
+          .add("open-popup");
+      }
+
+      function closePopup() {
+        popup
+          .classList
+          .remove("open-popup");
+      }
+    </script>
+  {% endblock content %}
