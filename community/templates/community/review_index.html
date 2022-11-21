@@ -21,27 +21,29 @@
           <div class="testimonial-box">
             <!-- top -->
             <div class="box-top">
-              <!--profile-->
-              <div class="profile">
-                <!--img-->
-                <div class="profile-img">
-                  {% if review.user.profile_image %}
-                    <img src="{{ review.user.profile_image.url }}" alt="">
-                  {% else %}
-                    <img src="{% static 'images/yeoldy_favicon.ico' %}" alt="">
-                  {% endif %}
-                </div>
-                <!--name-and-username-->
-                <div class="name-user">
-                  {% if review.user.nickname %}
-                    <strong>{{ review.user.nickname }}</strong>
-                  {% else %}
-                    <strong>Anonymous</strong>
-                  {% endif %}
-                  <span>{{ review.get_grade_display }}</span>
+              <div>
+                <!--profile-->
+                <div class="profile">
+                  <!--img-->
+                  <div class="profile-img">
+                    {% if review.user.profile_image %}
+                      <img src="{{ review.user.profile_image.url }}" alt="">
+                    {% else %}
+                      <img src="{% static 'images/yeoldy_favicon.ico' %}" alt="">
+                    {% endif %}
+                  </div>
+                  <!--name-and-username-->
+                  <div class="name-user">
+                    {% if review.user.nickname %}
+                      <strong>{{ review.user.nickname }}</strong>
+                    {% else %}
+                      <strong>Anonymous</strong>
+                    {% endif %}
+                    <span>{{ review.get_grade_display }}</span>
+                  </div>
                 </div>
               </div>
-
+              <p style="margin:0; font-size:14px; color:gray;">{{ review.created_at }}</p>
             </div>
 
             <!--Comments-->
@@ -95,7 +97,9 @@
                   <h1 class="modal-title fs-5" id="exampleModalLabel">
                     <strong>{{review_2.user.nickname}}</strong>
                   </h1>
+
                   <p class="m-0" style="font-size:14px; color:gray;">{{review_2.product.name}}</p>
+
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>

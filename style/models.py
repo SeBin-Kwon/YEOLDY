@@ -26,6 +26,7 @@ class Style(models.Model):
     like_users = models.ManyToManyField(get_user_model(), related_name="like_style")
     hits = models.PositiveIntegerField(default=0, verbose_name='조회수')
     created_at = models.DateTimeField(auto_now_add=True, null=True)
+    orderlists = models.CharField(null=True, max_length=100)
 
 class Photo(models.Model):
     style = models.ForeignKey(Style, on_delete=models.CASCADE, null=True)

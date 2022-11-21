@@ -30,6 +30,7 @@ class OrderListFinal(models.Model):
     order_name = models.CharField(max_length=20)
     phone_number = models.IntegerField(unique=False, null=True)
     order_request = models.CharField(max_length=50, choices=order_requests)
+    product_pk = models.IntegerField(null=True)
     product = models.TextField(blank=True)
     color = models.CharField(max_length=20, blank=True)
     size = models.CharField(max_length=20, blank=True)

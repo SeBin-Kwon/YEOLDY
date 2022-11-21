@@ -2,472 +2,470 @@
 {% load static %}
 {% load django_bootstrap5 %}
 {% load humanize %}
+{% load mathfilters %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/products_detail.css' %}">
-<script src="https://cdn.lordicon.com/qjzruarw.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="{% static 'css/products_detail.css' %}">
+  <script src="https://cdn.lordicon.com/qjzruarw.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
 {% endblock css %}
 
 {% block content %}
-<div class="product container row">
-  <!-- 상품 이미지 리스트 -->
-  <div class="col-1">
-    <div class="img-list d-flex flex-column">
-      {% for product_image in product_images %}
-      {% if forloop.first %}
-      <div class="on-image product-image-list w-100">
-        <a class="image-btn" href="#imagetab{{ forloop.counter }}">
-          <img class="img-fluid" src="{{ product_image.image.url }}" alt="">
-        </a>
-      </div>
-      {% else %}
-      <div class="product-image-list w-100">
-        <a class="image-btn" href="#imagetab{{ forloop.counter }}">
-          <img class="img-fluid" src="{{ product_image.image.url }}" alt="">
-        </a>
-      </div>
-      {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- 상품 대표 이미지 -->
-  {% for product_image in product_images %}
-  {% if forloop.first %}
-  <div id="imagetab{{ forloop.counter }}" class="col-4 imgBox"
-    style="display:block; background-image:url('{{ product_image.image.url }}'); background-repeat:no-repeat; background-position:center; background-size:contain;">
-  </div>
-  {% else %}
-  <div id="imagetab{{ forloop.counter }}" class="col-4 imgBox"
-    style="background-image:url('{{ product_image.image.url }}'); background-repeat:no-repeat; background-position:center; background-size:contain;">
-  </div>
-  {% endif %}
-  {% endfor %}
-
-  <!-- 상품 상세 박스 -->
-  <div class="col-4 infoBox">
-    <div class="mb-3 d-flex justify-content-between">
-      <h1 class="title">{{ product.name }}</h1>
-
-      <div class="d-flex align-items-center">
-        <!-- 수정 & 삭제 -->
-        {% if request.user == product.user %}
-        <a class="me-2 btn btn-warning" href="{% url 'products:update' product.pk %}">수정</a>
-        <a class="me-2 btn btn-danger" href="{% url 'products:delete' product.pk %}">삭제</a>
-        {% endif %}
-
-        <!-- 좋아요 -->
-        {% if request.user.is_authenticated %}
-        {% if request.user in product.save_users.all %}
-        <lord-icon src="https://cdn.lordicon.com/iwaotjbp.json" trigger="click"
-          colors="primary:#ee6d66,secondary:#ebe6ef" style="width:40px;height:40px" id="save-btn"
-          data-post-id="{{ product.pk }}"></lord-icon>
-        {% else %}
-        <lord-icon src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click"
-          colors="primary:#121331,secondary:#ee6d66" style="width:40px;height:40px" id="save-btn"
-          data-post-id="{{ product.pk }}"></lord-icon>
-        {% endif %}
-        {% else %}
-        <lord-icon src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click"
-          colors="primary:#121331,secondary:#ee6d66" style="width:40px;height:40px" id="save-btn"
-          data-post-id="{{ product.pk }}"></lord-icon>
-        {% endif %}
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <h5 class="m-0">
-        <i class="review-grade-star bi bi-star-fill"></i>
-        {{ product.average_rating }}
-        <span class="product-sub-review">({{ reviews.count }})</span>
-      </h5>
-    </div>
-
-    <p class="costBox">
-      <span class="cost-label">판매가</span>
-      <span class="cost">{{ product.cost|intcomma }}원</span>
-    </p>
-
-    <hr>
-    <div>
-
-      <div class="d-flex flex-column">
-        <div class="d-flex mb-2">
-          <div class="service-label col-4">배송비</div>
-          <div class="service">무료배송</div>
-        </div>
-
-        <div class="d-flex mb-2">
-          <div class="service-label col-4">배송안내</div>
-          <div class="service">무료배송</div>
-        </div>
-
-      </div>
-    </div>
-
-    <hr>
-    <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}"
-      method="POST">
-      {% csrf_token %}
-      <!-- 색상 -->
-      <div class="form-option select-option">
-        <label for="color">색상</label>
-        <select class="form-select" name="color" id="color" onchange="handleOnChangeColor(this)">
-          <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
-          <option value="" disabled="disabled">--------------------------</option>
-          {% for color in colors %}
-          <option value="{{ color }}">{{ color }}</option>
-          {% endfor %}
-        </select>
-      </div>
-
-      <!-- 사이즈 -->
-      <div class="form-option select-option">
-        <label for="size">사이즈</label>
-        <select class="form-select" name="size" id="size" onchange="handleOnChangeSize(this)">
-          <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
-          <option value="" disabled="disabled">--------------------------</option>
-          {% for size in sizes %}
-          <option value="{{ size }}">{{ size }}</option>
-          {% endfor %}
-        </select>
-        {{sizes}}
-      </div>
-
-      <!-- 장바구니 -->
-      <div id="cart">
-        <div class="product-cart-box d-flex justify-content-between">
-          <div class="count-box d-flex">
-            <button class="count-btn" type="button" id="minus">-</button>
-            <input class="count-input" id="cart_quantity" type="text" name="cart_quantity" value="1">
-            <button class="count-btn" type="button" id="plus">+</button>
-          </div>
-          <button class="cart-btn" type="submit" id="creatCart">장바구니 담기</button>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <div class="product container col-9">
-    <div class="tab_menu">
-      <ul class="list">
-        <li class="is_on">
-          <a href="#tab1" class="btn">상품 후기 ({{ reviews.count }})</a>
-        </li>
-        <li>
-          <a href="#tab2" class="btn">상품 문의</a>
-        </li>
-      </ul>
-
-      <div class="cont_area">
-        <div id="tab1" class="cont" style="display:block;">
-          <div class="cont-title-box">
-            <div class="cont-title">REVIEW |
-              <span style="font-size:22px; font-weight:300;">({{ reviews.count }})</span>
-            </div>
-            <div>
-              <a class="all-reviews" href="{% url 'community:review_index' %}">전체 상품 리뷰 보기
+  <div class="product container row">
+    <!-- 상품 이미지 리스트 -->
+    <div class="col-1">
+      <div class="img-list d-flex flex-column">
+        {% for product_image in product_images %}
+          {% if forloop.first %}
+            <div class="on-image product-image-list w-100">
+              <a class="image-btn" href="#imagetab{{ forloop.counter }}">
+                <img class="img-fluid" src="{{ product_image.image.url }}" alt="">
               </a>
             </div>
-          </div>
-          <div class="create-review-box">
-            <div class="review-grade-box">
-              <i class="review-grade-star bi bi-star-fill"></i>
-              <span class="review-grade-score">{{ points }}</span>
+          {% else %}
+            <div class="product-image-list w-100">
+              <a class="image-btn" href="#imagetab{{ forloop.counter }}">
+                <img class="img-fluid" src="{{ product_image.image.url }}" alt="">
+              </a>
             </div>
-            <a class="create-review-link" href="{% url 'community:review_create' product.pk %}">상품 리뷰 작성하기</a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 상품 대표 이미지 -->
+    {% for product_image in product_images %}
+      {% if forloop.first %}
+        <div id="imagetab{{ forloop.counter }}" class="col-4 imgBox" style="display:block; background-image:url('{{ product_image.image.url }}'); background-repeat:no-repeat; background-position:center; background-size:contain;"></div>
+      {% else %}
+        <div id="imagetab{{ forloop.counter }}" class="col-4 imgBox" style="background-image:url('{{ product_image.image.url }}'); background-repeat:no-repeat; background-position:center; background-size:contain;"></div>
+      {% endif %}
+    {% endfor %}
+
+    <!-- 상품 상세 박스 -->
+    <div class="col-4 infoBox">
+      <div class="mb-3 d-flex justify-content-between">
+        <h1 class="title">{{ product.name }}</h1>
+
+        <div class="d-flex align-items-center">
+          <!-- 수정 & 삭제 -->
+          {% if request.user == product.user %}
+            <a class="me-2 btn btn-warning" href="{% url 'products:update' product.pk %}">수정</a>
+            <a class="me-2 btn btn-danger" href="{% url 'products:delete' product.pk %}">삭제</a>
+          {% endif %}
+
+          <!-- 좋아요 -->
+          {% if request.user.is_authenticated %}
+            {% if request.user in product.save_users.all %}
+              <lord-icon src="https://cdn.lordicon.com/iwaotjbp.json" trigger="click" colors="primary:#ee6d66,secondary:#ebe6ef" style="width:40px;height:40px" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
+            {% else %}
+              <lord-icon src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:40px;height:40px" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
+            {% endif %}
+          {% else %}
+            <lord-icon src="https://cdn.lordicon.com/rjzlnunf.json" trigger="click" colors="primary:#121331,secondary:#ee6d66" style="width:40px;height:40px" id="save-btn" data-post-id="{{ product.pk }}"></lord-icon>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <h5 class="m-0">
+          <i class="review-grade-star bi bi-star-fill"></i>
+          {{ product.average_rating }}
+          <span class="product-sub-review">({{ reviews.count }})</span>
+        </h5>
+      </div>
+
+      <div class="costBox w-100 d-flex justify-content-between">
+        <div class="d-flex w-100 align-items-center">
+          <span class="cost-label">판매가</span>
+          {% with sale=product.sale_percent|sub:100 %}
+          {% with cal_sale=sale|mul:-1 %}
+          <span class="cost">{{ product.cost|mul:cal_sale|div:100|floatformat:"0"|intcomma }}</span>원
+        </div>
+        {% if product.sale_percent > 0 %}
+        <div class="d-flex">
+          <span class="origin-cost">{{ product.cost|intcomma }}원</span>
+          <span class="sale">{{ product.sale_percent }}%</span>
+        </div>
+        {% endif %}
+        {% endwith %}
+        {% endwith %}
+      </div>
+
+      <hr>
+
+      <div>
+        <div class="d-flex flex-column">
+          <div class="d-flex mb-2">
+            <div class="service-label col-4">배송비</div>
+            <div class="service">무료배송</div>
           </div>
-          {% for review in reviews %}
-          <div class="review-container">
-            <div class="review">
-              <h4 class="grade">{{ review.get_grade_display }}
-              </h4>
-              <div class="d-flex align-items-center">
 
-                <div class="review-userimg me-3"
-                  style="width:40px; height:40px; background-image:url({{review.user.profile_image.url}}); background-repeat:no-repeat; background-position-center; background-size:cover;">
-                </div>
+          <div class="d-flex mb-2">
+            <div class="service-label col-4">배송안내</div>
+            <div class="service">
+              15시 이전 결제완료시 당일출고</div>
+          </div>
+        </div>
+      </div>
 
-                <div>
-                  <span class="review-user">
-                    {{ review.user.username }}
-                  </span>님의 리뷰입니다.
-                </div>
+      <hr>
+
+      <form class="d-flex flex-column justify-content-between w-100" action="{% url 'cart:add_cart' product.pk %}" method="POST">
+        {% csrf_token %}
+        <!-- 색상 -->
+        <div class="form-option select-option">
+          <label for="color">색상</label>
+          <select class="form-select" name="color" id="color" onchange="handleOnChangeColor(this)">
+            <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
+            <option value="" disabled="disabled">--------------------------</option>
+            {% for color in colors %}
+              <option value="{{ color }}">{{ color }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- 사이즈 -->
+        <div class="form-option select-option">
+          <label for="size">사이즈</label>
+          <select class="form-select" name="size" id="size" onchange="handleOnChangeSize(this)">
+            <option value="none" selected="selected">- [필수] 옵션을 선택해 주세요 -</option>
+            <option value="" disabled="disabled">--------------------------</option>
+            {% for size in sizes %}
+              <option value="{{ size }}">{{ size }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <!-- 장바구니 -->
+        <div id="cart">
+          <div class="product-cart-box d-flex justify-content-between">
+            <div class="count-box d-flex">
+              <button class="count-btn" type="button" id="minus">-</button>
+              <input class="count-input" id="cart_quantity" type="text" name="cart_quantity" value="1">
+              <button class="count-btn" type="button" id="plus">+</button>
+            </div>
+            <button class="cart-btn" type="submit" id="creatCart">장바구니 담기</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="product container col-9">
+      <div class="tab_menu">
+        <ul class="list">
+          <li class="is_on">
+            <a href="#tab1" class="btn">상품 후기 ({{ reviews.count }})</a>
+          </li>
+          <li>
+            <a href="#tab2" class="btn">상품 문의</a>
+          </li>
+        </ul>
+
+        <div class="cont_area">
+          <div id="tab1" class="cont" style="display:block;">
+            <div class="cont-title-box">
+              <div class="cont-title">REVIEW |
+                <span style="font-size:22px; font-weight:300;">({{ reviews.count }})</span>
               </div>
               <div>
-                <p class="review-title">{{ review.title }}</p>
-                <p class="review-content">{{ review.content }}</p>
+                <a class="all-reviews" href="{% url 'community:review_index' %}">전체 상품 리뷰 보기
+                </a>
               </div>
             </div>
-            <div class="review-image-box">
-              {% if review.photo_set.all.count %}
-              <button type="button" class="comment-btn" data-bs-toggle="modal"
-                data-bs-target="#exampleModal{{forloop.counter}}">
-                <div class="review-image" style="background-image:url('{{ review.photo_set.first.image.url }}')"></div>
-              </button>
-              {% if review.photo_set.count > 1 %}
-              <p class="review-image-count">외
-                {{ review.photo_set.count|add:"-1" }}장</p>
-              {% endif %}
-              {% endif %}
+            <div class="create-review-box">
+              <div class="review-grade-box">
+                <i class="review-grade-star bi bi-star-fill"></i>
+                <span class="review-grade-score">{{ points }}</span>
+              </div>
+              <a class="create-review-link" href="{% url 'community:review_create' product.pk %}">상품 리뷰 작성하기</a>
             </div>
-          </div>
-          <hr>
-          {% endfor %}
-        </div>
-        <div id="tab2" class="cont">
-          <div class="cont-title-box">
-            <div class="cont-title">Q&A</div>
-            <div>
-              <a class="all-reviews" href="{% url 'community:index' %}">전체 상품 문의 보기
-              </a>
-            </div>
-          </div>
-          <table class="table" style="">
-            <thead>
-              <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-              </tr>
-            </thead>
-            {% for qna in qnas %}
-            <tr>
-              <td>{{ qna.id }}</td>
-              <td>
-                {% if qna.password %}
-                <a class="qna-link" href="{% url 'community:qna_password' qna.pk %}">
-                  <i class="bi bi-lock"></i>
-                  {% else %}
-                  <a class="qna-link" href="{% url 'community:qna_detail' qna.pk %}">
+            {% for review in reviews %}
+              <div class="review-container">
+                <div class="review">
+                  <h4 class="grade">{{ review.get_grade_display }}
+                  </h4>
+                  <div class="d-flex align-items-center">
+
+                    <div class="review-userimg me-3" style="width:40px; height:40px; background-image:url({{review.user.profile_image.url}}); background-repeat:no-repeat; background-position:center; background-size:cover;"></div>
+
+                    <div>
+                      <span class="review-user">
+                        {{ review.user.username }}
+                      </span>님의 리뷰입니다.
+                    </div>
+                  </div>
+                  <div>
+                    <p class="review-title">{{ review.title }}</p>
+                    <p class="review-content">{{ review.content }}</p>
+                  </div>
+                </div>
+                <div class="review-image-box">
+                  {% if review.photo_set.all.count %}
+                    <button type="button" class="comment-btn" data-bs-toggle="modal" data-bs-target="#exampleModal{{forloop.counter}}">
+                      <div class="review-image" style="background-image:url('{{ review.photo_set.first.image.url }}')"></div>
+                    </button>
+                    {% if review.photo_set.count > 1 %}
+                      <p class="review-image-count">외
+                        {{ review.photo_set.count|add:"-1" }}장</p>
                     {% endif %}
-                    {% if qna.solve %}
-                    {{ qna.title }}
-                    답변완료
-                    {% else %}
-                    {{ qna.title }}
-                    {% endif %}
-                  </a>
-              </td>
-              <td>{{ qna.user.username|first }}****</td>
-            </tr>
+                  {% endif %}
+                </div>
+              </div>
+              <hr>
             {% endfor %}
-          </table>
-          <div class="create-qna-box">
-            <a class="create-qna-link" href="{% url 'community:qna_create' product.pk %}">상품 문의하기</a>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {% for review in reviews %}
-  <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-        <div class="modal-header border-0 align-items-start">
-          <div class="d-flex flex-column">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              <strong>이미지 상세 보기</strong>
-            </h1>
-          </div>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-
-        <div class="modal-body">
-          <div class="swiper mySwiper1">
-            <div class="swiper-wrapper">
-              {% for photo in review.photo_set.all %}
-              <div class="swiper-slide">
-                <div class="modal-img w-100" style="height:700px; background-image:url('{{ photo.image.url }}')"></div>
+          <div id="tab2" class="cont">
+            <div class="cont-title-box">
+              <div class="cont-title">Q&A</div>
+              <div>
+                <a class="all-reviews" href="{% url 'community:index' %}">전체 상품 문의 보기
+                </a>
               </div>
-              {% endfor %}
             </div>
-            <div class="swiper-pagination"></div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                </tr>
+              </thead>
+              {% for qna in qnas %}
+                <tr>
+                  <td>{{ qna.id }}</td>
+                  <td>
+                    {% if qna.password %}
+                      <a class="qna-link" href="{% url 'community:qna_password' qna.pk %}">
+                        <i class="bi bi-lock"></i>
+                      {% else %}
+                        <a class="qna-link" href="{% url 'community:qna_detail' qna.pk %}">
+                        {% endif %}
+                        {% if qna.solve %}
+                          {{ qna.title }}
+                          답변완료
+                        {% else %}
+                          {{ qna.title }}
+                        {% endif %}
+                      </a>
+                    </td>
+                    <td>{{ qna.user.username|first }}****</td>
+                  </tr>
+                {% endfor %}
+              </table>
+              <div class="create-qna-box">
+                <a class="create-qna-link" href="{% url 'community:qna_create' product.pk %}">상품 문의하기</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      {% for review in reviews %}
+        <div class="modal fade" id="exampleModal{{forloop.counter}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <div class="modal-header border-0 align-items-start">
+                <div class="d-flex flex-column">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    <strong>이미지 상세 보기</strong>
+                  </h1>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+
+              <div class="modal-body">
+                <div class="swiper mySwiper1">
+                  <div class="swiper-wrapper">
+                    {% for photo in review.photo_set.all %}
+                      <div class="swiper-slide">
+                        <div class="modal-img w-100" style="height:700px; background-image:url('{{ photo.image.url }}')"></div>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="swiper-pagination"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-  </div>
-  {% endfor %}
-</div>
 
-<!-- 장바구니 기능 -->
-<script>
-  const quantity = document.querySelector('#cart_quantity')
+    <!-- 장바구니 기능 -->
+    <script>
+      const quantity = document.querySelector('#cart_quantity')
 
-  const minus = document.querySelector('#minus')
-  minus.addEventListener('click', function () {
-    quantity.value -= 1
-  })
+      const minus = document.querySelector('#minus')
+      minus.addEventListener('click', function () {
+        quantity.value -= 1
+      })
 
-  const plus = document.querySelector('#plus')
-  plus.addEventListener('click', function () {
-    console.log(quantity)
-    num = parseInt(quantity.value)
-    quantity.value = num + 1
-  })
-</script>
+      const plus = document.querySelector('#plus')
+      plus.addEventListener('click', function () {
+        console.log(quantity)
+        num = parseInt(quantity.value)
+        quantity.value = num + 1
+      })
+    </script>
 
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<!-- 찜하기 -->
-<script>
-  const cartQuantity = document.querySelector('#cart_quantity')
-  const plusBtn = document.querySelector('#plus')
-  const minusBtn = document.querySelector('#minus')
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 찜하기 -->
+    <script>
+      const cartQuantity = document.querySelector('#cart_quantity')
+      const plusBtn = document.querySelector('#plus')
+      const minusBtn = document.querySelector('#minus')
 
-  console.log(cartQuantity.value)
-  minusBtn.addEventListener('click', function (event) {
-    if (cartQuantity.value < 1) {
-      cartQuantity.value = 1
-    }
-  });
+      console.log(cartQuantity.value)
+      minusBtn.addEventListener('click', function (event) {
+        if (cartQuantity.value < 1) {
+          cartQuantity.value = 1
+        }
+      });
 
-  const saveBtn = document.querySelector('#save-btn')
-  saveBtn.addEventListener('click', function (event) {
-    console.log(event.target.dataset)
-    axios({ method: 'get', url: `/products/${event.target.dataset.postId}/save/` }).then(response => {
-      console.log(response)
-      console.log(response.data)
-      if (response.data.issaved === true) {
-        event
-          .target
-          .setAttribute('src', 'https://cdn.lordicon.com/iwaotjbp.json')
-        event
-          .target
-          .setAttribute('colors', 'primary:#ee6d66,secondary:#ebe6ef')
-      } else {
-        event
-          .target
-          .setAttribute('src', 'https://cdn.lordicon.com/rjzlnunf.json')
-        event
-          .target
-          .setAttribute('colors', 'primary:#121331,secondary:#ee6d66')
+      const saveBtn = document.querySelector('#save-btn')
+      saveBtn.addEventListener('click', function (event) {
+        console.log(event.target.dataset)
+        axios({method: 'get', url: `/products/${event.target.dataset.postId}/save/`}).then(response => {
+          console.log(response)
+          console.log(response.data)
+          if (response.data.issaved === true) {
+            event
+              .target
+              .setAttribute('src', 'https://cdn.lordicon.com/iwaotjbp.json')
+            event
+              .target
+              .setAttribute('colors', 'primary:#ee6d66,secondary:#ebe6ef')
+          } else {
+            event
+              .target
+              .setAttribute('src', 'https://cdn.lordicon.com/rjzlnunf.json')
+            event
+              .target
+              .setAttribute('colors', 'primary:#121331,secondary:#ee6d66')
+          }
+          location.reload();
+        })
+      })
+
+      // 장바구니
+      function handleOnChangeColor(e) {
+        const color = e
+          .options[e.selectedIndex]
+          .text;
+
+        console.log(color)
       }
-      location.reload();
-    })
-  })
 
-  // 장바구니
-  function handleOnChangeColor(e) {
-    const color = e
-      .options[e.selectedIndex]
-      .text;
+      function handleOnChangeSize(e) {
+        const size = e
+          .options[e.selectedIndex]
+          .text;
 
-    console.log(color)
-  }
+        console.log(size)
+      }
 
-  function handleOnChangeSize(e) {
-    const size = e
-      .options[e.selectedIndex]
-      .text;
+      const colorSelect = document.querySelector("#color")
+      const sizeSelect = document.querySelector("#size")
+      const creatCart = document.querySelector("#creatCart")
 
-    console.log(size)
-  }
+      creatCart.addEventListener("click", function (event) {
+        const colorboxOption = colorSelect
+          .options[colorSelect.selectedIndex]
+          .value;
+        const sizeboxOption = sizeSelect
+          .options[sizeSelect.selectedIndex]
+          .value;
 
-  const colorSelect = document.querySelector("#color")
-  const sizeSelect = document.querySelector("#size")
-  const creatCart = document.querySelector("#creatCart")
-
-  creatCart.addEventListener("click", function (event) {
-    const colorboxOption = colorSelect
-      .options[colorSelect.selectedIndex]
-      .value;
-    const sizeboxOption = sizeSelect
-      .options[sizeSelect.selectedIndex]
-      .value;
-
-    console.log(colorboxOption, sizeboxOption)
-    if (colorboxOption == "none" || sizeboxOption == "none") {
-      alert("필수 항목을 입력해주세요")
-      event.preventDefault();
-    }
-  })
-</script>
-
-<script>
-  // 상품 후기 & 문의 탭 분리
-  const tabList = document.querySelectorAll('.tab_menu .list li');
-  const contents = document.querySelectorAll('.tab_menu .cont_area .cont');
-  let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
-
-  for (let i = 0; i < tabList.length; i++) {
-    tabList[i]
-      .querySelector('.btn')
-      .addEventListener('click', function (e) {
-        e.preventDefault();
-        for (let j = 0; j < tabList.length; j++) {
-          // 나머지 버튼 클래스 제거
-          tabList[j]
-            .classList
-            .remove('is_on');
-
-          // 나머지 컨텐츠 display:none 처리
-          contents[j].style.display = 'none';
+        console.log(colorboxOption, sizeboxOption)
+        if (colorboxOption == "none" || sizeboxOption == "none") {
+          alert("필수 항목을 입력해주세요")
+          event.preventDefault();
         }
+      })
+    </script>
 
-        // 버튼 관련 이벤트
-        this
-          .parentNode
-          .classList
-          .add('is_on');
+    <script>
+      // 상품 후기 & 문의 탭 분리
+      const tabList = document.querySelectorAll('.tab_menu .list li');
+      const contents = document.querySelectorAll('.tab_menu .cont_area .cont');
+      let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
 
-        // 버튼 클릭시 컨텐츠 전환
-        activeCont = this.getAttribute('href');
+      for (let i = 0; i < tabList.length; i++) {
+        tabList[i]
+          .querySelector('.btn')
+          .addEventListener('click', function (e) {
+            e.preventDefault();
+            for (let j = 0; j < tabList.length; j++) {
+              // 나머지 버튼 클래스 제거
+              tabList[j]
+                .classList
+                .remove('is_on');
 
-        document
-          .querySelector(activeCont)
-          .style
-          .display = 'block';
-      });
-  }
+              // 나머지 컨텐츠 display:none 처리
+              contents[j].style.display = 'none';
+            }
 
-  // 이미지 바꾸기
-  const imgList = document.querySelectorAll('.img-list .product-image-list');
-  const productImage = document.querySelectorAll('.imgBox');
-  let activeImage = '';
+            // 버튼 관련 이벤트
+            this
+              .parentNode
+              .classList
+              .add('is_on');
 
-  for (let i = 0; i < imgList.length; i++) {
-    imgList[i]
-      .querySelector('.image-btn')
-      .addEventListener('click', function (e) {
-        e.preventDefault();
-        for (let j = 0; j < imgList.length; j++) {
-          imgList[j]
-            .classList
-            .remove('on-image');
+            // 버튼 클릭시 컨텐츠 전환
+            activeCont = this.getAttribute('href');
 
-          productImage[j].style.display = 'none';
+            document
+              .querySelector(activeCont)
+              .style
+              .display = 'block';
+          });
+      }
+
+      // 이미지 바꾸기
+      const imgList = document.querySelectorAll('.img-list .product-image-list');
+      const productImage = document.querySelectorAll('.imgBox');
+      let activeImage = '';
+
+      for (let i = 0; i < imgList.length; i++) {
+        imgList[i]
+          .querySelector('.image-btn')
+          .addEventListener('click', function (e) {
+            e.preventDefault();
+            for (let j = 0; j < imgList.length; j++) {
+              imgList[j]
+                .classList
+                .remove('on-image');
+
+              productImage[j].style.display = 'none';
+            }
+
+            this
+              .parentNode
+              .classList
+              .add('on-image');
+
+            activeImage = this.getAttribute('href');
+
+            document
+              .querySelector(activeImage)
+              .style
+              .display = 'flex';
+          });
+      }
+    </script>
+
+    <!-- 리뷰 이미지 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script>
+      const swiper = new Swiper('.mySwiper1', {
+        slidesPerView: 1,
+        pagination: {
+          el: ".swiper-pagination",
+          dynamicBullets: true
         }
-
-        this
-          .parentNode
-          .classList
-          .add('on-image');
-
-        activeImage = this.getAttribute('href');
-
-        document
-          .querySelector(activeImage)
-          .style
-          .display = 'flex';
       });
-  }
-</script>
+    </script>
 
-<!-- 리뷰 이미지 -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-<script>
-  const swiper = new Swiper('.mySwiper1', {
-    slidesPerView: 1,
-    pagination: {
-      el: ".swiper-pagination",
-      dynamicBullets: true
-    }
-  });
-</script>
-
-{% endblock content %}
+  {% endblock content %}

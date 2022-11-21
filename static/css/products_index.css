@@ -33,13 +33,15 @@ a {
 .imgBox {
     display: flex;
     align-items: center;
-    height: 230px;
+    height: 350px;
     position: relative;
     overflow: hidden;
-    box-shadow: -4px -6px 32px 0px #0d224216;
+    border-radius: 10px;
+    /* box-shadow: -4px -6px 32px 0px #0d224216; */
 }
 
 .imgBox .product-img {
+    height: 100%;
     transition: 0.5s;
 }
 
@@ -69,7 +71,7 @@ a {
 }
 
 .contentBox .product-title {
-    font-weight: 600;
+    font-size: 14px;
 }
 
 .contentBox p {
@@ -79,7 +81,7 @@ a {
 
 .contentBox .sale {
     color: #e91e63;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .contentBox .cost {

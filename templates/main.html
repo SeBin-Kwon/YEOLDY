@@ -1,6 +1,7 @@
 {% load django_bootstrap5 %}
 {% load static %}
 {% load humanize %}
+{% load mathfilters %}
 
 <!DOCTYPE html>
 <html lang="kr">
@@ -230,7 +231,14 @@
             <div class="infoBox">
               <h5 class="product-title">{{ best_product.name }}</h5>
               <p>
-                <span class="sale">{{ best_product.sale_percent }}%</span><span class="cost">{{ best_product.cost|intcomma }}</span>원
+                {% with sale=best_product.sale_percent|sub:100 %}
+                  {% with cal_sale=sale|mul:-1 %}
+                    {% if best_product.sale_percent > 0 %}
+                      <span class="sale">{{ best_product.sale_percent }}%</span>
+                    {% endif %}
+                    <span class="cost">{{ best_product.cost|mul:cal_sale|div:100|floatformat:"0"|intcomma }}</span>원
+                  {% endwith %}
+                {% endwith %}
               </p>
             </div>
           </div>
