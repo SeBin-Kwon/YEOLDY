@@ -268,7 +268,7 @@
 
 
 .qnacontainer .tab label h3{
-  font-size: 24px;
+  font-size: 20px;
   position: relative;
   font-weight: 500;
   color: #333;
@@ -438,7 +438,7 @@ a{
     padding: 10px;
   }
   .content .list label{
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 
