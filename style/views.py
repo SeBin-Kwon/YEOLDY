@@ -111,8 +111,8 @@ def detail(request, pk):
         if style.orderlists[i] == ',' or style.orderlists[i] == ']':
             orderlist_final.append(temp)
             temp = ''
-            print(orderlist_final)
     orderlist = list(map(int, orderlist_final))
+    print(orderlist)
 
 
     context = {
