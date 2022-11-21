@@ -11,4 +11,5 @@ class ProductsForm(forms.ModelForm):
             "category",
             "color",
             "size",
+            "sale_percent",
         ]
