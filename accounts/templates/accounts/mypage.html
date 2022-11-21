@@ -13,7 +13,7 @@
     {% else %}
       <h1>{{ user.nickname }}'s Page</h1>
     {% endif %}
-    <div class="section row container">
+    <div class="section row container align-items-center">
 
       <div class="col-12 col-md-7 mb-4">
         {% if user.profile_image %}
@@ -24,7 +24,7 @@
       </div>
 
       <div class="col-12 col-md-5">
-
+        {% if request.user == user %}
         <div class="info">
 
           <div class="info-box">
@@ -32,13 +32,11 @@
               <p>이름 :
                 <span class="info-name">{{ user.nickname }}
                 </p>
-                {% if request.user == user %}
                   <div class="">
                     <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:mypage-update' user.pk %}">
                       <i class="bi bi-pencil-square"></i>
                       수정하기</a>
                   </div>
-                {% endif %}
               </div>
 
               <p>아이디 :
@@ -63,7 +61,19 @@
           </div>
 
         </div>
+        {% else %}
+        <div class="info">
+          <div class="info-box">
+              <p>이름 :
+                <span class="info-name">{{ user.nickname }}
+                </p>
+              <p>아이디 :
+                <span class="info-content">{{ user.username }}</span>
+              </p>
+          </div>
+        </div>
 
+        {% endif %}
         <div class="follow-div d-flex">
           <div class="text-center me-4">
             <h2>
@@ -292,6 +302,69 @@
 
   </div>
 
+{% else %}
+<div id="tab2" class="mypost mt-4" style="display:block;">
+  <h3 class="sub-title">{{ user.nickname }}의 글</h3>
+  <!-- 테이블 -->
+  <table class="table table-hover mt-4 text-center">
+    <thead>
+      <tr>
+        <th scope="col">글 종류</th>
+        <th scope="col">제목</th>
+        <th scope="col">조회수</th>
+        <th scope="col">작성 날짜</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {% for style in my_style %}
+        <tr>
+          <th scope="row">Style</th>
+          <td>
+            <a class="links" href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
+          </td>
+          <td>{{ style.hits }}</td>
+          <td style="font-size: 13px; color:gray;">{{ style.created_at }}</td>
+        </tr>
+      {% endfor %}
+
+      {% for review in my_review %}
+        <tr>
+          <th scope="row">Review</th>
+          <td>
+            <a class="links" href="{% url 'products:detail' review.product_id %}">
+              {{ review.title }}</a>
+          </td>
+          <td>{{ review.hits }}</td>
+          <td style="font-size: 13px; color:gray;">{{ review.created_at }}</td>
+        </tr>
+      {% endfor %}
+
+      {% for qna in my_qna %}
+        {% if qna.Product_id %}
+          <tr>
+            <th scope="row">Q&A</th>
+            <td>
+              <a class="links" href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
+            </td>
+            <td>{{ qna.hits }}</td>
+            <td style="font-size: 13px; color:gray;">{{ qna.created_at }}</td>
+          </tr>
+        {% else %}
+          <tr>
+            <th scope="row">Q&A</th>
+            <td>
+              <a class="links" href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
+            </td>
+            <td>{{ qna.hits }}</td>
+            <td style="font-size: 13px; color:gray;">{{ qna.created_at }}</td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
 {% endif %}
 
   </div>
@@ -310,7 +383,11 @@
 
             {% for followers in user.followers.all %}
               <div class="d-flex my-3">
+                {% if followers.profile_image %}
                 <div class="style-userimage me-2" style="background-image: url('{{ followers.profile_image.url }}')"></div>
+                {% else %}
+                <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+                {% endif %}
 
                 <a href="{% url 'accounts:mypage' followers.pk %}">
                   {{ followers }}
@@ -346,7 +423,11 @@
 
             {% for followings in user.followings.all %}
               <div class="d-flex my-3">
-                <div class="style-userimage me-2" style="background-image: url('{{ followings.profile_image.url }}')"></div>
+                {% if followings.profile_image %}
+                  <div class="style-userimage me-2" style="background-image: url('{{ followings.profile_image.url }}')"></div>
+                  {% else %}
+                  <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+                {% endif %}
 
                 <a href="{% url 'accounts:mypage' followings.pk %}">
                   {{ followings }}
