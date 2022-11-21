@@ -17,6 +17,8 @@ def add_cart(request, product_id):
         print(size)
         # 장바구니에 들어가는 product
         img = product.photo_set.filter(product_id=product_id)[0].image
+        sale_cost = round((product.cost_2) * (1 - (product.sale_percent / 100)))
+        product.cost = sale_cost
         product.image = img
         product.save()
 

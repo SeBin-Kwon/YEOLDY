@@ -1,23 +1,73 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'css/kakao_show_order_list.css' %}">
+{% endblock css %}
 
 {% block content %}
 
-<h1>주문내역</h1>
-<hr>
+  <div class="title-box">
+    <h1 class="title">Order List</h1>
+  </div>
 
-<p>배송지명 : {{ first_item.location_name }}</p>
-<p>배송자명 : {{ first_item.order_name }}</p>
-<p>휴대폰번호 : {{ first_item.phone_number }}</p>
-<p>배송요청사항 : {{ first_item.order_request }}</p>
+  <div class="info">
+    <div class="d-flex align-items-center">
+      <div class="detail me-3">
+        <h5>배송지명</h5>
+      </div>
+      {{ first_item.location_name }}
+    </div>
 
-<hr>
+    <div class="d-flex align-items-center">
+      <div class="detail me-3">
+        <h5>배송자명</h5>
+      </div>
+      {{ first_item.order_name }}
+    </div>
 
-{% for orderlist in orderlists %}
-<p>제품명 : {{ orderlist.product }}</p>
-<p>색상 : {{ orderlist.color }}</p>
-<p>사이즈 : {{ orderlist.size }}</p>
-<p>수량 : {{ orderlist.quantity }}</p>
-<hr>
-{% endfor %}
+    <div class="d-flex align-items-center">
+      <div class="detail me-3">
+        <h5>휴대폰번호</h5>
+      </div>
+      {{ first_item.phone_number }}
+    </div>
+
+    <div class="d-flex align-items-center">
+      <div class="detail me-3">
+        <h5>요청사항</h5>
+      </div>
+      {{ first_item.order_request }}
+    </div>
+  </div>
+
+  <div class="container mt-3">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col" class="product">제품명</th>
+          <th scope="col">색상</th>
+          <th scope="col">사이즈</th>
+          <th scope="col">수량</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for orderlist in orderlists %}
+          <tr>
+            <th scope="row">{{ orderlist.product }}</th>
+            <td>{{ orderlist.color }}</td>
+            <td>{{ orderlist.size }}</td>
+            <td>{{ orderlist.quantity }}</td>
+          </tr>
+        {% endfor %}
+
+        <tr class="table-group-divider">
+          <th colspan="2">총 금액</th>
+          <td colspan="2">{{orderlist_total|intcomma}}원</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 {% endblock %}

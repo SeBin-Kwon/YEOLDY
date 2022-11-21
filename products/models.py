@@ -24,13 +24,13 @@ MY_COLOR = (
 )
 
 MY_SIZE = (
-    ("220", "220"),
-    ("230", "230"),
-    ("240", "240"),
-    ("250", "250"),
-    ("260", "260"),
-    ("270", "270"),
-    ("280", "280"),
+    (220, 220),
+    (230, 230),
+    (240, 240),
+    (250, 250),
+    (260, 260),
+    (270, 270),
+    (280, 280),
     ("XS", "XS"),
     ("S", "S"),
     ("M", "M"),
@@ -52,6 +52,7 @@ MY_CATEGORY = (
 class Products(models.Model):
     name = models.CharField(max_length=20)
     cost = models.IntegerField()
+    cost_2 = models.IntegerField(null=True)
     category = models.CharField(max_length=10, choices=MY_CATEGORY)
     color = MultiSelectField(choices=MY_COLOR)
     size = MultiSelectField(choices=MY_SIZE)

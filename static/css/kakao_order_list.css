@@ -116,8 +116,8 @@ form .button .detail {
 }
 
 .user-address .input-box .add-btn{
-  height: 39px;
-    width: 100px;
+    height: auto;
+    width: auto;
     margin: 46px 0;
     text-align: center;
     outline: none;

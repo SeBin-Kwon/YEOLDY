@@ -43,18 +43,20 @@ def create(request):
     else:
         style_form = StyleForm()
         orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
-        print(orderlists)
-
-        orderlist_final = []
-        for orderlist in orderlists:
-            if orderlist.product_pk not in orderlist_final:
-                orderlist_final.append(orderlist.product_pk)
-        print(orderlist_final)
         
-        orderlist_objects = []
-        for orderlist in orderlist_final:
-            object = Products.objects.get(pk=orderlist)
-            orderlist_objects.append(object)
+        if len(orderlists) == 0:
+            orderlist_objects = 0
+        else:
+            orderlist_final = []
+            for orderlist in orderlists:
+                if orderlist.product_pk not in orderlist_final:
+                    orderlist_final.append(orderlist.product_pk)
+            print(orderlist_final)
+
+            orderlist_objects = []
+            for orderlist in orderlist_final:
+                object = Products.objects.get(pk=orderlist)
+                orderlist_objects.append(object)
 
     context = {
         "style_form": style_form,
@@ -62,7 +64,8 @@ def create(request):
     }
     return render(request, "style/form.html", context)
 
-#구매한 내역이 없으면, 착용한 제품이 없습니다.
+
+# 구매한 내역이 없으면, 착용한 제품이 없습니다.
 
 
 @login_required
@@ -102,18 +105,29 @@ def detail(request, pk):
     reviews = style.style_review_set.all().order_by("-pk")
     style_tags = list(str(style.tag).split(", "))
 
-    #string으로 받은 orderlists들을 int형으로 바꿔줌
-    orderlist_final = []
-    temp = ''
-    for i in range(len(style.orderlists)):
-        if style.orderlists[i] != ',' and style.orderlists[i] != '\'' and style.orderlists[i] != '[' and style.orderlists[i] != ' ' and style.orderlists[i] != ']':
-            temp += style.orderlists[i]
-        if style.orderlists[i] == ',' or style.orderlists[i] == ']':
-            orderlist_final.append(temp)
-            temp = ''
-            print(orderlist_final)
-    orderlist = list(map(int, orderlist_final))
-
+    if len(style.orderlists) == 0:
+        products = 0
+    else:
+        # string으로 받은 orderlists들을 int형으로 바꿔줌
+        orderlist_final = []
+        temp = ""
+        for i in range(len(style.orderlists)):
+            if (
+                style.orderlists[i] != ","
+                and style.orderlists[i] != "'"
+                and style.orderlists[i] != "["
+                and style.orderlists[i] != " "
+                and style.orderlists[i] != "]"
+            ):
+                temp += style.orderlists[i]
+            if style.orderlists[i] == "," or style.orderlists[i] == "]":
+                orderlist_final.append(temp)
+                temp = ""
+        orderlist = list(map(int, orderlist_final))
+        products = []
+        for id in orderlist:
+            product = Products.objects.get(pk=id)
+            products.append(product)
 
     context = {
         "style": style,
@@ -121,6 +135,7 @@ def detail(request, pk):
         "reviews": reviews,
         "style_images": style_image,
         "style_tags": style_tags,
+        "products": products
         # "orderlists": orderlists,
     }
     response = render(request, "style/detail.html", context)
