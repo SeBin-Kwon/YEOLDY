@@ -5,6 +5,7 @@ from cart.models import CartItem
 from .forms import OrderlistForm
 from .models import OrderList, OrderListFinal
 from django.contrib.auth.decorators import login_required
+from products.models import Products
 
 # Create your views here.
 def approval(request):
@@ -121,9 +122,9 @@ def order_list(request):
             "quantity": "{}".format(cart_quantity),                # 구매 물품 수량
             "total_amount": "{}".format(cart_total),        # 구매 물품 가격
             "tax_free_amount": "0",         # 구매 물품 비과세
-            "approval_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/kakaopay/approval/",
-            "cancel_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/",
-            "fail_url": "http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/",
+            "approval_url": "http://127.0.0.1:8000/kakaopay/approval/",
+            "cancel_url": "http://127.0.0.1:8000/",
+            "fail_url": "http://127.0.0.1:8000/",
         }
         # params = {
         #     "cid": "TC0ONETIME",    # 테스트용 코드
@@ -154,9 +155,19 @@ def order_list(request):
 @login_required
 def show_order_list(request):
     orderlists = OrderListFinal.objects.filter(user_id=request.user.pk)
+
+    orderlist_total = 0
+    for orderlist in orderlists:
+        quantity = orderlist.quantity
+        product = Products.objects.get(pk=orderlist.product_pk)
+        price = product.cost
+        sub_total = quantity*price
+        orderlist_total += sub_total
+
     first_item = orderlists[0]
     context = {
         'orderlists': orderlists,
         'first_item': first_item,
+        'orderlist_total': orderlist_total,
     }
     return render(request, 'kakaopay/show_order_list.html', context)
