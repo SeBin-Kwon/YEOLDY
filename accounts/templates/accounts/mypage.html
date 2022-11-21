@@ -25,18 +25,19 @@
 
       <div class="col-12 col-md-5">
         {% if request.user == user %}
-        <div class="info">
+          <div class="info">
 
-          <div class="info-box">
-            <div class="d-flex justify-content-between">
-              <p>이름 :
-                <span class="info-name">{{ user.nickname }}</span>
+
+            <div class="info-box">
+              <div class="d-flex justify-content-between">
+                <p>이름 :
+                  <span class="info-name">{{ user.nickname }}</span>
                 </p>
-                  <div class="">
-                    <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:mypage-update' user.pk %}">
-                      <i class="bi bi-pencil-square"></i>
-                      수정하기</a>
-                  </div>
+                <div class="">
+                  <a class="btn btn-outline-primary btn-sm" href="{% url 'accounts:mypage-update' user.pk %}">
+                    <i class="bi bi-pencil-square"></i>
+                    수정하기</a>
+                </div>
               </div>
 
               <p>아이디 :
@@ -61,17 +62,17 @@
           </div>
 
         </div>
-        {% else %}
+      {% else %}
         <div class="info">
           <div class="info-box">
-              <p>이름 :
-                <span class="info-name">{{ user.nickname }}
-                </p>
+            <p>이름 :
+              <span class="info-name">{{ user.nickname }}
+              </p>
               <p>아이디 :
                 <span class="info-content">{{ user.username }}</span>
               </p>
+            </div>
           </div>
-        </div>
 
         {% endif %}
         <div class="follow-div d-flex">
@@ -113,73 +114,205 @@
       </div>
 
     </div>
-  
-    <!-- 주문 내역 및 내가 쓴 글, 좋아요한 글 -->
-  {% if request.user == user %}
-  <!-- 사이드바 -->
-  <div class="tab_menu d-flex justify-content-center" style="margin-top: 3rem;">
-    <div id="nav" class="navigation tab_menu">
-      <ul>
-        <li class="list active is_on">
-          <a href="#tab1" class="btns">
-            <span class="icon">
-              <i class="bi bi-basket"></i>
-            </span>
-            <span class="text">주문내역</span>
-          </a>
-        </li>
-        <li class="list">
-          <a href="#tab2" class="btns">
-            <span class="icon">
-              <i class="bi bi-file-earmark-text"></i>
-            </span>
-            <span class="text">내가 쓴 글</span>
-          </a>
-        </li>
-        <li class="list">
-          <a href="#tab3" class="btns">
-            <span class="icon">
-              <i class="bi bi-clipboard-heart"></i>
-            </span>
-            <span class="text">좋아요한 스타일</span>
-          </a>
-        </li>
-        <li class="list">
-          <a href="#tab4" class="btns">
-            <span class="icon">
-              <i class="bi bi-bookmark-heart"></i>
-            </span>
-            <span class="text">찜한 목록</span>
-          </a>
-        </li>
-      </ul>
-    </div>
 
-    <!-- 주문내역 -->
-    <div class="info">
-      <div id="tab1" class="mypost" style="display:block;">
-        <h3 class="sub-title">주문 내역</h3>
-        <!-- 주문 내역이 없다면 -->
-        {% if orderlist == 0 %}
-          <div class="d-flex align-items-center justify-content-center h-75">
-            <p class="m-0" style="font-size: 14px; color:gray;">주문 내역이 없습니다.</p>
+    <!-- 주문 내역 및 내가 쓴 글, 좋아요한 글 -->
+    {% if request.user == user %}
+      <!-- 사이드바 -->
+      <div class="tab_menu d-flex justify-content-center" style="margin-top: 3rem;">
+        <div id="nav" class="navigation tab_menu">
+          <ul>
+            <li class="list active is_on">
+              <a href="#tab1" class="btns">
+                <span class="icon">
+                  <i class="bi bi-basket"></i>
+                </span>
+                <span class="text">주문내역</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="#tab2" class="btns">
+                <span class="icon">
+                  <i class="bi bi-file-earmark-text"></i>
+                </span>
+                <span class="text">내가 쓴 글</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="#tab3" class="btns">
+                <span class="icon">
+                  <i class="bi bi-clipboard-heart"></i>
+                </span>
+                <span class="text">좋아요한 스타일</span>
+              </a>
+            </li>
+            <li class="list">
+              <a href="#tab4" class="btns">
+                <span class="icon">
+                  <i class="bi bi-bookmark-heart"></i>
+                </span>
+                <span class="text">찜한 목록</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 주문내역 -->
+        <div class="info">
+          <div id="tab1" class="mypost" style="display:block;">
+            <h3 class="sub-title">주문 내역</h3>
+            <!-- 주문 내역이 없다면 -->
+            {% if orderlist == 0 %}
+              <div class="d-flex align-items-center justify-content-center h-75">
+                <p class="m-0" style="font-size: 14px; color:gray;">주문 내역이 없습니다.</p>
+              </div>
+              <!-- 주문 내역이 있다면 -->
+            {% else %}
+              <div>
+                <div class="order-img"></div>
+                <p>
+                  <a href="{% url 'kakaopay:show_order_list' %}">{{ orderlist }}
+                    이(가) 배송 중입니다.</a>
+                </p>
+              </div>
+            {% endif %}
+
           </div>
-          <!-- 주문 내역이 있다면 -->
-        {% else %}
-          <div>
-            <div class="order-img"></div>
-            <p>
-              <a href="{% url 'kakaopay:show_order_list' %}">{{ orderlist }}
-                이(가) 배송 중입니다.</a>
-            </p>
+          <!-- 내가 쓴 글 -->
+          <!-- <div class="d-flex mt-4 justify-content-center"> -->
+          <div id="tab2" class="mypost">
+            <h3 class="sub-title">내가 쓴 글</h3>
+            <!-- 테이블 -->
+            <table class="table table-hover mt-4 text-center">
+              <thead>
+                <tr>
+                  <th scope="col">글 종류</th>
+                  <th scope="col">제목</th>
+                  <th scope="col">조회수</th>
+                  <th scope="col">작성 날짜</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% for style in my_style %}
+                  <tr>
+                    <th scope="row">Style</th>
+                    <td>
+                      <a class="links" href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
+                    </td>
+                    <td>{{ style.hits }}</td>
+                    <td style="font-size: 13px; color:gray;">{{ style.created_at }}</td>
+                  </tr>
+                {% endfor %}
+
+                {% for review in my_review %}
+                  <tr>
+                    <th scope="row">Review</th>
+                    <td>
+                      <a class="links" href="{% url 'products:detail' review.product_id %}">
+                        {{ review.title }}</a>
+                    </td>
+                    <td>{{ review.hits }}</td>
+                    <td style="font-size: 13px; color:gray;">{{ review.created_at }}</td>
+                  </tr>
+                {% endfor %}
+
+                {% for qna in my_qna %}
+                  {% if qna.Product_id %}
+                    <tr>
+                      <th scope="row">Q&A</th>
+                      <td>
+                        <a class="links" href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
+                      </td>
+                      <td>{{ qna.hits }}</td>
+                      <td style="font-size: 13px; color:gray;">{{ qna.created_at }}</td>
+                    </tr>
+                  {% else %}
+                    <tr>
+                      <th scope="row">Q&A</th>
+                      <td>
+                        <a class="links" href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
+                      </td>
+                      <td>{{ qna.hits }}</td>
+                      <td style="font-size: 13px; color:gray;">{{ qna.created_at }}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+
+              </tbody>
+            </table>
           </div>
-        {% endif %}
+
+          <!-- 좋아요한 스타일 -->
+          <div id="tab3" class="mypost" style="box-shadow: none !important;">
+            <h3 class="sub-title">좋아요한 스타일</h3>
+            <div class="swiper mySwiper pb-5 px-3">
+              <div class="swiper-wrapper">
+                {% for style in like_style %}
+                  <div class="swiper-slide like-style mt-4">
+                    {% for style_image in style.photo_set.all %}
+                      {% if forloop.counter == 1 %}
+                        <div class="like-style-image" style="background-image:url('{{ style_image.image.url }}')">
+                          <img class="img-fluid" src="" alt="">
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+
+                    <div class="d-flex px-4 align-items-center">
+                      {% if style.user.profile_image %}
+                        <a href="{% url 'style:detail' style.pk %}">
+                          <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')"></div>
+                        </a>
+                      {% else %}
+                        <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+                      {% endif %}
+
+                      <a class="d-flex align-items-center style-link" href="{% url 'accounts:mypage' style.user.pk %}">
+                        <h5>{{ style.user.username }}</h5>
+                      </a>
+
+                    </div>
+
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div id="tab4" class="mypost">
+            <h3 class="sub-title">찜한 목록</h3>
+            <div class="row mt-4 product-list w-100 justify-content-start">
+              {% for product in save_product %}
+
+                <div class="product-card col-12 col-md-6 col-lg-4">
+                  <a href="{% url 'products:detail' product.id %}">
+                    <div class="imgBox">
+                      {% for product_image in product.photo_set.all %}
+                        {% if forloop.counter == 1%}
+                          <img class="product-img" src="{{ product_image.image.url }}" alt="">
+                        {% endif %}
+                      {% endfor %}
+                      <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
+                    </div>
+                    <div class="contentBox">
+                      <h5 class="product-title">{{ product.name }}</h5>
+                      <p>
+                        <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <!-- </div> -->
+        </div>
 
       </div>
-      <!-- 내가 쓴 글 -->
-      <!-- <div class="d-flex mt-4 justify-content-center"> -->
-      <div id="tab2" class="mypost">
-        <h3 class="sub-title">내가 쓴 글</h3>
+
+    {% else %}
+      <div id="tab2" class="mypost mt-4" style="display:block;">
+        <h3 class="sub-title">{{ user.nickname }}의 글</h3>
         <!-- 테이블 -->
         <table class="table table-hover mt-4 text-center">
           <thead>
@@ -240,132 +373,7 @@
           </tbody>
         </table>
       </div>
-
-      <!-- 좋아요한 스타일 -->
-      <div id="tab3" class="mypost" style="box-shadow: none !important;">
-        <h3 class="sub-title">좋아요한 스타일</h3>
-        <div class="d-flex">
-          {% for style in like_style %}
-            <div class="like-style mt-4 me-3">
-              {% if style.image %}
-                <img src="{{ style.image.url }}">
-              {% endif %}
-
-              <div class="d-flex px-4 align-items-center">
-                {% if style.user.profile_image %}
-                  <a href="{% url 'style:detail' style.pk %}">
-                    <div class="style-userimage me-2" style="background-image: url('{{ style.user.profile_image.url }}')"></div>
-                  </a>
-                {% else %}
-                  <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
-                {% endif %}
-
-                <a class="d-flex align-items-center style-link" href="{% url 'accounts:mypage' style.user.pk %}">
-                  <h5>{{ style.user.username }}</h5>
-                </a>
-
-              </div>
-
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-
-      <div id="tab4" class="mypost">
-        <h3 class="sub-title">찜한 목록</h3>
-        <div class="row mt-4 product-list w-100 justify-content-start">
-          {% for product in save_product %}
-
-            <div class="product-card col-12 col-md-6 col-lg-4">
-              <a href="{% url 'products:detail' product.id %}">
-                <div class="imgBox">
-                  {% for product_image in product.photo_set.all %}
-                    {% if forloop.counter == 1%}
-                      <img class="product-img" src="{{ product_image.image.url }}" alt="">
-                    {% endif %}
-                  {% endfor %}
-                  <img class="mini-logo" src="{% static 'images/logo_green.png' %}" alt="">
-                </div>
-                <div class="contentBox">
-                  <h5 class="product-title">{{ product.name }}</h5>
-                  <p>
-                    <span class="sale">10%</span><span class="cost">{{ product.cost }}</span>원
-                  </p>
-                </div>
-              </a>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-      <!-- </div> -->
-    </div>
-
-  </div>
-
-{% else %}
-<div id="tab2" class="mypost mt-4" style="display:block;">
-  <h3 class="sub-title">{{ user.nickname }}의 글</h3>
-  <!-- 테이블 -->
-  <table class="table table-hover mt-4 text-center">
-    <thead>
-      <tr>
-        <th scope="col">글 종류</th>
-        <th scope="col">제목</th>
-        <th scope="col">조회수</th>
-        <th scope="col">작성 날짜</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      {% for style in my_style %}
-        <tr>
-          <th scope="row">Style</th>
-          <td>
-            <a class="links" href="{% url 'style:detail' style.pk %}">{{ style.title }}</a>
-          </td>
-          <td>{{ style.hits }}</td>
-          <td style="font-size: 13px; color:gray;">{{ style.created_at }}</td>
-        </tr>
-      {% endfor %}
-
-      {% for review in my_review %}
-        <tr>
-          <th scope="row">Review</th>
-          <td>
-            <a class="links" href="{% url 'products:detail' review.product_id %}">
-              {{ review.title }}</a>
-          </td>
-          <td>{{ review.hits }}</td>
-          <td style="font-size: 13px; color:gray;">{{ review.created_at }}</td>
-        </tr>
-      {% endfor %}
-
-      {% for qna in my_qna %}
-        {% if qna.Product_id %}
-          <tr>
-            <th scope="row">Q&A</th>
-            <td>
-              <a class="links" href="{% url 'products:detail' qna.Product_id %}">{{ qna.title }}</a>
-            </td>
-            <td>{{ qna.hits }}</td>
-            <td style="font-size: 13px; color:gray;">{{ qna.created_at }}</td>
-          </tr>
-        {% else %}
-          <tr>
-            <th scope="row">Q&A</th>
-            <td>
-              <a class="links" href="{% url 'community:qna_detail' qna.id %}">{{ qna.title }}</a>
-            </td>
-            <td>{{ qna.hits }}</td>
-            <td style="font-size: 13px; color:gray;">{{ qna.created_at }}</td>
-          </tr>
-        {% endif %}
-      {% endfor %}
-
-    </tbody>
-  </table>
-</div>
-{% endif %}
+    {% endif %}
 
   </div>
 
@@ -384,9 +392,9 @@
             {% for followers in user.followers.all %}
               <div class="d-flex my-3">
                 {% if followers.profile_image %}
-                <div class="style-userimage me-2" style="background-image: url('{{ followers.profile_image.url }}')"></div>
+                  <div class="style-userimage me-2" style="background-image: url('{{ followers.profile_image.url }}')"></div>
                 {% else %}
-                <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
+                  <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
                 {% endif %}
 
                 <a href="{% url 'accounts:mypage' followers.pk %}">
@@ -425,7 +433,7 @@
               <div class="d-flex my-3">
                 {% if followings.profile_image %}
                   <div class="style-userimage me-2" style="background-image: url('{{ followings.profile_image.url }}')"></div>
-                  {% else %}
+                {% else %}
                   <div class="style-userimage me-2" style="background-image: url('https://dummyimage.com/300X400')"></div>
                 {% endif %}
 
@@ -448,8 +456,6 @@
     </div>
 
   </div>
-
-  
 
   <!-- 팔로우 비동기 -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
