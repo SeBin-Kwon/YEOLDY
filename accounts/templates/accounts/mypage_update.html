@@ -41,29 +41,9 @@
           {{ form.nickname }}
         </div>
 
-        <div class="input-box">
+        <div class="input-box" style="display:none;">
           <label class="details" name="label_username" for="{{ form.username.id_for_label}}">{{ form.username.label}}</label>
-          {{ form.username }}
-          <script type="text/javascript">
-            if (document.getElementsByName('username')[0].value != '') {
-              document
-                .getElementsByName('label_username')[0]
-                .setAttribute('class', 'active');
-            }
-          </script>
-          {% if form.username.errors %}
-            <script type="text/javascript">
-              document
-                .getElementsByName('username')[0]
-                .setAttribute('class', 'is-invalid')
-            </script>
-            {% for error in form.username.errors %}
-              <div class="invalid-feedback">
-                {{ error }}
-              </div>
-            {% endfor %}
-          {% endif %}
-
+          <input type="text" name="username" value="{{ request.user.username }}">
         </div>
 
         <div class="input-box">
