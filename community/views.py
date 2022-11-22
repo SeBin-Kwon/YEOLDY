@@ -225,7 +225,7 @@ def review_update(request, review_pk):
                     photo.image = img
                     photo.save()
                 messages.success(request, "수정 완료")
-                return redirect("community:review_detail", review_pk)
+                return redirect("products:detail", review.product_id)
         else:
             review_form = ReviewForm(instance=review)
         context = {
