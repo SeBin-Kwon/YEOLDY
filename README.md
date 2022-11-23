@@ -4,7 +4,7 @@
 
 ## 메인
 
-![yeoldy_main](README.assets/yeoldy_main.gif)![yeoldy_main]()
+![yeoldy_main](README.assets/yeoldy_main.gif)
 
 
 
