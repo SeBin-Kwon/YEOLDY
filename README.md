@@ -1,10 +1,10 @@
-## 세빈이와 아이들🙋‍♀️
+# YEOLDY🤟
 
 
 
-### 🍽 다플 : 다이닝 플레이트
+## 메인
 
-![ezgif.com-gif-maker (1)](README.assets/ezgif.com-gif-maker (1).gif)
+![yeoldy_main](README.assets/yeoldy_main.gif)![yeoldy_main]()
 
 
 
