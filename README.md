@@ -1,4 +1,4 @@
-### YEOLDY 🤟
+# YEOLDY 🤟
 
 - 주제 : 상품 정보 및 후기 공유 커뮤니티 서비스
 
@@ -85,9 +85,7 @@
 
 <br>
 
-### Login page
-
-#### [ Accounts ]
+### [ Accounts ]
 
 ![로그인_2](README.assets/로그인_2.png)
 
@@ -114,9 +112,7 @@
 
 <br>
 
-### Cart page
-
-#### [ Cart ]
+### [ Cart ]
 
 - 로그인 되었을 때, 해당 유저의 장바구니를 띄움
 - product별 수량, 색상, 사이즈를 띄우고, 전체 수량 및 개수도 띄움
@@ -127,10 +123,8 @@
 
 <br>
 
-### Order page
 
-
-#### [ Kakaopay ]
+### [ Kakaopay ]
 
 
 - 장바구니와 카카오페이 테스트 결제 시스템을 연동함
@@ -140,7 +134,7 @@
 
 <br>
 
-#### [ Chat ]
+### [ Chat ]
 
 ![chat](README.assets/chat.png)
 
@@ -151,8 +145,10 @@
 - 자신이 팔로우한 스타일 작성자와 실시간 채팅 구현을 진행하였으나 배포후 소켓오류로 기능구현 불가
 - 상담원과의 실시간 채팅 구현(https://www.tawk.to/ 사이트 및 프로그램 이용)
 
+<br>
 
-#### [ Community ]
+
+### [ Community ]
 - qna 작성/조회/삭제/수정/작성할떄 비밀번호생성/작성자와 관리자만 조회 가능 
 - qna생성할떄 관리자가 답변작성
 - 상품review 작성/조회/삭제/수정
@@ -160,15 +156,13 @@
 
 <br>
 
-#### [ Products ]
+### [ Products ]
 
 ![전체태그](README.assets/전체태그.png)
 
 ![상의태그](README.assets/상의태그.png)
 
 ![상품디테일](README.assets/상품디테일.png)
-
-
 
 - 상품 인덱스 테그별 구분(전체, 상의, 하의, 아우터, 신발, 악세사리)
 - 상품 디테일 멀티이미지 등록 및 나열
@@ -178,7 +172,9 @@
 - 판매자가 등록한 컬러와 사이즈 구매자가 선택 가능
 - 리뷰 평점 평균 계산후 등록 완료
 
-#### [ Style ]
+<br>
+
+### [ Style ]
 
 ![스타일_인덱스](README.assets/스타일_인덱스.png)
 
@@ -192,7 +188,7 @@
 - (스타일) 좋아요, 스타일 작성자 팔로우 및 저장 기능 구현
 - 스타일 작성시 자신이 구매한 상품 목록에서 선택 후 스타일 디테일에서 상품 들 보여주기및 상품 디테일로 연결 완료
 
-### 🤟 AWS를 통한 배포
+## 🤟 AWS를 통한 배포
 
 
 
@@ -200,13 +196,13 @@
 
 
 
-### 🤟 사용한 기술스택
+## 🤟 사용한 기술스택
+
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=Python&logoColor=ffffff"/> <img src="https://img.shields.io/badge/Django-092E20?style=flat-square&logo=Django&logoColor=ffffff"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=ffffff"/> <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=flat-square&logo=Bootstrap&logoColor=ffffff"/> <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat-square&logo=Visual Studio Code&logoColor=ffffff"/><img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=Javascript&logoColor=ffffff"/> <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=Git&logoColor=ffffff"/> <img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=GitHub&logoColor=ffffff"/>
 
 
 
-
-
-### 🤟 프로젝트 참여자들
+## 🤟 프로젝트 참여자들
 
 <a href="https://github.com/w00ye0l/YEOLDY/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=w00ye0l/YEOLDY" />
@@ -214,7 +210,7 @@
 
 
 
-### 🤟 프로젝트 후기
+## 🤟 프로젝트 후기
 
 **이우열** : 
 
