@@ -181,7 +181,7 @@
 ## 🤟 AWS를 통한 배포
 
 
-
+http://yeoldybean-env.eba-ghf297im.ap-northeast-2.elasticbeanstalk.com/products/116/detail/
 
 
 
