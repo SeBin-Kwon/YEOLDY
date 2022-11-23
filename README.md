@@ -102,7 +102,7 @@
 
 ### [ Main page ]
 
-![yeoldy_main](README.assets/yeoldy_main.gif)
+<img src="README.assets/yeoldy_main.gif" alt="yeoldy_main" style="zoom:150%;" />
 
 - 스크롤에 따라 반응하는 네비게이션 바 구현
 - 각종 캐러셀 및 호버 효과 구현
@@ -148,7 +148,7 @@
 
 ### [ Cart ]
 
-![ezgif.com-gif-maker](README.assets/ezgif.com-gif-maker-16691869017262.gif)
+<img src="README.assets/ezgif.com-gif-maker-16691869017262.gif" alt="ezgif.com-gif-maker" style="zoom:150%;" />
 
 - 로그인 되었을 때, 해당 유저의 장바구니를 띄움
 - Product 별 수량, 색상, 사이즈를 띄우고, 전체 수량 및 개수도 띄움
