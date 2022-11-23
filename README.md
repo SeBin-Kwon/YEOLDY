@@ -100,16 +100,6 @@
 
 <br>
 
-### My page
-
-![마이페이지](README.assets/마이페이지.png)
-
-
-- 마이 페이지 팔로우 가능( 팔로우,  팔로워  확인가능 )
-- 마이 페이지 내가 쓴 리뷰, Qna, 스타일, 좋아요한 스타일, 주문내역, 찜한 상품 확인 가능 
-
-<br>
-
 ### [ Cart ]
 
 ![ezgif.com-gif-maker](README.assets/ezgif.com-gif-maker-16691869017262.gif)
